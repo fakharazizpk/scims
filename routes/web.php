@@ -20,6 +20,7 @@ use App\Http\Controllers\AdminDisabilityController;
 use App\Http\Controllers\AdminClassSectionController;
 use App\Http\Controllers\AdminSchoolController;
 use App\Http\Controllers\AdminBoardController;
+use App\Http\Controllers\AdminEmployeeTypeController;
 /*Other Controller*/
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\HomeController;
@@ -168,6 +169,14 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     Route::get('board/edit/{id}', [AdminBoardController::class, 'edit']);
     Route::post('board/update', [AdminBoardController::class, 'update']);
     Route::get('board/delete/{id}', [AdminBoardController::class, 'delete']);
+
+    /*Employee Type*/
+    Route::get('employee-type', [AdminEmployeeTypeController::class, 'index']);
+    Route::get('employee-type/add-view', [AdminEmployeeTypeController::class, 'create']);
+    Route::post('employee-type/add', [AdminEmployeeTypeController::class, 'store']);
+    Route::get('employee-type/edit/{id}', [AdminEmployeeTypeController::class, 'edit']);
+    Route::post('employee-type/update', [AdminEmployeeTypeController::class, 'update']);
+    Route::get('employee-type/delete/{id}', [AdminEmployeeTypeController::class, 'delete']);
 
 });
 /*admin Routs end */
