@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.add-users', compact('users'));
+        return view('add-users', compact('users'));
     }
 
     public function LoginPage(){

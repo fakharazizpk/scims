@@ -13,7 +13,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::all();
-        return view('admin.add-subject', compact('subjects'));
+        return view('add-subject', compact('subjects'));
     }
 
 

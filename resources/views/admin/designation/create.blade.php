@@ -49,6 +49,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    <a href="{{url('admin/designation')}}" class="btn btn-warning">Back</a>
                                 </div>
                             </form>
                         </div>
@@ -72,7 +73,7 @@
     <!-- DataTables Js Files -->
    {{-- <script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
     <script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>--}}
-   {{-- <script src="{{asset('js/nationality_script.js')}}"></script>--}}
+   {{-- <script src="{{asset('js/admin_common_script.js')}}"></script>--}}
     <script type="text/javascript">
         $(document).ready(function () {
             bsCustomFileInput.init();

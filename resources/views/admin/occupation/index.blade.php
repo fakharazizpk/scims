@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Class Section')
+@section('title', 'Occupation')
 
 @section('content')
     <div class="content-wrapper">
@@ -11,7 +11,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h3 class="card-title">Class Section</h3>
+                            <h3 class="card-title">Occupation</h3>
                         </div>
                         @if(session()->has('message'))
                             <div class="alert alert-success">
@@ -20,23 +20,23 @@
                         @endif
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{url('admin/class-section/add-view')}}" class="btn btn-primary pull-right mb-1">Add Class Section</a>
+                            <a href="{{url('admin/occupation/add-view')}}" class="btn btn-primary pull-right mb-1">Add Occupation</a>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Class Section</th>
+                                    <th>Occupation</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($class_sections as $class_section)
+                                @foreach($occupations as $occupation)
                                 <tr>
-                                    <td>{{$class_section->c_section_Id}}</td>
-                                    <td>{{$class_section->class_section_name}}</td>
+                                    <td>{{$occupation->occup_Id}}</td>
+                                    <td>{{$occupation->occup_Name}}</td>
                                     <td>
-                                        <a href="{{url('admin/class-section/edit/'.$class_section->c_section_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/class-section/delete/'.$class_section->c_section_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/occupation/edit/'.$occupation->occup_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{url('admin/occupation/delete/'.$occupation->occup_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -44,7 +44,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Class Section</th>
+                                    <th>Occupation</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

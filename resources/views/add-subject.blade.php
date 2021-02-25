@@ -5,7 +5,9 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <form id="SubjectForm" action="{{url('add-subject')}}" method="Post">
+
+
+                <form id="SubjectForm" action="" method="Post">
                     @csrf
                     <input type="hidden" name="id" id="sub_id">
                     <div class="card ">
@@ -31,6 +33,17 @@
                                         </div>
                                         <div class="modal-body row">
                                             <div class="col-sm-12">
+                                                {{--<div class="div-error" style="display:none">
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <ul class="p-0 m-0" style="list-style: none;">
+                                                            <li>gdfgdfshd</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>--}}
+
                                                 <div class="row">
                                                     <div class="form-group col-sm-6">
                                                         <label>Name</label>

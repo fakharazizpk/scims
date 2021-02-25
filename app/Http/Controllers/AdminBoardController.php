@@ -25,7 +25,7 @@ class AdminBoardController extends Controller
     {
         //dd($request->nationality);
         $request->validate([
-            'board_Name'  => 'required|unique:boards',
+            'board_Name'  => 'required|unique:boards,board_Name',
         ]);
 
         $board = new Board();

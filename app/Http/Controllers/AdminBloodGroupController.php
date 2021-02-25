@@ -25,7 +25,7 @@ class AdminBloodGroupController extends Controller
     {
         //dd($request->nationality);
         $request->validate([
-            'blood_group'  => 'required|unique:App\Models\BloodGroup, blood_group',
+            'blood_group'  => 'required|unique:blood_group',
         ]);
 
         $bg = new BloodGroup;

@@ -1,12 +1,9 @@
 <!--
 =========================================================
-* Paper Dashboard 2 PRO - v2.1.1
+* Paper SCIMS - v1.0.0
 =========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2-pro
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
+* Copyright 2020 Point Web Tech (https://www.pointwebtech.com)
+Coded by www.pointwebtech.com
 
  =========================================================
 
@@ -14,9 +11,6 @@ Coded by www.creative-tim.com
 -->
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from demos.creative-tim.com/paper-dashboard-2-pro/examples/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 27 Jan 2021 14:42:14 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8" />
@@ -173,6 +167,12 @@ Coded by www.creative-tim.com
                                 </a>
                             </li>
                             <li>
+                                <a href="{{url('class-section')}}">
+                                    <span class="sidebar-mini-icon">ADM</span>
+                                    <span class="sidebar-normal"> Class Section </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{url('add-subject')}}">
                                     <span class="sidebar-mini-icon">ADM</span>
                                     <span class="sidebar-normal"> Subjects </span>
@@ -297,13 +297,13 @@ Coded by www.creative-tim.com
                     </div>
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#mapsExamples">
+                    <a data-toggle="collapse" href="#Accounts">
                         <i class="fa fa-money"></i>
                         <p>
                             Accounts <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse " id="mapsExamples">
+                    <div class="collapse " id="Accounts">
                         <ul class="nav">
                             <li>
                                 <a href="maps/google.html">
@@ -327,13 +327,13 @@ Coded by www.creative-tim.com
                     </div>
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#mapsExamples">
+                    <a data-toggle="collapse" href="#mapsExamples1">
                         <i class="fa fa-book"></i>
                         <p>
                             Library <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse " id="mapsExamples">
+                    <div class="collapse " id="mapsExamples1">
                         <ul class="nav">
                             <li>
                                 <a href="maps/google.html">
@@ -357,13 +357,13 @@ Coded by www.creative-tim.com
                     </div>
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#mapsExamples">
+                    <a data-toggle="collapse" href="#Transport">
                         <i class="fa fa-bus"></i>
                         <p>
                             Transport <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse " id="mapsExamples">
+                    <div class="collapse " id="Transport">
                         <ul class="nav">
                             <li>
                                 <a href="maps/google.html">
@@ -387,13 +387,13 @@ Coded by www.creative-tim.com
                     </div>
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#mapsExamples">
+                    <a data-toggle="collapse" href="#Hostel">
                         <i class="fa fa-building-o"></i>
                         <p>
                             Hostel <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse " id="mapsExamples">
+                    <div class="collapse " id="Hostel">
                         <ul class="nav">
                             <li>
                                 <a href="maps/google.html">

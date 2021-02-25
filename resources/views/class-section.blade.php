@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Add Class')
+@section('title', 'Add Class Section')
 @section('content')
 
 <div class="content">
@@ -8,13 +8,13 @@
             <form id="RegisterValidation" action="#" method="">
                 <div class="card ">
                     <div class="card-header ">
-                        <h4 class="card-title">Classes</h4>
+                        <h4 class="card-title">Add Class Section</h4>
                     </div>
                     <div class="card-body">
                         <div class="row bor-sep">
                             <div class="col-sm-12 pull-right">
                                 <button class="btn btn-secondary pull-right" data-toggle="modal" data-target="#myModal">
-                                    Add New Class
+                                    Add Class Section
                                 </button>
                             </div>
                         </div>
@@ -25,12 +25,12 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <i class="fa fa-remove"></i>
                                         </button>
-                                        <h5 class="title title-up">Add New Class</h5>
+                                        <h5 class="title title-up">Add Class Section</h5>
                                     </div>
                                     <div class="modal-body row">
-                                        <div class="col-sm-12">
+                                       {{-- <div class="col-sm-6">
                                             <div class="row">
-                                                <h6 class="col-sm-12 text-center">New Class Details</h6>
+                                                <h6 class="col-sm-12">Class Section Details</h6>
                                                 <div class="form-group col-sm-6">
                                                     <label>Class Name</label>
                                                     <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
@@ -96,10 +96,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       {{-- <div class="divider"></div>
-                                        <div class="col-sm-6">
+                                        <div class="divider"></div>--}}
+                                        <div class="col-sm-12">
                                             <div class="row">
-                                                <h6 class="col-sm-12">Add Section</h6>
+                                                <h6 class="col-sm-12 text-center">Add Section</h6>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>For Class</label>
                                                     <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class" >
@@ -122,7 +122,7 @@
                                                     <label>Section Name</label>
                                                     <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
                                                     <label>Add Students</label>
                                                     <select class="selectpicker" data-style="btn btn-secondary " multiple title="Choose Students" data-size="7">
                                                         <option disabled> Choose Students</option>
@@ -155,7 +155,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>--}}
+                                        </div>
                                     </div>
                                     <!--<div class="row modal-body">-->
                                     <!--<h6 class="col-sm-12">Pension Details</h6>-->

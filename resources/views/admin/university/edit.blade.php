@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit City')
+@section('title', 'Edit University')
 
 @section('content')
     <div class="content-wrapper">
@@ -13,7 +13,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">City</h3>
+                                <h3 class="card-title">University</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -29,34 +29,20 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form role="form" action="{{url('admin/employee-type/update')}}" method="post">
+                            <form role="form" action="{{url('admin/university/update')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ $employee_type->emp_typ_Id}}">
+                                <input type="hidden" name="id" value="{{ $university->univ_Id}}">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="designation">Designation</label>
-                                        <select name="designation" id="designation" class="form-control select2" style="width: 100%;">
-                                            <option selected="selected" value="">Select Designation</option>
-                                            @foreach($designations as $designation)
-                                                <option value="{{$designation->desig_Id}}" @if($designation->desig_Id==$employee_type->desig_Id) selected @endif>{{$designation->designation}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="university">University</label>
+                                        <input type="text" class="form-control" id="university" value="{{ $university->univ_Name}}" name="university" placeholder="Enter University"/>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="employee-type">Employee Type</label>
-                                        <select name="employee_type" id="employee-type" class="form-control select2" style="width: 100%;">
-                                            <option selected="selected" value="">Select Employee Type</option>
-                                            <option value="Teaching" @if($employee_type->emp_Type=='Teaching') selected @endif>Teaching</option>
-                                            <option value="None Teaching" @if($employee_type->emp_Type=='None Teaching') selected @endif>None Teaching</option>
-                                        </select>
-                                    </div>
-
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="{{url('admin/employee-type')}}" class="btn btn-warning">Back</a>
+                                    <a href="{{url('admin/university')}}" class="btn btn-warning">Back</a>
                                 </div>
                             </form>
                         </div>

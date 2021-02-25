@@ -74,6 +74,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{url('admin/university')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>University</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="pages/layout/fixed-topnav.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Fixed Navbar</p>
@@ -177,6 +183,12 @@
                             <a href="{{url('admin/designation')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Designation</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('admin/occupation')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Occupation</p>
                             </a>
                         </li>
                     </ul>

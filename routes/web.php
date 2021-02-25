@@ -21,6 +21,8 @@ use App\Http\Controllers\AdminClassSectionController;
 use App\Http\Controllers\AdminSchoolController;
 use App\Http\Controllers\AdminBoardController;
 use App\Http\Controllers\AdminEmployeeTypeController;
+use App\Http\Controllers\AdminUniversityController;
+use App\Http\Controllers\AdminOccupationController;
 /*Other Controller*/
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\HomeController;
@@ -177,6 +179,20 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     Route::get('employee-type/edit/{id}', [AdminEmployeeTypeController::class, 'edit']);
     Route::post('employee-type/update', [AdminEmployeeTypeController::class, 'update']);
     Route::get('employee-type/delete/{id}', [AdminEmployeeTypeController::class, 'delete']);
+    /*University*/
+    Route::get('university', [AdminUniversityController::class, 'index']);
+    Route::get('university/add-view', [AdminUniversityController::class, 'create']);
+    Route::post('university/add', [AdminUniversityController::class, 'store']);
+    Route::get('university/edit/{id}', [AdminUniversityController::class, 'edit']);
+    Route::post('university/update', [AdminUniversityController::class, 'update']);
+    Route::get('university/delete/{id}', [AdminUniversityController::class, 'delete']);
+    /*Occupation*/
+    Route::get('occupation', [AdminOccupationController::class, 'index']);
+    Route::get('occupation/add-view', [AdminOccupationController::class, 'create']);
+    Route::post('occupation/add', [AdminOccupationController::class, 'store']);
+    Route::get('occupation/edit/{id}', [AdminOccupationController::class, 'edit']);
+    Route::post('occupation/update', [AdminOccupationController::class, 'update']);
+    Route::get('occupation/delete/{id}', [AdminOccupationController::class, 'delete']);
 
 });
 /*admin Routs end */
@@ -199,11 +215,14 @@ Route::get('delete-user/{id}', [UserController::class, 'DeleteUser']);
 Route::get('add-class', function () {
     return view('add-class');
 });
+Route::get('class-section', function () {
+    return view('class-section');
+});
 Route::get('add-school', function () {
-    return view('admin.add-school');
+    return view('add-school');
 });
 Route::get('add-subject', function () {
-    return view('admin.add-subject');
+    return view('add-subject');
 });
 Route::get('students', function () {
     return view('students');
@@ -220,14 +239,13 @@ Route::get('appointment', function () {
 
 
 Route::get('users-type', function () {
-    return view('admin.add-users');
+    return view('add-users');
 });
 
 
 Route::get('home', [HomeController::class, 'index']);
 
-/*
-Route::resource('subject', SubjectController::class);*/
+
 /*User Subject*/
 Route::get('add-subject', [SubjectController::class, 'index']);
 Route::post('add-subject', [SubjectController::class, 'CreateSubject']);
