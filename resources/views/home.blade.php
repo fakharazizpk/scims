@@ -564,7 +564,7 @@
 </div>
 @endsection
 
-@section('home_script')
+@section('front_script')
     {{--<script src="{{asset('js/home_script.js')}}"></script>--}}
     <script>
         $(document).ready(function() {

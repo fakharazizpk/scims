@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Cast')
+@section('title', 'Relationship')
 
 @section('content')
     <div class="content-wrapper">
@@ -11,7 +11,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h3 class="card-title">Cast</h3>
+                            <h3 class="card-title">Relationship</h3>
                         </div>
                         @if(session()->has('message'))
                             <div class="alert alert-success">
@@ -20,24 +20,23 @@
                         @endif
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{url('admin/cast/add-view')}}" class="btn btn-primary pull-right mb-1">Add Cast</a>
+                            <a href="{{url('admin/relationship/add-view')}}" class="btn btn-primary pull-right mb-1">Add Relationship</a>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Cast</th>
+                                    <th>Relationship</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php $i=1; ?>
-                                @foreach($casts as $cast)
+                                @foreach($relationships as $relationship)
                                 <tr>
-                                    <td>{{$i++}}</td>
-                                    <td>{{$cast->cast}}</td>
+                                    <td>{{$relationship->pk_relat_Id}}</td>
+                                    <td>{{$relationship->relation_Name}}</td>
                                     <td>
-                                        <a href="{{url('admin/cast/edit/'.$cast->cast_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/cast/delete/'.$cast->cast_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/relationship/edit/'.$relationship->pk_relat_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{url('admin/relationship/delete/'.$relationship->pk_relat_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -45,7 +44,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Cast</th>
+                                    <th>Relationship</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

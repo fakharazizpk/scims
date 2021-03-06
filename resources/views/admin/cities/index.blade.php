@@ -32,12 +32,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $i=1; ?>
                                 @foreach($cities as $city)
-                                    <?php
-                                    //echo '<pre>'; print_r($city);
-                                    ?>
                                 <tr>
-                                    <td>{{$city->pk_city_id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$city->city_name}}</td>
                                     <td>{{$city->zip_code}}</td>
                                     <td>{{$city->dom_District}}</td>

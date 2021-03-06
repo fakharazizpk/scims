@@ -32,7 +32,7 @@
                                 <tbody>
                                 @foreach($districts as $district)
                                 <tr>
-                                    <td>{{$district->dom_Id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$district->dom_District}}</td>
                                     <td>
                                         <a href="{{url('admin/district/edit/'.$district->dom_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>

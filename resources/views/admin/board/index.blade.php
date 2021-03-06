@@ -30,9 +30,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $i=1; ?>
                                 @foreach($boards as $board)
                                 <tr>
-                                    <td>{{$board->pk_board_Id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$board->board_Name}}</td>
                                     <td>
                                         <a href="{{url('admin/board/edit/'.$board->pk_board_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>

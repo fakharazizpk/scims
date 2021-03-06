@@ -23,8 +23,10 @@ use App\Http\Controllers\AdminBoardController;
 use App\Http\Controllers\AdminEmployeeTypeController;
 use App\Http\Controllers\AdminUniversityController;
 use App\Http\Controllers\AdminOccupationController;
+use App\Http\Controllers\AdminRelationshipController;
 /*Other Controller*/
-use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\AddClassesController;
+use App\Http\Controllers\AddSubjectController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -193,6 +195,13 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     Route::get('occupation/edit/{id}', [AdminOccupationController::class, 'edit']);
     Route::post('occupation/update', [AdminOccupationController::class, 'update']);
     Route::get('occupation/delete/{id}', [AdminOccupationController::class, 'delete']);
+    /*Occupation*/
+    Route::get('relationship', [AdminRelationshipController::class, 'index']);
+    Route::get('relationship/add-view', [AdminRelationshipController::class, 'create']);
+    Route::post('relationship/add', [AdminRelationshipController::class, 'store']);
+    Route::get('relationship/edit/{id}', [AdminRelationshipController::class, 'edit']);
+    Route::post('relationship/update', [AdminRelationshipController::class, 'update']);
+    Route::get('relationship/delete/{id}', [AdminRelationshipController::class, 'delete']);
 
 });
 /*admin Routs end */
@@ -212,18 +221,41 @@ Route::get('edit-user/{id}', [UserController::class, 'EditUser']);
 Route::post('update-user/{id}', [UserController::class, 'UpdateUser']);
 Route::get('delete-user/{id}', [UserController::class, 'DeleteUser']);
 
-Route::get('add-class', function () {
-    return view('add-class');
-});
+/*ajax Subject*/
+Route::get('add-subject', [AddSubjectController::class, 'index']);
+Route::post('add-subject', [AddSubjectController::class, 'CreateSubject']);
+Route::get('show-subject/{id}', [AddSubjectController::class, 'ShowSubject']);
+Route::get('edit-subject/{id}', [AddSubjectController::class, 'EditSubject']);
+Route::post('update-subject', [AddSubjectController::class, 'UpdateSubject']);
+Route::get('delete-subject/{id}', [AddSubjectController::class, 'DeleteSubject']);
+/*Subject Subject*/
+
+/*class class*/
+Route::get('add-class', [AddClassesController::class, 'index']);
+Route::post('add-class', [AddClassesController::class, 'store']);
+Route::get('show-class/{id}', [AddClassesController::class, 'show']);
+Route::get('edit-class/{id}', [AddClassesController::class, 'edit']);
+Route::post('update-class', [AddClassesController::class, 'update']);
+Route::get('delete-class/{id}', [AddClassesController::class, 'delete']);
+/*class class*/
+/*Route::get('class', [AddClassesController::class, 'index']);
+Route::get('class/add', [AddClassesController::class, 'create']);
+Route::post('class/create', [AddClassesController::class, 'store']);
+Route::get('class/show/{id}', [AddClassesController::class, 'show']);
+Route::get('class/edit/{id}', [AddClassesController::class, 'edit']);
+Route::post('class/update', [AddClassesController::class, 'update']);
+Route::get('class/delete/{id}', [AddClassesController::class, 'delete']);*/
+
+
 Route::get('class-section', function () {
     return view('class-section');
 });
 Route::get('add-school', function () {
     return view('add-school');
 });
-Route::get('add-subject', function () {
+/*Route::get('add-subject', function () {
     return view('add-subject');
-});
+});*/
 Route::get('students', function () {
     return view('students');
 });
@@ -246,13 +278,7 @@ Route::get('users-type', function () {
 Route::get('home', [HomeController::class, 'index']);
 
 
-/*User Subject*/
-Route::get('add-subject', [SubjectController::class, 'index']);
-Route::post('add-subject', [SubjectController::class, 'CreateSubject']);
-Route::get('show-subject/{id}', [SubjectController::class, 'ShowSubject']);
-Route::get('edit-subject/{id}', [SubjectController::class, 'EditSubject']);
-Route::post('update-subject/{id}', [SubjectController::class, 'UpdateSubject']);
-Route::get('delete-subject/{id}', [SubjectController::class, 'DeleteSubject']);
+
 
 
 

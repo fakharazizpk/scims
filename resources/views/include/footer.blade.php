@@ -62,7 +62,8 @@
 </div>--}}
 <!--   Core JS Files   -->
 <script> let base_url = "{{ env('APP_URL') }}" </script>
-<script src="{{asset('adminassets/js/core/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+{{--<script src="{{asset('adminassets/js/core/jquery.min.js')}}"></script>--}}
 <script src="{{asset('adminassets/js/core/popper.min.js')}}"></script>
 <script src="{{asset('adminassets/js/core/bootstrap.min.js')}}"></script>
 <script src="{{asset('adminassets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
@@ -108,14 +109,8 @@
 <!-- Sharrre libray -->
 <script src="{{asset('adminassets/demo/jquery.sharrre.js')}}"></script>
 {{--Custom Script for Pages--}}
-@yield('home_script')
-@yield('class_script')
-@yield('user_script')
-@yield('subject_script')
-@yield('student_script')
-@yield('admission_script')
-@yield('staff_script')
-@yield('appointment_script')
+@yield('front_script')
+
 {{--Custom Script for Pages--}}
 </body>
 

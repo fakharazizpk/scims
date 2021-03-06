@@ -55,7 +55,9 @@ Coded by www.pointwebtech.com
     <link href="{{asset('adminassets/css/paper-dashboard.min1036.css?v=2.1.1')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('adminassets/demo/demo.css" rel="stylesheet')}}" />
-    <link href="{{asset('adminassets/css/custom.css')}}" rel="stylesheet')}}" />
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet')}}" />
+
+ @yield('front_css')
     <!-- Extra details for Live View on GitHub Pages -->
     <!-- Google Tag Manager -->
     <script>

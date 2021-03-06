@@ -5,7 +5,7 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <form id="RegisterValidation" action="#" method="">
+
                 <div class="card ">
                     <div class="card-header ">
                         <h4 class="card-title">Classes</h4>
@@ -13,13 +13,15 @@
                     <div class="card-body">
                         <div class="row bor-sep">
                             <div class="col-sm-12 pull-right">
-                                <button class="btn btn-secondary pull-right" data-toggle="modal" data-target="#myModal">
+                                <a href="{{url('class/add')}}" class="btn btn-secondary pull-right">
                                     Add New Class
-                                </button>
+                                </a>
                             </div>
                         </div>
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                       {{-- <div class="modal fade" id="ClassModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form id="ClassForm" action="{{url('add-class')}}" method="Post">
+                                    @csrf
                                 <div class="modal-content">
                                     <div class="modal-header justify-content-center">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -29,74 +31,74 @@
                                     </div>
                                     <div class="modal-body row">
                                         <div class="col-sm-12">
+                                            <div class="add-div-error" style="display:none">
+                                                <div class="alert alert-danger alert-dismissible fade show"
+                                                     role="alert" id="add-alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <ul class="p-0 m-0" style="list-style: none;">
+                                                        <li></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
                                             <div class="row">
                                                 <h6 class="col-sm-12 text-center">New Class Details</h6>
                                                 <div class="form-group col-sm-6">
-                                                    <label>Class Name</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                    <label for="add-class-name">Class Name</label>
+                                                    <input type="text" class="form-control" id="add-class-name" placeholder="" name="class_name">
                                                 </div>
                                                 <div class="form-group col-sm-6">
-                                                    <label>Numeric Name</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                    <label for="add-numeric-name">Numeric Name</label>
+                                                    <input type="text" id="add-numeric-name" class="form-control" placeholder="" name="numeric_name">
                                                 </div>
                                                 <div class="form-group col-sm-6">
-                                                    <label>No of Periods</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                    <label for="add-no-of-period">No of Periods</label>
+                                                    <input type="text" id="add-no-of-period" class="form-control" placeholder="" name="no_of_period"  number="true" number="true">
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
-                                                    <label>Assign Teacher</label>
-                                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                    <label for="add-teacher">Assign Teacher</label>
+                                                    <select class="form-group js-example-basic-single"  id="add-teacher" name="teacher"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                         <option value="" disabled selected>Select Teacher</option>
                                                         <option value="1">Ahmed</option>
                                                         <option value="2">Jaffar</option>
                                                         <option value="3">Muneer</option>
-                                                        <option value="3">Saleem</option>
-                                                        <option value="3">Awais</option>
-                                                        <option value="1">Ahmed</option>
-                                                        <option value="2">Jaffar</option>
-                                                        <option value="3">Muneer</option>
-                                                        <option value="3">Saleem</option>
-                                                        <option value="3">Awais</option>
+                                                        <option value="4">Saleem</option>
+                                                        <option value="5">Awais</option>
+                                                        <option value="6">Ahmed</option>
+                                                        <option value="7">Jaffar</option>
+                                                        <option value="8">Muneer</option>
+                                                        <option value="9">Saleem</option>
+                                                        <option value="10">Awais</option>
                                                     </select>
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
-                                                    <label>School Section</label>
-                                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                    <label for="school-section">School Section</label>
+                                                    <select class="form-control js-example-basic-single" id="school-section" name="school_section"  data-style="btn btn-secondary" title="Select Teacher" >
                                                         <option value="" disabled selected>Select Section</option>
-                                                        <option value="1">Pre School</option>
-                                                        <option value="2">Primary School</option>
-                                                        <option value="2">Middle School</option>
-                                                        <option value="2">High School</option>
+                                                        @foreach($school_sections as $school_section)
+                                                        <option value="{{$school_section->sc_sec_Id}}">{{$school_section->sc_sec_name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-sm-6">
-                                                    <label>Tuition Fee</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                    <label for="add-tuition-fee">Tuition Fee</label>
+                                                    <input type="text" id="add-tuition-fee" class="form-control" placeholder="" name="tuition_fee">
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <label>Assign Subjects</label>
-                                                    <select class="selectpicker" data-style="btn btn-secondary " multiple title="Choose Subjects" data-size="7">
+                                                    <label for="add-subject">Assign Subjects</label>
+                                                    <select class="" id="add-subject" name="subject[]" data-style="btn btn-secondary" multiple="multiple" title="Choose Subjects" data-size="10">
                                                         <option disabled> Choose Subjects</option>
-                                                        <option value="2">English </option>
-                                                        <option value="3">Urdu</option>
-                                                        <option value="4">Math</option>
-                                                        <option value="5">History</option>
-                                                        <option value="6">G.Science </option>
-                                                        <option value="7">Drawingt</option>
-                                                        <option value="8">S.Studies </option>
-                                                        <option value="9">Pak Studies</option>
-                                                        <option value="10">Geography</option>
-                                                        <option value="11">Bio</option>
-                                                        <option value="12">Chemistry </option>
-                                                        <option value="13">Physics</option>
-                                                        <option value="14">Computer Studies </option>
-                                                        <option value="15">Islamiat</option>
-                                                        <option value="16">Arabic</option>
+                                                       @foreach($subjects as $subject))
+                                                        <option value="{{$subject->sub_Id}}">{{$subject->subject}} </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                       {{-- <div class="divider"></div>
+                                       --}}{{-- <div class="divider"></div>
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <h6 class="col-sm-12">Add Section</h6>
@@ -155,7 +157,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>--}}
+                                        </div>--}}{{--
                                     </div>
                                     <!--<div class="row modal-body">-->
                                     <!--<h6 class="col-sm-12">Pension Details</h6>-->
@@ -178,19 +180,27 @@
                                     <!--</div>-->
                                     <div class="modal-footer">
                                         <div class="">
-                                            <button type="button" class="btn btn-success btn-link" data-dismiss="modal">Save</button>
+                                            <button type="button" class="btn btn-success btn-link" id="Save-Btn">Save</button>
                                         </div>
                                         <div class="divider"></div>
                                         <div class="">
                                             <button type="button" data-dismiss="modal" class="btn btn-danger btn-link">Cancel</button>
                                         </div>
                                     </div>
+                                </form>
+
                                 </div>
                             </div>
-                        </div>
+                       --}} </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            @if(session()->has('message'))
+                                <div class="alert alert-success col-md-12" id="success-alert1">
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
+
                             <div class="card">
                                 <div class="card-header">
                                     <h6 class="card-title">Students Record List</h6>
@@ -225,20 +235,22 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        @foreach($classes as $class)
                                         <tr>
                                             <td></td>
-                                            <td></td>
+                                            <td>{{$class->class}}</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td class="text-center">
-                                                <a href="../../examples/pages/add-student.html" title="View" class="btn btn-info btn-link btn-icon btn-sm edit"><i class="fa fa-eye"></i></a>
-                                                <a href="../../examples/pages/add-student.html" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                                <a href="../../examples/pages/withdraw-student.html" class="btn btn-danger btn-link btn-icon btn-sm edit" title="Delete"><i class="fa fa-times"></i></a>
+                                                <a href="{{url('class/show/'.$class->cls_Id)}}" title="View" class="btn btn-info btn-link btn-icon btn-sm edit"><i class="fa fa-eye"></i></a>
+                                                <a href="{{url('class/edit/'.$class->cls_Id)}}" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                                                <a href="{{url('class/delete/'.$class->cls_Id)}}" class="btn btn-danger btn-link btn-icon btn-sm edit" title="Delete"><i class="fa fa-times"></i></a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div><!-- end content-->
@@ -259,19 +271,24 @@
                 <!--<button type="submit" class="btn btn-primary">Register</button>-->
                 <!--</div>-->
         </div>
-        </form>
     </div>
 
 </div>
 
 @endsection
 
-@section('class_script')
-    {{--<script src="{{asset('js/home_script.js')}}"></script>--}}
-    <script>
+@section('front_css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
+@section('front_script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   {{-- <script src="{{asset('js/addclass_script.js')}}"></script>--}}
+<script>
+$('select').select2({ width: '100%', placeholder: "Select an Option", allowClear: true, tags: true });
+</script>
+{{--<script>
         $(document).ready(function() {
-
-
+            $('select').select2({ width: '100%', placeholder: "Select an Option", allowClear: true, tags: true });
             $('#facebook').sharrre({
                 share: {
                     facebook: true
@@ -599,5 +616,5 @@
                 alert('You clicked on Like button');
             });
         });
-    </script>
+    </script>--}}
 @endsection

@@ -6,7 +6,7 @@
     display: block !important;
     margin: 0 !important;
     padding-left: 10px !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     /*border: 1px solid #f4f4f4 !important;*/
     background-color: #f4f4f4 !important;
     -webkit-box-sizing: border-box !important;
@@ -15,6 +15,23 @@
     font-weight: 500 !important;
 }
 .form-control:focus {
+    /*border: 1px solid #66615b !important;*/
+    border: 1px solid #2c7ac9 !important;
+    background-color: #fff !important;
+}
+.form-control-tt {
+    display: block !important;
+    margin: 0 !important;
+    padding-left: 10px !important;
+    font-size: 14px !important;
+    /*border: 1px solid #f4f4f4 !important;*/
+    /*background-color: #f4f4f4 !important;*/
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    font-weight: 500 !important;
+}
+.form-control-tt:focus {
     /*border: 1px solid #66615b !important;*/
     border: 1px solid #2c7ac9 !important;
     background-color: #fff !important;
@@ -59,22 +76,22 @@
 
 /*Move he original checkbox out of the way */
 [type="checkbox"].fancy-check {
-    position: absolute;
-    left: -9999px;
+    position: absolute !important;
+    left: -9999px !important;
     padding-left: 0 !important;
     margin-bottom: 0.5rem!important;
 }
 /*Align the icon and the label text to same height using tabl-cell display*/
 /*If you change the font-size of the text, you may also want to do som padding or alignhment changes here*/
 .fancy-check ~ label >  span {
-    display: table-cell;
-    vertical-align: middle;
-    padding-left: 5px;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    padding-left: 5px !important;
 }
 /*The label will contain the icon and the text, will grab the focus*/
 [type="checkbox"].fancy-check + label {
-    cursor: pointer;
-    display: table;
+    cursor: pointer !important;
+    display: table !important;
 }
 /*The icon container, set it to fixed size and font size, the padding is to align the border*/
 /*If you change the font-size of this icon, be sure to adjust the min-width as well*/
@@ -110,12 +127,19 @@ body {
 }
 a, a.fb i {
     text-decoration:none ;
-    color:#349beb
+    color:#0077C5
+}
+.btn-cus-weight{
+    font-weight: 600 !important;
 }
 i {
     font-size:32px;
 }
-
+.cus-img-wid{
+    width: 100%;
+    padding-right: 0px!important;
+    padding-left: 0px!important;
+}
 /*button {*/
     /*width:200px;*/
     /*height:150px;*/
@@ -144,3 +168,130 @@ i {
     /*color: #000;*/
     /*font-size:38px;*/
 /*}*/
+
+.left-icon-holder {
+    position:relative;
+}
+.left-icon-holder .fa {
+    position:absolute;
+    line-height: 24px;
+    top:50%;
+    margin-top: -12px; /* Half of line height to keep left middle postion of container */
+    left: 10px;
+}
+
+.addm{
+    border-bottom: 1px solid #dddddd!important;
+    padding: 16px 0px 0 16px;
+    margin-left: 3px;
+}
+
+.card-image {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fffefe;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin: 5px;
+}
+.not-blur-img{
+    filter: blur(0px)!important;
+
+}
+
+.bg-primary {
+    background-color: #3f6ad8 !important;
+}
+.card-height{
+    height: 175px;!important;
+}
+.card-sizes{
+    height: 135px;!important;
+}
+.vert-hor-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+div.div-hover-cus:hover{
+    background-color: #193048 !important;
+}
+div.div-hover-cus:active{
+    background-color: #2ca01c !important;
+}
+/*.collapse{*/
+    /*display: none;*/
+/*}*/
+.error{
+    color: red!important;
+}
+
+.wizard-cus{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.cus-top{
+    margin-top: -10px !important;
+}
+.cus-left{
+    padding-left: 40px; !important;
+}
+.cus-top-bot{
+    margin-top: 8px;!important;
+}
+.cus-weight{
+    font-weight: 600;
+}
+.bor-model{
+    border: 1px solid #cccccc;
+    padding: 15px 15px;
+}
+.form-input-cus {
+    margin-bottom: 0px !important;
+    position: relative !important;
+}
+.card .divider {
+    background-color: #ddd;
+    display: inline-block;
+    float: inherit;
+    height: auto;
+    margin: 0 -1px;
+    width: 2px;
+}
+.cus-margin{
+    margin-right: -15px;!important;
+}
+.cus-color{
+    color: #66615b!important;
+}
+
+.btn-shadow {
+    box-shadow: 0 0.125rem 0.625rem rgb(108 117 125 / 40%), 0 0.0625rem 0.125rem rgb(108 117 125 / 50%);
+}
+
+.btn-shadow:hover {
+    box-shadow: 0 0.125rem 0.625rem rgb(63 106 216 / 50%), 0 0.0625rem 0.125rem rgb(63 106 216 / 60%);
+}
+
+.btn-hover-shine {
+    position: relative;
+}
+/*.btn-primary:hover {*/
+    /*color: #fff;*/
+    /*background-color: #2955c8;*/
+    /*border-color: #2651be;*/
+/*}*/
+.btn:hover {
+    color: #495057;
+    text-decoration: none;
+}

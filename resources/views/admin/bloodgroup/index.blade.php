@@ -30,9 +30,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $i=1; ?>
                                 @foreach($blood_groups as $blood_group)
                                 <tr>
-                                    <td>{{$blood_group->bg_Id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$blood_group->blood_group}}</td>
                                     <td>
                                         <a href="{{url('admin/blood-group/edit/'.$blood_group->bg_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>

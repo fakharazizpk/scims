@@ -1,43 +1,108 @@
 // Wait for the DOM to be ready
 $(document).ready(function(){
-    //alert('hello');
-    $('#ShowSubject').click(function(e){
-        $('#SubjectForm')[0].reset();
-        $('#SubjectForm').attr('action', base_url +'add-subject');
-        $('#Model-Title').html("Add New Subject");
+    $('#success-alert').html('');
+    $('#show-subject-btn').click(function(e){
         e.preventDefault();
+        $('#SubjectModal').modal('show');
+    });
+
+    $('#add-subject-Btn').click(function(e){
+        e.preventDefault();
+        console.log('subject Modal');
+        //$('#SubjectForm')[0].reset();
+        $('#SubjectForm').attr('action', base_url +'add-subject');
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        jQuery.ajax({
-            url: base_url + "add-subject",
+        let classdata =  $('#SubjectForm').serialize();
+        $.ajax({
+            url: base_url + 'add-subject',
             method: 'post',
-            data:  $(this).serialize(),
+            data:  classdata,
             success: function(result){
+                console.log(result);
                 if(result.errors)
                 {
-                    $('.alert-danger').html('');
+                    $('#add-alert-danger').html('');
 
                     $.each(result.errors, function(key, value){
-                        //console.log(result.errors);
-
+                        //console.log(value);
                         $('#SubjectModal').modal('show');
-                        $('.alert-danger').show();
-                        $('.alert-danger').append('<li>'+value+'</li>');
+                        $('.add-div-error').show();
+                        //$('.alert-danger').show();
+                        $('#add-alert-danger').append('<li>'+value+'</li>');
+
                     });
                 }
                 else
                 {
-                    $('.alert-danger').hide();
-                    //$('#open').hide();
-                    $('#SubjectForm').modal('hide');
+                    $('#success-message').html('');
+                    $('.add-div-error').hide();
+
+                    $('#SubjectModal').modal('hide');
+                    $('#success-message').show();
+                    $('#success-message').append('<p>'+result.message+'</p>');
+                    //$('#success-alert').show();
+                    //$('#success-alert').text('Successfully Added!').fadeIn('slow');
+                    $('#success-message').delay(2000).fadeOut('slow');
+                    //location.reload();
+
+                }
+            }});
+    });
+        $('#update-Btn').click(function(e){
+        e.preventDefault();
+        //$('#SubjectForm')[0].reset();
+        //$('#EditSubjectForm').attr('action', base_url +'update-subject');
+        //$('#Model-Title').html("Add New Subject");
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        let editsubjectdata =  $('#EditSubjectForm').serialize();
+        $.ajax({
+            url: base_url + "update-subject",
+            method: 'post',
+            data:  editsubjectdata,
+            success: function(result){
+                //alert(response.message);
+                if(result.errors)
+                {
+                    $('#edit-alert-danger').html('');
+
+                    $.each(result.errors, function(key, value){
+                        //console.log(value);
+                        $('#EditSubjectModal').modal('show');
+                        $('.edit-div-error').show();
+                        //$('.alert-danger').show();
+                        $('#edit-alert-danger').append('<li>'+value+'</li>');
+
+                    });
+                }
+                else
+                {
+                    $('#success-message').html('');
+                    $('.edit-div-error').hide();
+
+                    $('#EditSubjectModal').modal('hide');
+                    $('#success-message').show();
+                    $('#success-message').append('<p>'+result.message+'</p>');
+                    //$('#success-alert').show();
+                    //$('#success-alert').text('Successfully Added!').fadeIn('slow');
+                    $('#success-message').delay(2000).fadeOut('slow');
+                    location.reload();
+
                 }
             }});
     });
 });
 
+/*
 $("#SubjectForm").validate({
     rules:
         {
@@ -83,16 +148,14 @@ $("#SubjectForm").validate({
                 form.submit();
             }
 });
+*/
 
 $('body').on('click', '#edit-subject', function () {
     var subject_id = $(this).data('id');
     $.get('edit-subject/'+subject_id, function (data) {
-        //console.log(data);
-        $('#Model-Title').html("Edit Subject");
-        //$('#Save-Btn').val("Update");
-        //$('#Save-Btn').prop('disabled',false);
-        $('#SubjectForm').attr('action', base_url +'update-subject/'+subject_id);
-        $('#SubjectModal').modal('show');
+        $('#EditSubjectForm')[0].reset();
+        $('#EditSubjectForm').attr('action', base_url +'update-subject');
+        $('#EditSubjectModal').modal('show');
         $('#sub_id').val(data.sub_Id);
         $('#sub_name').val(data.subject);
         $('#sub_code').val(data.sub_Code);
@@ -105,14 +168,11 @@ $('body').on('click', '#edit-subject', function () {
 });
 
 $('body').on('click', '#show-subject', function () {
+    alert('fdgfsg');
     var subject_id = $(this).data('id');
     $.get('show-subject/'+subject_id, function (data) {
-        //console.log(data);
-        $('#Model-Title').html("Show Subject");
         $('#Show-Btn').hide();
-        //$('#Save-Btn').prop('disabled',false);
         $('#ShowSubjectModal').modal('show');
-        //$('#sub_id').val(data.sub_Id);
         $('#show_sub_name').html(data.subject);
         $('#show_sub_code').html(data.sub_Code);
         $('#show_theory_marks').html(data.sub_th_Mks);
@@ -127,5 +187,9 @@ $('body').on('click', '#show-subject', function () {
 
 
     window.setTimeout(function () {
-        $("#success-alert").alert('close');
+        $("#success-alert1").alert('close');
+    }, 5000);
+    /*window.setTimeout(function () {
+        $("#success-message").alert('close');
     }, 2000);
+*/

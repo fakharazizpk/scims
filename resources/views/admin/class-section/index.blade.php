@@ -30,9 +30,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $i=1; ?>
                                 @foreach($class_sections as $class_section)
                                 <tr>
-                                    <td>{{$class_section->c_section_Id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$class_section->class_section_name}}</td>
                                     <td>
                                         <a href="{{url('admin/class-section/edit/'.$class_section->c_section_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>

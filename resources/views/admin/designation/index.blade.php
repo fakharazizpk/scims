@@ -31,9 +31,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $i=1; ?>
                                 @foreach($designations as $designation)
                                 <tr>
-                                    <td>{{$designation->desig_Id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$designation->designation}}</td>
                                     <td>{{$designation->desig_Status}}</td>
                                     <td>

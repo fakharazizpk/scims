@@ -13,12 +13,11 @@
                         <div class="row bor-sep">
                             <div class="col-sm-12 pull-right">
                                 <button class="btn btn-secondary pull-right" data-toggle="modal"
-                                        data-target="#SubjectModal" id="show-subject-btn">
+                                        data-target="#SubjectModal" id="ShowSubject">
                                     Add New Subject
                                 </button>
                             </div>
                         </div>
-                        {{--add Subject Modal--}}
                         <div class="modal fade" id="SubjectModal" tabindex="-1" role="dialog"
                              aria-labelledby="ModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-sm">
@@ -30,22 +29,21 @@
                                         <h5 class="title title-up" id="Model-Title">Add New Subject</h5>
                                     </div>
                                     <div class="modal-body row">
-                                        <div class="col-sm-12">
-
-                                        <form id="SubjectForm" method="post">
-                                            <div class="add-div-error" style="display:none">
-                                                <div class="alert alert-danger alert-dismissible fade show"
-                                                     role="alert" id="add-alert-danger">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    <ul class="p-0 m-0" style="list-style: none;">
-                                                        <li></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                        <form id="SubjectForm" action="" method="Post">
                                             @csrf
+                                            <div class="col-sm-12">
+                                                <div class="div-error" style="display:none">
+                                                    <div class="alert alert-danger alert-dismissible fade show"
+                                                         role="alert" id="add-alert-danger">
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <ul class="p-0 m-0" style="list-style: none;">
+                                                            <li></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
 
                                                 <div class="row">
                                                     <div class="form-group col-sm-6">
@@ -84,9 +82,28 @@
                                                 </div>
                                             </div>
                                     </div>
+                                    <!--<div class="row modal-body">-->
+                                    <!--<h6 class="col-sm-12">Pension Details</h6>-->
+                                    <!--<div class="form-group col-sm-3">-->
+                                    <!--<label>GPF Employer Share (%age)</label>-->
+                                    <!--<input type="text" class="form-control" placeholder="" name="deduction"  number="true" number="true">-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group col-sm-3">-->
+                                    <!--<label class="">Employee Pension Scheme (%age)</label>-->
+                                    <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group col-sm-3">-->
+                                    <!--<label class="">Graduity Balance</label>-->
+                                    <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group col-sm-3">-->
+                                    <!--<label class="">Total Pension Benefits</label>-->
+                                    <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
+                                    <!--</div>-->
+                                    <!--</div>-->
                                     <div class="modal-footer">
                                         <div class="">
-                                            <button type="submit" class="btn btn-success btn-link" id="add-subject-Btn">Save
+                                            <button type="submit" class="btn btn-success btn-link" id="Save-Btn">Save
                                             </button>
                                         </div>
                                         <div class="divider"></div>
@@ -100,9 +117,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{--end add Subject Modal--}}
-
-                        {{--edit Subject Modal--}}
                         <div class="modal fade" id="EditSubjectModal" tabindex="-1" role="dialog"
                              aria-labelledby="ModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-sm">
@@ -202,9 +216,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--end edit subject modal--}}
 
-                        {{--show subject Modal--}}
                         <div class="modal fade" id="ShowSubjectModal" tabindex="-1" role="dialog"
                              aria-labelledby="ModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-sm">
@@ -280,7 +292,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{--end Show subject modal--}}
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -305,7 +316,7 @@
                                         <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Namesdsafsdsaffs</th>
+                                            <th>Name</th>
                                             <th>Code</th>
                                             <th class="disabled-sorting text-center">Actions</th>
                                         </tr>
@@ -313,13 +324,13 @@
                                         <tfoot>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Nameadsadsad</th>
+                                            <th>Name</th>
                                             <th>Code</th>
                                             <th class="disabled-sorting text-center">Actions</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <?php $i=1; ?>
+                                        <?php $i=1;  ?>
                                         @foreach($subjects as $subject)
                                             <tr>
                                                 <td>{{$i++}}</td>
@@ -371,10 +382,8 @@
 
 @endsection
 
-@section('front_script')
-    <script src="{{asset('adminassets/validator/dist/jquery.validate.js')}}">
-
-    </script>
+@section('subject_script')
+    <script src="{{asset('adminassets/validator/dist/jquery.validate.js')}}"></script>
     <script src="{{asset('js/subject_script.js')}}"></script>
     <script>
         $(document).ready(function () {
