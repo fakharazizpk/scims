@@ -1,6 +1,5 @@
 // Wait for the DOM to be ready
 $(document).ready(function(e){
-    //$('select').select2({ width: '100%', placeholder: "Select an Option", allowClear: true });
     $('#success-alert').html('');
     $('#newclassbtn').click(function(e){
         $('#newclass').modal('show');
@@ -130,7 +129,7 @@ $(document).ready(function(e){
             $("#edit-subject").val(data.selectedSubjectIds).trigger('change');
             /*var valoresArea = $('#edit-subject').val(data.subject);
             alert(valoresArea);*/
-            var newvaloresArea=data.subject;
+            //var newvaloresArea=data.subject;
 
            // var values=data.subject;
            // $.each(values.split(","), function(i,e){
@@ -138,8 +137,8 @@ $(document).ready(function(e){
            // /});
 
 // it has the multiple values to set separated by comma
-            var arrayArea = newvaloresArea.split(',');
-            alert(newvaloresArea);
+            //var arrayArea = newvaloresArea.split(',');
+            //alert(newvaloresArea);
          /*   $.each(data.subject, function(key, value) {
                 $('select[name="subject"]').append('<option value="'+ key +'">'+ value +'</option>');
             });*/
@@ -165,7 +164,7 @@ $(document).ready(function(e){
             $('#show-tuition-fee').text(data.tuition_fee);
             $('#show-no-of-periods').text(data.no_of_period);
             $('#show-school-section').text(data.sc_sec_name);
-
+            $(".subjects_table tbody").empty();
             $.each(data.subjects, function(key, val) {
                 var markup = "<tr><td>" + (key + 1) + "</td><td>" + val.subject + "</td></tr>";
                 $(".subjects_table tbody").append(markup);

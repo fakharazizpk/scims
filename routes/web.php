@@ -27,6 +27,7 @@ use App\Http\Controllers\AdminRelationshipController;
 /*Other Controller*/
 use App\Http\Controllers\AddClassesController;
 use App\Http\Controllers\AddSubjectController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -221,6 +222,14 @@ Route::get('edit-user/{id}', [UserController::class, 'EditUser']);
 Route::post('update-user/{id}', [UserController::class, 'UpdateUser']);
 Route::get('delete-user/{id}', [UserController::class, 'DeleteUser']);
 
+/*ajax School*/
+Route::get('school', [SchoolController::class, 'index']);
+//Route::post('add-school', [SchoolController::class, 'CreateSubject']);
+Route::get('show-school/{id}', [SchoolController::class, 'ShowSchool']);
+Route::get('edit-school/{id}', [SchoolController::class, 'EditSchool']);
+Route::post('update-school', [SchoolController::class, 'UpdateSchool']);
+Route::get('delete-school/{id}', [SchoolController::class, 'DeleteSchool']);
+
 /*ajax Subject*/
 Route::get('add-subject', [AddSubjectController::class, 'index']);
 Route::post('add-subject', [AddSubjectController::class, 'CreateSubject']);
@@ -250,9 +259,9 @@ Route::get('class/delete/{id}', [AddClassesController::class, 'delete']);*/
 Route::get('class-section', function () {
     return view('class-section');
 });
-Route::get('add-school', function () {
+/*Route::get('add-school', function () {
     return view('add-school');
-});
+});*/
 /*Route::get('add-subject', function () {
     return view('add-subject');
 });*/

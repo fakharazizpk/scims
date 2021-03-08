@@ -5,270 +5,367 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <form id="RegisterValidation" action="#" method="">
-                    <div class="card ">
-                        <div class="card-header ">
-                            <h4 class="card-title">School</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row bor-sep">
-                                <div class="col-sm-12 pull-right">
-                                    <button class="btn btn-secondary pull-right" data-toggle="modal" data-target="#myModal">
-                                        Add School
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="card ">
+                    <div class="card-header ">
+                        <h4 class="card-title">School</h4>
+                    </div>
+                    <div class="card-body">
+
+                        {{--Start Edit School Modal--}}
+                        <div class="modal fade" id="edit-School-modal" tabindex="-1" role="dialog"
+                             aria-labelledby="ModalLabel" aria-hidden="true">
+
                                 <div class="modal-dialog modal-lg modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header justify-content-center">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <i class="fa fa-remove"></i>
                                             </button>
-                                            <h5 class="title title-up">Add School</h5>
+                                            <h5 class="title title-up">Edit School</h5>
                                         </div>
+
                                         <div class="modal-body row">
-                                            <div class="col-sm-6">
-                                                <div class="row">
-                                                    <h6 class="col-sm-12">New Class Details</h6>
-                                                    <div class="form-group col-sm-6">
-                                                        <label>Class Name</label>
-                                                        <input type="text" class="form-control" placeholder="" name="houseallow"/>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <label>Numeric Name</label>
-                                                        <input type="text" class="form-control" placeholder="" name="houseallow"/>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <label>No of Periods</label>
-                                                        <input type="text" class="form-control" placeholder="" name="houseallow"/>
-                                                    </div>
-                                                    <div class=" col-sm-6 select-wizard">
-                                                        <label>Assign Teacher</label>
-                                                        <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule">
-                                                            <option value="" disabled selected>Select Teacher</option>
-                                                            <option value="1">Ahmed</option>
-                                                            <option value="2">Jaffar</option>
-                                                            <option value="3">Muneer</option>
-                                                            <option value="3">Saleem</option>
-                                                            <option value="3">Awais</option>
-                                                            <option value="1">Ahmed</option>
-                                                            <option value="2">Jaffar</option>
-                                                            <option value="3">Muneer</option>
-                                                            <option value="3">Saleem</option>
-                                                            <option value="3">Awais</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class=" col-sm-6 select-wizard">
-                                                        <label>School Section</label>
-                                                        <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
-                                                            <option value="" disabled selected>Select Section</option>
-                                                            <option value="1">Pre School</option>
-                                                            <option value="2">Primary School</option>
-                                                            <option value="2">Middle School</option>
-                                                            <option value="2">High School</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <label>Tuition Fee</label>
-                                                        <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <label>Assign Subjects</label>
-                                                        <select class="selectpicker" data-style="btn btn-secondary " multiple title="Choose Subjects" data-size="7">
-                                                            <option disabled> Choose Subjects</option>
-                                                            <option value="2">English </option>
-                                                            <option value="3">Urdu</option>
-                                                            <option value="4">Math</option>
-                                                            <option value="5">History</option>
-                                                            <option value="6">G.Science </option>
-                                                            <option value="7">Drawingt</option>
-                                                            <option value="8">S.Studies </option>
-                                                            <option value="9">Pak Studies</option>
-                                                            <option value="10">Geography</option>
-                                                            <option value="11">Bio</option>
-                                                            <option value="12">Chemistry </option>
-                                                            <option value="13">Physics</option>
-                                                            <option value="14">Computer Studies </option>
-                                                            <option value="15">Islamiat</option>
-                                                            <option value="16">Arabic</option>
-                                                        </select>
+                                            <form id="editschoolform">
+                                            <div class="col-sm-12">
+                                                {{--show error in form--}}
+                                                <div class="edit-div-error" style="display:none">
+                                                    <div class="alert alert-danger alert-dismissible fade show"
+                                                         role="alert" id="edit-alert-danger">
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <ul class="p-0 m-0" style="list-style: none;">
+                                                            <li></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="col-sm-6">
+                                                {{--end  error in form--}}
                                                 <div class="row">
-                                                    <h6 class="col-sm-12">Add Section</h6>
+                                                    <h6 class="col-sm-12">Edit School Details</h6>
+                                                    <input type="hidden" id="edit-school-id" name="id">
+                                                    <div class="form-group col-sm-6">
+                                                        <label>School Name</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-school-name" name="school_Name"/>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Principal Name</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-principal-name" name="principal_Name"/>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Affiliation No</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-affiliation" name="affiliation_No"/>
+                                                    </div>
                                                     <div class=" col-sm-6 select-wizard">
-                                                        <label>For Class</label>
-                                                        <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class" >
-                                                            <option value="" disabled selected>Select Class</option>
-                                                            <option value="1">Playgroup</option>
-                                                            <option value="2">Kindergarten</option>
-                                                            <option value="3">Preparatory</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
-                                                            <option value="1">Four</option>
-                                                            <option value="2">Five</option>
-                                                            <option value="3">Six</option>
-                                                            <option value="1">Seven</option>
-                                                            <option value="2">Eight</option>
-                                                            <option value="3">Eleven</option>
+                                                        <label>Board</label>
+                                                        <select class="selectpicker" data-size="5"
+                                                                data-style="btn btn-secondary"
+                                                                title="Select Billing Scgedule"name="board" id="edit-board">
+                                                            <option value="" disabled selected>Select Teacher</option>
+                                                            @foreach($boards as $board)
+                                                                <option
+                                                                    value="{{$board->pk_board_Id}}">{{$board->board_Name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-sm-6">
-                                                        <label>Section Name</label>
-                                                        <input type="text" class="form-control" placeholder="" name="houseallow"/>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <label>Add Students</label>
-                                                        <select class="selectpicker" data-style="btn btn-secondary " multiple title="Choose Students" data-size="7">
-                                                            <option disabled> Choose Students</option>
-                                                            <option value="1">Ali</option>
-                                                            <option value="2">Basit</option>
-                                                            <option value="2">Kashif</option>
-                                                            <option value="1">Ahmed</option>
-                                                            <option value="2">Jaffar</option>
-                                                            <option value="3">Muneer</option>
-                                                            <option value="3">Saleem</option>
-                                                            <option value="3">Awais</option>
-                                                            <option value="1">Ahmed</option>
-                                                            <option value="2">Jaffar</option>
-                                                            <option value="3">Muneer</option>
-                                                            <option value="3">Saleem</option>
-                                                            <option value="3">Awais</option>
-                                                        </select>
+                                                        <label>Registration No</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-registration" name="registration" number="true" number="true">
                                                     </div>
                                                     <div class="form-group col-sm-6">
-                                                        <label>No of Students Added</label>
-                                                        <input type="text" class="form-control" placeholder="" name="houseallow"/>
+                                                        <label>Registered With</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-registered-with" name="registered_with" number="true" number="true">
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Primary Contact</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-primary-contact" name="primary_Contact" number="true" number="true">
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Secondary Contact</label>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                               id="edit-secondary-contact"  name="secondary_Contact" number="true" number="true">
                                                     </div>
                                                     <div class=" col-sm-6 select-wizard">
-                                                        <label>Assign Class Rep</label>
-                                                        <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
-                                                            <option value="" disabled selected>Select Student</option>
-                                                            <option value="1">Ali</option>
-                                                            <option value="2">Basit</option>
-                                                            <option value="2">Kashif</option>
+                                                        <label>District</label>
+                                                        <select class="selectpicker" data-size="7"
+                                                                data-style="btn btn-secondary"
+                                                                title="Select Billing Scgedule" name="district" id="edit-district">
+                                                            <option value="" disabled selected>Select District</option>
+                                                            @foreach($districts as $district)
+                                                                <option
+                                                                    value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
+                                                    <div class=" col-sm-6 select-wizard">
+                                                        <label>City</label>
+                                                        <select class="selectpicker" data-size="7"
+                                                                data-style="btn btn-secondary"
+                                                                title="Select Billing Scgedule" name="city" id="edit-city">
+                                                            <option value="" disabled selected>Select City</option>
+                                                            @foreach($cities as $city)
+                                                                <option
+                                                                    value="{{$city->pk_city_id}}">{{$city->city_name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                        <div class="select-wizard col-sm-12">
+                                                            <label>School Address</label>
+                                                            <input type="text" class="form-control" placeholder=""
+                                                                   id="edit-school-address" name="school_address"  number="true" number="true">
+                                                        </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--<div class="row modal-body">-->
-                                        <!--<h6 class="col-sm-12">Pension Details</h6>-->
-                                        <!--<div class="form-group col-sm-3">-->
-                                        <!--<label>GPF Employer Share (%age)</label>-->
-                                        <!--<input type="text" class="form-control" placeholder="" name="deduction"  number="true" number="true">-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group col-sm-3">-->
-                                        <!--<label class="">Employee Pension Scheme (%age)</label>-->
-                                        <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group col-sm-3">-->
-                                        <!--<label class="">Graduity Balance</label>-->
-                                        <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group col-sm-3">-->
-                                        <!--<label class="">Total Pension Benefits</label>-->
-                                        <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
-                                        <!--</div>-->
-                                        <!--</div>-->
                                         <div class="modal-footer">
                                             <div class="">
-                                                <button type="button" class="btn btn-success btn-link" data-dismiss="modal">Save</button>
+                                                <button type="button" class="btn btn-success btn-link"
+                                                        id="update-school-btn">Save
+                                                </button>
                                             </div>
                                             <div class="divider"></div>
                                             <div class="">
-                                                <button type="button" data-dismiss="modal" class="btn btn-danger btn-link">Cancel</button>
+                                                <button type="button" data-dismiss="modal"
+                                                        class="btn btn-danger btn-link">Cancel
+                                                </button>
                                             </div>
                                         </div>
+                                    </div>
+                                </form>
+                                </div>
+
+                        </div>
+                    </div>
+                    {{--End Edit School Modal--}}
+
+                    {{--view School Modal--}}
+                    <div class="modal fade" id="view-school-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                    <h5 class="title title-up">View School Details</h5>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-sm-6">
+                                        <h6 class="col-sm-6">School Details</h6>
+                                        <div class="row">
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">School Name</label>
+                                                <p id="show-school-name"></p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Principal Name</label>
+                                                <p id="show-principal-name"></p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Affiliation No</label>
+                                                <p id="show-affiliation-no">Affiliation No</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Board</label>
+                                                <p id="show-board">Board</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Registration</label>
+                                                <p id="show-registration">Registration</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Registered With</label>
+                                                <p id="show-registered-with">Registered With</p>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+
+                                    <div class="col-sm-6">
+                                        <h6 class="col-sm-6">Contact Details</h6>
+                                        <div class="row">
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Primary Contact</label>
+                                                <p id="show-primary-contact">Primary Contact</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Secondary Contact</label>
+                                                <p id="show-secondary-contact">Secondary Contact</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">District</label>
+                                                <p id="show-district">District</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">City</label>
+                                                <p id="show-city">City</p>
+                                                <hr>
+                                            </div>
+                                            <div class="col-sm-12 select-wizard">
+                                                <label class="font-weight-bolder">Address</label>
+                                                <p id="show-address">Address</p>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="divider"></div>-->
+                                </div>
+
+                                <div class="modal-footer">
+                                    <div class="">
+                                        <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title">Students Record List</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="toolbar">
-                                            <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                        </div>
-                                        <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                            <tr>
-                                                <th>S.No</th>
-                                                <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>City</th>
-                                                <th>Level</th>
-                                                <th>Affiliated With</th>
-                                                <th>Status</th>
-                                                <th class="disabled-sorting text-center">Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tfoot>
-                                            <tr>
-                                                <th>S.No</th>
-                                                <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>City</th>
-                                                <th>Level</th>
-                                                <th>Affiliated With</th>
-                                                <th>Status</th>
-                                                <th class="disabled-sorting text-center">Actions</th>
-                                            </tr>
-                                            </tfoot>
-                                            <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="text-center">
-                                                    <a href="../../examples/pages/add-student.html" title="Edit" class="btn btn-info btn-link btn-icon btn-sm edit"><i class="fa fa-eye"></i></a>
-                                                    <a href="../../examples/pages/withdraw-student.html" class="btn btn-warning btn-link btn-icon btn-sm edit" title="edit"><i class="fa fa-edit"></i></a>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div><!-- end content-->
-                                </div><!--  end card  -->
-                            </div> <!-- end col-md-12 -->
-                        </div> <!-- end row -->
-
                     </div>
+                    {{--End view Schhool Modal--}}
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title">Students Record List</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <div class="alert alert-success" id="success-alert1" style="display: none">
+                                    {{--{{ session()->get('message') }}--}}
+                                </div>
+                                <table id="datatable" class="table table-striped table-bordered" cellspacing="0"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>School</th>
+                                        <th>Reg No</th>
+                                        <th>Board</th>
+                                        <th>Principal</th>
+                                        <th>District</th>
+                                        <th>City</th>
+                                        <th class="disabled-sorting text-center">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>School</th>
+                                        <th>Reg No</th>
+                                        <th>Board</th>
+                                        <th>Principal</th>
+                                        <th>District</th>
+                                        <th>City</th>
+                                        <th class="disabled-sorting text-center">Actions</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    @php $i = 0 @endphp
+                                    @foreach($schools as  $school)
+                                        <tr>
+                                            <td>{{$i+1}}</td>
+                                            <td>{{$school->school_Name}}</td>
+                                            <td>{{$school->registration}}</td>
+                                            <td>{{$school->board_Name}}</td>
+                                            <td>{{$school->principal_Name}}</td>
+                                            <td>{{$school->dom_District}}</td>
+                                            <td>{{$school->city_name}}</td>
+                                            <td class="text-center">
+                                                <div class="form-inline pull-right">
+                                                    <div class="">
+                                                        <button class=" btn-link btn-cus-weight show-view-class-btn"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                {{-- data-target="#viewclass"--}}
+                                                                id="view-school-btn"
+                                                                aria-haspopup="true"
+                                                                aria-expanded="false"
+                                                                data-id="{{ $school->pk_school_Id }}">
+                                                            View
+                                                        </button>
+                                                    </div>
+                                                    <div
+                                                        class="nav-item btn-rotate dropdown pull-right ">
+                                                        <a class="nav-link dropdown-toggle pull-right"
+                                                           href="javascript:void(0)" id="navbarDropdownMenuLink"
+                                                           data-toggle="dropdown"
+                                                           aria-haspopup="true"
+                                                           aria-expanded="false" data-id="{{ $school->pk_school_Id }}">
+                                                        </a>
+                                                        <div
+                                                            class="dropdown-menu dropdown-menu-right"
+                                                            aria-labelledby="navbarDropdownMenuLink">
+                                                            <a class="dropdown-item edit-school-btn"
+                                                               href="javascript:void(0)"
+                                                               data-toggle="modal"
+                                                               {{-- data-target="#editclass"--}}
+                                                               aria-haspopup="true"
+                                                               aria-expanded="false"
+                                                               data-id="{{ $school->pk_school_Id }}">Edit</a>
+                                                            {{-- <a class="dropdown-item"
+                                                                href="{{url('delete-school/'.$school->pk_school_Id)}}">Delete</a>--}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div><!-- end content-->
+                        </div><!--  end card  -->
+                    </div> <!-- end col-md-12 -->
+                </div> <!-- end row -->
 
-                    <!--<div class="card-footer text-right">-->
-                    <!--<div class="form-check pull-left">-->
-                    <!--<label class="form-check-label">-->
-                    <!--<input class="form-check-input" type="checkbox" name="optionCheckboxes" required>-->
-                    <!--<span class="form-check-sign"></span>-->
-                    <!--Subscribe to newsletter-->
-                    <!--</label>-->
-                    <!--</div>-->
-                    <!--<button type="submit" class="btn btn-primary">Register</button>-->
-                    <!--</div>-->
             </div>
-            </form>
+
+            <!--<div class="card-footer text-right">-->
+            <!--<div class="form-check pull-left">-->
+            <!--<label class="form-check-label">-->
+            <!--<input class="form-check-input" type="checkbox" name="optionCheckboxes" required>-->
+            <!--<span class="form-check-sign"></span>-->
+            <!--Subscribe to newsletter-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--<button type="submit" class="btn btn-primary">Register</button>-->
+            <!--</div>-->
         </div>
+    </div>
 
     </div>
 
 @endsection
 
-@section('class_script')
-    {{--<script src="{{asset('js/home_script.js')}}"></script>--}}
+
+@section('front_css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+@endsection
+@section('front_script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{asset('js/school_script.js')}}"></script>
     <script>
-        $(document).ready(function() {
+        $('select').select2({width: '100%', placeholder: "Select an Option", allowClear: true, tags: true});
+    </script>
+    <script>
+        $(document).ready(function () {
 
 
             $('#facebook').sharrre({
@@ -278,7 +375,7 @@
                 enableHover: false,
                 enableTracking: false,
                 enableCounter: false,
-                click: function(api, options) {
+                click: function (api, options) {
                     api.simulateClick();
                     api.openPopup('facebook');
                 },
@@ -293,7 +390,7 @@
                 enableCounter: false,
                 enableHover: false,
                 enableTracking: true,
-                click: function(api, options) {
+                click: function (api, options) {
                     api.simulateClick();
                     api.openPopup('googlePlus');
                 },
@@ -313,7 +410,7 @@
                         via: 'CreativeTim'
                     }
                 },
-                click: function(api, options) {
+                click: function (api, options) {
                     api.simulateClick();
                     api.openPopup('twitter');
                 },
@@ -322,11 +419,10 @@
             });
 
 
-
             // Facebook Pixel Code Don't Delete
-            ! function(f, b, e, v, n, t, s) {
+            !function (f, b, e, v, n, t, s) {
                 if (f.fbq) return;
-                n = f.fbq = function() {
+                n = f.fbq = function () {
                     n.callMethod ?
                         n.callMethod.apply(n, arguments) : n.queue.push(arguments)
                 };
@@ -354,10 +450,11 @@
         });
     </script>
     <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&amp;ev=PageView&amp;noscript=1" />
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=111649226022273&amp;ev=PageView&amp;noscript=1"/>
     </noscript>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $sidebar = $('.sidebar');
             $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -378,7 +475,7 @@
             //
             // }
 
-            $('.fixed-plugin a').click(function(event) {
+            $('.fixed-plugin a').click(function (event) {
                 // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
                 if ($(this).hasClass('switch-trigger')) {
                     if (event.stopPropagation) {
@@ -389,7 +486,7 @@
                 }
             });
 
-            $('.fixed-plugin .active-color span').click(function() {
+            $('.fixed-plugin .active-color span').click(function () {
                 $full_page_background = $('.full-page-background');
 
                 $(this).siblings().removeClass('active');
@@ -410,7 +507,7 @@
                 }
             });
 
-            $('.fixed-plugin .background-color span').click(function() {
+            $('.fixed-plugin .background-color span').click(function () {
                 $(this).siblings().removeClass('active');
                 $(this).addClass('active');
 
@@ -429,7 +526,7 @@
                 }
             });
 
-            $('.fixed-plugin .img-holder').click(function() {
+            $('.fixed-plugin .img-holder').click(function () {
                 $full_page_background = $('.full-page-background');
 
                 $(this).parent('li').siblings().removeClass('active');
@@ -439,7 +536,7 @@
                 var new_image = $(this).find("img").attr('src');
 
                 if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                    $sidebar_img_container.fadeOut('fast', function() {
+                    $sidebar_img_container.fadeOut('fast', function () {
                         $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
                         $sidebar_img_container.fadeIn('fast');
                     });
@@ -448,7 +545,7 @@
                 if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
                     var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-                    $full_page_background.fadeOut('fast', function() {
+                    $full_page_background.fadeOut('fast', function () {
                         $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
                         $full_page_background.fadeIn('fast');
                     });
@@ -467,7 +564,7 @@
                 }
             });
 
-            $('.switch-sidebar-image input').on("switchChange.bootstrapSwitch", function() {
+            $('.switch-sidebar-image input').on("switchChange.bootstrapSwitch", function () {
                 $full_page_background = $('.full-page-background');
 
                 $input = $(this);
@@ -500,7 +597,7 @@
             });
 
 
-            $('.switch-mini input').on("switchChange.bootstrapSwitch", function() {
+            $('.switch-mini input').on("switchChange.bootstrapSwitch", function () {
                 $body = $('body');
 
                 $input = $(this);
@@ -514,12 +611,12 @@
                 }
 
                 // we simulate the window Resize so the charts will get updated in realtime.
-                var simulateWindowResize = setInterval(function() {
+                var simulateWindowResize = setInterval(function () {
                     window.dispatchEvent(new Event('resize'));
                 }, 180);
 
                 // we stop the simulation of Window Resize after the animations are completed
-                setTimeout(function() {
+                setTimeout(function () {
                     clearInterval(simulateWindowResize);
                 }, 1000);
 
@@ -530,21 +627,21 @@
     <script>
         function setFormValidation(id) {
             $(id).validate({
-                highlight: function(element) {
+                highlight: function (element) {
                     $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
                     $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
                 },
-                success: function(element) {
+                success: function (element) {
                     $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
                     $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
                 },
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     $(element).closest('.form-group').append(error);
                 },
             });
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             setFormValidation('#RegisterValidation');
             setFormValidation('#TypeValidation');
             setFormValidation('#LoginValidation');
@@ -552,16 +649,16 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Initialise the wizard
             demo.initWizard();
-            setTimeout(function() {
+            setTimeout(function () {
                 $('.card.card-wizard').addClass('active');
             }, 600);
         });
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#datatable').DataTable({
                 "pagingType": "full_numbers",
                 "lengthMenu": [
@@ -579,7 +676,7 @@
             var table = $('#datatable').DataTable();
 
             // Edit record
-            table.on('click', '.edit', function() {
+            table.on('click', '.edit', function () {
                 $tr = $(this).closest('tr');
 
                 var data = table.row($tr).data();
@@ -587,14 +684,14 @@
             });
 
             // Delete a record
-            table.on('click', '.remove', function(e) {
+            table.on('click', '.remove', function (e) {
                 $tr = $(this).closest('tr');
                 table.row($tr).remove().draw();
                 e.preventDefault();
             });
 
             //Like record
-            table.on('click', '.like', function() {
+            table.on('click', '.like', function () {
                 alert('You clicked on Like button');
             });
         });

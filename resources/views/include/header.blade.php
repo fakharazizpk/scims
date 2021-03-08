@@ -157,7 +157,7 @@ Coded by www.pointwebtech.com
                     <div class="collapse " id="pagesExamples">
                         <ul class="nav">
                             <li>
-                                <a href="{{url('add-school')}}">
+                                <a href="{{url('school')}}">
                                     <span class="sidebar-mini-icon">ADM</span>
                                     <span class="sidebar-normal"> School </span>
                                 </a>
