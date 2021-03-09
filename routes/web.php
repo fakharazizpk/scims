@@ -26,8 +26,10 @@ use App\Http\Controllers\AdminOccupationController;
 use App\Http\Controllers\AdminRelationshipController;
 /*Other Controller*/
 use App\Http\Controllers\AddClassesController;
+use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\AddSubjectController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -246,6 +248,16 @@ Route::get('show-class/{id}', [AddClassesController::class, 'show']);
 Route::get('edit-class/{id}', [AddClassesController::class, 'edit']);
 Route::post('update-class', [AddClassesController::class, 'update']);
 Route::get('delete-class/{id}', [AddClassesController::class, 'delete']);
+
+/*class Section*/
+Route::get('class-section', [ClassSectionController::class, 'index']);
+Route::post('add-class-section', [ClassSectionController::class, 'create']);
+Route::get('show-class-section/{id}', [ClassSectionController::class, 'show']);
+Route::get('edit-class-section/{id}', [ClassSectionController::class, 'edit']);
+Route::post('update-class-section', [ClassSectionController::class, 'update']);
+Route::get('delete-class-section/{id}', [ClassSectionController::class, 'delete']);
+Route::get('get-student/{id}', [StudentController::class, 'getstudent']);
+
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);
 Route::get('class/add', [AddClassesController::class, 'create']);
@@ -256,9 +268,9 @@ Route::post('class/update', [AddClassesController::class, 'update']);
 Route::get('class/delete/{id}', [AddClassesController::class, 'delete']);*/
 
 
-Route::get('class-section', function () {
+/*Route::get('class-section', function () {
     return view('class-section');
-});
+});*/
 /*Route::get('add-school', function () {
     return view('add-school');
 });*/

@@ -693,7 +693,7 @@
     </div>
 @endsection
 
-@section('appointment_script')
+@section('front_script')
     <script>
         $(document).ready(function() {
 

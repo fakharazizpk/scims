@@ -5,7 +5,7 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <form id="RegisterValidation" action="#" method="">
+
                 <div class="card ">
                     <div class="card-header ">
                         <h4 class="card-title">Add Class Section</h4>
@@ -13,13 +13,14 @@
                     <div class="card-body">
                         <div class="row bor-sep">
                             <div class="col-sm-12 pull-right">
-                                <button class="btn btn-secondary pull-right" data-toggle="modal" data-target="#myModal">
+                                <button class="btn btn-secondary pull-right" data-toggle="modal" id="show-class-section-btn">
                                     Add Class Section
                                 </button>
                             </div>
                         </div>
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                        {{--add class section Modal--}}
+                        <div class="modal fade" id="class-section-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header justify-content-center">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,166 +29,164 @@
                                         <h5 class="title title-up">Add Class Section</h5>
                                     </div>
                                     <div class="modal-body row">
-                                       {{-- <div class="col-sm-6">
-                                            <div class="row">
-                                                <h6 class="col-sm-12">Class Section Details</h6>
-                                                <div class="form-group col-sm-6">
-                                                    <label>Class Name</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                    <label>Numeric Name</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                    <label>No of Periods</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
-                                                </div>
-                                                <div class=" col-sm-6 select-wizard">
-                                                    <label>Assign Teacher</label>
-                                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
-                                                        <option value="" disabled selected>Select Teacher</option>
-                                                        <option value="1">Ahmed</option>
-                                                        <option value="2">Jaffar</option>
-                                                        <option value="3">Muneer</option>
-                                                        <option value="3">Saleem</option>
-                                                        <option value="3">Awais</option>
-                                                        <option value="1">Ahmed</option>
-                                                        <option value="2">Jaffar</option>
-                                                        <option value="3">Muneer</option>
-                                                        <option value="3">Saleem</option>
-                                                        <option value="3">Awais</option>
-                                                    </select>
-                                                </div>
-                                                <div class=" col-sm-6 select-wizard">
-                                                    <label>School Section</label>
-                                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
-                                                        <option value="" disabled selected>Select Section</option>
-                                                        <option value="1">Pre School</option>
-                                                        <option value="2">Primary School</option>
-                                                        <option value="2">Middle School</option>
-                                                        <option value="2">High School</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-sm-6">
-                                                    <label>Tuition Fee</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <label>Assign Subjects</label>
-                                                    <select class="selectpicker" data-style="btn btn-secondary " multiple title="Choose Subjects" data-size="7">
-                                                        <option disabled> Choose Subjects</option>
-                                                        <option value="2">English </option>
-                                                        <option value="3">Urdu</option>
-                                                        <option value="4">Math</option>
-                                                        <option value="5">History</option>
-                                                        <option value="6">G.Science </option>
-                                                        <option value="7">Drawingt</option>
-                                                        <option value="8">S.Studies </option>
-                                                        <option value="9">Pak Studies</option>
-                                                        <option value="10">Geography</option>
-                                                        <option value="11">Bio</option>
-                                                        <option value="12">Chemistry </option>
-                                                        <option value="13">Physics</option>
-                                                        <option value="14">Computer Studies </option>
-                                                        <option value="15">Islamiat</option>
-                                                        <option value="16">Arabic</option>
-                                                    </select>
+                                        <form id="add-class-section-form">
+                                            @csrf
+                                        <div class="col-sm-12">
+                                            <div class="add-div-error" style="display:none">
+                                                <div class="alert alert-danger alert-dismissible fade show"
+                                                     role="alert" id="add-alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <ul class="p-0 m-0" style="list-style: none;">
+                                                        <li></li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="divider"></div>--}}
-                                        <div class="col-sm-12">
                                             <div class="row">
                                                 <h6 class="col-sm-12 text-center">Add Section</h6>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>For Class</label>
-                                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class" >
+                                                    <select class="selectpicker" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
                                                         <option value="" disabled selected>Select Class</option>
-                                                        <option value="1">Playgroup</option>
-                                                        <option value="2">Kindergarten</option>
-                                                        <option value="3">Preparatory</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                        <option value="1">Four</option>
-                                                        <option value="2">Five</option>
-                                                        <option value="3">Six</option>
-                                                        <option value="1">Seven</option>
-                                                        <option value="2">Eight</option>
-                                                        <option value="3">Eleven</option>
+                                                        @foreach($nameofclasses as $nameofclass)
+                                                        <option value="{{$nameofclass->cls_Id}}">{{$nameofclass->class}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>Section Name</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                    <input type="text" class="form-control" placeholder="" name="class_section_name"  number="true" number="true">
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Add Students</label>
-                                                    <select class="selectpicker" data-style="btn btn-secondary " multiple title="Choose Students" data-size="7">
+                                                    <select class="selectpicker" id="sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
                                                         <option disabled> Choose Students</option>
-                                                        <option value="1">Ali</option>
-                                                        <option value="2">Basit</option>
-                                                        <option value="2">Kashif</option>
-                                                        <option value="1">Ahmed</option>
-                                                        <option value="2">Jaffar</option>
-                                                        <option value="3">Muneer</option>
-                                                        <option value="3">Saleem</option>
-                                                        <option value="3">Awais</option>
-                                                        <option value="1">Ahmed</option>
-                                                        <option value="2">Jaffar</option>
-                                                        <option value="3">Muneer</option>
-                                                        <option value="3">Saleem</option>
-                                                        <option value="3">Awais</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>No of Students Added</label>
-                                                    <input type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                    <input type="text" class="form-control" placeholder="" id="add-no-of-student" name="no_of_student"  number="true" number="true">
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>Assign Class Rep</label>
-                                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                    <select class="selectpicker" id="representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                         <option value="" disabled selected>Select Student</option>
-                                                        <option value="1">Ali</option>
-                                                        <option value="2">Basit</option>
-                                                        <option value="2">Kashif</option>
+                                                    </select>
+                                                </div>
+                                                <div class=" col-sm-6 select-wizard">
+                                                    <label>Teacher</label>
+                                                    <select class="selectpicker" id="" name="teacher" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                        <option value="" disabled selected>Select Teacher</option>
+                                                        @foreach($teachers as $teacher)
+                                                        <option value="{{$teacher->emp_Id }}">{{$teacher->emp_Fname . " " .$teacher->emp_Mname . " " .$teacher->emp_Lname}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--<div class="row modal-body">-->
-                                    <!--<h6 class="col-sm-12">Pension Details</h6>-->
-                                    <!--<div class="form-group col-sm-3">-->
-                                    <!--<label>GPF Employer Share (%age)</label>-->
-                                    <!--<input type="text" class="form-control" placeholder="" name="deduction"  number="true" number="true">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group col-sm-3">-->
-                                    <!--<label class="">Employee Pension Scheme (%age)</label>-->
-                                    <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group col-sm-3">-->
-                                    <!--<label class="">Graduity Balance</label>-->
-                                    <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group col-sm-3">-->
-                                    <!--<label class="">Total Pension Benefits</label>-->
-                                    <!--<input type="text" class="form-control" placeholder="" name="netpay"  number="true" number="true">-->
-                                    <!--</div>-->
-                                    <!--</div>-->
                                     <div class="modal-footer">
                                         <div class="">
-                                            <button type="button" class="btn btn-success btn-link" data-dismiss="modal">Save</button>
+                                            <button type="button" class="btn btn-success btn-link" id="add-class-section-btn">Save</button>
                                         </div>
                                         <div class="divider"></div>
                                         <div class="">
                                             <button type="button" data-dismiss="modal" class="btn btn-danger btn-link">Cancel</button>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                        {{--end class section Modal--}}
+                        {{--edit class section Modal--}}
+                        <div class="modal fade" id="edit-class-section-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                        <h5 class="title title-up">Edit Class Section</h5>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <form id="edit-class-section-form">
+                                            @csrf
+                                        <input type="hidden" name="id" id="class-section-id">
+                                        <div class="col-sm-12">
+                                            <div class="edit-div-error" style="display:none">
+                                                <div class="alert alert-danger alert-dismissible fade show"
+                                                     role="alert" id="edit-alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <ul class="p-0 m-0" style="list-style: none;">
+                                                        <li></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h6 class="col-sm-12 text-center">Edit Section</h6>
+                                                <div class=" col-sm-6 select-wizard">
+                                                    <label>For Class</label>
+                                                    <select class="selectpicker" id="edit_sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                        <option value="" disabled selected>Select Class</option>
+                                                        @foreach($nameofclasses as $nameofclass)
+                                                        <option value="{{$nameofclass->cls_Id}}">{{$nameofclass->class}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>Section Name</label>
+                                                    <input type="text" class="form-control" placeholder="" id="edit-class-section-name" name="class_section_name"  number="true" number="true">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Add Students</label>
+                                                    <select class="selectpicker edit_sel_student" id="edit_sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
+                                                        <option disabled> Choose Students</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>No of Students Added</label>
+                                                    <input type="text" class="form-control" placeholder="" id="edit-no-of-student" name="no_of_student"  number="true" number="true">
+                                                </div>
+                                                <div class=" col-sm-6 select-wizard">
+                                                    <label>Assign Class Rep</label>
+                                                    <select class="selectpicker" id="edit-representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                        <option value="" disabled selected>Select Student</option>
+                                                    </select>
+                                                </div>
+                                                <div class=" col-sm-6 select-wizard">
+                                                    <label>Teacher</label>
+                                                    <select class="selectpicker" id="edit-teacher" name="teacher" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                        <option value="" disabled selected>Select Teacher</option>
+                                                        @foreach($teachers as $teacher)
+                                                        <option value="{{$teacher->emp_Id }}">{{$teacher->emp_Fname . " " .$teacher->emp_Mname . " " .$teacher->emp_Lname}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="">
+                                            <button type="button" class="btn btn-success btn-link" id="update-class-section-btn">Save</button>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="">
+                                            <button type="button" data-dismiss="modal" class="btn btn-danger btn-link">Cancel</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{--end class section Modal--}}
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -199,46 +198,79 @@
                                     <div class="toolbar">
                                         <!--        Here you can write extra buttons/actions for the toolbar              -->
                                     </div>
+                                    <div class="alert alert-success" id="success-message" style="display: none">
+                                        {{--{{ session()->get('message') }}--}}
+                                    </div>
                                     <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Name</th>
+                                            <th>Class Name</th>
                                             <th>Section</th>
                                             <th>Total Students</th>
                                             <th>Teacher</th>
                                             <th>Class Rep</th>
-                                            <th>Status</th>
                                             <th class="disabled-sorting text-center">Actions</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Name</th>
+                                            <th>Class</th>
                                             <th>Section</th>
                                             <th>Total Students</th>
                                             <th>Teacher</th>
                                             <th>Class Rep</th>
-                                            <th>Status</th>
                                             <th class="disabled-sorting text-center">Actions</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        @php $i=1; @endphp
+                                        @foreach($class_sections as $class_section)
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{$i++}}</td>
+                                            <td>{{$class_section->class}}</td>
+                                            <td>{{$class_section->class_section_name}}</td>
+                                            <td>{{$class_section->no_of_student}}</td>
+                                            <td>{{$class_section->emp_Fname. $class_section->emp_Mname ." ".$class_section->emp_Lname }}</td>
+                                            <td>Class Rep</td>
                                             <td class="text-center">
-                                                <a href="../../examples/pages/add-student.html" title="View" class="btn btn-info btn-link btn-icon btn-sm edit"><i class="fa fa-eye"></i></a>
-                                                <a href="../../examples/pages/add-student.html" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                                <a href="../../examples/pages/withdraw-student.html" class="btn btn-danger btn-link btn-icon btn-sm edit" title="Delete"><i class="fa fa-times"></i></a>
+                                                <div class="form-inline pull-right">
+                                                    <div class="">
+                                                        <button class=" btn-link btn-cus-weight show-view-class-section-btn"
+                                                                type="button"
+                                                                data-toggle="modal"
+                                                                 data-target="#viewclass"
+                                                                id="show-view-class-section-btn"
+                                                                aria-haspopup="true"
+                                                                aria-expanded="false" data-id="{{ $class_section->c_section_Id  }}">
+                                                            View
+                                                        </button>
+                                                    </div>
+                                                    <div
+                                                        class="nav-item btn-rotate dropdown pull-right ">
+                                                        <a class="nav-link dropdown-toggle pull-right"
+                                                           href="javascript:void(0)" id="navbarDropdownMenuLink"
+                                                           data-toggle="dropdown"
+                                                           aria-haspopup="true"
+                                                           aria-expanded="false" data-id="{{ $class_section->c_section_Id  }}">
+                                                        </a>
+                                                        <div
+                                                            class="dropdown-menu dropdown-menu-right"
+                                                            aria-labelledby="navbarDropdownMenuLink">
+                                                            <a class="dropdown-item edit-class-section-btn" href="javascript:void(0)"
+                                                               data-toggle="modal"
+                                                               {{-- data-target="#editclass"--}}
+                                                               aria-haspopup="true"
+                                                               aria-expanded="false" data-id="{{ $class_section->c_section_Id  }}">Edit</a>
+                                                            <a class="dropdown-item"
+                                                               href="{{url('delete-class-section/'.$class_section->c_section_Id )}}">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div><!-- end content-->
@@ -247,28 +279,23 @@
                     </div> <!-- end row -->
 
                 </div>
-
-                <!--<div class="card-footer text-right">-->
-                <!--<div class="form-check pull-left">-->
-                <!--<label class="form-check-label">-->
-                <!--<input class="form-check-input" type="checkbox" name="optionCheckboxes" required>-->
-                <!--<span class="form-check-sign"></span>-->
-                <!--Subscribe to newsletter-->
-                <!--</label>-->
-                <!--</div>-->
-                <!--<button type="submit" class="btn btn-primary">Register</button>-->
-                <!--</div>-->
         </div>
-        </form>
+
     </div>
 
 </div>
 
 @endsection
-
-@section('class_script')
-    {{--<script src="{{asset('js/home_script.js')}}"></script>--}}
+@section('front_css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+@endsection
+@section('front_script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{asset('js/class_section_script.js')}}"></script>
     <script>
+        $('select').select2({width: '100%', placeholder: "Select an Option", allowClear: true, tags: true});
+    </script>
+  {{--  <script>
         $(document).ready(function() {
 
 
@@ -599,5 +626,5 @@
                 alert('You clicked on Like button');
             });
         });
-    </script>
+    </script>--}}
 @endsection

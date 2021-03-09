@@ -248,9 +248,11 @@
                                 <div class="toolbar">
                                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                                 </div>
-                                <div class="alert alert-success" id="success-alert1" style="display: none">
+                                {{--start success Mesage--}}
+                                <div class="alert alert-success" id="success-message" style="display: none">
                                     {{--{{ session()->get('message') }}--}}
                                 </div>
+                                {{--end success Mesage--}}
                                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0"
                                        width="100%">
                                     <thead>

@@ -547,7 +547,7 @@
         </div>
     </div>
 @endsection
-@section('admission_script')
+@section('front_script')
     <script>
         $(document).ready(function() {
 

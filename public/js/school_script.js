@@ -91,10 +91,11 @@ $(document).ready(function(){
 
                     $('#edit-School-modal').modal('hide');
                     $('#success-message').show();
+                    $('#success-message').show();
                     $('#success-message').append('<p>'+result.message+'</p>');
                     //$('#success-alert').show();
-                    $('#success-alert').text('Successfully Added!').fadeIn('slow');
-                    //$('#success-message').delay(2000).fadeOut('slow');
+                    //$('#success-alert').text('Successfully Added!').fadeIn('slow');
+                    $('#success-message').delay(2000).fadeOut('slow');
                     location.reload();
 
                 }
