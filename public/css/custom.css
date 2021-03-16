@@ -186,6 +186,10 @@ i {
     margin-left: 3px;
 }
 
+.cus-bottom{
+    border-bottom: 1px solid #dddddd!important;
+    padding: 16px 0px 0 16px;
+}
 .card-image {
     position: relative;
     display: -ms-flexbox;
@@ -294,4 +298,76 @@ div.div-hover-cus:active{
 .btn:hover {
     color: #495057;
     text-decoration: none;
+}
+
+.sb2-2-2 {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.sb2-2-2 ul li {
+    list-style-type: none;
+    float: left;
+    padding-right: 5px;
+}
+.page-back {
+    float: right !important;
+}
+.btn-ff6347{
+    background-color: #193048!important;
+}
+.page-back a {
+    background: #193048;
+    color: #fff !important;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 30px;
+    font-weight: 500;
+    border: 1px solid #193048;
+}
+.sb2-2-2 ul li a i {
+    padding-right: 2px;
+}
+.page-back a:hover {
+    background: #2ca01c;
+    color: #fff !important;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 30px;
+    font-weight: 500;
+    border: 1px solid #2ca01c;
+}
+.active-bre:before {
+    content: "/";
+    padding: 0 5px;
+    color: #333;
+}
+
+button:focus {
+    outline: 1px auto!important;
+}
+
+element.style {
+}
+.modal-footer .btn-link {
+    /* padding: 20px; */
+    width: 100%;
+    margin: 0;
+}
+.btn.btn-link, .navbar .navbar-nav > a.btn.btn-link {
+    /* color: #66615b; */
+}
+[type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.btn-round {
+    border-width: 1px;
+    border-radius: 30px;
+    padding-right: 23px;
+    padding-left: 23px;
+}
+.btn-cus-padding {
+width: 100% !important;
+    margin: 0!important;
+    padding: 0.5rem 0.7rem !important;
 }

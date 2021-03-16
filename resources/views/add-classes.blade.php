@@ -415,34 +415,32 @@
                                                             <thead>
                                                             <tr>
                                                                 <th>S.No</th>
-                                                                <th>Name</th>
-                                                                <th>Father Name</th>
-                                                                <th>Address</th>
-                                                                <th>Contact No</th>
-                                                                <th>Status</th>
+                                                                <th>Class Name</th>
+                                                                <th>Numeric Name</th>
+                                                                <th>No Of Period</th>
+                                                                <th>Tuition Fee</th>
                                                                 <th class="disabled-sorting text-center">Actions</th>
                                                             </tr>
                                                             </thead>
                                                             <tfoot>
                                                             <tr>
                                                                 <th>S.No</th>
-                                                                <th>Name</th>
-                                                                <th>Father Name</th>
-                                                                <th>Address</th>
-                                                                <th>Contact No</th>
-                                                                <th>Status</th>
+                                                                <th>Class Name</th>
+                                                                <th>Numeric Name</th>
+                                                                <th>No Of Period</th>
+                                                                <th>Tuition Fee</th>
                                                                 <th class="disabled-sorting text-center">Actions</th>
                                                             </tr>
                                                             </tfoot>
                                                             <tbody>
+                                                            @php $i=1; @endphp
                                                             @foreach($classes as $class)
                                                             <tr>
+                                                                <td>{{$i++}}</td>
                                                                 <td>{{$class->class}}</td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
+                                                                <td>{{$class->numeric_name}}</td>
+                                                                <td>{{$class->no_of_period}}</td>
+                                                                <td>{{$class->tuition_fee}}</td>
                                                                 <td class="text-center">
                                                                     <div class="form-inline pull-right">
                                                                         <div class="">

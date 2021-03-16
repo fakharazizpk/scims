@@ -45,7 +45,6 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <h6 class="col-sm-12 text-center">Add Section</h6>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>For Class</label>
                                                     <select class="selectpicker" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
@@ -129,7 +128,6 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <h6 class="col-sm-12 text-center">Edit Section</h6>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>For Class</label>
                                                     <select class="selectpicker" id="edit_sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
@@ -147,13 +145,14 @@
                                                     <label>Add Students</label>
                                                     <select class="selectpicker edit_sel_student" id="edit_sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
                                                         <option disabled> Choose Students</option>
+                                                        <option value=""></option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>No of Students Added</label>
                                                     <input type="text" class="form-control" placeholder="" id="edit-no-of-student" name="no_of_student"  number="true" number="true">
                                                 </div>
-                                                <div class=" col-sm-6 select-wizard">
+                                                <div class="col-sm-6 select-wizard">
                                                     <label>Assign Class Rep</label>
                                                     <select class="selectpicker" id="edit-representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                         <option value="" disabled selected>Select Student</option>

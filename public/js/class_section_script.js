@@ -88,11 +88,12 @@ $(document).ready(function(e){
      });
 
      /*for edit modal */
-    $('#edit_sel_class').change(function(){
+    $("#edit_sel_class").bind("ready change", function(event){
+    //$('#edit_sel_class').change(function(){
 
         // Department id
         var id = $(this).val();
-
+        //alert(id);
         // Empty the dropdown
         $('#edit_sel_student').find('option').not(':first').remove();
 
@@ -102,7 +103,7 @@ $(document).ready(function(e){
             type   : 'get',
             data   : {id: id},
             success: function(response){
-                //console.log(response);
+                console.log(response);
                 $("#edit_sel_student").empty();
                 $("#edit_sel_student").append('<option value="">Select Student</option>');
                 $.each(response , function (key, value) {
@@ -266,3 +267,6 @@ $(document).ready(function(e){
     window.setTimeout(function () {
         $("#success-message").alert('close');
     }, 2000);
+  /*  window.setTimeout(function () {
+        $("#success-message1").alert('close');
+    }, 2000);*/

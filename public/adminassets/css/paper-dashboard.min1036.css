@@ -13129,3 +13129,7 @@ fieldset[disabled] .btn-outline-choice:hover {
     /*width: 100%;*/
 /*}*/
 
+/*for error*/
+label.error {color: red !important;}
+input.error {border: 1px solid red !important;}
+select.error{border: 1px solid red !important;}

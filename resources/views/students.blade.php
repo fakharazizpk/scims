@@ -17,13 +17,6 @@
                        :
                    </span>
                             </div>
-                            <!--<div class="form-group has-label col-sm-3">-->
-                            <!--<label>-->
-                            <!--Password-->
-                            <!--*-->
-                            <!--</label>-->
-                            <!--<input class="form-control" name="password" id="registerPassword" type="password" required="true" />-->
-                            <!--</div>-->
                             <div class="form-group col-sm-3 select-wizard">
                                 <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class" required="true">
                                     <option value="" disabled selected>Select Class</option>
@@ -109,17 +102,6 @@
                         </div> <!-- end row -->
 
                     </div>
-
-                    <!--<div class="card-footer text-right">-->
-                    <!--<div class="form-check pull-left">-->
-                    <!--<label class="form-check-label">-->
-                    <!--<input class="form-check-input" type="checkbox" name="optionCheckboxes" required>-->
-                    <!--<span class="form-check-sign"></span>-->
-                    <!--Subscribe to newsletter-->
-                    <!--</label>-->
-                    <!--</div>-->
-                    <!--<button type="submit" class="btn btn-primary">Register</button>-->
-                    <!--</div>-->
                 </div>
             </form>
         </div>

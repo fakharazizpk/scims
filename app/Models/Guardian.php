@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class School extends Model
+class Guardian extends Model
 {
-    protected $table = "schools";
+    protected $table = "parent_info";
     public $timestamps = false;
-    protected $primaryKey = 'pk_school_Id';
-
+    protected $primaryKey = 'pnt_Id';
     use HasFactory;
 }

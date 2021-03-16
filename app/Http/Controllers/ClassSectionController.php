@@ -79,6 +79,7 @@ class ClassSectionController extends Controller
         $where = array('c_section_Id' => $id);
         $class_sections = ClassSection::where($where)->first();
         //->studentbyIds = explode(',',$class->subject);
+
         $class_sections->studentbyids = explode(',', $class_sections->students);
         return Response::json($class_sections);
     }
