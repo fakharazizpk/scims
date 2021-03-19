@@ -618,7 +618,7 @@
 
 @endsection
 
-@section('user_script')
+@section('front_script')
 
     <script src="{{asset('adminassets/validator/dist/jquery.validate.js')}}"></script>
     <script src="{{asset('js/user_script.js')}}"></script>

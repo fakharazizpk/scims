@@ -300,29 +300,31 @@ $(document).ready(function(e){
         });*/
     }
 
-  $('#guardian-dropdown').change(function(){
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-          }
-      });
-        // Department id
-        var id = $(this).val();
-        alert(id);
-        // Empty the dropdown
-        //$('#guardian-dropdown').find('option').not(':first').remove();
 
-        // AJAX request
-        $.ajax({
-            url: base_url +'get-guardian-father-image/'+id,
-            type   : 'get',
-            success: function(response){
-                console.log(response);
-                $('#grdPicturePreview').attr("src", base_url+"upload/guardian/"+response.guardian_image);
-            }
-        });
-    });
-    $('#guardian-mother-dropdown').change(function(){
+  $('#guardian-dropdown').bind('ready load change', function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+              }
+          });
+          // Department id
+          var id = $(this).val();
+          alert(id);
+          // Empty the dropdown
+          //$('#guardian-dropdown').find('option').not(':first').remove();
+
+          // AJAX request
+          $.ajax({
+              url: base_url +'get-guardian-father-image/'+id,
+              type   : 'get',
+              success: function(response){
+                  console.log(response);
+                  $('#grdPicturePreview').attr("src", base_url+"upload/guardian/"+response.guardian_image);
+              }
+          });
+      });
+    $('#guardian-mother-dropdown').bind('ready load change', function () {
+    //$('#guardian-mother-dropdown').change(function(){
 
         // Department id
         var id = $(this).val();
@@ -563,7 +565,7 @@ $(document).ready(function(e){
 });
 
 
-
+/*add admission form validation*/
     $("#admission-form").validate({
 
         rules:
@@ -769,6 +771,262 @@ $(document).ready(function(e){
             form.submit();
         }
     });
+    /*edit admission form validation*/
+    $("#edit-admission-form").validate({
+
+        rules:
+            {
+                admdate: {
+                    required: true
+                },
+                admsession: {
+                    required: true
+                },
+                regno: {
+                    required: true
+                },
+                nadrab: {
+                    required: true
+                },
+
+                class_name: {
+                    required: true
+                },
+                stdfname: {
+                    required: true
+                },
+                stdlname: {
+                    required: true
+                },
+                student_gender: {
+                    required: true
+                },
+                date_of_birth: {
+                    required: true
+                },
+                blood_group: {
+                    required: true
+                },
+                religion: {
+                    required: true
+                },
+                nationality: {
+                    required: true
+                },
+                student_district: {
+                    required: true
+                },
+                cast: {
+                    required: true
+                },
+                student_category: {
+                    required: true
+                },
+                disability: {
+                    required: true
+                },
+                guardian: {
+                    required: true
+                },
+                mother: {
+                    required: true
+                },
+                previous_school_name: {
+                    required: true
+                },
+                previous_school_contact: {
+                    required: true
+                },
+                previous_school_leaving_date: {
+                    required: true
+                },
+                previous_school_class_passed: {
+                    required: true
+                },
+                previous_school_comment: {
+                    required: true
+                },
+                parent_mailing_address: {
+                    required: true
+                },
+                parent_permanent_address: {
+                    required: true
+                },
+                parent_district: {
+                    required: true
+                },
+                parent_city: {
+                    required: true
+                },
+                parent_zipcode: {
+                    required: true
+                },
+                guardian_mobile: {
+                    required: true
+                },
+                guardian_email: {
+                    required: true,
+                    email:true
+                },
+                mother_mobile: {
+                    required: true
+                },
+                student_emergency_name: {
+                    required: true
+                },
+                student_emergency_phone: {
+                    required: true
+                },
+            },
+        messages:
+            {
+                admdate: "enter admission date",
+                admsession:{
+                    required: "please enter session",
+                },
+                regno: "please enter registration",
+                nadrab:{
+                    required: "please Nadra B form",
+                },
+                class_name:{
+                    required: "please select class",
+                },
+                stdfname:{
+                    required: "please student first name",
+                },
+                stdlname:{
+                    required: "please student last name",
+                },
+                date_of_birth:{
+                    required: "please enter date of birth",
+                },
+                blood_group:{
+                    required: "please select blood group",
+                },
+                religion:{
+                    required: "please select religion",
+                },
+                nationality:{
+                    required: "please select nationality",
+                },
+                student_district:{
+                    required: "please select district",
+                },
+                cast:{
+                    required: "please select cast",
+                },
+                student_category:{
+                    required: "please select student category",
+                },
+                disability:{
+                    required: "please select disability",
+                },
+                guardian:{
+                    required: "please select guardian",
+                },
+                mother:{
+                    required: "please select mother",
+                },
+                previous_school_name:{
+                    required: "please enter previous school name",
+                },
+                previous_school_contact:{
+                    required: "please enter previous school contact",
+                },
+                previous_school_leaving_date:{
+                    required: "please enter previous school leaving date",
+                },
+                previous_school_class_passed:{
+                    required: "please enter previous class passed",
+                },
+                previous_school_comment:{
+                    required: "please enter previous school comment",
+                },
+                parent_mailing_address:{
+                    required: "please enter mailing address",
+                },
+                parent_permanent_address:{
+                    required: "please enter permanent_address",
+                },
+                parent_district:{
+                    required: "please select district",
+                },
+                parent_city:{
+                    required: "please select city",
+                },
+                parent_zipcode:{
+                    required: "please enter zipcode",
+                },
+                guardian_mobile:{
+                    required: "please enter guardian mobile",
+                },
+                guardian_email:{
+                    required: "please enter guardian email",
+                },
+                mother_mobile:{
+                    required: "please enter guardian mobile",
+                },
+                student_emergency_name:{
+                    required: "please enter emergency person name",
+                },
+                student_emergency_phone:{
+                    required: "please enter emergency person name",
+                },
+            },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+/*start edit student Admission*/
+$('.edit-admission-btn-save-exit-submit').click(function(e){
+    alert('hello');
+    e.preventDefault();
+    $('#edit-admission-form').attr('action', base_url +'update-admission-info');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    });
+    var edit_admission_data =    new FormData($('#edit-admission-form')[0]);
+    $.ajax({
+        url: base_url + 'update-admission-info',
+        enctype: 'multipart/form-data',
+        method: 'post',
+        contentType: false,
+        processData: false,
+        data:  edit_admission_data,
+        success: function(result){
+            console.log(result);
+            if(result.errors)
+            {
+                $('#add-alert-danger').html('');
+
+                $.each(result.errors, function(key, value){
+                    //console.log(value);
+                    //$('#class-section-modal').modal('show');
+                    $('.add-div-error').show();
+                    //$('.alert-danger').show();
+                    $('#add-alert-danger').append('<li>'+value+'</li>');
+
+                });
+            }
+            else
+            {
+                $('#success-message').html('');
+                $('.add-div-error').hide();
+
+                $('#class-section-modal').modal('hide');
+                $('#success-message').show();
+                $('#success-message').append('<p>'+result.message+'</p>');
+                //$('#success-alert').show();
+                //$('#success-alert').text('Successfully Added!').fadeIn('slow');
+                $('#success-message').delay(2000).fadeOut('slow');
+                location.reload();
+
+            }
+        }});
+});
+/*start edit student Admission*/
 /*});*/
 
 /*    window.setTimeout(function () {

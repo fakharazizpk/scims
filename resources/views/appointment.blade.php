@@ -6,7 +6,7 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
                 <div class="card card-wizard" data-color="primary" id="wizardProfile">
-                    <form id="TypeValidation" action="#" method="">
+                    <form id="add-employee-form" action="#" method="">
                         <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                         <div class="card-header text-center">
                             <h4 class="card-title">
@@ -62,55 +62,50 @@
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Given Name</label>
-                                            <input type="text" class="form-control" placeholder="" name="stafffname" title="First & Middle Name">
+                                            <input type="text" class="form-control" placeholder="" name="given_name" title="First & Middle Name">
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Surname</label>
-                                            <input type="text" class="form-control" placeholder="" name="stafflname" title="Last or Family Name" >
+                                            <input type="text" class="form-control" placeholder="" name="surname" title="Last or Family Name" >
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Father Name</label>
-                                            <input type="text" class="form-control" placeholder="" name="stafffather" >
+                                            <input type="text" class="form-control" placeholder="" name="father" >
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="picture-container">
                                                 <div class="picture">
-                                                    <img src="../../assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="" />
-                                                    <input type="file" id="wizard-picture">
+                                                    <img src="{{asset('adminassets/img/default-avatar.png')}}" class="picture-src" id="wizardPicturePreview" title="" />
+                                                    <input type="file" name="employee_image" id="wizard-picture">
                                                 </div>
                                                 <label class="">Choose Picture</label>
                                             </div>
                                         </div>
                                         <div class=" col-sm-3 select-wizard" >
                                             <label>Gender</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Gender" >
+                                            <select class="selectpicker" name="gender" data-size="3" data-style="btn btn-secondary" title="Select Gender" >
                                                 <option value="" disabled selected>Select Gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
+                                                @foreach($genders as $gender)
+                                                    <option value="{{$gender->gnd_Id}}">{{$gender->gender}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class=" col-sm-3 select-wizard" >
                                             <label>Marital Status</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Gender" >
+                                            <select class="selectpicker" name="marital_status" data-size="3" data-style="btn btn-secondary" title="Select Gender" data-live-search="true">
                                                 <option value="" disabled selected>Marital Status</option>
-                                                <option value="1">Single</option>
-                                                <option value="2">Married</option>
-                                                <option value="2">Divorced</option>
-                                                <option value="2">Separated</option>
+                                                @foreach($marital_status as $m_status)
+                                                    <option value="{{$m_status->pk_marital_id}}">{{$m_status->marital_status}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class=" col-sm-3 select-wizard">
                                             <label>Blood Group</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Blood Group" >
+                                            <select class="selectpicker" name="blood_group"    data-size="3" data-style="btn btn-secondary" title="Select Blood Group" data-live-search="true">
                                                 <option value="" disabled selected>Blood Group</option>
-                                                <option value="1">O+</option>
-                                                <option value="2">O-</option>
-                                                <option value="1">A+</option>
-                                                <option value="2">A-</option>
-                                                <option value="1">B+</option>
-                                                <option value="2">B-</option>
-                                                <option value="1">AB+</option>
-                                                <option value="2">AB-</option>
+                                                @foreach($bloodgroups as $bgroup)
+                                                    <option value="{{$bgroup->bg_Id}}">{{$bgroup->blood_group}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-3">
@@ -118,31 +113,46 @@
                                         </div>
                                         <div class="form-group col-sm-3 ">
                                             <label>National Identifier</label>
-                                            <input class="form-control" type="text" placeholder="" name="staffcnic" number="true"/>
+                                            <input class="form-control" type="text" placeholder="" name="staff_cnic" number="true"/>
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Date of Birth</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="staffdob" >
+                                            <input type="text" class="form-control datepicker" placeholder="" name="date_of_birth" >
                                         </div>
 
                                         <div class="form-group col-sm-3">
                                             <label>Religion</label>
-                                            <input type="text" class="form-control" placeholder="" name="staffreligion" >
+                                            <select class="selectpicker" id="religion" name="religion" data-container="" data-size="3" data-style="btn btn-secondary" title="Select bloodgroup" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select religion</option>
+                                                @foreach($religions as $religion)
+                                                    <option value="{{$religion->relig_Id}}">{{$religion->religion}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group col-sm-3">
 
                                         </div>
-                                        <div class="form-group col-sm-3">
-                                            <label>Nationality</label>
-                                            <input type="text" class="form-control" placeholder="" name="staffnation" >
+                                        <div class="col-sm-3 select-wizard">
+                                            <label class="col-sm-12">Nationality</label>
+                                            <select multiple class="selectpicker " data-size="3" name="nationality" id="nationality" data-style="btn btn-secondary" data-container="" data-live-search="true" title="Select Nationality" data-hide-disabled="true"  data-virtual-scroll="false">
+                                                <option value="" disabled>Choose Nationality</option>
+                                                @foreach($nationalities as $nationality)
+                                                    <option value="{{$nationality->nation_Id}}">{{$nationality->nationality}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        <div class="form-group col-sm-3">
-                                            <label>Domicile</label>
-                                            <input type="text" class="form-control" placeholder="" name="staffdom" >
+                                        <div class=" col-sm-3 select-wizard">
+                                            <label class="col-sm-12" >District</label>
+                                            <select class="selectpicker"  id="employee_district" name="district" data-container="" data-style="btn btn-secondary" data-size="3" data-style=" " title="Select district" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled >Select District</option>
+                                                @foreach($districts as $district)
+                                                    <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Cast</label>
-                                            <input type="text" class="form-control" placeholder="" name="staffcast" >
+                                            <input type="text" class="form-control" placeholder="" name="staff_cast" >
                                         </div>
                                     </div>
                                     <div class="form-check pull-left">
@@ -163,12 +173,12 @@
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Hire Date</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="Apptdate" >
+                                            <input type="text" class="form-control datepicker" placeholder="" name="hire_date" >
 
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Adjustment Date</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="Adjdate" >
+                                            <input type="text" class="form-control datepicker" placeholder="" name="adjustment_date" >
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Release Date</label>
@@ -197,20 +207,20 @@
                                                             <h6 class="col-sm-12">Billing Details</h6>
                                                             <div class="form-group col-sm-6 select-wizard">
                                                                 <label>Bill Schedule</label>
-                                                                <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                                <select class="selectpicker" data-size="3" data-style="btn btn-secondary" title="Select Billing Scgedule" data_live_search->
                                                                     <option value="" disabled selected>Select</option>
                                                                     <option value="1">Daily</option>
                                                                     <option value="2">Weekly</option>
-                                                                    <option value="2">Monthly</option>
+                                                                    <option value="3">Monthly</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-sm-6 select-wizard">
                                                                 <label>Billing Type</label>
-                                                                <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                                <select class="selectpicker" data-size="3" data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                                     <option value="" disabled selected>Select</option>
                                                                     <option value="1">Hourly</option>
                                                                     <option value="2">Daily</option>
-                                                                    <option value="2">Monthly</option>
+                                                                    <option value="3">Monthly</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-sm-12">
@@ -306,40 +316,40 @@
                                         <h6 class="col-sm-12">Employment Details</h6>
                                         <div class=" col-sm-3 select-wizard" >
                                             <label>Employment Status</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select status" >
+                                            <select class="selectpicker" name="employee_status" data-size="3" data-style="btn btn-secondary" title="Select status" data-live-search="true">
                                                 <option value="" disabled selected>Select Status</option>
                                                 <option value="1">Full Time</option>
                                                 <option value="2">Part Time</option>
                                             </select>
                                         </div>
-                                        <div class=" col-sm-2 select-wizard" >
+                                        <div class=" col-sm-3 select-wizard" >
                                             <label>Contract Type</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select type" >
+                                            <select class="selectpicker" name="contract_type" data-size="3" data-style="btn btn-secondary" title="Select type" data-live-search="true">
                                                 <option value="" disabled selected>Select Type</option>
                                                 <option value="1">Permanent</option>
                                                 <option value="2">Fixed Term</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-2">
+                                        <div class="form-group col-sm-3">
                                             <label>Duration of Contract</label>
-                                            <input type="text" class="form-control" placeholder="" name="staffcondur" number="true">
+                                            <input type="text" class="form-control" placeholder="" name="staff_contract_duration" number="true">
                                         </div>
-                                        <div class=" col-sm-2 select-wizard" >
+                                        <div class=" col-sm-3 select-wizard" >
                                             <label>Employee Type</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select type" >
+                                            <select class="selectpicker" name="employee_type" data-size="3" data-style="btn btn-secondary" title="Select type" data-live-search="true">
                                                 <option value="" disabled selected>Select Type</option>
-                                                <option value="1">Teaching</option>
-                                                <option value="2">Non Teaching</option>
+                                                @foreach($employee_types as $employee_type)
+                                                    <option value="{{$employee_type->emp_typ_Id}}">{{$employee_type->emp_Type}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class=" col-sm-3 select-wizard">
                                             <label>Designation</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Blood Group" >
+                                            <select class="selectpicker" name="designation" data-size="3" data-style="btn btn-secondary" title="Select Blood Group" data-live-search="true">
                                                 <option value="" disabled selected>Select Designation</option>
-                                                <option value="1">Teacher</option>
-                                                <option value="2">Accountant</option>
-                                                <option value="1">Librarian</option>
-                                                <option value="2">Admin</option>
+                                                @foreach($designations as $designation)
+                                                    <option value="{{$designation->desig_Id}}">{{$designation->designation}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -567,23 +577,33 @@
                                         <h6 class="col-sm-12">Address</h6>
                                         <div class="form-group col-sm-12">
                                             <label>Mailing Address</label>
-                                            <textarea id="" class="form-control" name="commentslc" rows="1" cols="33" ></textarea>
+                                            <textarea id="" class="form-control" name="mailing_address" rows="1" cols="33" ></textarea>
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Permanent Address</label>
-                                            <textarea id="" class="form-control" name="commentslc" rows="1" cols="33"></textarea>
+                                            <textarea id="" class="form-control" name="permanent_address" rows="1" cols="33"></textarea>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label>City</label>
-                                            <input type="text" class="form-control" placeholder="" name="stdfname" >
+                                            <label>Domicile</label>
+                                            <select class="selectpicker" name="employee_district"    id="dom" data-container="" data-size="3" data-style="btn btn-secondary" title="Select domicile" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select domicile</option>
+                                                @foreach($districts as $district)
+                                                    <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="select-wizard col-sm-4">
+                                            <label class="col-sm-12">City</label>
+                                            <select class="selectpicker " id="city" name="employee_city" data-container="" data-size="3" data-style="btn btn-secondary" title="Select city" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select city</option>
+                                                @foreach($cities as $city)
+                                                    <option value="{{$city->pk_city_id}}">{{$city->city_name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label>District</label>
-                                            <input type="text" class="form-control" placeholder="" name="pnic" number="true" >
-                                        </div>
-                                        <div class="form-group col-sm-4">
-                                            <label>Zip</label>
-                                            <input type="text" class="form-control" placeholder="" name="pnic" >
+                                            <label>Zipcode</label>
+                                            <input type="text" class="form-control" placeholder="" name="zip_code" >
                                         </div>
                                     </div>
                                     <div class="row bor-sep">
@@ -591,47 +611,40 @@
                                         <div class="form-group col-sm-4">
                                             <label>Mobile Phone No</label>
 
-                                            <input type="text" class="form-control" placeholder="+11" name="stdfstname" number="true" >
+                                            <input type="text" class="form-control" placeholder="+11" name="employee_mobile_phone" number="true" >
                                         </div>
 
                                         <div class="form-group col-sm-4">
                                             <label>Home Phone No</label>
-                                            <input type="text" class="form-control" placeholder="+11" name="stdlname" number="true" >
+                                            <input type="text" class="form-control" placeholder="+11" name="employee_home_phone" number="true" >
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Email Address</label>
-                                            <input type="text" class="form-control" placeholder="" name="pnic" email="true" >
+                                            <input type="text" class="form-control" placeholder="" name="employee_email" email="true" >
                                         </div>
                                     </div>
                                     <div class="row bor-sep">
                                         <h6 class="col-sm-12">Emergency Contact Information</h6>
                                         <div class="form-group col-sm-4">
                                             <label>Contact Name</label>
-                                            <input type="text" class="form-control" placeholder="" name="stdfname" >
+                                            <input type="text" class="form-control" placeholder="" name="emergency_contact_name" >
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>Contact Phone</label>
-                                            <input type="text" class="form-control" placeholder="+11" name="pnic" number="true" >
+                                            <input type="text" class="form-control" placeholder="+11" name="emergency_contact_phone" number="true" >
                                         </div>
                                         <div class=" col-sm-3 select-wizard">
                                             <label>Relation</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Blood Group" >
+                                            <select class="selectpicker" name="relation" data-size="3" data-style="btn btn-secondary" title="Select Blood Group" data-live-search="true">
                                                 <option value="" disabled selected>Select Relation</option>
-                                                <option value="1">Spouse</option>
-                                                <option value="2">Partner</option>
-                                                <option value="2">Father</option>
-                                                <option value="1">Mother</option>
-                                                <option value="2">Brother</option>
-                                                <option value="1">Sister</option>
-                                                <option value="2">Son</option>
-                                                <option value="1">Daughter</option>
-                                                <option value="2">Fried</option>
-                                                <option value="2">Other</option>
+                                                @foreach($ralationship as $ralation)
+                                                    <option value="{{$ralation->pk_relat_Id}}">{{$ralation->relation_Name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>Other Relation</label>
-                                            <input type="text" class="form-control" placeholder="" name="pnic" number="true" >
+                                            <input type="text" class="form-control" placeholder="" name="other_relation" number="true" >
                                         </div>
                                     </div>
                                 </div>
@@ -640,7 +653,7 @@
                                         <h6 class="col-sm-12">Create User</h6>
                                         <div class=" col-sm-3 select-wizard">
                                             <label>User Type</label>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Blood Group" >
+                                            <select class="selectpicker" data-size="3" data-style="btn btn-secondary" title="Select Blood Group" data-live-search="true">
                                                 <option value="" disabled selected>Select Type</option>
                                                 <option value="1">Teacher</option>
                                                 <option value="2">Accountant</option>
@@ -650,7 +663,7 @@
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label>User Id</label>
-                                            <input type="text" class="form-control" placeholder="" name="staffusename" required="true" >
+                                            <input type="text" class="form-control" placeholder="" name="user_id" required="true" >
                                         </div>
                                         <div class="form-group has-label col-sm-3">
                                             <label>
@@ -679,7 +692,7 @@
                             <div class="pull-right">
                                 <input type='button' class='btn btn-choice btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
                                 <input type='button' class='btn btn-outline-success btn-save btn-fill btn-rose btn-wd' name='next' value='Save & Exit' />
-                                <input type='submit' class='btn btn-finish  btn-secondary btn-fill btn-rose btn-wd' name='finish' value='Submit' />
+                                <input type='submit' class='btn btn-finish  btn-secondary btn-fill btn-rose btn-wd add-employee-submit-btn' name='finish' value='Submit' />
                             </div>
                             <div class="pull-left">
                                 <input type='button' class='btn btn-previous btn-fill btn-outline-choice btn-wd' name='previous' value='Previous' />
@@ -692,8 +705,13 @@
         </div>
     </div>
 @endsection
-
+@section('front_css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('front_script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{asset('adminassets/validator/dist/jquery.validate.js')}}"></script>
+    <script src="{{asset('js/employee_script.js')}}"></script>
     <script>
         $(document).ready(function() {
 
@@ -1094,14 +1112,14 @@
     <script>
         $(function () {
             //Initialize Select2 Elements
-            $('.select2').select2()
+            //$('select').select2();
 
             //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
             //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('#datemask2').inputmask('yyyy--mm-dd', { 'placeholder': 'yyyy/mm/dd' });
             //Money Euro
-            $('[data-mask]').inputmask()
+            $('[data-mask]').inputmask();
 
             //Date range picker
             $('#reservation').daterangepicker()

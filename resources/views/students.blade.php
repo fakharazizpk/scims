@@ -62,7 +62,7 @@
                                             <tr>
                                                 <th>S.No</th>
                                                 <th>Name</th>
-                                                <th>Father Name</th>
+                                                <th>Admission No</th>
                                                 <th>Address</th>
                                                 <th>Contact No</th>
                                                 <th>Status</th>
@@ -73,7 +73,7 @@
                                             <tr>
                                                 <th>S.No</th>
                                                 <th>Name</th>
-                                                <th>Father Name</th>
+                                                <th>Admission No</th>
                                                 <th>Address</th>
                                                 <th>Contact No</th>
                                                 <th>Status</th>
@@ -81,19 +81,22 @@
                                             </tr>
                                             </tfoot>
                                             <tbody>
+                                            @php $i= 1; @endphp
+                                            @foreach($students as $student)
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{$i++}}</td>
+                                                <td>{{$student->std_Fname. " ".$student->std_Mname. " ".$student->std_Lname}}</td>
+                                                <td>{{$student->adm_Number}}</td>
+                                                <td>{{$student->pnt_pmt_Add}}</td>
+                                                <td>{{$student->pnt_mob_Ph}}</td>
+                                                <td>{{$student->std_Status}}</td>
                                                 <td class="text-center">
                                                     <a href="#" class="btn btn-success btn-link btn-icon btn-sm fa fa-eye" title="View Profile"><i class="fa fa-times"></i></a>
-                                                    <a href="../../examples/pages/add-student.html" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{url('edit-admission-info/'.$student->std_Id)}}" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                                                     <a href="../../examples/pages/withdraw-student.html" class="btn btn-danger btn-link btn-icon btn-sm edit" title="withdraw"><i class="fa fa-times"></i></a>
                                                 </td>
                                             </tr>
+                                             @endforeach
                                             </tbody>
                                         </table>
                                     </div><!-- end content-->
@@ -109,7 +112,7 @@
     </div>
 </div>
 @endsection
-@section('student_script')
+@section('front_script')
     <script>
         $(document).ready(function() {
 

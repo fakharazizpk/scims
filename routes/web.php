@@ -31,6 +31,7 @@ use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\AddSubjectController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -273,6 +274,16 @@ Route::get('get-student/{id}', [StudentController::class, 'getstudent']); /*for 
 Route::get('students', [StudentController::class, 'index']);
 Route::get('admission', [StudentController::class, 'create']);
 Route::post('admission-info', [StudentController::class, 'admissionInfo']);
+Route::get('edit-admission-info/{id}', [StudentController::class, 'EditAdmissionInfo']);
+Route::post('update-admission-info', [StudentController::class, 'UpdateAdmissionInfo']);
+
+/*Employee*/
+Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for ajax*/
+Route::get('staff', [EmployeeController::class, 'index']);
+Route::get('appointment', [EmployeeController::class, 'create']);
+Route::post('appointment-info', [EmployeeController::class, 'appointmentInfo']);
+//Route::get('edit-appointment-info/{id}', [EmployeeController::class, 'EditAdmissionInfo']);
+//Route::post('update-admission-info', [EmployeeController::class, 'UpdateAdmissionInfo']);
 
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);
@@ -299,12 +310,12 @@ Route::get('class/delete/{id}', [AddClassesController::class, 'delete']);*/
 Route::get('admission', function () {
     return view('admission');
 });*/
-Route::get('staff', function () {
+/*Route::get('staff', function () {
     return view('staff');
-});
-Route::get('appointment', function () {
+});*/
+/*Route::get('appointment', function () {
     return view('appointment');
-});
+});*/
 
 
 Route::get('users-type', function () {
