@@ -6,7 +6,7 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
                 <div class="card card-wizard" data-color="primary" id="wizardProfile">
-                    <form id="add-employee-form" action="#" method="">
+                    <form id="add-employee-form" action="#" method="" enctype="multipart/form-data">
                         <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                         <div class="card-header text-center">
                             <h4 class="card-title">
@@ -75,8 +75,8 @@
                                         <div class="col-sm-3">
                                             <div class="picture-container">
                                                 <div class="picture">
-                                                    <img src="{{asset('adminassets/img/default-avatar.png')}}" class="picture-src" id="wizardPicturePreview" title="" />
-                                                    <input type="file" name="employee_image" id="wizard-picture">
+                                                    <img src="{{asset('adminassets/img/default-avatar.png')}}" class="picture-src" id="employee_image_preview" title="" />
+                                                    <input type="file" name="employee_image" id="employee_image">
                                                 </div>
                                                 <label class="">Choose Picture</label>
                                             </div>
@@ -142,22 +142,27 @@
                                             </select>
                                         </div>
                                         <div class=" col-sm-3 select-wizard">
-                                            <label class="col-sm-12" >District</label>
-                                            <select class="selectpicker"  id="employee_district" name="district" data-container="" data-style="btn btn-secondary" data-size="3" data-style=" " title="Select district" data-live-search="true"  data-hide-disabled="true">
+                                            <label class="col-sm-12" >Employee District</label>
+                                            <select class="selectpicker"  id="employee_district" name="employee_district" data-container="" data-style="btn btn-secondary" data-size="3" data-style=" " title="Select district" data-live-search="true"  data-hide-disabled="true">
                                                 <option value="" disabled >Select District</option>
                                                 @foreach($districts as $district)
                                                     <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-3">
-                                            <label>Cast</label>
-                                            <input type="text" class="form-control" placeholder="" name="staff_cast" >
+                                        <div class=" col-sm-3 select-wizard">
+                                            <label class="col-sm-12" >Cast</label>
+                                            <select class="selectpicker"  id="staff_cast" name="staff_cast" data-container="" data-style="btn btn-secondary" data-size="3" data-style=" " title="Select district" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled >Select Cast</option>
+                                                @foreach($casts as $cast)
+                                                    <option value="{{$cast->cast_Id}}">{{$cast->cast}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-check pull-left">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="optionCheckboxes" >
+                                            <input class="form-check-input" type="checkbox" name="employee_status" value="Active">
                                             <span class="form-check-sign"></span>
                                             Check if employee is inactive
                                         </label>
@@ -369,62 +374,65 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row bor-sep" id="showacadqual" style="display: none">
-                                        <h6 class="col-sm-12">Academic Qualification</h6>
-                                        <div class="form-group col-sm-1">
-                                            <label>S.No</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualsno">
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>Title</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualtitle" >
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>Board/University</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualboard" >
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>Subject</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualsubject">
-                                        </div>
-                                        <div class="form-group col-sm-2">
-                                            <label>Session</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="qualyear" >
-                                        </div>
-                                        <div class="form-group col-sm-1">
-                                            <label>Grade</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualgrade" >
-                                        </div>
-                                        <div class="form-group col-sm-1">
-                                            <label>CGPA</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualgpa">
-                                        </div>
-                                        <div class=" col-sm-1">
-                                            <label>Action</label>
-                                            <button type='submit' class='btn btn-sm btn-outline-choice' name='Add'  title="Add" value=''/><i class="text-center fa fa-plus fa-lg"></i></button>
-                                        </div>
+
+                                    <div class="row bor-sep showacadqualdiv" id="showacadqual" style="display: none">
+                                            <h6 class="col-sm-12">Academic Qualification</h6>
+                                            <div class="form-group col-sm-1">
+                                                <label>S.No</label>
+                                                <input type="text" class="form-control" placeholder="" name="qual_sno[]">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>Title</label>
+                                                <input type="text" class="form-control" placeholder="" name="qual_title[]" >
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>Board/University</label>
+                                                <input type="text" class="form-control" placeholder="" name="qual_board[]" >
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>Subject</label>
+                                                <input type="text" class="form-control" placeholder="" name="qual_subject[]">
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label>Session</label>
+                                                <input type="text" class="form-control datepicker" placeholder="" name="qual_year" >
+                                            </div>
+                                            <div class="form-group col-sm-1">
+                                                <label>Grade</label>
+                                                <input type="text" class="form-control" placeholder="" name="qual_grade[]" >
+                                            </div>
+                                            <div class="form-group col-sm-1">
+                                                <label>CGPA/%age</label>
+                                                <input type="text" class="form-control" placeholder="" name="qual_gpa[]">
+                                            </div>
+                                            <div class=" col-sm-1">
+                                                <label>Action</label>
+                                                <button type='button'  class='btn btn-sm btn-outline-choice add-academic-btn' name='Add'  title="Add" value=''/><i class="text-center fa fa-plus fa-lg"></i></button>
+                                            </div>
                                     </div>
-                                    <div class="row bor-sep" id="showprofqual" style="display: none">
+
+
+                                    <div class="row bor-sep showprofqualdiv" id="showprofqual" style="display: none">
                                         <h6 class="col-sm-12">Professional Qualification</h6>
                                         <div class="form-group col-sm-1">
                                             <label>S.No</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualsno">
+                                            <input type="text" class="form-control" placeholder="" name="prof_qual_sno[]">
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Title</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualtitle" >
+                                            <input type="text" class="form-control" placeholder="" name="prof_qual_title[]" >
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Board/University</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualboard" >
+                                            <input type="text" class="form-control" placeholder="" name="prof_qual_board[]" >
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>Session</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="qualyear" >
+                                            <input type="text" class="form-control datepicker" placeholder="" name="prof_qual_year[]" >
                                         </div>
                                         <div class=" col-sm-1">
                                             <label>Action</label>
-                                            <button type='submit' class='btn btn-sm btn-outline-choice' name='Add'  title="Add" value=''/><i class="text-center fa fa-plus fa-lg"></i></button>
+                                            <button type='submit' class='btn btn-sm btn-outline-choice profession-qual-btn' name='Add'  title="Add" value=''/><i class="text-center fa fa-plus fa-lg"></i></button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -488,35 +496,35 @@
                                 </div>
                                 <div class="tab-pane" id="expinfo">
                                     <h5></h5>
-                                    <div class="row bor-sep">
+                                    <div class="row bor-sep show-experience-div" id="show-experience">
                                         <h6 class="col-sm-12">Add Experience</h6>
                                         <div class="form-group col-sm-1">
                                             <label>S.No</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualsno" >
+                                            <input type="text" class="form-control" placeholder="" name="experience_sno[]" >
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>Organization</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualtitle" >
+                                            <input type="text" class="form-control" placeholder="" name="experience_organization[]" >
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>Position</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualboard" >
+                                            <input type="text" class="form-control" placeholder="" name="experience_position[]" >
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>Role</label>
-                                            <input type="text" class="form-control" placeholder="" name="qualsubject">
+                                            <input type="text" class="form-control" placeholder="" name="experience_role[]">
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>From Date</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="qualyear" >
+                                            <input type="text" class="form-control datepicker" placeholder="" name="experience_from_date[]" >
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>To Date</label>
-                                            <input type="text" class="form-control datepicker" placeholder="" name="qualgrade" >
+                                            <input type="text" class="form-control datepicker" placeholder="" name="experience_to_date[]" >
                                         </div>
                                         <div class=" col-sm-1">
                                             <label>Action</label>
-                                            <button type='button' class='btn btn-outline-info btn-sm' name='Add'  title="Add" value=''/><i class="fa fa-plus"></i></button>
+                                            <button type='button' class='btn btn-outline-info btn-sm add-experience-div-btn' name='Add'  title="Add" value=''/><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -577,15 +585,15 @@
                                         <h6 class="col-sm-12">Address</h6>
                                         <div class="form-group col-sm-12">
                                             <label>Mailing Address</label>
-                                            <textarea id="" class="form-control" name="mailing_address" rows="1" cols="33" ></textarea>
+                                            <textarea  class="form-control" name="mailing_address" rows="1" cols="33" ></textarea>
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Permanent Address</label>
-                                            <textarea id="" class="form-control" name="permanent_address" rows="1" cols="33"></textarea>
+                                            <textarea  class="form-control" name="permanent_address" rows="1" cols="33"></textarea>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label>Domicile</label>
-                                            <select class="selectpicker" name="employee_district"    id="dom" data-container="" data-size="3" data-style="btn btn-secondary" title="Select domicile" data-live-search="true"  data-hide-disabled="true">
+                                            <select class="selectpicker" name="district"    id="district" data-container="" data-size="3" data-style="btn btn-secondary" title="Select domicile" data-live-search="true"  data-hide-disabled="true">
                                                 <option value="" disabled selected>Select domicile</option>
                                                 @foreach($districts as $district)
                                                     <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
@@ -594,7 +602,7 @@
                                         </div>
                                         <div class="select-wizard col-sm-4">
                                             <label class="col-sm-12">City</label>
-                                            <select class="selectpicker " id="city" name="employee_city" data-container="" data-size="3" data-style="btn btn-secondary" title="Select city" data-live-search="true"  data-hide-disabled="true">
+                                            <select class="selectpicker " id="employee_city" name="employee_city" data-container="" data-size="3" data-style="btn btn-secondary" title="Select city" data-live-search="true"  data-hide-disabled="true">
                                                 <option value="" disabled selected>Select city</option>
                                                 @foreach($cities as $city)
                                                     <option value="{{$city->pk_city_id}}">{{$city->city_name}}</option>
@@ -644,7 +652,7 @@
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <label>Other Relation</label>
-                                            <input type="text" class="form-control" placeholder="" name="other_relation" number="true" >
+                                            <input type="text" class="form-control" placeholder="" name="other_relation">
                                         </div>
                                     </div>
                                 </div>
@@ -1115,16 +1123,16 @@
             //$('select').select2();
 
             //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
+            $('#datemask').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' })
             //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('yyyy--mm-dd', { 'placeholder': 'yyyy/mm/dd' });
+            $('#datemask2').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' })
             //Money Euro
-            $('[data-mask]').inputmask();
+            $('[data-mask]').inputmask()
 
             //Date range picker
             $('#reservation').daterangepicker()
             //Date range picker with time picker
-            $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
+            $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'yyy-mm-dd hh:mm A' }})
             //Date range as a button
             $('#daterange-btn').daterangepicker(
                 {
@@ -1175,5 +1183,23 @@
                 showInputs: false
             })
         })
+
+        /*employee image*/
+        function EmployeereadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#employee_image_preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#employee_image").change(function() {
+            EmployeereadURL(this);
+        });
+
     </script>
 @endsection

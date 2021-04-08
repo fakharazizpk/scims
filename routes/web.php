@@ -212,6 +212,29 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
 /*admin Routs end */
 
 /*login User*/
+
+    //Clear Config cache:
+    Route::get('config-cache', function() {
+        $exitCode = Artisan::call('config:cache');
+        return '<h1>Clear Config cleared</h1>';
+    });
+    Route::get('cache-clear', function() {
+        $exitCode = Artisan::call('cache:clear');
+        return '<h1>cache:cleared</h1>';
+    });
+    Route::get('config-clear', function() {
+        $exitCode = Artisan::call('config:clear');
+        return '<h1>config:cleared</h1>';
+    });
+    Route::get('route-clear', function() {
+        $exitCode = Artisan::call('route:clear');
+        return '<h1>route:cleared</h1>';
+    });
+    Route::get('view-clear', function() {
+        $exitCode = Artisan::call('view:clear');
+        return '<h1>view:cleared</h1>';
+    });
+
 Route::get('/', [UserController::class, 'LoginPage']);
 Route::get('login', [UserController::class, 'LoginPage']);
 Route::post('login', [UserController::class, 'Login']);

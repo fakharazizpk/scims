@@ -119,24 +119,24 @@ class EmployeeController extends Controller
 
     public function appointmentInfo(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
 
-        if ($request->file('student_image')) {
-            $student_image = $request->file('student_image');
-            $new_student_image = "student" . time() . '.' . $student_image->getClientOriginalExtension();
-            $student_image->move(public_path('upload/student'), $new_student_image);
+        if ($request->file('employee_image')) {
+            $student_image = $request->file('employee_image');
+            $new_student_image = "empl" . time() . '.' . $student_image->getClientOriginalExtension();
+            $student_image->move(public_path('upload/employee'), $new_student_image);
             //echo "<pre>"; print_r($new_student_image); exit;
         } else {
             $new_student_image = "";
         }
-        if ($request->file('previous_school_document')) {
+        /*if ($request->file('previous_school_document')) {
             $school_image = $request->file('previous_school_document');
             $new_school_image = "document" . time() . '.' . $school_image->getClientOriginalExtension();
             $school_image->move(public_path('upload/school'), $new_school_image);
             //echo "<pre>"; print_r($new_school_image); exit;
         } else {
             $new_school_image = "";
-        }
+        }*/
 
         $admission_no = School::select('school_abbreviation')->first();
         $i = DB::table('admission')->orderBy('adm_No', 'DESC')->first();
