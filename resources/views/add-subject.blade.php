@@ -326,12 +326,47 @@
                                                 <td>{{$subject->subject}}</td>
                                                 <td>{{$subject->sub_Code}}</td>
                                                 <td class="text-center">
+                                                    <div class="form-inline pull-right">
+                                                        <div class="">
+                                                            <button class=" btn-link btn-cus-weight show-view-class-btn"
+                                                                    type="button"
+                                                                    data-toggle="modal"
+                                                                    {{-- data-target="#viewclass"--}}
+                                                                    id="show-subject"
+                                                                    aria-haspopup="true"
+                                                                    aria-expanded="false" data-id="{{ $subject->sub_Id  }}">
+                                                                View
+                                                            </button>
+                                                        </div>
+                                                        <div
+                                                                class="nav-item btn-rotate dropdown pull-right ">
+                                                            <a class="nav-link dropdown-toggle pull-right"
+                                                               href="javascript:void(0)" id="navbarDropdownMenuLink"
+                                                               data-toggle="dropdown"
+                                                               aria-haspopup="true"
+                                                               aria-expanded="false" data-id="{{ $subject->sub_Id }}">
+                                                            </a>
+                                                            <div
+                                                                    class="dropdown-menu dropdown-menu-right"
+                                                                    aria-labelledby="navbarDropdownMenuLink">
+                                                                <a class="dropdown-item edit-subject" href="javascript:void(0)"
+                                                                   data-toggle="modal" id="edit-subject"
+                                                                   {{-- data-target="#editclass"--}}
+                                                                   aria-haspopup="true"
+                                                                   aria-expanded="false" data-id="{{ $subject->sub_Id }}">Edit</a>
+                                                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this Subject?');"
+                                                                   href="{{url('delete-subject/'.$subject->sub_Id)}}">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                {{--<td class="text-center">
                                                     <a href="javascript:void(0)" title="View"
                                                        class="btn btn-info btn-link btn-icon btn-sm show"
                                                        id="show-subject" data-toggle="modal"
                                                        data-id="{{ $subject->sub_Id }}"><i class="fa fa-eye"></i></a>
-                                                    {{--<a href="{{url('edit-subject/'.$subject->sub_Id)}}"   title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit" id="EditSubject"><i class="fa fa-edit"></i></a>
-                                                    --}}
+                                                    --}}{{--<a href="{{url('edit-subject/'.$subject->sub_Id)}}"   title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit" id="EditSubject"><i class="fa fa-edit"></i></a>
+                                                    --}}{{--
                                                     <a href="javascript:void(0)"
                                                        class="btn btn-warning btn-link btn-icon btn-sm edit"
                                                        id="edit-subject" data-toggle="modal"
@@ -341,7 +376,7 @@
                                                        onclick="return confirm('Are you sure you want to delete this Subject?');"><i
                                                             class="fa fa-times"></i></a>
 
-                                                </td>
+                                                </td>--}}
                                             </tr>
                                         @endforeach
                                         </tbody>
