@@ -80,7 +80,7 @@ class EmployeeController extends Controller
         $religions = Religion::all();
         $marital_status = MaritalStatus::all();
         $employee_types = EmployeeType::all();
-        $employee_status = Emp::all();
+        $employee_status = EmployeeInfo::all();
         $cities = City::all();
         $casts = Cast::all();
 
@@ -122,12 +122,12 @@ class EmployeeController extends Controller
         dd($request->all());
 
         if ($request->file('employee_image')) {
-            $student_image = $request->file('employee_image');
-            $new_student_image = "empl" . time() . '.' . $student_image->getClientOriginalExtension();
-            $student_image->move(public_path('upload/employee'), $new_student_image);
+            $employee_image = $request->file('employee_image');
+            $new_employee_image = "empl" . time() . '.' . $employee_image->getClientOriginalExtension();
+            $employee_image->move(public_path('upload/employee'), $new_employee_image);
             //echo "<pre>"; print_r($new_student_image); exit;
         } else {
-            $new_student_image = "";
+            $new_employee_image = "";
         }
         /*if ($request->file('previous_school_document')) {
             $school_image = $request->file('previous_school_document');

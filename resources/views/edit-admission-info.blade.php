@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class=" pull-left">
-                                        <input type="checkbox" name="student_status" value="Active" class=" fancy-check"
+                                        <input type="checkbox" name="student_status"     value="Active" class=" fancy-check"
                                                id="myId"/>
                                         <label class="form-check-label"
                                                for="myId"><span>Check if student is inactive</span></label>
@@ -542,9 +542,9 @@
                             <div class="pull-right">
                                 <input type='button' class='btn btn-choice btn-next btn-fill btn-rose btn-wd btn-round'
                                        name='next' value='Next'/>
-                                <input type='button'
+                               {{-- <input type='button'
                                        class='btn btn-outline-success btn-save btn-fill btn-rose btn-round btn-wd'
-                                       name='next' value='Save & Exit'/>
+                                       name='next' value='Save & Exit'/>--}}
                                 <input type='submit'
                                        class='btn btn-finish  btn-secondary btn-fill btn-rose btn-wd btn-round  edit-admission-btn-save-exit-submit'
                                        name='finish' value='Submit'/>
@@ -632,7 +632,7 @@
                                         <option value="" disabled selected>Select Gender</option>
                                         @foreach($genders as $gender)
                                             <option value="{{$gender->gnd_Id}}"
-                                                    selected="selected">{{$gender->gender}}</option>
+                                                    @if($gender->gnd_Id ==1) selected @endif>{{$gender->gender}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -773,7 +773,7 @@
                                         data-style="btn btn-secondary" title="Select Gender" required>
                                     <option value="" disabled selected>Select Gender</option>
                                     @foreach($genders as $gender)
-                                        <option value="{{$gender->gnd_Id}}">{{$gender->gender}}</option>
+                                        <option value="{{$gender->gnd_Id}}" @if($gender->gnd_Id ==2) selected @endif>{{$gender->gender}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -699,7 +699,7 @@
                         <div class="card-footer">
                             <div class="pull-right">
                                 <input type='button' class='btn btn-choice btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
-                                <input type='button' class='btn btn-outline-success btn-save btn-fill btn-rose btn-wd' name='next' value='Save & Exit' />
+                              {{--  <input type='button' class='btn btn-outline-success btn-save btn-fill btn-rose btn-wd' name='next' value='Save & Exit' />--}}
                                 <input type='submit' class='btn btn-finish  btn-secondary btn-fill btn-rose btn-wd add-employee-submit-btn' name='finish' value='Submit' />
                             </div>
                             <div class="pull-left">

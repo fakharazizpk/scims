@@ -47,19 +47,19 @@ class StudentController extends Controller
     public function index()
     {
         $students = DB::table('student_info')
-            ->join('student_contact', 'student_info.fk_pnt_cnt_Id', '=', 'student_contact.pnt_cnt_Id')
-            ->join('gender', 'student_info.gnd_Id', '=', 'gender.gnd_Id')
-            ->join('nationality', 'student_info.nation_Id', '=', 'nationality.nation_Id')
-            ->join('domicile', 'student_info.dom_Id', '=', 'domicile.dom_Id')
-            ->join('cast', 'student_info.cast_Id', '=', 'cast.cast_Id')
-            ->join('blood_group', 'student_info.bg_Id', '=', 'blood_group.bg_Id')
-            ->join('religion', 'student_info.relig_Id', '=', 'religion.relig_Id')
-            ->join('student_category', 'student_info.std_cat_Id', '=', 'student_category.std_cat_Id')
-            ->join('disable', 'student_info.disable_Id', '=', 'disable.disable_Id')
-            ->join('emergency_contact', 'student_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
-            ->join('admission', 'student_info.adm_No', '=', 'admission.adm_No')
-            ->join('last_school', 'student_info.lsch_Id', '=', 'last_school.lsch_Id')
-            ->join('class', 'student_info.cls_Id', '=', 'class.cls_Id')
+            ->leftJoin('student_contact', 'student_info.fk_pnt_cnt_Id', '=', 'student_contact.pnt_cnt_Id')
+            ->leftJoin('gender', 'student_info.gnd_Id', '=', 'gender.gnd_Id')
+            ->leftJoin('nationality', 'student_info.nation_Id', '=', 'nationality.nation_Id')
+            ->leftJoin('domicile', 'student_info.dom_Id', '=', 'domicile.dom_Id')
+            ->leftJoin('cast', 'student_info.cast_Id', '=', 'cast.cast_Id')
+            ->leftJoin('blood_group', 'student_info.bg_Id', '=', 'blood_group.bg_Id')
+            ->leftJoin('religion', 'student_info.relig_Id', '=', 'religion.relig_Id')
+            ->leftJoin('student_category', 'student_info.std_cat_Id', '=', 'student_category.std_cat_Id')
+            ->leftJoin('disable', 'student_info.disable_Id', '=', 'disable.disable_Id')
+            ->leftJoin('emergency_contact', 'student_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+            ->leftJoin('admission', 'student_info.adm_No', '=', 'admission.adm_No')
+            ->leftJoin('last_school', 'student_info.lsch_Id', '=', 'last_school.lsch_Id')
+            ->leftJoin('class', 'student_info.cls_Id', '=', 'class.cls_Id')
             ->get();
         //dd($students);
 
@@ -251,8 +251,11 @@ class StudentController extends Controller
             ->join('last_school', 'student_info.lsch_Id', '=', 'last_school.lsch_Id')
             ->join('class', 'student_info.cls_Id', '=', 'class.cls_Id')
             ->where('student_info.std_Id', $id)->first();
-        //dd($student);
+        //dd($student->parent_ids);
+
         $studentParent = explode(",", $student->parent_ids);
+       /* $Guardian_image = Guardian::whereIn('gnd_Id', $studentParent)->get();
+        dd($Guardian_image);*/
         return view('edit-admission-info', compact('student', 'studentParent', 'classes', 'genders', 'bloodgroups', 'religions', 'nationalities', 'districts', 'cities', 'casts', 'student_categories', 'disabilities', 'ralationship', 'designations', 'occupations', 'guardians', 'mothers'));
     }
 
@@ -404,5 +407,11 @@ class StudentController extends Controller
         //$student_admission->save();
 
     }
+
+    public function DeleteStudent(Request $request){
+        StudentInfo::where('std_Id',$request->id)->delete();
+        return redirect()->back()->with('message', 'Successfully Deleted!');
+    }
+
 
 }

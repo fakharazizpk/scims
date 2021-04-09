@@ -91,9 +91,40 @@
                                                 <td>{{$student->pnt_mob_Ph}}</td>
                                                 <td>{{$student->std_Status}}</td>
                                                 <td class="text-center">
-                                                    <a href="#" class="btn btn-success btn-link btn-icon btn-sm fa fa-eye" title="View Profile"><i class="fa fa-times"></i></a>
+                                                    <div class="form-inline pull-right">
+                                                        <div class="">
+                                                            <button class=" btn-link btn-cus-weight show-view-class-btn"
+                                                                    type="button"
+                                                                    data-toggle="modal"
+                                                                    {{-- data-target="#viewclass"--}}
+                                                                    id="show-subject"
+                                                                    aria-haspopup="true"
+                                                                    aria-expanded="false" data-id="{{ $student->std_Id  }}">
+                                                                View
+                                                            </button>
+                                                        </div>
+                                                        <div
+                                                                class="nav-item btn-rotate dropdown pull-right ">
+                                                            <a class="nav-link dropdown-toggle pull-right"
+                                                               href="javascript:void(0)" id="navbarDropdownMenuLink"
+                                                               data-toggle="dropdown"
+                                                               aria-haspopup="true"
+                                                               aria-expanded="false" data-id="{{ $student->std_Id  }}">
+                                                            </a>
+                                                            <div
+                                                                    class="dropdown-menu dropdown-menu-right"
+                                                                    aria-labelledby="navbarDropdownMenuLink">
+                                                                <a class="dropdown-item edit-subject" href="{{url('edit-admission-info/'.$student->std_Id)}}"
+                                                                  {{-- data-target="#editclass"--}}
+                                                                   aria-haspopup="true"
+                                                                   aria-expanded="false" data-id="{{ $student->std_Id  }}">Edit</a>
+                                                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this Student?');"
+                                                                   href="{{url('delete-student/'.$student->std_Id )}}">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    {{--<a href="#" class="btn btn-success btn-link btn-icon btn-sm fa fa-eye" title="View Profile"><i class="fa fa-times"></i></a>
                                                     <a href="{{url('edit-admission-info/'.$student->std_Id)}}" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="../../examples/pages/withdraw-student.html" class="btn btn-danger btn-link btn-icon btn-sm edit" title="withdraw"><i class="fa fa-times"></i></a>
+                                                    <a href="../../examples/pages/withdraw-student.html" class="btn btn-danger btn-link btn-icon btn-sm edit" title="withdraw"><i class="fa fa-times"></i></a>--}}
                                                 </td>
                                             </tr>
                                              @endforeach
