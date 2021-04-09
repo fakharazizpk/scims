@@ -212,7 +212,11 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
 /*admin Routs end */
 
 /*login User*/
-
+Route::get('dump-autoload', function()
+{
+    Artisan::call('dump-autoload');
+    echo 'dump-autoload complete';
+});
     //Clear Config cache:
     Route::get('config-cache', function() {
         $exitCode = Artisan::call('config:cache');
