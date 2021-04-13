@@ -6,6 +6,9 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
                 <div class="card card-wizard" data-color="primary" id="wizardProfile">
+                    <div class="alert alert-success" id="success-message" style="display: none">
+                        {{--{{ session()->get('message') }}--}}
+                    </div>
                     <form id="add-employee-form" action="#" method="" enctype="multipart/form-data">
                         <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                         <div class="card-header text-center">
@@ -190,7 +193,7 @@
                                             <input type="text" class="form-control datepicker" placeholder="Last date on payroll" name="releasedate" readonly="true" >
                                         </div>
                                     </div>
-                                    <div class="row bor-hid">
+                                   {{-- <div class="row bor-hid">
                                         <div class="col-sm-12 pull-right">
                                             <button class="btn btn-secondary pull-right" data-toggle="modal" data-target="#myModal">
                                                 Add Billing
@@ -316,7 +319,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+--}}
                                     <div class="row bor-sep">
                                         <h6 class="col-sm-12">Employment Details</h6>
                                         <div class=" col-sm-3 select-wizard" >
@@ -343,9 +346,10 @@
                                             <label>Employee Type</label>
                                             <select class="selectpicker" name="employee_type" data-size="3" data-style="btn btn-secondary" title="Select type" data-live-search="true">
                                                 <option value="" disabled selected>Select Type</option>
-                                                @foreach($employee_types as $employee_type)
-                                                    <option value="{{$employee_type->emp_typ_Id}}">{{$employee_type->emp_Type}}</option>
-                                                @endforeach
+
+                                                    <option value="Teaching">Teaching
+                                                    </option><option value="None Teaching">None Teaching</option>
+
                                             </select>
                                         </div>
                                         <div class=" col-sm-3 select-wizard">
@@ -395,7 +399,7 @@
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label>Session</label>
-                                                <input type="text" class="form-control datepicker" placeholder="" name="qual_year" >
+                                                <input type="text" class="form-control datepicker" placeholder="" name="qual_year[]" >
                                             </div>
                                             <div class="form-group col-sm-1">
                                                 <label>Grade</label>
@@ -661,12 +665,11 @@
                                         <h6 class="col-sm-12">Create User</h6>
                                         <div class=" col-sm-3 select-wizard">
                                             <label>User Type</label>
-                                            <select class="selectpicker" data-size="3" data-style="btn btn-secondary" title="Select Blood Group" data-live-search="true">
+                                            <select class="selectpicker" name="user_type" data-size="3" data-style="btn btn-secondary" title="Select Blood Group" data-live-search="true">
                                                 <option value="" disabled selected>Select Type</option>
-                                                <option value="1">Teacher</option>
-                                                <option value="2">Accountant</option>
-                                                <option value="1">Librarian</option>
-                                                <option value="2">Admin</option>
+                                                @foreach($designations as $designation)
+                                                    <option value="{{$designation->designation}}">{{$designation->designation}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-3">

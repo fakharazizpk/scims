@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicQualification;
 use App\Models\Admission;
 use App\Models\EmergencyContact;
 use App\Models\EmployeeType;
+use App\Models\EmploymentInfo;
 use App\Models\MaritalStatus;
-use App\Models\StudentContact;
+use App\Models\PreviousExperience;
+use App\Models\ProfessionalQualification;
+use App\Models\EmployeeContact;
 use App\Models\LastSchool;
 use App\Models\Designation;
-use App\Models\Disability;
-use App\Models\Guardian;
+/*use App\Models\Disability;
+use App\Models\Guardian;*/
 use App\Models\Occupation;
 use App\Models\Relationship;
-use App\Models\School;
+/*use App\Models\School;*/
 use App\Models\StudentCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Religion;
 use App\Models\StudentInfo;
 use App\Models\EmployeeInfo;
-use App\Models\AddClasses;
+/*use App\Models\AddClasses;*/
 use App\Models\Gender;
 use App\Models\BloodGroup;
 use App\Models\Nationality;
@@ -27,6 +32,7 @@ use App\Models\District;
 use App\Models\City;
 use App\Models\Cast;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Redirect, Response;
 
 
@@ -49,22 +55,21 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        /*$students = DB::table('student_info')
-            ->join('student_contact', 'student_info.fk_pnt_cnt_Id', '=', 'student_contact.pnt_cnt_Id')
-            ->join('gender', 'student_info.gnd_Id', '=', 'gender.gnd_Id')
-            ->join('nationality', 'student_info.nation_Id', '=', 'nationality.nation_Id')
-            ->join('domicile', 'student_info.dom_Id', '=', 'domicile.dom_Id')
-            ->join('cast', 'student_info.cast_Id', '=', 'cast.cast_Id')
-            ->join('blood_group', 'student_info.bg_Id', '=', 'blood_group.bg_Id')
-            ->join('religion', 'student_info.relig_Id', '=', 'religion.relig_Id')
-            ->join('student_category', 'student_info.std_cat_Id', '=', 'student_category.std_cat_Id')
-            ->join('disable', 'student_info.disable_Id', '=', 'disable.disable_Id')
-            ->join('emergency_contact', 'student_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
-            ->join('admission', 'student_info.adm_No', '=', 'admission.adm_No')
-            ->join('last_school', 'student_info.lsch_Id', '=', 'last_school.lsch_Id')
-            ->join('class', 'student_info.cls_Id', '=', 'class.cls_Id')
-            ->get();*/
-        //dd($students);
+        $employees = DB::table('employee_info')
+            ->join('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+            ->join('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+            ->join('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+            ->join('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+            ->join('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+            ->join('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+            ->join('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+            ->join('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+            ->join('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+            ->join('professional_qualification', 'employee_info.prof_qual_Id', '=', 'professional_qualification.prof_qual_Id')
+            ->join('academic_qualification', 'employee_info.acdm_qual_Id', '=', 'academic_qualification.acdm_qual_Id')
+            ->join('prev_experience', 'employee_info.prev_exper_Id', '=', 'prev_experience.prev_exper_Id')
+            ->get();
+        //dd($employees);
 
         //$parents = $students[0]->parent_ids;
 
@@ -84,7 +89,7 @@ class EmployeeController extends Controller
         $cities = City::all();
         $casts = Cast::all();
 
-        return view('staff');
+        return view('staff', compact('employees'));
     }
 
 
@@ -119,7 +124,7 @@ class EmployeeController extends Controller
 
     public function appointmentInfo(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
 
         if ($request->file('employee_image')) {
             $employee_image = $request->file('employee_image');
@@ -129,112 +134,121 @@ class EmployeeController extends Controller
         } else {
             $new_employee_image = "";
         }
-        /*if ($request->file('previous_school_document')) {
-            $school_image = $request->file('previous_school_document');
-            $new_school_image = "document" . time() . '.' . $school_image->getClientOriginalExtension();
-            $school_image->move(public_path('upload/school'), $new_school_image);
-            //echo "<pre>"; print_r($new_school_image); exit;
-        } else {
-            $new_school_image = "";
-        }*/
-
-        $admission_no = School::select('school_abbreviation')->first();
-        $i = DB::table('admission')->orderBy('adm_No', 'DESC')->first();
-        if (!empty($i)) {
-            $adminId = $i->adm_No;
-        } else {
-            $adminId = 0;
-        }
-        $admission_no = $admission_no->school_abbreviation . "-" . "2021" . "-" . ($adminId + 1);
 
 
-        $admission_table = new Admission();
-        $student_admission = new StudentInfo();
-        $last_school = new LastSchool();
-        /*admision Table*/
-        $admission_table->adm_Number = $admission_no;
-        $admission_table->adm_Date = $request->admdate;
-        $admission_table->adm_Session = $request->admsession;
-        $admission_table->reg_no = $request->regno;
-        $admission_table->nadra_b = $request->nadrab;
+        /*employee type Table*/
+        $employee_contact_table = new EmployeeContact();
+        $employee_contact_table->emp_mob_Ph = $request->employee_mobile_phone;
+        $employee_contact_table->emp_home_Ph =$request->employee_home_phone;
+        $employee_contact_table->emp_Email =$request->employee_email;
+        $employee_contact_table->emp_mail_Add =$request->mailing_address;
+        $employee_contact_table->emp_pmt_Add =$request->permanent_address;
 
-        $admission_table->save();
-        $admission_last_id = $admission_table->adm_No;
-        //dd($admission_last_id);
-
-        /*last school table*/
-        $last_school->lsch_Name = $request->previous_school_name;
-        $last_school->lsch_slc_img = $new_school_image;
-        $last_school->lsch_contact_No = $request->previous_school_contact;
-        $last_school->lsch_lv_Date = $request->previous_school_leaving_date;
-        $last_school->lsch_class_Passed = $request->previous_school_class_passed;
-        $last_school->lsch_Comments = $request->previous_school_comment;
-        $last_school->save();
-        $last_schcool_id = $last_school->lsch_Id;
+        $employee_contact_table->emp_City =$request->employee_city;
+        $employee_contact_table->emp_District =$request->district;
+        $employee_contact_table->zip_Code =$request->zip_code;
+        $employee_contact_table->save();
+        $employee_contact_table_last_id = $employee_contact_table->emp_cnt_Id;
 
         /*Emergency Contact Table*/
-        $student_emergency_table = new EmergencyContact();
-        $student_emergency_table->emer_cont_Name = $request->student_emergency_name;
-        $student_emergency_table->emer_cont_No = $request->student_emergency_phone;
-        $student_emergency_table->fk_emer_relat_Id = $request->relation_with_student;
-        $student_emergency_table->save();
-        $student_emergency_last_id = $student_emergency_table->emer_cnt_Id;
+        $employee_emergency_table = new EmergencyContact();
+        $employee_emergency_table->emer_cont_Name = $request->emergency_contact_name;
+        $employee_emergency_table->emer_cont_No = $request->emergency_contact_phone;
+        $employee_emergency_table->fk_emer_relat_Id = $request->relation;
+        $employee_emergency_table->other_relation = $request->other_relation;
+        $employee_emergency_table->save();
+        $employee_emergency_table_last_id = $employee_emergency_table->emer_cnt_Id;
 
-        /*student_Contact table*/
-        $student_Contact_table = new StudentContact();
-        $student_Contact_table->pnt_mail_Add = $request->parent_mailing_address;
-        $student_Contact_table->pnt_pmt_Add = $request->parent_permanent_address;
-        $student_Contact_table->pnt_District = $request->parent_district;
-        $student_Contact_table->pnt_City = $request->parent_city;
-        $student_Contact_table->zip_No = $request->parent_zipcode;
-        $student_Contact_table->pnt_mob_Ph = $request->guardian_mobile;
-        $student_Contact_table->pnt_off_Ph = $request->guardian_office_phone;
-        $student_Contact_table->pnt_home_Ph = $request->guardian_home_phone;
-        $student_Contact_table->pnt_Email = $request->guardian_email;
-
-        $student_Contact_table->mother_mobile = $request->mother_mobile;
-        $student_Contact_table->mother_office_phone = $request->mother_office_phone;
-        $student_Contact_table->mother_home_phone = $request->mother_home_phone;
-        $student_Contact_table->mother_email = $request->mother_email;
+        /*employee type Table*/
+        $employee_type_table = new EmployeeType();
+        $employee_type_table->emp_Type = $request->employee_type;
+        $employee_type_table->desig_Id = $request->designation;
+        $employee_type_table->save();
+        $employee_type_last_id = $employee_type_table->emp_typ_Id;
 
 
-        //dd($student_Contact_table);
-        $student_Contact_table->save();
-        $student_Contact_last_id = $student_Contact_table->pnt_cnt_Id;
-        //dd($student_Contact_last_id);
+        $Academic_qualification_table = new AcademicQualification();
+
+        $Academic_qualification_table->acdm_qual_Name = implode(",",$request->qual_title);
+        $Academic_qualification_table->subject = implode(",",$request->qual_subject);
+        $Academic_qualification_table->university = implode(",",$request->qual_board);
+        $Academic_qualification_table->acdm_comp_Session = implode(",",$request->qual_year);
+        $Academic_qualification_table->grade = implode(",",$request->qual_grade);
+        $Academic_qualification_table->acdm_Gpa = implode(",",$request->qual_gpa);
+        $Academic_qualification_table->save();
+        $Academic_qualification_table_last_id = $Academic_qualification_table->acdm_qual_Id;
+
+        /* Professional Qualification Table */
+        $professional_qualification_table = new ProfessionalQualification();
+        $professional_qualification_table->prof_qual_Name = implode(",",$request->prof_qual_title);
+        $professional_qualification_table->university = implode(",",$request->prof_qual_board);
+        $professional_qualification_table->prof_comp_Session = implode(",",$request->prof_qual_year);
+        $professional_qualification_table->save();
+        $professional_qualification_table_last_id = $professional_qualification_table->prof_qual_Id;
 
 
-        /*student info Table*/
-        $student_admission->adm_No = $admission_last_id;
-        $student_admission->lsch_Id = $last_schcool_id;
-        $student_admission->emer_cnt_Id = $student_emergency_last_id;
-        $student_admission->fk_pnt_cnt_Id = $student_Contact_last_id;
-        $parentarray = [$request->guardian, $request->mother];
-        //implode(",",$parentarray)
-        $student_admission->parent_ids = implode(",", $parentarray);
 
-        //dump($student_Contact_last_id);
-        $student_admission->std_Fname = $request->stdfname;
-        $student_admission->std_Mname = $request->stdmname;
-        $student_admission->std_Lname = $request->stdlname;
-        $student_admission->std_Status = ($request->student_status == 'Active') ? 'Active' : 'Inactive';
 
-        //$student_admission->fk_pnt_cnt_Id = $request->class;
-        $student_admission->cls_Id = $request->class_name;
+        $Previous_experience_table = new PreviousExperience();
 
-        $student_admission->std_Img = $new_student_image;
+        $Previous_experience_table->prev_exper_Org = implode(",",$request->experience_organization);
+        $Previous_experience_table->prev_exper_Position = implode(",",$request->experience_position);
+        $Previous_experience_table->prev_exper_Role = implode(",",$request->experience_role);
+        $Previous_experience_table->prev_Frmdate = implode(",",$request->experience_from_date);
+        $Previous_experience_table->prev_Todate = implode(",",$request->experience_to_date);
+        $Previous_experience_table->save();
+        $Previous_experience_table_last_id = $Previous_experience_table->prev_exper_Id;
 
-        $student_admission->gnd_Id = $request->student_gender;
-        $student_admission->std_Dob = $request->date_of_birth;
-        $student_admission->bg_Id = $request->blood_group;
-        $student_admission->relig_Id = $request->religion;
-        $student_admission->nation_Id = $request->nationality;
-        $student_admission->dom_Id = $request->student_district;
-        $student_admission->std_Age = $request->age;
-        $student_admission->cast_Id = $request->cast;
-        $student_admission->disable_Id = $request->disability;
-        $student_admission->std_cat_Id = $request->student_category;
-        $student_admission->save();
+        /*Employment Info Table*/
+        $employment_info_table = new EmploymentInfo();
+        $employment_info_table->personal_No = rand(1000,1000000000);
+        $employment_info_table->appt_Date =  $request->hire_date;
+        $employment_info_table->adjust_Date = $request->adjustment_date;
+        $employment_info_table->empt_Status = $request->employee_status;
+        $employment_info_table->contract_Type = $request->contract_type;
+        $employment_info_table->contract_Duration = $request->staff_contract_duration;
+        $employment_info_table->save();
+        $employment_info_table_last_id = $employment_info_table->empt_Id;
+
+
+        /*Enployee Info Table*/
+        $employee_info_table = new EmployeeInfo();
+        $employee_info_table->emp_Img = $new_employee_image;
+        $employee_info_table->emp_given_name = $request->given_name;
+        $employee_info_table->emp_surname = $request->surname;
+        $employee_info_table->emp_fat_Name = $request->father;
+        $employee_info_table->gnd_Id =  $request->gender;
+        $employee_info_table->emp_marital_Status =  $request->marital_status;
+        $employee_info_table->bg_Id = $request->blood_group;
+        $employee_info_table->emp_Cnic = $request->staff_cnic;
+        $employee_info_table->emp_Dob =  $request->date_of_birth;
+        $employee_info_table->relig_Id   = $request->religion;
+        $employee_info_table->nation_Id  = $request->nationality;
+        $employee_info_table->dom_Id  = $request->employee_district;
+        $employee_info_table->cast_Id = $request->staff_cast;
+        $employee_info_table->emp_Status = ($request->employee_status)? 'Active' : 'Inactive';
+        /*last id's of another table start*/
+        $employee_info_table->emp_typ_Id = $employee_type_last_id;
+        $employee_info_table->emer_cnt_Id = $employee_emergency_table_last_id;
+        $employee_info_table->empt_Id = $employment_info_table_last_id;
+        $employee_info_table->acdm_qual_Id = $Academic_qualification_table_last_id;
+        $employee_info_table->prof_qual_Id = $professional_qualification_table_last_id;
+        $employee_info_table->prev_exper_Id = $Previous_experience_table_last_id;
+        $employee_info_table->emp_cnt_Id = $employee_contact_table_last_id;
+        /*last id's of another table end*/
+
+        $employee_info_table->save();
+
+        $user = new User();
+        $user->name = $request->given_name;
+        $user->user_type = $request->user_type;
+        $user->username = $request->user_id;
+        $user->status = ($request->status)? 'Active' : 'Inactive';
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        $employee_last_id = $employee_info_table->emp_Id;
+        /* Academic Qualification Table */
 
     }
 

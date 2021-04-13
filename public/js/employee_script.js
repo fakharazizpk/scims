@@ -80,6 +80,11 @@ $(document).ready(function () {
             //$("#showprofqualdiv").clone().insertAfter("#showprofqual");
         });
 
+    $(document).on('click', ".remove-profession-qual-btn", function() {
+        //alert('works');
+        $(this).closest(".appended_prof_qual_div").remove();
+    });
+
         $(".add-experience-div-btn").click(function(e) {
             e.preventDefault();
 
@@ -164,7 +169,7 @@ $(document).ready(function () {
                     //$('#success-alert').show();
                     //$('#success-alert').text('Successfully Added!').fadeIn('slow');
                     $('#success-message').delay(2000).fadeOut('slow');
-                    //location.reload();
+                    location.reload();
 
                 }
             }

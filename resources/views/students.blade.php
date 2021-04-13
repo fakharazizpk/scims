@@ -49,6 +49,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                @if(session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
                                 <div class="card">
                                     <div class="card-header">
                                         <h6 class="card-title">Students Record List</h6>
@@ -118,8 +123,8 @@
                                                                   {{-- data-target="#editclass"--}}
                                                                    aria-haspopup="true"
                                                                    aria-expanded="false" data-id="{{ $student->std_Id  }}">Edit</a>
-                                                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to delete this Student?');"
-                                                                   href="{{url('delete-student/'.$student->std_Id )}}">Delete</a>
+                                                                <a class="dropdown-item" onclick="return confirm('Are you sure you want to Change Student Status?');"
+                                                                   href="{{url('change-student/'.$student->std_Id )}}">Change Status</a>
                                                             </div>
                                                         </div>
                                                     {{--<a href="#" class="btn btn-success btn-link btn-icon btn-sm fa fa-eye" title="View Profile"><i class="fa fa-times"></i></a>

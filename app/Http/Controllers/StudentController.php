@@ -401,16 +401,30 @@ class StudentController extends Controller
         StudentInfo::where('std_id', $request->std_id)->update($studentinfoarray);
         //dump($student_Contact_last_id);
 
-
+        //return redirect('students')->with('message', 'Successfully Updated!');
         //$student_admission->fk_pnt_cnt_Id = $request->class;
 
         //$student_admission->save();
 
     }
 
-    public function DeleteStudent(Request $request){
-        StudentInfo::where('std_Id',$request->id)->delete();
-        return redirect()->back()->with('message', 'Successfully Deleted!');
+    public function ChangeStudentStatus(Request $request){
+        $student = StudentInfo::where('std_Id',$request->id)->first();
+        //dd($request->id);
+        if ($student->std_Status == 'Active')
+        {
+            $student_status_array = [
+                'std_Status' => 'Inactive'
+            ];
+        }elseif($student->std_Status == 'Inactive'){
+            $student_status_array = [
+                'std_Status' => 'Active'
+            ];
+        }
+
+        $student_status = StudentInfo::where('std_Id',$request->id)->update($student_status_array);
+
+        return redirect()->back()->with('message', 'Successfully Change Status!');
     }
 
 

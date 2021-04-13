@@ -299,7 +299,7 @@ Route::get('admission', [StudentController::class, 'create']);
 Route::post('admission-info', [StudentController::class, 'admissionInfo']);
 Route::get('edit-admission-info/{id}', [StudentController::class, 'EditAdmissionInfo']);
 Route::post('update-admission-info', [StudentController::class, 'UpdateAdmissionInfo']);
-Route::get('delete-student/{id}', [StudentController::class, 'DeleteStudent']);
+Route::get('change-student/{id}', [StudentController::class, 'ChangeStudentStatus']);
 
 /*Employee*/
 Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for ajax*/
