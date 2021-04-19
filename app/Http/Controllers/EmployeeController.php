@@ -15,9 +15,11 @@ use App\Models\LastSchool;
 use App\Models\Designation;
 /*use App\Models\Disability;
 use App\Models\Guardian;*/
+
 use App\Models\Occupation;
 use App\Models\Relationship;
 /*use App\Models\School;*/
+
 use App\Models\StudentCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,6 +27,7 @@ use App\Models\Religion;
 use App\Models\StudentInfo;
 use App\Models\EmployeeInfo;
 /*use App\Models\AddClasses;*/
+
 use App\Models\Gender;
 use App\Models\BloodGroup;
 use App\Models\Nationality;
@@ -65,30 +68,12 @@ class EmployeeController extends Controller
             ->join('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
             ->join('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
             ->join('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
-            ->join('professional_qualification', 'employee_info.prof_qual_Id', '=', 'professional_qualification.prof_qual_Id')
+            /*->join('professional_qualification', 'employee_info.prof_qual_Id', '=', 'professional_qualification.prof_qual_Id')
             ->join('academic_qualification', 'employee_info.acdm_qual_Id', '=', 'academic_qualification.acdm_qual_Id')
             ->join('prev_experience', 'employee_info.prev_exper_Id', '=', 'prev_experience.prev_exper_Id')
+     */
             ->get();
         //dd($employees);
-
-        //$parents = $students[0]->parent_ids;
-
-        //$parents = explode(',',$students[0]->parent_ids);
-        //dd(array_values($parents)[0]);
-
-        /*foreach($students->parent_ids as $p_id)
-            {
-                echo $p_id;
-            }*/
-        $genders = Gender::all();
-        $bloodgroups = BloodGroup::all();
-        $religions = Religion::all();
-        $marital_status = MaritalStatus::all();
-        $employee_types = EmployeeType::all();
-        $employee_status = EmployeeInfo::all();
-        $cities = City::all();
-        $casts = Cast::all();
-
         return view('staff', compact('employees'));
     }
 
@@ -106,9 +91,9 @@ class EmployeeController extends Controller
         $ralationship = Relationship::all();
         $districts = District::all();
         $cities = City::all();
-       $religions = Religion::all();
-       $nationalities = Nationality::all();
-       $casts = Cast::all();
+        $religions = Religion::all();
+        $nationalities = Nationality::all();
+        $casts = Cast::all();
         /*
 
               $student_categories = StudentCategory::all();
@@ -119,7 +104,7 @@ class EmployeeController extends Controller
               $guardians = Guardian::where('gnd_Id', '=', 1)->get();
               $mothers = Guardian::where('gnd_Id', '!=', 1)->get();*/
 
-        return view('appointment', compact('marital_status','genders','bloodgroups','employee_types','designations','ralationship','districts','cities', 'religions','nationalities','casts'));
+        return view('appointment', compact('marital_status', 'genders', 'bloodgroups', 'employee_types', 'designations', 'ralationship', 'districts', 'cities', 'religions', 'nationalities', 'casts'));
     }
 
     public function appointmentInfo(Request $request)
@@ -139,14 +124,14 @@ class EmployeeController extends Controller
         /*employee type Table*/
         $employee_contact_table = new EmployeeContact();
         $employee_contact_table->emp_mob_Ph = $request->employee_mobile_phone;
-        $employee_contact_table->emp_home_Ph =$request->employee_home_phone;
-        $employee_contact_table->emp_Email =$request->employee_email;
-        $employee_contact_table->emp_mail_Add =$request->mailing_address;
-        $employee_contact_table->emp_pmt_Add =$request->permanent_address;
+        $employee_contact_table->emp_home_Ph = $request->employee_home_phone;
+        $employee_contact_table->emp_Email = $request->employee_email;
+        $employee_contact_table->emp_mail_Add = $request->mailing_address;
+        $employee_contact_table->emp_pmt_Add = $request->permanent_address;
 
-        $employee_contact_table->emp_City =$request->employee_city;
-        $employee_contact_table->emp_District =$request->district;
-        $employee_contact_table->zip_Code =$request->zip_code;
+        $employee_contact_table->emp_City = $request->employee_city;
+        $employee_contact_table->emp_District = $request->district;
+        $employee_contact_table->zip_Code = $request->zip_code;
         $employee_contact_table->save();
         $employee_contact_table_last_id = $employee_contact_table->emp_cnt_Id;
 
@@ -167,42 +152,88 @@ class EmployeeController extends Controller
         $employee_type_last_id = $employee_type_table->emp_typ_Id;
 
 
-        $Academic_qualification_table = new AcademicQualification();
+        $count = count($request->qual_title);
+        if ($count > 0) {
+            $data[] = array("S.No" => $request->qual_sno[0], "Title" => $request->qual_title[0], "Board" => $request->qual_board[0], "Subject" => $request->qual_subject[0], "Session" => $request->qual_year[0], "Grade" => $request->qual_grade[0], "CGPA" => $request->qual_gpa[0]);
+        }
+        if ($count > 1) {
+            $data[] = array("S.No" => $request->qual_sno[1], "Title" => $request->qual_title[1], "Board" => $request->qual_board[1], "Subject" => $request->qual_subject[1], "Session" => $request->qual_year[1], "Grade" => $request->qual_grade[1], "CGPA" => $request->qual_gpa[1]);
 
-        $Academic_qualification_table->acdm_qual_Name = implode(",",$request->qual_title);
-        $Academic_qualification_table->subject = implode(",",$request->qual_subject);
-        $Academic_qualification_table->university = implode(",",$request->qual_board);
-        $Academic_qualification_table->acdm_comp_Session = implode(",",$request->qual_year);
-        $Academic_qualification_table->grade = implode(",",$request->qual_grade);
-        $Academic_qualification_table->acdm_Gpa = implode(",",$request->qual_gpa);
-        $Academic_qualification_table->save();
-        $Academic_qualification_table_last_id = $Academic_qualification_table->acdm_qual_Id;
+        }
 
-        /* Professional Qualification Table */
-        $professional_qualification_table = new ProfessionalQualification();
-        $professional_qualification_table->prof_qual_Name = implode(",",$request->prof_qual_title);
-        $professional_qualification_table->university = implode(",",$request->prof_qual_board);
-        $professional_qualification_table->prof_comp_Session = implode(",",$request->prof_qual_year);
-        $professional_qualification_table->save();
-        $professional_qualification_table_last_id = $professional_qualification_table->prof_qual_Id;
+        if ($count > 2) {
+            $data[] = array("S.No" => $request->qual_sno[2], "Title" => $request->qual_title[2], "Board" => $request->qual_board[2], "Subject" => $request->qual_subject[2], "Session" => $request->qual_year[2], "Grade" => $request->qual_grade[2], "CGPA" => $request->qual_gpa[2]);
 
+        }
+        if ($count > 3) {
+            $data[] = array("S.No" => $request->qual_sno[3], "Title" => $request->qual_title[3], "Board" => $request->qual_board[3], "Subject" => $request->qual_subject[3], "Session" => $request->qual_year[3], "Grade" => $request->qual_grade[3], "CGPA" => $request->qual_gpa[3]);
 
+        }
+        if ($count > 4) {
+            $data[] = array("S.No" => $request->qual_sno[4], "Title" => $request->qual_title[4], "Board" => $request->qual_board[4], "Subject" => $request->qual_subject[4], "Session" => $request->qual_year[4], "Grade" => $request->qual_grade[4], "CGPA" => $request->qual_gpa[4]);
 
+        }
+        if ($count > 5) {
+            $data[] = array("S.No" => $request->qual_sno[5], "Title" => $request->qual_title[5], "Board" => $request->qual_board[5], "Subject" => $request->qual_subject[5], "Session" => $request->qual_year[5], "Grade" => $request->qual_grade[5], "CGPA" => $request->qual_gpa[5]);
 
-        $Previous_experience_table = new PreviousExperience();
+        }
+        if ($count > 6) {
+            $data[] = array("S.No" => $request->qual_sno[6], "Title" => $request->qual_title[6], "Board" => $request->qual_board[6], "Subject" => $request->qual_subject[6], "Session" => $request->qual_year[6], "Grade" => $request->qual_grade[6], "CGPA" => $request->qual_gpa[6]);
 
-        $Previous_experience_table->prev_exper_Org = implode(",",$request->experience_organization);
-        $Previous_experience_table->prev_exper_Position = implode(",",$request->experience_position);
-        $Previous_experience_table->prev_exper_Role = implode(",",$request->experience_role);
-        $Previous_experience_table->prev_Frmdate = implode(",",$request->experience_from_date);
-        $Previous_experience_table->prev_Todate = implode(",",$request->experience_to_date);
-        $Previous_experience_table->save();
-        $Previous_experience_table_last_id = $Previous_experience_table->prev_exper_Id;
+        }
+        if ($count > 7) {
+            $data[] = array("S.No" => $request->qual_sno[7], "Title" => $request->qual_title[7], "Board" => $request->qual_board[7], "Subject" => $request->qual_subject[7], "Session" => $request->qual_year[7], "Grade" => $request->qual_grade[7], "CGPA" => $request->qual_gpa[7]);
+
+        }
+        if ($count > 8) {
+            $data[] = array("S.No" => $request->qual_sno[8], "Title" => $request->qual_title[8], "Board" => $request->qual_board[8], "Subject" => $request->qual_subject[8], "Session" => $request->qual_year[8], "Grade" => $request->qual_grade[8], "CGPA" => $request->qual_gpa[8]);
+
+        }
+
+        $serialized_academic_array = serialize($data);
+
+        $profcount = count($request->prof_qual_title);
+        if ($profcount > 0) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[0], "Title" => $request->prof_qual_title[0], "Board" => $request->prof_qual_board[0], "Session" => $request->prof_qual_year[0]);
+        }
+        if ($profcount > 1) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[1], "Title" => $request->prof_qual_title[1], "Board" => $request->prof_qual_board[1], "Session" => $request->prof_qual_year[1]);
+        }
+        if ($profcount > 2) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[2], "Title" => $request->prof_qual_title[2], "Board" => $request->prof_qual_board[2], "Session" => $request->prof_qual_year[2]);
+        }
+        if ($profcount > 3) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[3], "Title" => $request->prof_qual_title[3], "Board" => $request->prof_qual_board[3], "Session" => $request->prof_qual_year[3]);
+        }
+        if ($profcount > 4) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[4], "Title" => $request->prof_qual_title[4], "Board" => $request->prof_qual_board[4], "Session" => $request->prof_qual_year[4]);
+        }
+
+        $serialized_professional_array = serialize($data1);
+
+        $expcount = count($request->experience_organization);
+        if ($expcount > 0) {
+            $data_exp[] = array("s_no" => $request->experience_sno[0], "organization" => $request->experience_organization[0], "position" => $request->experience_position[0], "role" => $request->experience_role[0], "from_date" => $request->experience_from_date[0], "to_date" => $request->experience_to_date[0]);
+        }
+        if ($expcount > 1) {
+            $data_exp[] = array("s_no" => $request->experience_sno[1], "organization" => $request->experience_organization[1], "position" => $request->experience_position[1], "role" => $request->experience_role[1], "from_date" => $request->experience_from_date[1], "to_date" => $request->experience_to_date[1]);
+        }
+        if ($expcount > 2) {
+            $data_exp[] = array("s_no" => $request->experience_sno[2], "organization" => $request->experience_organization[2], "position" => $request->experience_position[2], "role" => $request->experience_role[2], "from_date" => $request->experience_from_date[2], "to_date" => $request->experience_to_date[2]);
+        }
+        if ($expcount > 3) {
+            $data_exp[] = array("s_no" => $request->experience_sno[3], "organization" => $request->experience_organization[3], "position" => $request->experience_position[3], "role" => $request->experience_role[3], "from_date" => $request->experience_from_date[3], "to_date" => $request->experience_to_date[3]);
+        }
+        if ($expcount > 4) {
+            $data_exp[] = array("s_no" => $request->experience_sno[4], "organization" => $request->experience_organization[4], "position" => $request->experience_position[4], "role" => $request->experience_role[4], "from_date" => $request->experience_from_date[4], "to_date" => $request->experience_to_date[4]);
+        }
+
+        $serialized_experience_array = serialize($data_exp);
 
         /*Employment Info Table*/
         $employment_info_table = new EmploymentInfo();
-        $employment_info_table->personal_No = rand(1000,1000000000);
-        $employment_info_table->appt_Date =  $request->hire_date;
+        $employment_info_table->personal_No = rand(1000, 1000000000);
+        $employment_info_table->appt_Date = $request->hire_date;
         $employment_info_table->adjust_Date = $request->adjustment_date;
         $employment_info_table->empt_Status = $request->employee_status;
         $employment_info_table->contract_Type = $request->contract_type;
@@ -217,23 +248,23 @@ class EmployeeController extends Controller
         $employee_info_table->emp_given_name = $request->given_name;
         $employee_info_table->emp_surname = $request->surname;
         $employee_info_table->emp_fat_Name = $request->father;
-        $employee_info_table->gnd_Id =  $request->gender;
-        $employee_info_table->emp_marital_Status =  $request->marital_status;
+        $employee_info_table->gnd_Id = $request->gender;
+        $employee_info_table->emp_marital_Status = $request->marital_status;
         $employee_info_table->bg_Id = $request->blood_group;
         $employee_info_table->emp_Cnic = $request->staff_cnic;
-        $employee_info_table->emp_Dob =  $request->date_of_birth;
-        $employee_info_table->relig_Id   = $request->religion;
-        $employee_info_table->nation_Id  = $request->nationality;
-        $employee_info_table->dom_Id  = $request->employee_district;
+        $employee_info_table->emp_Dob = $request->date_of_birth;
+        $employee_info_table->relig_Id = $request->religion;
+        $employee_info_table->nation_Id = $request->nationality;
+        $employee_info_table->dom_Id = $request->employee_district;
         $employee_info_table->cast_Id = $request->staff_cast;
-        $employee_info_table->emp_Status = ($request->employee_status)? 'Active' : 'Inactive';
+        $employee_info_table->emp_Status = ($request->employee_status) ? 'Active' : 'Inactive';
         /*last id's of another table start*/
         $employee_info_table->emp_typ_Id = $employee_type_last_id;
         $employee_info_table->emer_cnt_Id = $employee_emergency_table_last_id;
         $employee_info_table->empt_Id = $employment_info_table_last_id;
-        $employee_info_table->acdm_qual_Id = $Academic_qualification_table_last_id;
-        $employee_info_table->prof_qual_Id = $professional_qualification_table_last_id;
-        $employee_info_table->prev_exper_Id = $Previous_experience_table_last_id;
+        $employee_info_table->academic = $serialized_academic_array;
+        $employee_info_table->professional = $serialized_professional_array;
+        $employee_info_table->experience = $serialized_experience_array;
         $employee_info_table->emp_cnt_Id = $employee_contact_table_last_id;
         /*last id's of another table end*/
 
@@ -243,199 +274,220 @@ class EmployeeController extends Controller
         $user->name = $request->given_name;
         $user->user_type = $request->user_type;
         $user->username = $request->user_id;
-        $user->status = ($request->status)? 'Active' : 'Inactive';
+        $user->status = ($request->status) ? 'Active' : 'Inactive';
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $employee_last_id = $employee_info_table->emp_Id;
+        //$employee_last_id = $employee_info_table->emp_Id;
         /* Academic Qualification Table */
 
     }
 
-    public function EditAdmissionInfo($id)
+    public function EditAppointmentInfo($id)
     {
-        $classes = AddClasses::all();
         $genders = Gender::all();
+        //dd($genders);
+        $marital_status = MaritalStatus::all();
         $bloodgroups = BloodGroup::all();
-        $religions = Religion::all();
-        $nationalities = Nationality::all();
+        $employee_types = EmployeeType::all();
+        $designations = Designation::all();
+        $ralationship = Relationship::all();
         $districts = District::all();
         $cities = City::all();
+        $religions = Religion::all();
+        $nationalities = Nationality::all();
         $casts = Cast::all();
-        $student_categories = StudentCategory::all();
-        $disabilities = Disability::all();
-        $ralationship = Relationship::all();
-        $occupations = Occupation::all();
-        $designations = Designation::all();
-        $guardians = Guardian::where('gnd_Id', '=', 1)->get();
-        $mothers = Guardian::where('gnd_Id', '!=', 1)->get();
-        $student = DB::table('student_info')
-            ->join('student_contact', 'student_info.fk_pnt_cnt_Id', '=', 'student_contact.pnt_cnt_Id')
-            ->join('gender', 'student_info.gnd_Id', '=', 'gender.gnd_Id')
-            ->join('nationality', 'student_info.nation_Id', '=', 'nationality.nation_Id')
-            ->join('domicile', 'student_info.dom_Id', '=', 'domicile.dom_Id')
-            ->join('cast', 'student_info.cast_Id', '=', 'cast.cast_Id')
-            ->join('blood_group', 'student_info.bg_Id', '=', 'blood_group.bg_Id')
-            ->join('religion', 'student_info.relig_Id', '=', 'religion.relig_Id')
-            ->join('student_category', 'student_info.std_cat_Id', '=', 'student_category.std_cat_Id')
-            ->join('disable', 'student_info.disable_Id', '=', 'disable.disable_Id')
-            ->join('emergency_contact', 'student_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
-            ->join('admission', 'student_info.adm_No', '=', 'admission.adm_No')
-            ->join('last_school', 'student_info.lsch_Id', '=', 'last_school.lsch_Id')
-            ->join('class', 'student_info.cls_Id', '=', 'class.cls_Id')
-            ->where('student_info.std_Id', $id)->first();
-        //dd($student);
-        $studentParent = explode(",", $student->parent_ids);
-        return view('edit-admission-info', compact('student', 'studentParent', 'classes', 'genders', 'bloodgroups', 'religions', 'nationalities', 'districts', 'cities', 'casts', 'student_categories', 'disabilities', 'ralationship', 'designations', 'occupations', 'guardians', 'mothers'));
+        $employee = DB::table('employee_info')
+            ->join('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+            ->join('employee_type', 'employee_info.emp_typ_Id', '=', 'employee_type.emp_typ_Id')
+            ->join('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+            ->join('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+            ->join('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+            ->join('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+            ->join('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+            ->join('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+            ->join('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+            ->join('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+            ->where('employee_info.emp_Id', $id)->first();
+        //dd($employee);
+        //$studentParent = explode(",", $student->parent_ids);
+        return view('edit-appointment-info', compact('employee', 'employee_types', 'genders', 'marital_status', 'bloodgroups', 'religions', 'nationalities', 'districts', 'cities', 'casts', 'ralationship', 'designations'));
     }
 
-    public function UpdateAdmissionInfo(Request $request)
+    public function UpdateAppointmentInfo(Request $request)
     {
-        //dd($request->input('p_id'));
+        //dd($request->all());
 
-        if ($request->file('student_image')) {
-            $student_image = $request->file('student_image');
-            $new_student_image = "student" . time() . '.' . $student_image->getClientOriginalExtension();
-            $student_image->move(public_path('upload/student'), $new_student_image);
-            //echo "<pre>"; print_r($new_student_image); exit;
-            $studentinfoarray['std_Img'] = $new_student_image;
-        }
-        if ($request->file('previous_school_document')) {
-            $school_image = $request->file('previous_school_document');
-            $new_school_image = "document" . time() . '.' . $school_image->getClientOriginalExtension();
-            $school_image->move(public_path('upload/school'), $new_school_image);
-            //echo "<pre>"; print_r($new_school_image); exit;
-            $last_schoolarray['lsch_slc_img'] = $new_school_image;
+        if ($request->file('employee_image')) {
+            $employee_image = $request->file('employee_image');
+            $new_employee_image = "student" . time() . '.' . $employee_image->getClientOriginalExtension();
+            $employee_image->move(public_path('upload/employee'), $new_employee_image);
+            $employee_info_array['emp_Img'] = $new_employee_image;
         }
 
-        $admission_no = School::select('school_abbreviation')->first();
-        $i = DB::table('admission')->orderBy('adm_No', 'DESC')->first();
-        if (!empty($i)) {
-            $adminId = $i->adm_No;
-        } else {
-            $adminId = 0;
-        }
-        $admission_no = $admission_no->school_abbreviation . "-" . "2021" . "-" . ($adminId + 1);
-
-
-        /* $admission_table = new Admission();
-         $student_admission = new StudentInfo();
-         $last_school = new LastSchool();*/
-        /*admision Table*/
-        $admissionArray = [
-            'adm_Number' => $admission_no,
-            'adm_Date' => $request->admdate,
-            'adm_Session' => $request->admsession,
-            'reg_no' => $request->regno,
-            'nadra_b' => $request->nadrab,
+        $employment_info_table = [
+            'appt_Date' => $request->hire_date,
+            'adjust_Date' => $request->adjustment_date,
+            'empt_Status' => $request->employee_status,
+            'contract_Type' => $request->contract_type,
+            'contract_Duration' => $request->staff_contract_duration,
         ];
+        EmploymentInfo::where('empt_Id', $request->empt_id)->update($employment_info_table);
 
         //dd($admissionArray);
 
-        Admission::where('adm_No', $request->adm_id)->update($admissionArray);
+        $count = count($request->qual_title);
+        if ($count > 0) {
+            $data[] = array("S.No" => $request->qual_sno[0], "Title" => $request->qual_title[0], "Board" => $request->qual_board[0], "Subject" => $request->qual_subject[0], "Session" => $request->qual_year[0], "Grade" => $request->qual_grade[0], "CGPA" => $request->qual_gpa[0]);
+        }
+        if ($count > 1) {
+            $data[] = array("S.No" => $request->qual_sno[1], "Title" => $request->qual_title[1], "Board" => $request->qual_board[1], "Subject" => $request->qual_subject[1], "Session" => $request->qual_year[1], "Grade" => $request->qual_grade[1], "CGPA" => $request->qual_gpa[1]);
 
+        }
 
-        // $admission_last_id = $request->adm_id;
-        //dd($admission_last_id);
+        if ($count > 2) {
+            $data[] = array("S.No" => $request->qual_sno[2], "Title" => $request->qual_title[2], "Board" => $request->qual_board[2], "Subject" => $request->qual_subject[2], "Session" => $request->qual_year[2], "Grade" => $request->qual_grade[2], "CGPA" => $request->qual_gpa[2]);
 
-        /*last school table*/
-        $last_schoolarray = [
-            'lsch_Name' => $request->previous_school_name,
-            'lsch_contact_No' => $request->previous_school_contact,
-            'lsch_lv_Date' => $request->previous_school_leaving_date,
-            'lsch_class_Passed' => $request->previous_school_class_passed,
-            'lsch_Comments' => $request->previous_school_comment,
+        }
+        if ($count > 3) {
+            $data[] = array("S.No" => $request->qual_sno[3], "Title" => $request->qual_title[3], "Board" => $request->qual_board[3], "Subject" => $request->qual_subject[3], "Session" => $request->qual_year[3], "Grade" => $request->qual_grade[3], "CGPA" => $request->qual_gpa[3]);
 
-        ];
-        //dd($last_schoolarray);
+        }
+        if ($count > 4) {
+            $data[] = array("S.No" => $request->qual_sno[4], "Title" => $request->qual_title[4], "Board" => $request->qual_board[4], "Subject" => $request->qual_subject[4], "Session" => $request->qual_year[4], "Grade" => $request->qual_grade[4], "CGPA" => $request->qual_gpa[4]);
 
-        LastSchool::where('lsch_Id', $request->lsch_Id)->update($last_schoolarray);
+        }
+        if ($count > 5) {
+            $data[] = array("S.No" => $request->qual_sno[5], "Title" => $request->qual_title[5], "Board" => $request->qual_board[5], "Subject" => $request->qual_subject[5], "Session" => $request->qual_year[5], "Grade" => $request->qual_grade[5], "CGPA" => $request->qual_gpa[5]);
 
-        //$last_school->save();
-        //$last_schcool_id = $last_school->lsch_Id;
+        }
+        if ($count > 6) {
+            $data[] = array("S.No" => $request->qual_sno[6], "Title" => $request->qual_title[6], "Board" => $request->qual_board[6], "Subject" => $request->qual_subject[6], "Session" => $request->qual_year[6], "Grade" => $request->qual_grade[6], "CGPA" => $request->qual_gpa[6]);
 
-        /*Emergency Contact Table*/
-        $student_emergency_array = [
-            'emer_cont_Name' => $request->student_emergency_name,
-            'emer_cont_No' => $request->student_emergency_phone,
-            'fk_emer_relat_Id' => $request->relation_with_student,
-        ];
-        //dd($student_emergency_array);
+        }
+        if ($count > 7) {
+            $data[] = array("S.No" => $request->qual_sno[7], "Title" => $request->qual_title[7], "Board" => $request->qual_board[7], "Subject" => $request->qual_subject[7], "Session" => $request->qual_year[7], "Grade" => $request->qual_grade[7], "CGPA" => $request->qual_gpa[7]);
 
-        EmergencyContact::where('emer_cnt_Id', $request->e_id)->update($student_emergency_array);
+        }
+        if ($count > 8) {
+            $data[] = array("S.No" => $request->qual_sno[8], "Title" => $request->qual_title[8], "Board" => $request->qual_board[8], "Subject" => $request->qual_subject[8], "Session" => $request->qual_year[8], "Grade" => $request->qual_grade[8], "CGPA" => $request->qual_gpa[8]);
 
-        //$student_emergency_table->save();
-        $student_emergency_last_id = $request->emer_cnt_Id;
+        }
+        //dd($data);
+        $serialized_academic_array = serialize($data);
+        //dd(unserialize($serialized_academic_array));
 
-        /*student_Contact table*/
-        //$student_Contact_table = new StudentContact();
-        $Student_Contact_array = [
-        'pnt_mail_Add' => $request->parent_mailing_address,
-        'pnt_pmt_Add' => $request->parent_permanent_address,
-        'pnt_District' => $request->parent_district,
-        'pnt_City' => $request->parent_city,
-        'zip_No' => $request->parent_zipcode,
-        'pnt_mob_Ph' => $request->guardian_mobile,
-        'pnt_off_Ph' => $request->guardian_office_phone,
-        'pnt_home_Ph' => $request->guardian_home_phone,
-        'pnt_Email' => $request->guardian_email,
+        $profcount = count($request->prof_qual_title);
+        if ($profcount > 0) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[0], "Title" => $request->prof_qual_title[0], "Board" => $request->prof_qual_board[0], "Session" => $request->prof_qual_year[0]);
+        }
+        if ($profcount > 1) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[1], "Title" => $request->prof_qual_title[1], "Board" => $request->prof_qual_board[1], "Session" => $request->prof_qual_year[1]);
+        }
+        if ($profcount > 2) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[2], "Title" => $request->prof_qual_title[2], "Board" => $request->prof_qual_board[2], "Session" => $request->prof_qual_year[2]);
+        }
+        if ($profcount > 3) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[3], "Title" => $request->prof_qual_title[3], "Board" => $request->prof_qual_board[3], "Session" => $request->prof_qual_year[3]);
+        }
+        if ($profcount > 4) {
+            $data1[] = array("S.No" => $request->prof_qual_sno[4], "Title" => $request->prof_qual_title[4], "Board" => $request->prof_qual_board[4], "Session" => $request->prof_qual_year[4]);
+        }
 
-        'mother_mobile' => $request->mother_mobile,
-        'mother_office_phone' => $request->mother_office_phone,
-        'mother_home_phone' => $request->mother_home_phone,
-        'mother_email' => $request->mother_email,
-        ];
-        //dd($StudentContactarray);
-        //DB::connection()->enableQueryLog();
-        $student_contact = StudentContact::where('pnt_cnt_Id',$request->p_id)->update($Student_Contact_array);
-        //$queries = DB::getQueryLog();
-        //dd($queries);
+        $serialized_professional_array = serialize($data1);
+        //dd($serialized_professional_array);
 
-        //dd($student_Contact_table);
-        //$student_Contact_table->save();
-        //$student_Contact_last_id = $request->p_id;
-        //dd($student_Contact_last_id);
+        $expcount = count($request->experience_organization);
+        if ($expcount > 0) {
+            $data_exp[] = array("s_no" => $request->experience_sno[0], "organization" => $request->experience_organization[0], "position" => $request->experience_position[0], "role" => $request->experience_role[0], "from_date" => $request->experience_from_date[0], "to_date" => $request->experience_to_date[0]);
+        }
+        if ($expcount > 1) {
+            $data_exp[] = array("s_no" => $request->experience_sno[1], "organization" => $request->experience_organization[1], "position" => $request->experience_position[1], "role" => $request->experience_role[1], "from_date" => $request->experience_from_date[1], "to_date" => $request->experience_to_date[1]);
+        }
+        if ($expcount > 2) {
+            $data_exp[] = array("s_no" => $request->experience_sno[2], "organization" => $request->experience_organization[2], "position" => $request->experience_position[2], "role" => $request->experience_role[2], "from_date" => $request->experience_from_date[2], "to_date" => $request->experience_to_date[2]);
+        }
+        if ($expcount > 3) {
+            $data_exp[] = array("s_no" => $request->experience_sno[3], "organization" => $request->experience_organization[3], "position" => $request->experience_position[3], "role" => $request->experience_role[3], "from_date" => $request->experience_from_date[3], "to_date" => $request->experience_to_date[3]);
+        }
+        if ($expcount > 4) {
+            $data_exp[] = array("s_no" => $request->experience_sno[4], "organization" => $request->experience_organization[4], "position" => $request->experience_position[4], "role" => $request->experience_role[4], "from_date" => $request->experience_from_date[4], "to_date" => $request->experience_to_date[4]);
+        }
 
+        $serialized_experience_array = serialize($data_exp);
 
-        /*student info Table*/
-        $parentarray = [$request->guardian, $request->mother];
-        $parent_ids = implode(",", $parentarray);
-        $studentinfoarray = [
-            'adm_No' => $request->adm_id,
-            'lsch_Id' => $request->last_school_id,
-            'emer_cnt_Id' => $request->e_id,
-            'fk_pnt_cnt_Id' => $request->p_id,
-            'parent_ids' => $parent_ids,
-            'std_Fname' => $request->stdfname,
-            'std_Mname' => $request->stdmname,
-            'std_Lname' => $request->stdlname,
-            'std_Status' => ($request->student_status == 'Active') ? 'Active' : 'Inactive',
-            'cls_Id' => $request->class_name,
+        $employee_info_array = [
 
-            //'std_Img' => $new_student_image,
-
-            'gnd_Id' => $request->student_gender,
-            'std_Dob' => $request->date_of_birth,
+            'emp_given_name' => $request->given_name,
+            'emp_surname' => $request->surname,
+            'emp_fat_Name' => $request->father,
+            'gnd_Id' => $request->gender,
+            'emp_marital_Status' => $request->marital_status,
             'bg_Id' => $request->blood_group,
+            'emp_Cnic' => $request->staff_cnic,
+            'emp_Dob' => $request->date_of_birth,
             'relig_Id' => $request->religion,
             'nation_Id' => $request->nationality,
-            'dom_Id' => $request->student_district,
-            'std_Age' => $request->age,
-            'cast_Id' => $request->cast,
-            'disable_Id' => $request->disability,
-            'std_cat_Id' => $request->student_category,
+            'dom_Id' => $request->employee_district,
+            'cast_Id' => $request->staff_cast,
+            'emp_Status' => ($request->employee_status) ? 'Active' : 'Inactive',
+            /*last id's of another table start*/
+            'emp_typ_Id' => $request->emp_typ_Id,
+            'emer_cnt_Id' => $request->emp_cnt_Id,
+            'empt_Id' => $request->empt_id,
+            'academic' => $serialized_academic_array,
+            'professional' => $serialized_professional_array,
+            'experience' => $serialized_experience_array,
+            'emp_cnt_Id' => $request->e_id,
+
         ];
-
-        //dd($studentinfoarray);
-
-        StudentInfo::where('std_id', $request->std_id)->update($studentinfoarray);
-        //dump($student_Contact_last_id);
+        //dd($employee_info_array);
+        EmployeeInfo::where('emp_Id', $request->emp_id)->update($employee_info_array);
 
 
-        //$student_admission->fk_pnt_cnt_Id = $request->class;
+        /*Emergency Contact Table*/
+        $employee_emergency_array = [
+            'emer_cont_Name' => $request->emergency_contact_name,
+            'emer_cont_No' => $request->emergency_contact_phone,
+            'fk_emer_relat_Id' => $request->relation,
+            'other_relation' => $request->other_relation,
+        ];
+        //dd($student_emergency_array);
+        EmergencyContact::where('emer_cnt_Id', $request->e_id)->update($employee_emergency_array);
 
-        //$student_admission->save();
+        $employee_contact_array = [
+            'emp_mob_Ph' => $request->employee_mobile_phone,
+            'emp_home_Ph' => $request->employee_home_phone,
+            'emp_Email' => $request->employee_email,
+            'emp_mail_Add' => $request->mailing_address,
+            'emp_pmt_Add' => $request->permanent_address,
 
+            'emp_City' => $request->employee_city,
+            'emp_District' => $request->district,
+            'zip_Code' => $request->zip_code,
+        ];
+        EmployeeContact::where('emp_cnt_Id', $request->emp_cnt_Id)->update($employee_contact_array);
     }
+
+
+    public function ChangeEmployeeStatus(Request $request)
+    {
+        $student = EmployeeInfo::where('emp_Id', $request->id)->first();
+        //dd($request->id);
+        if ($student->emp_Status == 'Active') {
+            $student_status_array = [
+                'emp_Status' => 'Inactive'
+            ];
+        } elseif ($student->emp_Status == 'Inactive') {
+            $student_status_array = [
+                'emp_Status' => 'Active'
+            ];
+        }
+
+        $student_status = EmployeeInfo::where('emp_Id', $request->id)->update($student_status_array);
+
+        return redirect()->back()->with('message', 'Successfully Change Status!');
+    }
+
 
 }

@@ -306,9 +306,9 @@ Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for
 Route::get('staff', [EmployeeController::class, 'index']);
 Route::get('appointment', [EmployeeController::class, 'create']);
 Route::post('appointment-info', [EmployeeController::class, 'appointmentInfo']);
-//Route::get('edit-appointment-info/{id}', [EmployeeController::class, 'EditAdmissionInfo']);
-//Route::post('update-admission-info', [EmployeeController::class, 'UpdateAdmissionInfo']);
-
+Route::get('edit-appointment-info/{id}', [EmployeeController::class, 'EditAppointmentInfo']);
+Route::post('update-appointment-info', [EmployeeController::class, 'UpdateAppointmentInfo']);
+Route::get('change-employee-status/{id}', [EmployeeController::class, 'ChangeEmployeeStatus']);
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);
 Route::get('class/add', [AddClassesController::class, 'create']);

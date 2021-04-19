@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class=" pull-left">
-                                        <input type="checkbox" name="student_status"     value="Active" class=" fancy-check"
+                                        <input type="checkbox" name="student_status" @if($student->std_Status=='Active')checked @endif  value="Active" class=" fancy-check"
                                                id="myId"/>
                                         <label class="form-check-label"
                                                for="myId"><span>Check if student is inactive</span></label>

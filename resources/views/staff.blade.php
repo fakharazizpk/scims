@@ -4,6 +4,11 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 <form id="RegisterValidation" action="#" method="">
                     <div class="card ">
                         <div class="card-header ">
@@ -17,26 +22,6 @@
                        :
                    </span>
                                 </div>
-                                <!--<div class="form-group has-label col-sm-3">-->
-                                <!--<label>-->
-                                <!--Password-->
-                                <!--*-->
-                                <!--</label>-->
-                                <!--<input class="form-control" name="password" id="registerPassword" type="password" required="true" />-->
-                                <!--</div>-->
-                                <!--<div class="col-sm-3">-->
-                                <!--<div class="dropdown">-->
-                                <!--<button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                                <!--Dropdown-->
-                                <!--</button>-->
-                                <!--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">-->
-                                <!--<div class="dropdown-header">Dropdown header</div>-->
-                                <!--<a class="dropdown-item" href="#">Active</a>-->
-                                <!--<a class="dropdown-item" href="#">Another action</a>-->
-                                <!--<a class="dropdown-item" href="#">Something else</a>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
                                 <div class="form-group col-sm-3 select-wizard">
                                     <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Status" required="true">
                                         <option value="" disabled selected>Select Status</option>
@@ -117,11 +102,11 @@
                                                                 <div
                                                                         class="dropdown-menu dropdown-menu-right"
                                                                         aria-labelledby="navbarDropdownMenuLink">
-                                                                    <a class="dropdown-item edit-subject" href="{{url('edit-employee-info/'.$employee->emp_Id)}}"
+                                                                    <a class="dropdown-item edit-subject" href="{{url('edit-appointment-info/'.$employee->emp_Id)}}"
                                                                        {{-- data-target="#editclass"--}}
                                                                        aria-haspopup="true"
                                                                        aria-expanded="false" data-id="{{ $employee->emp_Id  }}">Edit</a>
-                                                                    <a class="dropdown-item" onclick="return confirm('Are you sure you want to Change Student Status?');"
+                                                                    <a class="dropdown-item" onclick="return confirm('Are you sure you want to Change Employee Status?');"
                                                                        href="{{url('change-employee-status/'.$employee->emp_Id )}}">Change Status</a>
                                                                 </div>
                                                             </div>
