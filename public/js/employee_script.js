@@ -272,9 +272,9 @@ $(document).ready(function () {
                adjustment_date: {
                    required: true
                },
-               employee_status: {
+               /*employee_status: {
                    required: true
-               },
+               },*/
                contract_type: {
                    required: true
                },
@@ -356,9 +356,9 @@ $(document).ready(function () {
                adjustment_date:{
                    required: "please select adjustment date",
                },
-               employee_status:{
+              /* employee_status:{
                    required: "please select employee status",
-               },
+               },*/
                contract_type:{
                    required: "please select contract type",
                },
@@ -446,9 +446,9 @@ $(document).ready(function () {
                adjustment_date: {
                    required: true
                },
-               employee_status: {
+              /* employee_status: {
                    required: true
-               },
+               },*/
                contract_type: {
                    required: true
                },
@@ -530,9 +530,9 @@ $(document).ready(function () {
                adjustment_date:{
                    required: "please select adjustment date",
                },
-               employee_status:{
+              /* employee_status:{
                    required: "please select employee status",
-               },
+               },*/
                contract_type:{
                    required: "please select contract type",
                },
@@ -610,8 +610,7 @@ $('.edit-employee-submit-btn').click(function (e) {
                 //$('#success-alert').show();
                 //$('#success-alert').text('Successfully Added!').fadeIn('slow');
                 $('#success-message').delay(2000).fadeOut('slow');
-                //location.reload();
-
+                location.reload();
             }
         }
     });

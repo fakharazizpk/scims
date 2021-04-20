@@ -96,7 +96,7 @@
                                             <div class="picture-container">
                                                 <div class="picture">
                                                     @if($employee->emp_Img)
-                                                        <img src="{{asset('upload/employee/'.$employee->emp_Img)}}"
+                                                        <img src="@if($employee->emp_Img) {{asset('upload/employee/'.$employee->emp_Img)}} @else {{asset('adminassets/img/default-avatar.png')}} @endif"
                                                              alt="Employee Image" width="160"
                                                              class="img-responsive img-rounded">
                                                     @else
@@ -430,7 +430,7 @@
                                         @endforeach
 
                                     </div>
-                                    <div class="row">
+                                   {{-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header">
@@ -485,7 +485,7 @@
                                                 </div><!-- end content-->
                                             </div><!--  end card  -->
                                         </div> <!-- end col-md-12 -->
-                                    </div> <!-- end row -->
+                                    </div> <!-- end row -->--}}
 
                                     <div class="row bor-sep showprofqualdiv" id="showprofqual" style="display: none">
                                         <h6 class="col-sm-12">Professional Qualification</h6>
@@ -619,7 +619,7 @@
                                         @endforeach
                                     </div>
 
-                                    <div class="row">
+                                    {{--<div class="row">
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header">
@@ -669,7 +669,7 @@
                                                 </div><!-- end content-->
                                             </div><!--  end card  -->
                                         </div> <!-- end col-md-12 -->
-                                    </div> <!-- end row -->
+                                    </div> <!-- end row -->--}}
                                 </div>
                                 <div class="tab-pane" id="cntinfo">
                                     <div class="row bor-sep">

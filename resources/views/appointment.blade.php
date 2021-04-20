@@ -439,7 +439,7 @@
                                             <button type='submit' class='btn btn-sm btn-outline-choice profession-qual-btn' name='Add'  title="Add" value=''/><i class="text-center fa fa-plus fa-lg"></i></button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    {{--<div class="row">
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header">
@@ -496,7 +496,7 @@
                                                 </div><!-- end content-->
                                             </div><!--  end card  -->
                                         </div> <!-- end col-md-12 -->
-                                    </div> <!-- end row -->
+                                    </div> <!-- end row -->--}}
                                 </div>
                                 <div class="tab-pane" id="expinfo">
                                     <h5></h5>
@@ -531,7 +531,7 @@
                                             <button type='button' class='btn btn-outline-info btn-sm add-experience-div-btn' name='Add'  title="Add" value=''/><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                   {{-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header">
@@ -582,7 +582,7 @@
                                                 </div><!-- end content-->
                                             </div><!--  end card  -->
                                         </div> <!-- end col-md-12 -->
-                                    </div> <!-- end row -->
+                                    </div> <!-- end row -->--}}
                                 </div>
                                 <div class="tab-pane" id="cntinfo">
                                     <div class="row bor-sep">
