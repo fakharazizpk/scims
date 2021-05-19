@@ -9,11 +9,13 @@
                         {{ session()->get('message') }}
                     </div>
                 @endif
-                <form id="RegisterValidation" action="#" method="">
+                    <form id="RegisterValidation" action="{{url('employee-filter')}}" method="post">
+                        @csrf
                     <div class="card ">
                         <div class="card-header ">
                             <h4 class="card-title">View Staff</h4>
                         </div>
+
                         <div class="card-body">
                             <div class="row bor-sep">
                                 <div class="form-group has-label col-sm-2">
@@ -22,17 +24,19 @@
                        :
                    </span>
                                 </div>
+
                                 <div class="form-group col-sm-3 select-wizard">
-                                    <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Status" required="true">
+                                    <select class="selectpicker" name="search" data-size="3" data-style="btn btn-secondary" title="Select Status" required="true">
                                         <option value="" disabled selected>Select Status</option>
-                                        <option value="1">Active</option>
-                                        <option value="2">Inactive</option>
-                                        <option value="3">All</option>
+                                        <option value="Active">Active</option>
+                                        <option value="All">All</option>
+                                        <option value="Inactive">Inactive</option>s
                                     </select>
                                 </div>
                                 <div class="pull-right">
-                                    <input type='button' class='btn  btn-fill btn-outline-choice btn-wd' name='List Studenrs' value='List Staff' />
+                                    <input type='submit' class='btn  btn-fill btn-outline-choice btn-wd' name='List Studenrs' value='List Staff' />
                                 </div>
+
                                 <!--<div class="category form-category">* Required fields</div>-->
                             </div>
                             <div class="row">
@@ -45,77 +49,7 @@
                                             <div class="toolbar">
                                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                                             </div>
-                                            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                <thead>
-                                                <tr>
-                                                    <th>S.No</th>
-                                                    <th>Per.No</th>
-                                                    <th>Full Name</th>
-                                                    <th>Surname</th>
-                                                    <th>Contact No</th>
-                                                    <th>Status</th>
-                                                    <th class="disabled-sorting text-center">Actions</th>
-                                                </tr>
-                                                </thead>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>S.No</th>
-                                                    <th>Per.No</th>
-                                                    <th>Full Name</th>
-                                                    <th>Surname</th>
-                                                    <th>Contact No</th>
-                                                    <th>Status</th>
-                                                    <th class="disabled-sorting text-center">Actions</th>
-                                                </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                @php $i=1; @endphp
-                                               @foreach($employees as $employee)
-                                                   <tr>
-                                                    <td>{{$i++}}</td>
-                                                    <td>{{$employee->personal_No}}</td>
-                                                    <td>{{$employee->emp_given_name}}</td>
-                                                    <td>{{$employee->emp_surname}}</td>
-                                                    <td>{{$employee->emp_mob_Ph}}</td>
-                                                    <td>{{$employee->emp_Status}}</td>
-                                                    <td class="text-center">
-                                                        <div class="form-inline pull-right">
-                                                            <div class="">
-                                                                <button class=" btn-link btn-cus-weight show-view-class-btn"
-                                                                        type="button"
-                                                                        data-toggle="modal"
-                                                                        {{-- data-target="#viewclass"--}}
-                                                                        id="show-subject"
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded="false" data-id="{{ $employee->emp_Id  }}">
-                                                                    View
-                                                                </button>
-                                                            </div>
-                                                            <div
-                                                                class="nav-item btn-rotate dropdown pull-right ">
-                                                                <a class="nav-link dropdown-toggle pull-right"
-                                                                   href="javascript:void(0)" id="navbarDropdownMenuLink"
-                                                                   data-toggle="dropdown"
-                                                                   aria-haspopup="true"
-                                                                   aria-expanded="false" data-id="{{ $employee->emp_Id  }}">
-                                                                </a>
-                                                                <div
-                                                                        class="dropdown-menu dropdown-menu-right"
-                                                                        aria-labelledby="navbarDropdownMenuLink">
-                                                                    <a class="dropdown-item edit-subject" href="{{url('edit-appointment-info/'.$employee->emp_Id)}}"
-                                                                       {{-- data-target="#editclass"--}}
-                                                                       aria-haspopup="true"
-                                                                       aria-expanded="false" data-id="{{ $employee->emp_Id  }}">Edit</a>
-                                                                    <a class="dropdown-item" onclick="return confirm('Are you sure you want to Change Employee Status?');"
-                                                                       href="{{url('change-employee-status/'.$employee->emp_Id )}}">Change Status</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                                            @include('partials.employee_data')
                                         </div><!-- end content-->
                                     </div><!--  end card  -->
                                 </div> <!-- end col-md-12 -->
@@ -135,7 +69,7 @@
                         <!--<button type="submit" class="btn btn-primary">Register</button>-->
                         <!--</div>-->
                     </div>
-                </form>
+                    </form>
             </div>
 
         </div>
@@ -143,7 +77,7 @@
 @endsection
 
 @section('front_script')
-    {{--<script src="{{asset('js/home_script.js')}}"></script>--}}
+    <script src="{{asset('js/employee_script.js')}}"></script>
     <script>
         $(document).ready(function() {
 

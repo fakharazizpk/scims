@@ -24,6 +24,7 @@ use App\Http\Controllers\AdminEmployeeTypeController;
 use App\Http\Controllers\AdminUniversityController;
 use App\Http\Controllers\AdminOccupationController;
 use App\Http\Controllers\AdminRelationshipController;
+use App\Http\Controllers\AdminUserController;
 /*Other Controller*/
 use App\Http\Controllers\AddClassesController;
 use App\Http\Controllers\GuardianController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,13 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     /*Home*/
     Route::get('home', [AdminHomeController::class, 'index']);
+    /*user Type*/
+    Route::get('user-type', [AdminUserController::class, 'UserType']);
+    Route::get('user-type/add-view', [AdminUserController::class, 'CreateUserTypeView']);
+    Route::post('user-type/add', [AdminUserController::class, 'CreateUserType']);
+    Route::get('user-type/edit/{id}', [AdminUserController::class, 'EditUserType']);
+    Route::post('user-type/update', [AdminUserController::class, 'UpdateUserType']);
+    Route::get('user-type/delete/{id}', [AdminUserController::class, 'DeleteUserType']);
     /*Nationality*/
     Route::get('nationality', [AdminNationalityController::class, 'index']);
     Route::get('nationality/add-view', [AdminNationalityController::class, 'create']);
@@ -267,6 +276,7 @@ Route::get('delete-subject/{id}', [AddSubjectController::class, 'DeleteSubject']
 /*Subject Subject*/
 
 /*GuardianController*/
+Route::get('parent-dashboard', [GuardianController::class, 'index']);
 Route::post('add-guardian', [GuardianController::class, 'store']);
 Route::post('add-mother', [GuardianController::class, 'motherInfo']);
 Route::get('get-guardian-father', [GuardianController::class, 'getGuardianFather']);
@@ -300,15 +310,22 @@ Route::post('admission-info', [StudentController::class, 'admissionInfo']);
 Route::get('edit-admission-info/{id}', [StudentController::class, 'EditAdmissionInfo']);
 Route::post('update-admission-info', [StudentController::class, 'UpdateAdmissionInfo']);
 Route::get('change-student/{id}', [StudentController::class, 'ChangeStudentStatus']);
+Route::get('withdrawl-student/{id}', [StudentController::class, 'WithdrawlStudent']);
+Route::post('withdrawl-student', [StudentController::class, 'WithdrawlStudentPost']);
 
 /*Employee*/
-Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for ajax*/
+//Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for ajax*/
 Route::get('staff', [EmployeeController::class, 'index']);
+Route::post('employee-filter', [EmployeeController::class, 'EmployeeFilter']);
 Route::get('appointment', [EmployeeController::class, 'create']);
 Route::post('appointment-info', [EmployeeController::class, 'appointmentInfo']);
 Route::get('edit-appointment-info/{id}', [EmployeeController::class, 'EditAppointmentInfo']);
 Route::post('update-appointment-info', [EmployeeController::class, 'UpdateAppointmentInfo']);
 Route::get('change-employee-status/{id}', [EmployeeController::class, 'ChangeEmployeeStatus']);
+
+/*Teacher*/
+Route::get('teacher-dashboard', [TeacherController::class, 'index']);
+
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);
 Route::get('class/add', [AddClassesController::class, 'create']);

@@ -305,12 +305,20 @@
                                         </div>
 
                                         <div class="form-group col-sm-3">
-                                            <label>Enter Class Passed</label>
+                                           {{-- <label>Enter Class Passed</label>
                                             <input type="text" class="form-control" placeholder="" name="previous_school_class_passed" >
+                                         --}}
+                                            <select class="selectpicker" id="previous_school_class_passed" name="previous_school_class_passed" data-container="" data-size="3" data-style="btn btn-secondary" title="Select class" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select Class Passed</option>
+                                                @foreach($classes as $class)
+                                                    <option value="{{$class->cls_Id}}">{{$class->class}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Enter Remarks</label>
                                             <textarea class="form-control" name="previous_school_comment" rows="1" cols="33"></textarea>
+
                                         </div>
                                         <div class="form-group col-sm-12">
 

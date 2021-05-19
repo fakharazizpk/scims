@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 class GuardianController extends Controller
 {
+    public function index(){
+        return view('parent-dashboard');
+    }
 
     public function getGuardianFatherPicture($id){
 
@@ -92,10 +95,10 @@ class GuardianController extends Controller
             'mother_marital_status' => 'required',
             'mother_working_status' => 'required',
             'mother_relation' => 'required',
-            'mother_gender' => 'required',
-            'mother_occupation' => 'required',
-            'mother_designation' => 'required',
-            'mother_employer' => 'required',
+            //'mother_gender' => 'required',
+            //'mother_occupation' => 'required',
+            //'mother_designation' => 'required',
+            //'mother_employer' => 'required',
             'mother_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
 
         ]);

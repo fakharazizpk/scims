@@ -17,7 +17,7 @@ $(document).ready(function(e){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let add_class_section_data =  $('#add-class-section-form').serialize();
+        var add_class_section_data =  $('#add-class-section-form').serialize();
         $.ajax({
             url: base_url + 'add-class-section',
             method: 'post',
@@ -155,7 +155,7 @@ $(document).ready(function(e){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let edit_class_section_data =  $('#edit-class-section-form').serialize();
+        var edit_class_section_data =  $('#edit-class-section-form').serialize();
         $.ajax({
             url: base_url + "update-class-section",
             method: 'post',

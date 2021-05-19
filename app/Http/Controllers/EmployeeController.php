@@ -58,26 +58,94 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        $employees = DB::table('employee_info')
-            ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
-            ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
-            ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
-            ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
-            ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
-            ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
-            ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
-            ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
-            ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
-            /*->join('professional_qualification', 'employee_info.prof_qual_Id', '=', 'professional_qualification.prof_qual_Id')
-            ->join('academic_qualification', 'employee_info.acdm_qual_Id', '=', 'academic_qualification.acdm_qual_Id')
-            ->join('prev_experience', 'employee_info.prev_exper_Id', '=', 'prev_experience.prev_exper_Id')
-     */
-            ->get();
-        //dd($employees);
+
+       /* if ($request->ajax()){
+            $output = "";
+            $query  = $request->search;
+            //dd($query);
+            if ($query==='All'){
+                $employees = DB::table('employee_info')
+                    ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+                    ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+                    ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+                    ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+                    ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+                    ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+                    ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+                    ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+                    ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+                    ->get();
+            }else{
+                $employees = DB::table('employee_info')
+                    ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+                    ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+                    ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+                    ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+                    ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+                    ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+                    ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+                    ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+                    ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+                    ->where('employee_info.emp_Status', '=', $query)
+                    ->get();
+                //dd($employees);
+            }
+
+
+            if ($employees){
+                return view('partials.employee_data', compact('employees'))->render();
+            }
+        } else {*/
+            //dd($request->all());
+            $employees = DB::table('employee_info')
+                ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+                ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+                ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+                ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+                ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+                ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+                ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+                ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+                ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+                ->get();
+       // }
+
         return view('staff', compact('employees'));
     }
 
 
+    public function EmployeeFilter(Request $request)
+    {
+        $query  = $request->search;
+        if ($query == 'All'){
+            $employees = DB::table('employee_info')
+                ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+                ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+                ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+                ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+                ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+                ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+                ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+                ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+                ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+                ->get();
+        }else{
+            $employees = DB::table('employee_info')
+                ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+                ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+                ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+                ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+                ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+                ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+                ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+                ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+                ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+                ->where('employee_info.emp_Status', '=', $query)
+                ->get();
+        }
+        return view('staff', compact('employees'));
+
+    }
     public function create()
     {
         //dd('dfhsdjaghsdghsd gsdjghsd');
@@ -418,7 +486,7 @@ class EmployeeController extends Controller
                 'academic' => $serialized_academic_array,
                 'professional' => $serialized_professional_array,
                 'experience' => $serialized_experience_array,
-                'emp_cnt_Id' => $request->emp_cnt_Id,s
+                'emp_cnt_Id' => $request->emp_cnt_Id,
 
             ];
         }else{

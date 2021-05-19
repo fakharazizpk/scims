@@ -454,8 +454,7 @@
                                                                                 View
                                                                             </button>
                                                                         </div>
-                                                                        <div
-                                                                            class="nav-item btn-rotate dropdown pull-right ">
+                                                                        <div class="nav-item btn-rotate dropdown pull-right ">
                                                                             <a class="nav-link dropdown-toggle pull-right"
                                                                                href="javascript:void(0)" id="navbarDropdownMenuLink"
                                                                                data-toggle="dropdown"

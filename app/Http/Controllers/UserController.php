@@ -31,7 +31,11 @@ class UserController extends Controller
 
         $username = $request->get('username');
         $password = $request->get('password');
-        $user     = User::where('username', '=', $request->input('username'))->first();
+        $user     = User::where([
+            ['username', '=', $username],
+            ['status', '=', 'Active'],
+        ])->first();
+        //dd($user);
         if ($user){
             if (Hash::check($password, $user->password)){
                 $userFound = User::where([
@@ -39,6 +43,7 @@ class UserController extends Controller
                     //            ['password', '=', $password],
                     ['status', '=', 'Active'],
                 ])->first();
+
                 if ($userFound){
                     $userData = array(
                         'id'         => $userFound["id"],
@@ -47,7 +52,19 @@ class UserController extends Controller
                         'email'  => $userFound["email"],
                     );
                     Session::put('userData', $userData);
-                    return redirect('home');
+                    //dd($userFound->user_type);
+                    if($userFound->user_type=='Admin'){
+                        return redirect('home');// exit;
+                    }
+                    else if($userFound->user_type=='Teacher'){
+                        return redirect('teacher-dashboard');
+                    }
+                    else if($userFound->user_type=='Accountant'){
+                        return "Accountant Dashboard";// exit;
+                    }else{
+                        return back()->with('error', 'Account is not active');
+                    }
+
                 }
             } else {
                 $request->flashExcept('password');
@@ -57,7 +74,7 @@ class UserController extends Controller
         } else {
             $request->flashExcept('password');
 
-            return back()->with('error', 'User is not found');
+            return back()->with('error', 'User is not found or Account is not active');
         }
     }
 

@@ -576,9 +576,9 @@ $(document).ready(function(e){
                 admsession: {
                     required: true
                 },
-                regno: {
+               /* regno: {
                     required: true
-                },
+                },*/
                 nadrab: {
                     required: true
                 },
@@ -678,7 +678,7 @@ $(document).ready(function(e){
                 admsession:{
                     required: "please enter session",
                 },
-                regno: "please enter registration",
+                /*regno: "please enter registration",*/
                 nadrab:{
                     required: "please Nadra B form",
                 },
@@ -782,9 +782,9 @@ $(document).ready(function(e){
                 admsession: {
                     required: true
                 },
-                regno: {
+                /*regno: {
                     required: true
-                },
+                },*/
                 nadrab: {
                     required: true
                 },
@@ -884,7 +884,7 @@ $(document).ready(function(e){
                 admsession:{
                     required: "please enter session",
                 },
-                regno: "please enter registration",
+                /*regno: "please enter registration",*/
                 nadrab:{
                     required: "please Nadra B form",
                 },
@@ -1021,7 +1021,7 @@ $('.edit-admission-btn-save-exit-submit').click(function(e){
                 //$('#success-alert').show();
                 //$('#success-alert').text('Successfully Added!').fadeIn('slow');
                 $('#success-message').delay(2000).fadeOut('slow');
-                location.reload();
+                //location.reload();
 
             }
         }});

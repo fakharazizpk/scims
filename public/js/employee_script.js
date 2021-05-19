@@ -176,6 +176,36 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('change', '#employee-filter', function (e) {
+
+        var value = $(this).val();
+        employeeSearch(value);
+    });
+
+    function employeeSearch(value) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: base_url + 'staff',
+            // url    : "http://localhost/nextdaylabels_live/admin/public/template",
+
+            type   : 'get',
+            data   : {'search': value},
+            success: function (data) {
+                $('#datatable').empty();
+                $("#datatable").html(data);
+
+
+            }
+        });
+
+    }
+
+
     $("#std-date-of-birth").blur(function () {
 
         calculateAge();

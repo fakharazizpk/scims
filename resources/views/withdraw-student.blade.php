@@ -1,53 +1,57 @@
 @extends('layouts.master')
-@section('title', 'Students')
+@section('title', 'Withdraw Student')
 @section('content')
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <form id="RegisterValidation" action="{{url('students')}}" method="">
+                <form id="RegisterValidation" action="{{url('withdrawl-student')}}" method="Post">
+                    @csrf
+                    <input type="hidden" name="std_id" value="{{$student->s_id}}">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">View Students</h4>
+                            <h4 class="card-title">Withdraw Student</h4>
                         </div>
                         <div class="card-body">
                             <div class="row bor-sep">
-                                <div class="form-group has-label col-sm-2">
-                   <span>
-                       View By
-                       :
-                   </span>
+                                <h6 class="col-sm-12">Withdrawal Information</h6>
+                                <div class="form-group col-sm-4">
+                                    <label>Admission No</label>
+                                    <input type="text" class="form-control" placeholder="" value="{{$student->adm_Number}}" name="admno" readonly="true">
                                 </div>
-                                <div class="form-group col-sm-3 select-wizard">
-                                    <select class="selectpicker" data-size="5" name="class_name" data-style="btn btn-secondary" data-live-search="true"
-                                            title="Select Class" required="true">
-                                        <option value="" disabled selected>Select Class</option>
-                                        @foreach($classes as $class)
-                                        <option value="{{$class->cls_Id}}">{{$class->class}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-group col-sm-4">
+                                    <label>Date</label>
+                                    <input type="text" class="form-control datepicker" placeholder="" value="" name="withdraw_date" required="true">
+
                                 </div>
-                                <div class="form-group col-sm-3 select-wizard">
-                                    <select class="selectpicker" data-size="5" name="class_section" data-style="btn btn-secondary" data-live-search="true"
-                                            title="Select Section" required="true">
-                                        <option value="" disabled selected>Select Section</option>
-                                        @foreach($class_sections as $class_section)
-                                            <option value="{{$class_section->c_section_Id}}">{{$class_section->class_section_name}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-group col-sm-4">
+                                    <label>Session</label>
+                                    <input type="text" class="form-control" placeholder="" value="{{$student->adm_Session}}" name="adm_session" readonly="true" >
                                 </div>
-                                <div class="pull-right">
-                                    <input type='submit' class='btn  btn-fill btn-outline-choice btn-wd'
-                                           name='List Studenrs' value='List Students'/>
+                                <div class="form-group col-sm-12">
+                                    <label>Remarks</label>
+                                    <textarea id="" class="form-control" name="commentslc" rows="1" cols="33" required="true"></textarea>
                                 </div>
+                                <!--<div class="form-group has-label col-sm-3">-->
+                                <!--<label>-->
+                                <!--Password-->
+                                <!--*-->
+                                <!--</label>-->
+                                <!--<input class="form-control" name="password" id="registerPassword" type="password" required="true" />-->
+                                <!--</div>-->
                                 <!--<div class="category form-category">* Required fields</div>-->
+                            </div>
+                            <div class="card-footer text-right">
+                                <div class="form-check pull-left">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="Active" @if($student->std_Status=='Active') checked @endif name="optionCheckboxes">
+                                        <span class="form-check-sign"></span>
+                                        Uncheck if student is active
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-secondary btn-danger">Withdraw</button>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    @if(session()->has('message'))
-                                        <div class="alert alert-success">
-                                            {{ session()->get('message') }}
-                                        </div>
-                                    @endif
                                     <div class="card">
                                         <div class="card-header">
                                             <h6 class="card-title">Students Record List</h6>
@@ -56,87 +60,38 @@
                                             <div class="toolbar">
                                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                                             </div>
-                                            <table id="datatable" class="table table-striped table-bordered"
-                                                   cellspacing="0" width="100%">
+                                            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                 <thead>
                                                 <tr>
-                                                    <th>S.No</th>
-                                                    <th>Name</th>
-                                                    <th>Admission No</th>
-                                                    <th>Address</th>
-                                                    <th>Contact No</th>
-                                                    <th>Status</th>
+                                                    <th>Admission.No</th>
+                                                    <th>Full Name</th>
+                                                    <th>Security Refundable</th>
+                                                    <th>Dues</th>
+                                                    <th>Security Payable</th>
                                                     <th class="disabled-sorting text-center">Actions</th>
                                                 </tr>
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
-                                                    <th>S.No</th>
-                                                    <th>Name</th>
-                                                    <th>Admission No</th>
-                                                    <th>Address</th>
-                                                    <th>Contact No</th>
-                                                    <th>Status</th>
+                                                    <th>Admission.No</th>
+                                                    <th>Full Name</th>
+                                                    <th>Security Refundable</th>
+                                                    <th>Dues</th>
+                                                    <th>Security Payable</th>
                                                     <th class="disabled-sorting text-center">Actions</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                @php $i= 1; @endphp
-                                                @foreach($students as $student)
-                                                    <tr>
-                                                        <td>{{$i++}}</td>
-                                                        <td>{{$student->std_Fname. " ".$student->std_Mname. " ".$student->std_Lname}}</td>
-                                                        <td>{{$student->adm_Number}}</td>
-                                                        <td>{{$student->pnt_pmt_Add}}</td>
-                                                        <td>{{$student->pnt_mob_Ph}}</td>
-                                                        <td>{{$student->std_Status}}</td>
-                                                        <td class="text-center">
-                                                            <div class="form-inline pull-right">
-                                                                <div class="">
-                                                                    <button class=" btn-link btn-cus-weight show-view-class-btn"
-                                                                            type="button"
-                                                                            data-toggle="modal"
-                                                                            {{-- data-target="#viewclass"--}}
-                                                                            id="show-subject"
-                                                                            aria-haspopup="true"
-                                                                            aria-expanded="false"
-                                                                            data-id="{{ $student->std_Id  }}">
-                                                                        View
-                                                                    </button>
-                                                                </div>
-                                                                <div
-                                                                        class="nav-item btn-rotate dropdown pull-right ">
-                                                                    <a class="nav-link dropdown-toggle pull-right"
-                                                                       href="javascript:void(0)"
-                                                                       id="navbarDropdownMenuLink"
-                                                                       data-toggle="dropdown"
-                                                                       aria-haspopup="true"
-                                                                       aria-expanded="false"
-                                                                       data-id="{{ $student->std_Id  }}">
-                                                                    </a>
-                                                                    <div
-                                                                            class="dropdown-menu dropdown-menu-right"
-                                                                            aria-labelledby="navbarDropdownMenuLink">
-                                                                        <a class="dropdown-item edit-subject"
-                                                                           href="{{url('edit-admission-info/'.$student->std_Id)}}"
-                                                                           {{-- data-target="#editclass"--}}
-                                                                           aria-haspopup="true"
-                                                                           aria-expanded="false"
-                                                                           data-id="{{ $student->std_Id  }}">Edit</a>
-                                                                        {{--<a class="dropdown-item" onclick="return confirm('Are you sure you want to Change Student Status?');"
-                                                                           href="{{url('change-student/'.$student->std_Id )}}">Change Status</a>--}}
-                                                                        <a class="dropdown-item"
-                                                                           onclick="return confirm('Are you sure you want to Withdraw Student?');"
-                                                                           href="{{url('withdrawl-student/'.$student->std_Id )}}">Withdraw
-                                                                            Student</a>
-                                                                    </div>
-                                                                </div>
-                                                            {{--<a href="#" class="btn btn-success btn-link btn-icon btn-sm fa fa-eye" title="View Profile"><i class="fa fa-times"></i></a>
-                                                            <a href="{{url('edit-admission-info/'.$student->std_Id)}}" title="Edit" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                                            <a href="../../examples/pages/withdraw-student.html" class="btn btn-danger btn-link btn-icon btn-sm edit" title="withdraw"><i class="fa fa-times"></i></a>--}}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-center">
+                                                        <a href="#" title="Clear Dues" class="btn btn-success btn-link btn-icon btn-sm"><i class="fa fa-check"></i></a>
+                                                    </td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div><!-- end content-->
@@ -153,8 +108,11 @@
     </div>
 @endsection
 @section('front_script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{asset('adminassets/validator/dist/jquery.validate.js')}}"></script>
+    <script src="{{asset('js/admission_script.js')}}"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
             $('#facebook').sharrre({
@@ -164,7 +122,7 @@
                 enableHover: false,
                 enableTracking: false,
                 enableCounter: false,
-                click: function (api, options) {
+                click: function(api, options) {
                     api.simulateClick();
                     api.openPopup('facebook');
                 },
@@ -179,7 +137,7 @@
                 enableCounter: false,
                 enableHover: false,
                 enableTracking: true,
-                click: function (api, options) {
+                click: function(api, options) {
                     api.simulateClick();
                     api.openPopup('googlePlus');
                 },
@@ -199,7 +157,7 @@
                         via: 'CreativeTim'
                     }
                 },
-                click: function (api, options) {
+                click: function(api, options) {
                     api.simulateClick();
                     api.openPopup('twitter');
                 },
@@ -208,10 +166,11 @@
             });
 
 
+
             // Facebook Pixel Code Don't Delete
-            !function (f, b, e, v, n, t, s) {
+            ! function(f, b, e, v, n, t, s) {
                 if (f.fbq) return;
-                n = f.fbq = function () {
+                n = f.fbq = function() {
                     n.callMethod ?
                         n.callMethod.apply(n, arguments) : n.queue.push(arguments)
                 };
@@ -239,11 +198,10 @@
         });
     </script>
     <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=111649226022273&amp;ev=PageView&amp;noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&amp;ev=PageView&amp;noscript=1" />
     </noscript>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $sidebar = $('.sidebar');
             $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -264,7 +222,7 @@
             //
             // }
 
-            $('.fixed-plugin a').click(function (event) {
+            $('.fixed-plugin a').click(function(event) {
                 // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
                 if ($(this).hasClass('switch-trigger')) {
                     if (event.stopPropagation) {
@@ -275,7 +233,7 @@
                 }
             });
 
-            $('.fixed-plugin .active-color span').click(function () {
+            $('.fixed-plugin .active-color span').click(function() {
                 $full_page_background = $('.full-page-background');
 
                 $(this).siblings().removeClass('active');
@@ -296,7 +254,7 @@
                 }
             });
 
-            $('.fixed-plugin .background-color span').click(function () {
+            $('.fixed-plugin .background-color span').click(function() {
                 $(this).siblings().removeClass('active');
                 $(this).addClass('active');
 
@@ -315,7 +273,7 @@
                 }
             });
 
-            $('.fixed-plugin .img-holder').click(function () {
+            $('.fixed-plugin .img-holder').click(function() {
                 $full_page_background = $('.full-page-background');
 
                 $(this).parent('li').siblings().removeClass('active');
@@ -325,7 +283,7 @@
                 var new_image = $(this).find("img").attr('src');
 
                 if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                    $sidebar_img_container.fadeOut('fast', function () {
+                    $sidebar_img_container.fadeOut('fast', function() {
                         $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
                         $sidebar_img_container.fadeIn('fast');
                     });
@@ -334,7 +292,7 @@
                 if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
                     var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-                    $full_page_background.fadeOut('fast', function () {
+                    $full_page_background.fadeOut('fast', function() {
                         $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
                         $full_page_background.fadeIn('fast');
                     });
@@ -353,7 +311,7 @@
                 }
             });
 
-            $('.switch-sidebar-image input').on("switchChange.bootstrapSwitch", function () {
+            $('.switch-sidebar-image input').on("switchChange.bootstrapSwitch", function() {
                 $full_page_background = $('.full-page-background');
 
                 $input = $(this);
@@ -386,7 +344,7 @@
             });
 
 
-            $('.switch-mini input').on("switchChange.bootstrapSwitch", function () {
+            $('.switch-mini input').on("switchChange.bootstrapSwitch", function() {
                 $body = $('body');
 
                 $input = $(this);
@@ -400,12 +358,12 @@
                 }
 
                 // we simulate the window Resize so the charts will get updated in realtime.
-                var simulateWindowResize = setInterval(function () {
+                var simulateWindowResize = setInterval(function() {
                     window.dispatchEvent(new Event('resize'));
                 }, 180);
 
                 // we stop the simulation of Window Resize after the animations are completed
-                setTimeout(function () {
+                setTimeout(function() {
                     clearInterval(simulateWindowResize);
                 }, 1000);
 
@@ -413,41 +371,18 @@
 
         });
     </script>
-    <script>
-        function setFormValidation(id) {
-            $(id).validate({
-                highlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
-                    $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
-                },
-                success: function (element) {
-                    $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
-                    $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
-                },
-                errorPlacement: function (error, element) {
-                    $(element).closest('.form-group').append(error);
-                },
-            });
-        }
 
-        $(document).ready(function () {
-            setFormValidation('#RegisterValidation');
-            setFormValidation('#TypeValidation');
-            setFormValidation('#LoginValidation');
-            setFormValidation('#RangeValidation');
-        });
-    </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Initialise the wizard
             demo.initWizard();
-            setTimeout(function () {
+            setTimeout(function() {
                 $('.card.card-wizard').addClass('active');
             }, 600);
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#datatable').DataTable({
                 "pagingType": "full_numbers",
                 "lengthMenu": [
@@ -465,7 +400,7 @@
             var table = $('#datatable').DataTable();
 
             // Edit record
-            table.on('click', '.edit', function () {
+            table.on('click', '.edit', function() {
                 $tr = $(this).closest('tr');
 
                 var data = table.row($tr).data();
@@ -473,16 +408,25 @@
             });
 
             // Delete a record
-            table.on('click', '.remove', function (e) {
+            table.on('click', '.remove', function(e) {
                 $tr = $(this).closest('tr');
                 table.row($tr).remove().draw();
                 e.preventDefault();
             });
 
             //Like record
-            table.on('click', '.like', function () {
+            table.on('click', '.like', function() {
                 alert('You clicked on Like button');
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // initialise Datetimepicker and Sliders
+            demo.initDateTimePicker();
+            if ($('.slider').length != 0) {
+                demo.initSliders();
+            }
         });
     </script>
 @endsection

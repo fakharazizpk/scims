@@ -47,7 +47,7 @@
                                             <div class="row">
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>For Class</label>
-                                                    <select class="selectpicker" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                    <select class="selectpicker edit_sel_class" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
                                                         <option value="" disabled selected>Select Class</option>
                                                         @foreach($nameofclasses as $nameofclass)
                                                         <option value="{{$nameofclass->cls_Id}}">{{$nameofclass->class}}</option>
@@ -60,7 +60,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Add Students</label>
-                                                    <select class="selectpicker" id="sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
+                                                    <select class="selectpicker edit_sel_student" id="sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
                                                         <option disabled> Choose Students</option>
                                                     </select>
                                                 </div>
@@ -70,7 +70,7 @@
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>Assign Class Rep</label>
-                                                    <select class="selectpicker" id="representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                    <select class="selectpicker edit_representative" id="representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                         <option value="" disabled selected>Select Student</option>
                                                     </select>
                                                 </div>
@@ -79,7 +79,7 @@
                                                     <select class="selectpicker" id="" name="teacher" data-size="5" data-style="btn btn-secondary" title="Select Class" >
                                                         <option value="" disabled selected>Select Teacher</option>
                                                         @foreach($teachers as $teacher)
-                                                        <option value="{{$teacher->emp_Id }}">{{$teacher->emp_Fname . " " .$teacher->emp_Mname . " " .$teacher->emp_Lname}}</option>
+                                                        <option value="{{$teacher->emp_Id }}">{{$teacher->emp_given_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -163,7 +163,7 @@
                                                     <select class="selectpicker" id="edit-teacher" name="teacher" data-size="5" data-style="btn btn-secondary" title="Select Class" >
                                                         <option value="" disabled selected>Select Teacher</option>
                                                         @foreach($teachers as $teacher)
-                                                        <option value="{{$teacher->emp_Id }}">{{$teacher->emp_Fname . " " .$teacher->emp_Mname . " " .$teacher->emp_Lname}}</option>
+                                                        <option value="{{$teacher->emp_Id }}">{{$teacher->emp_given_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -226,12 +226,13 @@
                                         <tbody>
                                         @php $i=1; @endphp
                                         @foreach($class_sections as $class_section)
+                                            @php //echo "<pre>"; print_r($class_section); exit; @endphp
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{$class_section->class}}</td>
                                             <td>{{$class_section->class_section_name}}</td>
                                             <td>{{$class_section->no_of_student}}</td>
-                                            <td>{{$class_section->emp_Fname. $class_section->emp_Mname ." ".$class_section->emp_Lname }}</td>
+                                            <td>{{$class_section->emp_given_name }}</td>
                                             <td>Class Rep</td>
                                             <td class="text-center">
                                                 <div class="form-inline pull-right">

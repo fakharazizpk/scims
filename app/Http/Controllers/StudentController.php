@@ -17,12 +17,14 @@ use Illuminate\Http\Request;
 use App\Models\Religion;
 use App\Models\StudentInfo;
 use App\Models\AddClasses;
+use App\Models\ClassSection;
 use App\Models\Gender;
 use App\Models\BloodGroup;
 use App\Models\Nationality;
 use App\Models\District;
 use App\Models\City;
 use App\Models\Cast;
+use App\Models\WithdrawlStudent;
 use Illuminate\Support\Facades\DB;
 use Redirect, Response;
 
@@ -46,6 +48,9 @@ class StudentController extends Controller
 
     public function index()
     {
+
+        $classes = AddClasses::all();
+        $class_sections = ClassSection::all();
         $students = DB::table('student_info')
             ->leftJoin('student_contact', 'student_info.fk_pnt_cnt_Id', '=', 'student_contact.pnt_cnt_Id')
             ->leftJoin('gender', 'student_info.gnd_Id', '=', 'gender.gnd_Id')
@@ -73,7 +78,7 @@ class StudentController extends Controller
                 echo $p_id;
             }*/
 
-        return view('students', compact('students'));
+        return view('students', compact('students','classes', 'class_sections'));
     }
 
 
@@ -251,7 +256,7 @@ class StudentController extends Controller
             ->join('last_school', 'student_info.lsch_Id', '=', 'last_school.lsch_Id')
             ->join('class', 'student_info.cls_Id', '=', 'class.cls_Id')
             ->where('student_info.std_Id', $id)->first();
-        //dd($student->parent_ids);
+        //dd($student);
 
         $studentParent = explode(",", $student->parent_ids);
        /* $Guardian_image = Guardian::whereIn('gnd_Id', $studentParent)->get();
@@ -262,21 +267,6 @@ class StudentController extends Controller
     public function UpdateAdmissionInfo(Request $request)
     {
         //dd($request->input('p_id'));
-
-        if ($request->file('student_image')) {
-            $student_image = $request->file('student_image');
-            $new_student_image = "student" . time() . '.' . $student_image->getClientOriginalExtension();
-            $student_image->move(public_path('upload/student'), $new_student_image);
-            //echo "<pre>"; print_r($new_student_image); exit;
-            $studentinfoarray['std_Img'] = $new_student_image;
-        }
-        if ($request->file('previous_school_document')) {
-            $school_image = $request->file('previous_school_document');
-            $new_school_image = "document" . time() . '.' . $school_image->getClientOriginalExtension();
-            $school_image->move(public_path('upload/school'), $new_school_image);
-            //echo "<pre>"; print_r($new_school_image); exit;
-            $last_schoolarray['lsch_slc_img'] = $new_school_image;
-        }
 
         $admission_no = School::select('school_abbreviation')->first();
         $i = DB::table('admission')->orderBy('adm_No', 'DESC')->first();
@@ -309,16 +299,33 @@ class StudentController extends Controller
         //dd($admission_last_id);
 
         /*last school table*/
-        $last_schoolarray = [
-            'lsch_Name' => $request->previous_school_name,
-            'lsch_contact_No' => $request->previous_school_contact,
-            'lsch_lv_Date' => $request->previous_school_leaving_date,
-            'lsch_class_Passed' => $request->previous_school_class_passed,
-            'lsch_Comments' => $request->previous_school_comment,
 
-        ];
+        if ($request->file('previous_school_document')) {
+            $school_image = $request->file('previous_school_document');
+            $new_school_image = "document" . time() . '.' . $school_image->getClientOriginalExtension();
+            $school_image->move(public_path('upload/school'), $new_school_image);
+            //echo "<pre>"; print_r($new_school_image); exit;
+            $last_schoolarray['lsch_slc_img'] = $new_school_image;
+            $last_schoolarray = [
+                'lsch_Name' => $request->previous_school_name,
+                'lsch_contact_No' => $request->previous_school_contact,
+                'lsch_lv_Date' => $request->previous_school_leaving_date,
+                'lsch_class_Passed' => $request->previous_school_class_passed,
+                'lsch_Comments' => $request->previous_school_comment,
+                'lsch_slc_img' => $new_school_image,
+
+            ];
+        }else{
+            $last_schoolarray = [
+                'lsch_Name' => $request->previous_school_name,
+                'lsch_contact_No' => $request->previous_school_contact,
+                'lsch_lv_Date' => $request->previous_school_leaving_date,
+                'lsch_class_Passed' => $request->previous_school_class_passed,
+                'lsch_Comments' => $request->previous_school_comment,
+
+            ];
+        }
         //dd($last_schoolarray);
-
         LastSchool::where('lsch_Id', $request->lsch_Id)->update($last_schoolarray);
 
         //$last_school->save();
@@ -370,31 +377,67 @@ class StudentController extends Controller
         /*student info Table*/
         $parentarray = [$request->guardian, $request->mother];
         $parent_ids = implode(",", $parentarray);
-        $studentinfoarray = [
-            'adm_No' => $request->adm_id,
-            'lsch_Id' => $request->last_school_id,
-            'emer_cnt_Id' => $request->e_id,
-            'fk_pnt_cnt_Id' => $request->p_id,
-            'parent_ids' => $parent_ids,
-            'std_Fname' => $request->stdfname,
-            'std_Mname' => $request->stdmname,
-            'std_Lname' => $request->stdlname,
-            'std_Status' => ($request->student_status == 'Active') ? 'Active' : 'Inactive',
-            'cls_Id' => $request->class_name,
 
-            //'std_Img' => $new_student_image,
+        if ($request->file('student_image')) {
+            $student_image = $request->file('student_image');
+            $new_student_image = "student" . time() . '.' . $student_image->getClientOriginalExtension();
+            $student_image->move(public_path('upload/student'), $new_student_image);
+            //echo "<pre>"; print_r($new_student_image); exit;
+            //$studentinfoarray['std_Img'] = $new_student_image;
+            $studentinfoarray = [
+                'adm_No' => $request->adm_id,
+                'std_Img' => $new_student_image,
+                'lsch_Id' => $request->last_school_id,
+                'emer_cnt_Id' => $request->e_id,
+                'fk_pnt_cnt_Id' => $request->p_id,
+                'parent_ids' => $parent_ids,
+                'std_Fname' => $request->stdfname,
+                'std_Mname' => $request->stdmname,
+                'std_Lname' => $request->stdlname,
+                'std_Status' => ($request->student_status == 'Active') ? 'Active' : 'Inactive',
+                'cls_Id' => $request->class_name,
 
-            'gnd_Id' => $request->student_gender,
-            'std_Dob' => $request->date_of_birth,
-            'bg_Id' => $request->blood_group,
-            'relig_Id' => $request->religion,
-            'nation_Id' => $request->nationality,
-            'dom_Id' => $request->student_district,
-            'std_Age' => $request->age,
-            'cast_Id' => $request->cast,
-            'disable_Id' => $request->disability,
-            'std_cat_Id' => $request->student_category,
-        ];
+                //'std_Img' => $new_student_image,
+
+                'gnd_Id' => $request->student_gender,
+                'std_Dob' => $request->date_of_birth,
+                'bg_Id' => $request->blood_group,
+                'relig_Id' => $request->religion,
+                'nation_Id' => $request->nationality,
+                'dom_Id' => $request->student_district,
+                'std_Age' => $request->age,
+                'cast_Id' => $request->cast,
+                'disable_Id' => $request->disability,
+                'std_cat_Id' => $request->student_category,
+            ];
+        }else{
+            $studentinfoarray = [
+                'adm_No' => $request->adm_id,
+                'lsch_Id' => $request->last_school_id,
+                'emer_cnt_Id' => $request->e_id,
+                'fk_pnt_cnt_Id' => $request->p_id,
+                'parent_ids' => $parent_ids,
+                'std_Fname' => $request->stdfname,
+                'std_Mname' => $request->stdmname,
+                'std_Lname' => $request->stdlname,
+                'std_Status' => ($request->student_status == 'Active') ? 'Active' : 'Inactive',
+                'cls_Id' => $request->class_name,
+
+                //'std_Img' => $new_student_image,
+
+                'gnd_Id' => $request->student_gender,
+                'std_Dob' => $request->date_of_birth,
+                'bg_Id' => $request->blood_group,
+                'relig_Id' => $request->religion,
+                'nation_Id' => $request->nationality,
+                'dom_Id' => $request->student_district,
+                'std_Age' => $request->age,
+                'cast_Id' => $request->cast,
+                'disable_Id' => $request->disability,
+                'std_cat_Id' => $request->student_category,
+            ];
+        }
+
 
         //dd($studentinfoarray);
 
@@ -408,6 +451,47 @@ class StudentController extends Controller
 
     }
 
+    public function WithdrawlStudent($id){
+        $student = DB::table('student_info')
+            ->select('student_info.*', 'student_info.std_Id as s_id', 'admission.*')
+            ->join('admission', 'student_info.adm_No', '=', 'admission.adm_No')
+            //->select("tbl_templates.*", "tbl_templates.id as t_id", "tbl_template_categories.title as category_title")
+            ->leftjoin('withdrawl_student', 'student_info.std_Id', '=', 'withdrawl_student.std_Id')
+            ->where('student_info.std_Id',$id)->first();
+        //dd($student);
+
+
+
+        return view('withdraw-student', compact('student'));
+    }
+    public function WithdrawlStudentPost(Request $request){
+        //dd($request->all());
+        if ($request->optionCheckboxes == '')
+        {
+            $student_status_array = [
+                'std_Status' => 'Inactive'
+            ];
+        }elseif($request->optionCheckboxes == 'Active'){
+            $student_status_array = [
+                'std_Status' => 'Active'
+            ];
+        }
+        //dd($student_status_array);
+
+        $student_status = StudentInfo::where('std_Id',$request->std_id)->update($student_status_array);
+        //dd($request->all());
+        $withdrawl = WithdrawlStudent::firstOrNew(array('std_Id' => $request->std_id));
+        //dd($withdrawl);
+        $withdrawl->std_Id = $request->std_id;
+        $withdrawl->withdrawl_Date = $request->withdraw_date;
+        $withdrawl->with_Remark = $request->commentslc;
+        //$withdrawl->with_Date = $request->std_id;
+        $withdrawl->save();
+
+
+
+        return redirect('students')->with('message', 'Successfully Withdrwal Student!');
+    }
     public function ChangeStudentStatus(Request $request){
         $student = StudentInfo::where('std_Id',$request->id)->first();
         //dd($request->id);

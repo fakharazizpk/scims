@@ -88,16 +88,16 @@ Coded by www.pointwebtech.com
     <div class="sidebar" data-color="default" data-active-color="danger">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color=" default | primary | info | success | warning | danger |"
-      -->
+        -->
         <div class="logo">
-            <a href="{{url('/')}}" class="simple-text logo-mini">
+            <a href="https://www.creative-tim.com/" class="simple-text logo-mini">
                 <div class="logo-image-small">
-                    <img src="{{asset('adminassets/img/logo.gif')}}">
+                    <img src="{{url('adminassets/img/logo-small.png')}}">
                 </div>
                 <!-- <p>CT</p> -->
             </a>
-            <a href="{{url('/')}}" class="simple-text logo-normal">
-                Creative Tim
+            <a href="#" class="simple-text logo-normal">
+                Teacher Portal
                 <!-- <div class="logo-image-big">
                   <img src="../assets/img/logo-big.png">
                 </div> -->
@@ -106,12 +106,12 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="{{asset('adminassets/img/faces/ayo-ogunseinde-2.jpg')}}" />
+                    <img src="{{url('adminassets/img/employee%20avatar.png')}}" />
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                Chet Faker
+                Teacher Name
                 <b class="caret"></b>
               </span>
                     </a>
@@ -140,290 +140,60 @@ Coded by www.pointwebtech.com
                     </div>
                 </div>
             </div>
+
             <ul class="nav">
                 <li class="active">
-                    <a href="{{url('home')}}">
+                    <a href="{{url('teacher-dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#pagesExamples">
-                        <i class="fa fa-cogs"></i>
+                    <a data-toggle="" href="#">
+                        <i class="fa fa-university"></i>
                         <p>
-                            Admin Pages <b class="caret"></b>
+                            Blog </b>
                         </p>
                     </a>
-                    <div class="collapse " id="pagesExamples">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{url('school')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> School </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('add-class')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Classes </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('class-section')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Class Section </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('add-subject')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Subjects </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Examination </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Syllabus </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('users')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Users </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('type')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Users Type </span>
-                                </a>
-                            </li>
+                </li>
+                <li>
+                    <a data-toggle="" href="#">
+                        <i class="fa fa-envelope-o"></i>
+                        <p>
+                            Messages </b>
+                        </p>
+                    </a>
 
-                        </ul>
-                    </div>
+                </li>
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#componentsExamples">
-                        <i class="fa fa-graduation-cap"></i>
-                        <p>
-                            Students <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse " id="componentsExamples">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{url('students')}}">
-                                    <span class="sidebar-mini-icon">VS</span>
-                                    <span class="sidebar-normal"> View Students </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('admission')}}">
-                                    <span class="sidebar-mini-icon">AS</span>
-                                    <span class="sidebar-normal"> Admission </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">R</span>
-                                    <span class="sidebar-normal"> Reports </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a data-toggle="collapse" href="#formsExamples">
-                        <i class="fa fa-users"></i>
-                        <p>
-                            Staff <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse " id="formsExamples">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{url('staff')}}">
-                                    <span class="sidebar-mini-icon">VS</span>
-                                    <span class="sidebar-normal"> View Staff </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('appointment')}}">
-                                    <span class="sidebar-mini-icon">AS</span>
-                                    <span class="sidebar-normal"> Appointment </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">R</span>
-                                    <span class="sidebar-normal"> Reports </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a data-toggle="collapse" href="#tablesExamples">
-                        <i class="fa fa-clipboard"></i>
-                        <p>
-                            Examination  <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse " id="tablesExamples">
-                        <ul class="nav">
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">RT</span>
-                                    <span class="sidebar-normal"> Regular Tables </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">ET</span>
-                                    <span class="sidebar-normal"> Extended Tables </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">DT</span>
-                                    <span class="sidebar-normal"> DataTables.net </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a data-toggle="collapse" href="#Accounts">
-                        <i class="fa fa-money"></i>
-                        <p>
-                            Accounts <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse " id="Accounts">
-                        <ul class="nav">
-                            <li>
-                                <a href="maps/google.html">
-                                    <span class="sidebar-mini-icon">GM</span>
-                                    <span class="sidebar-normal"> Google Maps </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/fullscreen.html">
-                                    <span class="sidebar-mini-icon">FSM</span>
-                                    <span class="sidebar-normal"> Full Screen Map </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/vector.html">
-                                    <span class="sidebar-mini-icon">VM</span>
-                                    <span class="sidebar-normal"> Vector Map </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a data-toggle="collapse" href="#mapsExamples1">
+                    <a data-toggle="" href="../pages/student-register.html">
                         <i class="fa fa-book"></i>
                         <p>
-                            Library <b class="caret"></b>
+                            Register </b>
                         </p>
                     </a>
-                    <div class="collapse " id="mapsExamples1">
-                        <ul class="nav">
-                            <li>
-                                <a href="maps/google.html">
-                                    <span class="sidebar-mini-icon">GM</span>
-                                    <span class="sidebar-normal"> Google Maps </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/fullscreen.html">
-                                    <span class="sidebar-mini-icon">FSM</span>
-                                    <span class="sidebar-normal"> Full Screen Map </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/vector.html">
-                                    <span class="sidebar-mini-icon">VM</span>
-                                    <span class="sidebar-normal"> Vector Map </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#Transport">
-                        <i class="fa fa-bus"></i>
+                    <a data-toggle="" href="../pages/teacher_diary.html">
+                        <i class="fa fa-pencil-square"></i>
                         <p>
-                            Transport <b class="caret"></b>
+                            Diary </b>
                         </p>
                     </a>
-                    <div class="collapse " id="Transport">
-                        <ul class="nav">
-                            <li>
-                                <a href="maps/google.html">
-                                    <span class="sidebar-mini-icon">GM</span>
-                                    <span class="sidebar-normal"> Google Maps </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/fullscreen.html">
-                                    <span class="sidebar-mini-icon">FSM</span>
-                                    <span class="sidebar-normal"> Full Screen Map </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/vector.html">
-                                    <span class="sidebar-mini-icon">VM</span>
-                                    <span class="sidebar-normal"> Vector Map </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </li>
                 <li>
-                    <a data-toggle="collapse" href="#Hostel">
-                        <i class="fa fa-building-o"></i>
+                    <a data-toggle="" href="#">
+                        <i class="fa fa-file-text"></i>
                         <p>
-                            Hostel <b class="caret"></b>
+                            Assessments </b>
                         </p>
                     </a>
-                    <div class="collapse " id="Hostel">
-                        <ul class="nav">
-                            <li>
-                                <a href="maps/google.html">
-                                    <span class="sidebar-mini-icon">GM</span>
-                                    <span class="sidebar-normal"> Google Maps </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/fullscreen.html">
-                                    <span class="sidebar-mini-icon">FSM</span>
-                                    <span class="sidebar-normal"> Full Screen Map </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/vector.html">
-                                    <span class="sidebar-mini-icon">VM</span>
-                                    <span class="sidebar-normal"> Vector Map </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </li>
-                <li>
-                    <a href="../examples/calendar.html.html">
-                        <i class="fa fa-calendar"></i>
-                        <p>Events</p>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </div>

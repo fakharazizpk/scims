@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class WithdrawlStudent extends Model
 {
-    protected $table = "user_type";
+    protected $table = "withdrawl_student";
     public $timestamps = false;
+    protected $primaryKey = 'with_Id';
+    protected $fillable = ['Std_Id'];
     use HasFactory;
 }

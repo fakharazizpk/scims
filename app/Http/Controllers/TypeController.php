@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Type;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -28,7 +28,7 @@ class TypeController extends Controller
            if ($validator->fails()) {
                return response()->json(['errors' => $validator->errors()->all()]);
            }*/
-        $subject = new Type();
+        $subject = new UserType();
         $subject->subject = $request->get('name');
         $subject->role_id = $request->get('role_id');
         $subject->save();
@@ -45,7 +45,7 @@ class TypeController extends Controller
     {
 
         $where = array('sub_Id' => $id);
-        $subject = Type::where($where)->first();
+        $subject = UserType::where($where)->first();
         return Response::json($subject);
 
     }
@@ -54,7 +54,7 @@ class TypeController extends Controller
     public function EditSubject($id)
     {
         $where = array('sub_Id' => $id);
-        $subject = Type::where($where)->first();
+        $subject = UserType::where($where)->first();
         return Response::json($subject);
     }
 
@@ -73,7 +73,7 @@ class TypeController extends Controller
         //dd($form_data);
 
 
-        Type::where('sub_Id', $request->id)->update($form_data);
+        UserType::where('sub_Id', $request->id)->update($form_data);
         $request->flash();
         return redirect()->back()->with('message', 'Successfully Updated!');
 
@@ -82,7 +82,7 @@ class TypeController extends Controller
 
     public function DeleteSubject($id)
     {
-        Type::where('sub_Id',$id)->delete();
+        UserType::where('sub_Id',$id)->delete();
         return redirect()->back()->with('message', 'Successfully Deleted!');
     }
 }

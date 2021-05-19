@@ -18,14 +18,14 @@ class ClassSectionController extends Controller
     {
         //echo "class-section index function"; exit;
 
-        $nameofclasses = AddClasses::all();
+
         $class_sections = DB::table('class_section')
             ->join('class', 'class_section.cls_Id', '=', 'class.cls_Id')
             ->join('employee_info', 'class_section.emp_Id', '=', 'employee_info.emp_Id')
             ->get();
 
-        //echo "<pre>"; print_r($class_sections);
-
+        //echo "<pre>"; print_r($class_sections); exit;
+        $nameofclasses = AddClasses::all();
         /*$students = DB::table('student_info')
             ->whereIn('std_Id',explode(',',$class_sections->students))->get();*/
         //dd($students);

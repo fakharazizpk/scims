@@ -384,10 +384,20 @@
                                         </div>
 
                                         <div class="form-group col-sm-3">
-                                            <label>Enter Class Passed</label>
-                                            <input type="text" class="form-control" placeholder=""
-                                                   value="{{$student->lsch_class_Passed}}"
-                                                   name="previous_school_class_passed">
+                                            <label>Select Class Passed</label>
+                                            {{-- <input type="text" class="form-control" placeholder=""
+                                                    value="{{$student->lsch_class_Passed}}"
+                                                    name="previous_school_class_passed">--}}
+                                            <select class="selectpicker" id="previous_school_class_passed" name="previous_school_class_passed" data-container=""
+                                                    data-size="3" data-style="btn btn-secondary" title="Select class"
+                                                    data-live-search="true" data-hide-disabled="true">
+                                                <option value="" disabled selected>Select Class</option>
+                                                @foreach($classes as $class)
+                                                    <option value="{{$class->cls_Id}}"
+                                                            @if($student->lsch_class_Passed ==$class->cls_Id) selected @endif>{{$class->class}}</option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                         <div class="form-group col-sm-12">
                                             <label>Enter Remarks</label>
@@ -403,7 +413,7 @@
                                                        accept="image/*">
                                                 <label class="custom-file-label" for="input-document">Select scanned
                                                     document</label>
-                                                <p>{{$student->lsch_class_Passed}}</p>
+                                                <p>{{$student->lsch_slc_img}}</p>
                                             </div>
 
 

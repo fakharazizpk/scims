@@ -79,7 +79,7 @@
                                 <p>University</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{--<li class="nav-item">
                             <a href="pages/layout/fixed-topnav.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Fixed Navbar</p>
@@ -96,7 +96,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Collapsed Sidebar</p>
                             </a>
-                        </li>
+                        </li>--}}
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -120,7 +120,7 @@
                                 <p>Subject</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                   {{--     <li class="nav-item">
                             <a href="pages/UI/buttons.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Representative</p>
@@ -155,7 +155,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ribbons</p>
                             </a>
-                        </li>
+                        </li>--}}
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -167,6 +167,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{url('admin/user-type')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User Types</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{url('admin/employee-type')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -266,7 +272,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
+              {{--  <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
@@ -574,7 +580,7 @@
                         <i class="nav-icon far fa-circle text-info"></i>
                         <p>Informational</p>
                     </a>
-                </li>
+                </li>--}}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

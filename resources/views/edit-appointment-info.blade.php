@@ -95,14 +95,15 @@
                                         <div class="col-sm-3">
                                             <div class="picture-container">
                                                 <div class="picture">
-                                                    @if($employee->emp_Img)
+
                                                         <img src="@if($employee->emp_Img) {{asset('upload/employee/'.$employee->emp_Img)}} @else {{asset('adminassets/img/default-avatar.png')}} @endif"
                                                              alt="Employee Image" width="160"
-                                                             class="img-responsive img-rounded">
-                                                    @else
+                                                             class="picture-src" id="employee_image_preview">
+                                                   {{-- @else
                                                         <img src="{{asset('adminassets/img/default-avatar.png')}}"
                                                              class="picture-src" id="employee_image_preview" title=""/>
-                                                    @endif
+                                                    @endif--}}
+
                                                     <input type="file" name="employee_image" id="employee_image">
                                                 </div>
                                                 <label class="">Choose Picture</label>
