@@ -1,6 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Add Class')
 @section('content')
+    <style>
+        .add-div-error{
+            color: red;
+        }
+        .edit-div-error{
+            color: red;
+        }
+    </style>
     {{--main Content--}}
     <div class="content">
         <div class="row">
@@ -186,17 +194,21 @@
                                                                 <label>Class Name</label>
                                                                 <input type="text"  name="class_name" class="form-control" placeholder=""
                                                                        name="houseallow">
+                                                                <div class="add-div-error class_name"></div>
 
                                                             </div>
                                                             <div class="form-group col-sm-6">
                                                                 <label>Numeric Name</label>
                                                                 <input type="text" class="form-control" name="numeric_name" placeholder=""
                                                                        name="houseallow" pattern="">
+                                                                <div class="add-div-error numeric_name"></div>
+
                                                             </div>
                                                             <div class="form-group col-sm-6">
                                                                 <label>No of Periods</label>
                                                                 <input type="number" class="form-control" name="no_of_period" placeholder=""
                                                                        name="noofperiod" number="true">
+                                                                <div class="add-div-error no_of_period"></div>
                                                             </div>
                                                           {{--  <div class=" col-sm-6 select-wizard">
                                                                 <label>Assign Teacher</label>
@@ -228,11 +240,13 @@
                                                                         <option value="{{$school_section->sc_sec_Id}}">{{$school_section->sc_sec_name}}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                <div class="add-div-error school_section"></div>
                                                             </div>
                                                             <div class="form-group col-sm-6">
                                                                 <label>Tuition Fee</label>
                                                                 <input type="text" name="tuition_fee" class="form-control" placeholder=""
                                                                        name="tuitionfee" number="true">
+                                                                <div class="add-div-error tuition_fee"></div>
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <label>Assign Subjects</label>
@@ -244,6 +258,7 @@
                                                                     <option value="{{$subject->sub_Id}}">{{$subject->subject}} </option>
                                                                     @endforeach
                                                                 </select>
+                                                                <div class="add-div-error subject"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -307,16 +322,20 @@
                                                                 <label>Class Name</label>
                                                                 <input type="text" class="form-control" placeholder=""
                                                                        name="class_name" id="edit-class-name">
+                                                                <div class="edit-div-error class_name"></div>
+
                                                             </div>
                                                             <div class="form-group col-sm-6">
                                                                 <label>Numeric Name</label>
                                                                 <input type="text" class="form-control" placeholder=""
                                                                        name="numeric_name" pattern="" id="edit-numeric-name">
+                                                                <div class="edit-div-error numeric_name"></div>
                                                             </div>
                                                             <div class="form-group col-sm-6">
                                                                 <label>No of Periods</label>
                                                                 <input type="number" class="form-control" placeholder=""
                                                                        name="no_of_period" number="true" id="edit-no-of-period">
+                                                                <div class="edit-div-error no_of_period"></div>
                                                             </div>
                                                             {{--<div class=" col-sm-6 select-wizard">
                                                                 <label>Assign Teacher</label>
@@ -348,11 +367,13 @@
                                                                         <option value="{{$school_section->sc_sec_Id}}">{{$school_section->sc_sec_name}}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                <div class="edit-div-error school_section"></div>
                                                             </div>
                                                             <div class="form-group col-sm-6">
                                                                 <label>Tuition Fee</label>
                                                                 <input type="text" class="form-control" placeholder=""
                                                                        name="tuition_fee" number="true" id="edit-tuition-fee">
+                                                                <div class="edit-div-error tuition_fee"></div>
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <label>Assign Subjects</label>
@@ -364,6 +385,7 @@
                                                                     <option value="{{$subject->sub_Id}}">{{$subject->subject}} </option>
                                                                     @endforeach
                                                                 </select>
+                                                                <div class="edit-div-error subject"></div>
                                                             </div>
                                                         </div>
                                                     </div>

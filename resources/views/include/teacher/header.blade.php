@@ -96,7 +96,7 @@ Coded by www.pointwebtech.com
                 </div>
                 <!-- <p>CT</p> -->
             </a>
-            <a href="#" class="simple-text logo-normal">
+            <a href="{{url('teacher/dashboard')}}" class="simple-text logo-normal">
                 Teacher Portal
                 <!-- <div class="logo-image-big">
                   <img src="../assets/img/logo-big.png">
@@ -143,7 +143,7 @@ Coded by www.pointwebtech.com
 
             <ul class="nav">
                 <li class="active">
-                    <a href="{{url('teacher-dashboard')}}">
+                    <a href="{{url('teacher/dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
@@ -176,7 +176,7 @@ Coded by www.pointwebtech.com
 
                 </li>
                 <li>
-                    <a data-toggle="" href="../pages/teacher_diary.html">
+                    <a data-toggle="" href="{{url('teacher/dairy')}}">
                         <i class="fa fa-pencil-square"></i>
                         <p>
                             Diary </b>

@@ -47,7 +47,7 @@ class ClassSectionController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
+            return response()->json(['errors' => $validator->errors()]);
         } else {
             $class_section = new ClassSection();
             $class_section->cls_Id = $request->get('class_name');
@@ -78,6 +78,9 @@ class ClassSectionController extends Controller
     {
         $where = array('c_section_Id' => $id);
         $class_sections = ClassSection::where($where)->first();
+            //DB::table('class_section')
+                          //->join('student_info', 'class_section.std_Id,  student_info.std_Id')->first();
+            //
         //->studentbyIds = explode(',',$class->subject);
 
         $class_sections->studentbyids = explode(',', $class_sections->students);
@@ -98,7 +101,7 @@ class ClassSectionController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
+            return response()->json(['errors' => $validator->errors()]);
         } else {
 
             $form_data = array(

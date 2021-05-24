@@ -1,5 +1,6 @@
 // Wait for the DOM to be ready
 $(document).ready(function(e){
+    TotalStudent();
     $('#success-alert').html('');
     $('#show-class-section-btn').click(function(e){
         $('#class-section-modal').modal('show');
@@ -24,6 +25,7 @@ $(document).ready(function(e){
             data:  add_class_section_data,
             success: function(result){
                 //console.log(result);
+                $('.add-div-error').text('');
                 if(result.errors)
                 {
                     $('#add-alert-danger').html('');
@@ -31,9 +33,12 @@ $(document).ready(function(e){
                     $.each(result.errors, function(key, value){
                         //console.log(value);
                         $('#class-section-modal').modal('show');
-                        $('.add-div-error').show();
+                        $('.add-div-error.'+key).text(value);
+
+                        $('.add-div-error .'+key).show();
+                        /*$('.add-div-error').show();
                         //$('.alert-danger').show();
-                        $('#add-alert-danger').append('<li>'+value+'</li>');
+                        $('#add-alert-danger').append('<li>'+value+'</li>');*/
 
                     });
                 }
@@ -73,9 +78,11 @@ $(document).ready(function(e){
                 $("#sel_student").empty();
                 $("#sel_student").append('<option value="">Select Student</option>');
                 $.each(response , function (key, value) {
+                    //console.log(response);
                     $("#sel_student").append('<option value="' + value.std_Id + '">' + value.std_Fname + '</option>');
 
                     $("#representative").append('<option value="' + value.std_Id + '">' + value.std_Fname + '</option>');
+
                 });
 
 
@@ -103,13 +110,14 @@ $(document).ready(function(e){
             type   : 'get',
             data   : {id: id},
             success: function(response){
-                console.log(response);
+                //console.log(response);
                 $("#edit_sel_student").empty();
                 $("#edit_sel_student").append('<option value="">Select Student</option>');
                 $.each(response , function (key, value) {
-                    $("#edit_sel_student").append('<option value="' + value.std_Id + '">' + value.std_Fname + '</option>');
-
+                    $("#edit_sel_student").append('<option value="' + value.std_Id + '" selected>' + value.std_Fname + '</option>');
                     $("#edit-representative").append('<option value="' + value.std_Id + '">' + value.std_Fname + '</option>');
+
+
                 });
 
 
@@ -117,10 +125,14 @@ $(document).ready(function(e){
         });
     });
 
-    $('#edit_sel_student').change(function(){
+     function TotalStudent(){
         var count = $("#edit_sel_student :selected").length;
         $("#edit-no-of-student").val(count);
-    });
+    };
+    /*$('#edit_sel_student').change(function(){
+        var count = $("#edit_sel_student :selected").length;
+        $("#edit-no-of-student").val(count);
+    });*/
     /*for edit modal */
    /* $('#sel_student').change(function(){
 
@@ -161,6 +173,7 @@ $(document).ready(function(e){
             method: 'post',
             data:  edit_class_section_data,
             success: function(result){
+                $('.edit-div-error').text('');
                 //alert(result);
                 if(result.errors)
                 {
@@ -169,9 +182,12 @@ $(document).ready(function(e){
                     $.each(result.errors, function(key, value){
                         console.log(value);
                         $('#edit-class-section-modal').modal('show');
-                        $('.edit-div-error').show();
+                        $('.edit-div-error.'+key).text(value);
+
+                        $('.edit-div-error .'+key).show();
+                        //$('.edit-div-error').show();
                         //$('.alert-danger').show();
-                        $('#edit-alert-danger').append('<li>'+value+'</li>');
+                        //$('#edit-alert-danger').append('<li>'+value+'</li>');
 
                     });
                 }

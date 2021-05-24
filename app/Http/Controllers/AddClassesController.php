@@ -33,11 +33,10 @@ class AddClassesController extends Controller
             'school_section' => 'required',
             'tuition_fee' => 'required',
             'subject' => 'required',
-
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
+            return response()->json(['errors' => $validator->errors()]);
         }else{
 
             $subject = new AddClasses();
@@ -99,7 +98,8 @@ class AddClassesController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
+           /* return response()->json(['errors' => $validator->errors()->all()]);*/
+            return response()->json(['errors' => $validator->errors()]);
         }else{
 
             $form_data = array(

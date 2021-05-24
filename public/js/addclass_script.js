@@ -17,23 +17,28 @@ $(document).ready(function(e){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let classdata =  $('#add-new-class-form').serialize();
+        var classdata =  $('#add-new-class-form').serialize();
         $.ajax({
             url: base_url + 'add-class',
             method: 'post',
             data:  classdata,
             success: function(result){
                 console.log(result);
+                $('.add-div-error').text('');
                 if(result.errors)
                 {
+
                     $('#add-alert-danger').html('');
 
                     $.each(result.errors, function(key, value){
-                        //console.log(value);
+
                         $('#newclass').modal('show');
-                        $('.add-div-error').show();
+
+                        $('.add-div-error.'+key).text(value);
+
+                        $('.add-div-error .'+key).show();
                         //$('.alert-danger').show();
-                        $('#add-alert-danger').append('<li>'+value+'</li>');
+
 
                     });
                 }
@@ -65,13 +70,14 @@ $(document).ready(function(e){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let editsubjectdata =  $('#edit-new-class-form').serialize();
+        var editsubjectdata =  $('#edit-new-class-form').serialize();
         $.ajax({
             url: base_url + "update-class",
             method: 'post',
             data:  editsubjectdata,
             success: function(result){
                 //alert(response.message);
+                $('.edit-div-error').text('');
                 if(result.errors)
                 {
                     $('#edit-alert-danger').html('');
@@ -79,9 +85,11 @@ $(document).ready(function(e){
                     $.each(result.errors, function(key, value){
                         //console.log(value);
                         $('#editclassmodal').modal('show');
-                        $('.edit-div-error').show();
+                        $('.edit-div-error.'+key).text(value);
+
+                        $('.edit-div-error .'+key).show();
                         //$('.alert-danger').show();
-                        $('#edit-alert-danger').append('<li>'+value+'</li>');
+                        //$('#edit-alert-danger').append('<li>'+value+'</li>');
 
                     });
                 }

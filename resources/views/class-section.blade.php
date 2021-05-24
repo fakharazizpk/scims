@@ -1,7 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Add Class Section')
 @section('content')
-
+    <style>
+        .add-div-error{
+            color: red;
+        }
+        .edit-div-error{
+            color: red;
+        }
+    </style>
 <div class="content">
     <div class="row">
         <div class="col-md-12">
@@ -47,32 +54,37 @@
                                             <div class="row">
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>For Class</label>
-                                                    <select class="selectpicker edit_sel_class" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                    <select class="selectpicker" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
                                                         <option value="" disabled selected>Select Class</option>
                                                         @foreach($nameofclasses as $nameofclass)
                                                         <option value="{{$nameofclass->cls_Id}}">{{$nameofclass->class}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="add-div-error class_name"></div>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>Section Name</label>
                                                     <input type="text" class="form-control" placeholder="" name="class_section_name"  number="true" number="true">
+                                                    <div class="add-div-error class_section_name"></div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Add Students</label>
-                                                    <select class="selectpicker edit_sel_student" id="sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
+                                                    <select class="selectpicker" id="sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
                                                         <option disabled> Choose Students</option>
                                                     </select>
+                                                    <div class="add-div-error students"></div>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>No of Students Added</label>
                                                     <input type="text" class="form-control" placeholder="" id="add-no-of-student" name="no_of_student"  number="true" number="true">
+                                                    <div class="add-div-error no_of_student"></div>
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>Assign Class Rep</label>
-                                                    <select class="selectpicker edit_representative" id="representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                    <select class="selectpicker" id="representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                         <option value="" disabled selected>Select Student</option>
                                                     </select>
+                                                    <div class="add-div-error representative"></div>
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>Teacher</label>
@@ -82,6 +94,7 @@
                                                         <option value="{{$teacher->emp_Id }}">{{$teacher->emp_given_name}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="add-div-error teacher"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,10 +149,12 @@
                                                         <option value="{{$nameofclass->cls_Id}}">{{$nameofclass->class}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="edit-div-error class_name"></div>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>Section Name</label>
                                                     <input type="text" class="form-control" placeholder="" id="edit-class-section-name" name="class_section_name"  number="true" number="true">
+                                                    <div class="edit-div-error class_section_name"></div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Add Students</label>
@@ -147,16 +162,19 @@
                                                         <option disabled> Choose Students</option>
                                                         <option value=""></option>
                                                     </select>
+                                                    <div class="edit-div-error students"></div>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label>No of Students Added</label>
                                                     <input type="text" class="form-control" placeholder="" id="edit-no-of-student" name="no_of_student"  number="true" number="true">
+                                                    <div class="edit-div-error no_of_student"></div>
                                                 </div>
                                                 <div class="col-sm-6 select-wizard">
                                                     <label>Assign Class Rep</label>
                                                     <select class="selectpicker" id="edit-representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
                                                         <option value="" disabled selected>Select Student</option>
                                                     </select>
+                                                    <div class="edit-div-error representative"></div>
                                                 </div>
                                                 <div class=" col-sm-6 select-wizard">
                                                     <label>Teacher</label>
@@ -166,6 +184,7 @@
                                                         <option value="{{$teacher->emp_Id }}">{{$teacher->emp_given_name}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="edit-div-error teacher"></div>
                                                 </div>
                                             </div>
                                         </div>

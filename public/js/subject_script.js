@@ -17,7 +17,7 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let classdata =  $('#SubjectForm').serialize();
+        var classdata =  $('#SubjectForm').serialize();
         $.ajax({
             url: base_url + 'add-subject',
             method: 'post',
@@ -26,14 +26,18 @@ $(document).ready(function(){
                 console.log(result);
                 if(result.errors)
                 {
-                    $('#add-alert-danger').html('');
+                    //$('#add-alert-danger').html('');
+                    $('.add-div-error').text('');
 
                     $.each(result.errors, function(key, value){
                         //console.log(value);
                         $('#SubjectModal').modal('show');
-                        $('.add-div-error').show();
+                        $('.add-div-error.'+key).text(value);
+
+                        $('.add-div-error .'+key).show();
+                        //$('.add-div-error').show();
                         //$('.alert-danger').show();
-                        $('#add-alert-danger').append('<li>'+value+'</li>');
+                        //$('#add-alert-danger').append('<li>'+value+'</li>');
 
                     });
                 }
@@ -64,23 +68,27 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let editsubjectdata =  $('#EditSubjectForm').serialize();
+        var editsubjectdata =  $('#EditSubjectForm').serialize();
         $.ajax({
             url: base_url + "update-subject",
             method: 'post',
             data:  editsubjectdata,
             success: function(result){
                 //alert(response.message);
+                $('.edit-div-error').text('');
                 if(result.errors)
                 {
-                    $('#edit-alert-danger').html('');
+                    //$('#edit-alert-danger').html('');
 
                     $.each(result.errors, function(key, value){
                         //console.log(value);
                         $('#EditSubjectModal').modal('show');
-                        $('.edit-div-error').show();
+                        $('.edit-div-error.'+key).text(value);
+
+                        $('.edit-div-error .'+key).show();
+                        //$('.edit-div-error').show();
                         //$('.alert-danger').show();
-                        $('#edit-alert-danger').append('<li>'+value+'</li>');
+                        //$('#edit-alert-danger').append('<li>'+value+'</li>');
 
                     });
                 }

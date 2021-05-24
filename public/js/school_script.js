@@ -17,7 +17,7 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let classdata =  $('#SubjectForm').serialize();
+        var classdata =  $('#SubjectForm').serialize();
         $.ajax({
             url: base_url + 'add-subject',
             method: 'post',
@@ -64,23 +64,28 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        let editschooldata =  $('#editschoolform').serialize();
+        var editschooldata =  $('#editschoolform').serialize();
         $.ajax({
             url: base_url + "update-school",
             method: 'post',
             data:  editschooldata,
             success: function(result){
                 console.log(result);
+                $('.edit-div-error').text('');
                 if(result.errors)
                 {
-                    $('#edit-alert-danger').html('');
+                    //$('#edit-alert-danger').html('');
 
                     $.each(result.errors, function(key, value){
                         //console.log(value);
                         $('#edit-School-modal').modal('show');
-                        $('.edit-div-error').show();
+                        $('.edit-div-error.'+key).text(value);
+
+                        $('.edit-div-error .'+key).show();
+
+                        //$('.edit-div-error').show();
                         //$('.alert-danger').show();
-                        $('#edit-alert-danger').append('<li>'+value+'</li>');
+                        //$('#edit-alert-danger').append('<li>'+value+'</li>');
 
                     });
                 }

@@ -1,7 +1,11 @@
 @extends('layouts.master')
 @section('title', 'Add School')
 @section('content')
-
+    <style>
+        .edit-div-error{
+            color: red;
+        }
+    </style>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
@@ -48,16 +52,19 @@
                                                         <label>School Name</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-school-name" name="school_Name"/>
+                                                        <div class="edit-div-error school_Name"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Principal Name</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-principal-name" name="principal_Name"/>
+                                                        <div class="edit-div-error principal_Name"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Affiliation No</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-affiliation" name="affiliation_No"/>
+                                                        <div class="edit-div-error affiliation_No"></div>
                                                     </div>
                                                     <div class=" col-sm-6 select-wizard">
                                                         <label>Board</label>
@@ -70,26 +77,31 @@
                                                                     value="{{$board->pk_board_Id}}">{{$board->board_Name}}</option>
                                                             @endforeach
                                                         </select>
+                                                        <div class="edit-div-error board"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Registration No</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-registration" name="registration" number="true" number="true">
+                                                        <div class="edit-div-error registration"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Registered With</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-registered-with" name="registered_with" number="true" number="true">
+                                                        <div class="edit-div-error registered_with"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Primary Contact</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-primary-contact" name="primary_Contact" number="true" number="true">
+                                                        <div class="edit-div-error primary_Contact"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Secondary Contact</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                id="edit-secondary-contact"  name="secondary_Contact" number="true" number="true">
+                                                        <div class="edit-div-error secondary_Contact"></div>
                                                     </div>
                                                     <div class=" col-sm-6 select-wizard">
                                                         <label>District</label>
@@ -102,6 +114,7 @@
                                                                     value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
                                                             @endforeach
                                                         </select>
+                                                        <div class="edit-div-error district"></div>
                                                     </div>
                                                     <div class=" col-sm-6 select-wizard">
                                                         <label>City</label>
@@ -114,12 +127,14 @@
                                                                     value="{{$city->pk_city_id}}">{{$city->city_name}}</option>
                                                             @endforeach
                                                         </select>
+                                                        <div class="edit-div-error city"></div>
                                                     </div>
 
                                                         <div class="select-wizard col-sm-12">
                                                             <label>School Address</label>
                                                             <input type="text" class="form-control" placeholder=""
                                                                    id="edit-school-address" name="school_address"  number="true" number="true">
+                                                            <div class="edit-div-error school_address"></div>
                                                         </div>
 
                                                 </div>

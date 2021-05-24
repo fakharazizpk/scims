@@ -324,7 +324,8 @@ Route::post('update-appointment-info', [EmployeeController::class, 'UpdateAppoin
 Route::get('change-employee-status/{id}', [EmployeeController::class, 'ChangeEmployeeStatus']);
 
 /*Teacher*/
-Route::get('teacher-dashboard', [TeacherController::class, 'index']);
+Route::get('teacher/dashboard', [TeacherController::class, 'index']);
+Route::get('teacher/dairy', [TeacherController::class, 'Dairy']);
 
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);

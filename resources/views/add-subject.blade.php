@@ -1,7 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Add Subject')
 @section('content')
-
+    <style>
+        .add-div-error{
+            color: red;
+        }
+        .edit-div-error{
+            color: red;
+        }
+    </style>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
@@ -52,34 +59,38 @@
                                                         <label>Name</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="name">
-                                                        <span class="" id="name-error"></span>
+                                                        <div class="add-div-error name"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Code</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="code">
-                                                        <span id="code-error"></span>
+                                                        <div class="add-div-error code"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Theory Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="theory_marks">
+                                                        <div class="add-div-error theory_marks"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Practical Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="practical_marks">
+                                                        <div class="add-div-error practical_marks"></div>
                                                     </div>
 
                                                     <div class="form-group col-sm-6">
                                                         <label>Total Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="total_marks">
+                                                        <div class="add-div-error total_marks"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Passing Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="passing_marks">
+                                                        <div class="add-div-error passing_marks"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,33 +147,39 @@
                                                         <label>Name</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="name" id="sub_name">
+                                                        <div class="edit-div-error name"></div>
 
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Code</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="code" id="sub_code">
+                                                        <div class="edit-div-error code"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Theory Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="theory_marks" id="theory_marks">
+                                                        <div class="edit-div-error theory_marks"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Practical Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="practical_marks" id="practical_marks">
+                                                        <div class="edit-div-error practical_marks"></div>
                                                     </div>
 
                                                     <div class="form-group col-sm-6">
                                                         <label>Total Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="total_marks" id="total_marks">
+                                                        <div class="edit-div-error total_marks"></div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Passing Marks</label>
                                                         <input type="text" class="form-control" placeholder=""
                                                                name="passing_marks" id="passing_marks">
+                                                        <div class="edit-div-error passing_marks"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -305,7 +322,7 @@
                                         <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Namesdsafsdsaffs</th>
+                                            <th>Name</th>
                                             <th>Code</th>
                                             <th class="disabled-sorting text-center">Actions</th>
                                         </tr>
@@ -313,7 +330,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Nameadsadsad</th>
+                                            <th>Name</th>
                                             <th>Code</th>
                                             <th class="disabled-sorting text-center">Actions</th>
                                         </tr>

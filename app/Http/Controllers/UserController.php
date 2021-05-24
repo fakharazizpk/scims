@@ -57,7 +57,7 @@ class UserController extends Controller
                         return redirect('home');// exit;
                     }
                     else if($userFound->user_type=='Teacher'){
-                        return redirect('teacher-dashboard');
+                        return redirect('teacher/dashboard');
                     }
                     else if($userFound->user_type=='Accountant'){
                         return "Accountant Dashboard";// exit;
