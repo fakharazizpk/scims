@@ -281,11 +281,11 @@
                                                     </div>
                                                     <div class="form-group col-sm-6 select-wizard">
                                                         <label>Password *</label>
-                                                        <input class="form-control" name="password" id="userPassword" type="password"/>
+                                                        <input class="form-control" name="password" id="edituserPassword" type="password"/>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label>Confirm Password *</label>
-                                                        <input class="form-control" name="password_confirmation" id="userconfirmpassword" type="password" />
+                                                        <input class="form-control" name="password_confirmation" id="edituserconfirmpassword" type="password" />
                                                     </div>
                                                     <div class="pull-right col-sm-6">
 

@@ -25,4 +25,9 @@ class TeacherController extends Controller
     {
         return view('teacher.dairy');
     }
+
+    public function TeacherProfile()
+    {
+        return view('teacher.profile');
+    }
 }

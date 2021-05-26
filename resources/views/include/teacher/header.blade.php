@@ -119,7 +119,7 @@ Coded by www.pointwebtech.com
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#">
+                                <a href="{{url('teacher/profile')}}">
                                     <span class="sidebar-mini-icon">MP</span>
                                     <span class="sidebar-normal">My Profile</span>
                                 </a>

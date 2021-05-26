@@ -136,7 +136,7 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
 $('body').on('click', '#edit-user', function () {
     var user_id = $(this).data('id');
     $.get('edit-user/'+user_id, function (data) {
-        //console.log(data);
+        console.log(data);
         $('#modal-title').html("Edit User Detail");
         //$('#Save-Btn').val("Update");
         //$('#Save-Btn').prop('disabled',false);
@@ -149,7 +149,13 @@ $('body').on('click', '#edit-user', function () {
         //$('#edit-user-type option:selected').text(user_type);
         $('#edit-name').val(data.name);
         $('#edit-username').val(data.username);
-        //$('#edit-status').val(data.status === 'Active').attr("checked", "checked")
+        //$("input[name='status'][data.status='Active']").attr('checked','checked');
+        if(data.status == 'Active'){
+            $('#edit-status').val(data.status == 'Active').attr('checked', true);
+        }else if(data.status == 'Inactive'){
+            $('#edit-status').val(data.status == 'Inactive').attr('checked', false);
+        }
+
 
         //$('#edit-status').val(data.staus);
     })
@@ -158,7 +164,7 @@ $('body').on('click', '#edit-user', function () {
 $('body').on('click', '#show-user', function () {
     var user_id = $(this).data('id');
     $.get('show-user/'+user_id, function (data) {
-        //console.log(data);
+        console.log(data);
         $('#modal-title').html("VIEW USER DETAIL");
         $('#show-save-btn').hide();
         //$('#Save-Btn').prop('disabled',false);

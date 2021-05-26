@@ -41,6 +41,8 @@ use Redirect, Response;
 
 class EmployeeController extends Controller
 {
+
+   
     public function getEmployee($id)
     {
 
