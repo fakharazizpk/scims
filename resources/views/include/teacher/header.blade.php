@@ -116,16 +116,17 @@ Coded by www.pointwebtech.com
               </span>
                     </a>
                     <div class="clearfix"></div>
+                    {{$user_id =  Session::get('userData')['id']}}}
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="{{url('teacher/profile')}}">
+                                <a href="{{url('teacher/profile')}}/{{$user_id}}">
                                     <span class="sidebar-mini-icon">MP</span>
                                     <span class="sidebar-normal">My Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('teacher/editProfile')}}/{{$user_id}}">
                                     <span class="sidebar-mini-icon">EP</span>
                                     <span class="sidebar-normal">Edit Profile</span>
                                 </a>

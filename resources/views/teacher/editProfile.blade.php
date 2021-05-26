@@ -1,294 +1,207 @@
 @extends('layouts.teacher')
 @section('title', 'Teacher Dashboard')
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card card-user">
-                <div class="image">
-                    <img src="{{url('adminassets/img/bg/damir-bosnjak.jpg')}}" alt="...">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="{{url('adminassets/img/bg/damir-bosnjak.jpg')}}" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <div class="author">
+                            <img class="avatar border-gray" src="{{url('adminassets/img/fakhar.jpg')}}" width="234" height="145" alt="...">
+                            <div class="wrapper">
+
+                                <input id="file" type="file" name="file" />
+                            </div>
+
+                            <h3 class="profile-username text-center">{{ $teacher->emp_given_name }}</h3>
+
+                            <p class="text-muted text-center">teacher</p>
+
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b class="fa fa-mobile-phone pull-left"> Mobile</b> <a class="pull-right">{{ $teacher->emp_mob_Ph }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b class="fa fa-envelope-o pull-left"> Email</b> <a class="pull-right">{{ $teacher->emp_Email }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="author">
-                        <img class="avatar border-gray" src="{{url('adminassets/img/fakhar.jpg')}}" width="234" height="145" alt="...">
-                        <h3 class="profile-username text-center">{{ $teacher->emp_given_name }}</h3>
-
-                        <p class="text-muted text-center">teacher</p>
-
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b class="fa fa-mobile-phone pull-left"> Mobile</b> <a class="pull-right">{{ $teacher->emp_mob_Ph }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b class="fa fa-envelope-o pull-left"> Email</b> <a class="pull-right">{{ $teacher->emp_Email }}</a>
-                            </li>
-                        </ul>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"> Personal Information</h5>
+                    </div>
+                    <div class="card-body hover">
+                        <div class="table-condensed">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-4 col-form-label">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Personal Information</h5>
+
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"> Employment Information</h5>
+                    </div>
+                    <div class="card-body hover">
+                        <div class="table-condensed">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-                            <tr>
-                                <th>Father Name</th>
-                                <td>{{ $teacher->emp_fat_Name }}</td>
-                            </tr>
-                            <tr>
-                                <th>Gender</th>
-                                <td>{{ $teacher->gender }}</td>
-                            </tr>
-                            <tr>
-                                <th>Marital Status</th>
-                                <td>{{ $teacher->emp_marital_Status }}</td>
-                            </tr>
-                            <tr>
-                                <th>Blood Group</th>
-                                <td>{{ $teacher->blood_group }}</td>
-                            </tr>
-                            <tr>
-                                <th>National Identifier</th>
-                                <td>{{ $teacher->nationality}}</td>
-                            </tr>
-                            <tr>
-                                <th>Date of Birth</th>
-                                <td>{{ $teacher->emp_Dob}}</td>
-                            </tr>
-                            <tr>
-                                <th>Religion</th>
-                                <td>{{ $teacher->religion}}</td>
-                            </tr>
-                            <tr>
-                                <th>Nationality</th>
-                                <td>{{ $teacher->nationality}}</td>
-                            </tr>
-                            <tr>
-                                <th>Domicile</th>
-                                <td>{{ $teacher->dom_District}}</td>
-                            </tr>
-                            <tr>
-                                <th>Cast</th>
-                                <td>{{ $teacher->cast}}</td>
-                            </tr>
-                            <tr>
-                                <th>City</th>
-                                <td>{{ $teacher->emp_City}}</td>
-                            </tr>
-                            <tr>
-                                <th>Emergency Contact Person</th>
-                                <td>{{ $teacher->emer_cont_Name}}</td>
-                            </tr>
-                            <tr>
-                                <th>Emergency Contact No</th>
-                                <td>{{ $teacher->emer_cont_No}}</td>
-                            </tr>
-                            <tr>
-                                <th>Emergency Contact Relation</th>
-                                <td>{{ $teacher->fk_emer_relat_Id}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"> Billing Information</h5>
+                    </div>
+                    <div class="card-body hover">
+                        <div class="table-condensed">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"> Pension Information</h5>
+                    </div>
+                    <div class="card-body hover">
+                        <div class="table-condensed">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!--<div class="col-md-8">-->
+            <!--<div class="card">-->
+            <!--<div class="card-header">-->
+            <!--<h5 class="title">Edit Profile</h5>-->
+            <!--</div>-->
+            <!--<div class="card-body">-->
+            <!--<form>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-5 pr-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Company (disabled)</label>-->
+            <!--<input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 px-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Username</label>-->
+            <!--<input type="text" class="form-control" placeholder="Username" value="michael23">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 pl-1">-->
+            <!--<div class="form-group">-->
+            <!--<label for="exampleInputEmail1">Email address</label>-->
+            <!--<input type="email" class="form-control" placeholder="Email">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-6 pr-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>First Name</label>-->
+            <!--<input type="text" class="form-control" placeholder="Company" value="Chet">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-6 pl-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Last Name</label>-->
+            <!--<input type="text" class="form-control" placeholder="Last Name" value="Faker">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Address</label>-->
+            <!--<input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-4 pr-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>City</label>-->
+            <!--<input type="text" class="form-control" placeholder="City" value="Melbourne">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 px-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Country</label>-->
+            <!--<input type="text" class="form-control" placeholder="Country" value="Australia">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 pl-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Postal Code</label>-->
+            <!--<input type="number" class="form-control" placeholder="ZIP Code">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>About Me</label>-->
+            <!--<textarea rows="4" cols="80" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</form>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
-
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Employment Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody><tr>
-                                <th>Personal No</th>
-                                <td>{{$teacher->personal_No}}</td>
-                            </tr>
-                            <tr>
-                                <th>Hire Date</th>
-                                <td>{{$teacher->appt_Date}}</td>
-                            </tr>
-                            <tr>
-                                <th>Adjustment Date</th>
-                                <td>{{$teacher->adjust_Date}}</td>
-                            </tr>
-                            <tr>
-                                <th>Employment Status</th>
-                                <td>{{$teacher->empt_Status}}</td>
-                            </tr>
-                            <tr>
-                                <th>Contract Type</th>
-                                <td>{{$teacher->contract_Type}}</td>
-                            </tr>
-                            <tr>
-                                <th>Contract Duration</th>
-                                <td>{{$teacher->contract_Duration}}</td>
-                            </tr>
-                            <tr>
-                                <th>Employee Type</th>
-                                <td>{{$teacher->contract_Type}}</td>
-                            </tr>
-                            <tr>
-                                <th>Designation</th>
-                                <td>Accountant </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Billing Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-                            <tr>
-                                <th>Billing Type</th>
-                                <td>Daily</td>
-                            </tr>
-                            <tr>
-                                <th>Billing Rate</th>
-                                <td>&#8360; 700</td>
-                            </tr>
-                            <tr>
-                                <th>Billing Schedule</th>
-                                <td>Monthly</td>
-                            </tr>
-                            <tr>
-                                <th>Basic Pay</th>
-                                <td>&#8360; 18,200</td>
-                            </tr>
-                            <tr>
-                                <th>Net Pay</th>
-                                <td>&#8360; 28,200</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Pension Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-
-                            <tr>
-                                <th>GFP Balance</th>
-                                <td>&#8360; 24,200</td>
-                            </tr>
-                            <tr>
-                                <th>EPS Balance</th>
-                                <td>&#8360; 9,100</td>
-                            </tr>
-                            <tr>
-                                <th>Graduity Balance</th>
-                                <td>&#8360; 9,100</td>
-                            </tr>
-                            <tr>
-                                <th>Total Balance</th>
-                                <td>&#8360; 42,500</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--<div class="col-md-8">-->
-        <!--<div class="card">-->
-        <!--<div class="card-header">-->
-        <!--<h5 class="title">Edit Profile</h5>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-        <!--<form>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-5 pr-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Company (disabled)</label>-->
-        <!--<input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-3 px-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Username</label>-->
-        <!--<input type="text" class="form-control" placeholder="Username" value="michael23">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-4 pl-1">-->
-        <!--<div class="form-group">-->
-        <!--<label for="exampleInputEmail1">Email address</label>-->
-        <!--<input type="email" class="form-control" placeholder="Email">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-6 pr-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>First Name</label>-->
-        <!--<input type="text" class="form-control" placeholder="Company" value="Chet">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-6 pl-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Last Name</label>-->
-        <!--<input type="text" class="form-control" placeholder="Last Name" value="Faker">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-12">-->
-        <!--<div class="form-group">-->
-        <!--<label>Address</label>-->
-        <!--<input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-4 pr-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>City</label>-->
-        <!--<input type="text" class="form-control" placeholder="City" value="Melbourne">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-4 px-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Country</label>-->
-        <!--<input type="text" class="form-control" placeholder="Country" value="Australia">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-4 pl-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Postal Code</label>-->
-        <!--<input type="number" class="form-control" placeholder="ZIP Code">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-12">-->
-        <!--<div class="form-group">-->
-        <!--<label>About Me</label>-->
-        <!--<textarea rows="4" cols="80" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</form>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
     </div>
-</div>
 @endsection
 
 @section('front_script')
