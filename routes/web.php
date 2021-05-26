@@ -252,6 +252,9 @@ Route::post('logout', [UserController::class, 'Logout']);
 
 /*User*/
 Route::get('users', [UserController::class, 'index']);
+Route::get('profile', [UserController::class, 'ProfileView']); //admin profile
+Route::get('profile-edit', [UserController::class, 'ProfileEdit']); //admin profile edit
+Route::post('profile-update', [UserController::class, 'ProfileUpdate']); //admin profile Update
 Route::post('add-user', [UserController::class, 'CreateUser']);
 Route::get('show-user/{id}', [UserController::class, 'ShowUser']);
 Route::get('edit-user/{id}', [UserController::class, 'EditUser']);

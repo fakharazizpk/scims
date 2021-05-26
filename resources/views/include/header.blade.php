@@ -119,13 +119,13 @@ Coded by www.pointwebtech.com
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#">
+                                <a href="{{url('profile')}}">
                                     <span class="sidebar-mini-icon">MP</span>
                                     <span class="sidebar-normal">My Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('profile-edit')}}">
                                     <span class="sidebar-mini-icon">EP</span>
                                     <span class="sidebar-normal">Edit Profile</span>
                                 </a>

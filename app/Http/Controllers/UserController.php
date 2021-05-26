@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\UserType;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use phpDocumentor\Reflection\Types\Null_;
 use Redirect,Response;
 //use Illuminate\Support\Facades\Validator;
 
@@ -16,6 +18,56 @@ class UserController extends Controller
         $users = User::all();
         return view('add-users', compact('users'));
     }
+
+    public function ProfileView()
+    {
+        //dd(Session::get('userData'));
+        $adminprofile = User::where('id',Session::get('userData')['id'])->first();
+        //dd($adminprofile);
+        return view('profile', compact('adminprofile'));
+    }
+    public function ProfileEdit()
+    {
+        //dd(Session::get('userData'));
+        $users_types = UserType::all();
+        //dd($users_types);
+        $adminprofile = User::where('id',Session::get('userData')['id'])->first();
+        //dd($adminprofile);
+        return view('profile-edit', compact('adminprofile','users_types'));
+    }
+    public function ProfileUpdate(Request $request)
+    {
+        //dd($request->file('user_image'));
+        $request->validate([
+            'name'    => 'required',
+            'email'    => 'required',
+            'password_confirmation' => 'same:password',
+            'user_image' => 'image|mimes:jpeg,png,jpg,png|max:1024',
+        ]);
+        $form_data = array();
+
+            $form_data = array(
+                'name'      => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+            );
+        if ($request->password !=''){
+            $form_data['password'] = Hash::make($request->get('password'));
+            //dd($form_data['password']);
+        }
+        if ($request->hasFile('user_image')) {
+            $user_image = $request->file('user_image');
+            $new_user_image = "user" . time() . '.' . $user_image->getClientOriginalExtension();
+            $user_image->move(public_path('upload/user'), $new_user_image);
+            $form_data['user_image'] = $new_user_image;
+        }
+        //dd($form_data);
+        User::where('id', Session::get('userData')['id'])->update($form_data);
+        $request->flash();
+        return redirect()->back()->with('message', 'Successfully Updated!');
+
+    }
+
 
     public function LoginPage(){
         return view('login');
@@ -50,6 +102,9 @@ class UserController extends Controller
                         'name'      => $userFound["name"],
                         'username' => $userFound["username"],
                         'email'  => $userFound["email"],
+                        'phone'  => $userFound["phone"],
+                        'user_type'  => $userFound["user_type"],
+                        'status'  => $userFound["status"],
                     );
                     Session::put('userData', $userData);
                     //dd($userFound->user_type);

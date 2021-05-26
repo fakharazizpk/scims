@@ -251,7 +251,7 @@ $(document).ready(function () {
 
 
 /*add employee form validation*/
-/*   $("#add-employee-form").validate({
+   $("#add-employee-form").validate({
 
        rules:
            {
@@ -302,9 +302,9 @@ $(document).ready(function () {
                adjustment_date: {
                    required: true
                },
-               /!*employee_status: {
+               /*employee_status: {
                    required: true
-               },*!/
+               },*/
                contract_type: {
                    required: true
                },
@@ -386,9 +386,9 @@ $(document).ready(function () {
                adjustment_date:{
                    required: "please select adjustment date",
                },
-              /!* employee_status:{
+              /* employee_status:{
                    required: "please select employee status",
-               },*!/
+               },*/
                contract_type:{
                    required: "please select contract type",
                },
@@ -422,11 +422,11 @@ $(document).ready(function () {
        submitHandler: function (form) {
            form.submit();
        }
-   });*/
+   });
 /*add employee form validation*/
 
 /*edit employee form validation*/
-  /* $("#edit-employee-form").validate({
+   $("#edit-employee-form").validate({
        rules:
            {
                given_name: {
@@ -476,9 +476,9 @@ $(document).ready(function () {
                adjustment_date: {
                    required: true
                },
-              /!* employee_status: {
+              /* employee_status: {
                    required: true
-               },*!/
+               },*/
                contract_type: {
                    required: true
                },
@@ -560,9 +560,9 @@ $(document).ready(function () {
                adjustment_date:{
                    required: "please select adjustment date",
                },
-              /!* employee_status:{
+              /* employee_status:{
                    required: "please select employee status",
-               },*!/
+               },*/
                contract_type:{
                    required: "please select contract type",
                },
@@ -596,7 +596,7 @@ $(document).ready(function () {
        submitHandler: function (form) {
            form.submit();
        }
-   });*/
+   });
 /*edit employee form validation*/
 
 /*start edit student Admission*/
