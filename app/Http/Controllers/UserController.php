@@ -41,6 +41,7 @@ class UserController extends Controller
         $request->validate([
             'name'    => 'required',
             'email'    => 'required',
+            'phone'    => 'required',
             'password_confirmation' => 'same:password',
             'user_image' => 'image|mimes:jpeg,png,jpg,png|max:1024',
         ]);
