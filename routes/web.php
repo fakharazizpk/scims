@@ -328,9 +328,10 @@ Route::get('change-employee-status/{id}', [EmployeeController::class, 'ChangeEmp
 
 /*Teacher*/
 Route::get('teacher/dashboard', [TeacherController::class, 'index']);
+Route::get('teacher/profile', [TeacherController::class, 'TeacherProfile']); //teacher profile
+Route::get('teacher/editProfile', [TeacherController::class, 'editProfile']); //admin profile edit
+Route::post('teacher/profile-update', [TeacherController::class, 'ProfileUpdate']); //teacher profile Update
 Route::get('teacher/dairy', [TeacherController::class, 'Dairy']);
-Route::get('teacher/profile/{id}', [TeacherController::class, 'TeacherProfile']);
-Route::get('teacher/editProfile/{id}', [TeacherController::class, 'editProfile']);
 
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);

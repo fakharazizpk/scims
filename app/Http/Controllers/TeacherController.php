@@ -60,6 +60,6 @@ class TeacherController extends Controller
             ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
             ->where('emp_Cnic', Session::get('userData')['username'])->first();
 //    dd($teacher);
-        return view('teacher.editProfile',compact('teacher'));
+        return view('teacher.editProfile',compact('teacherprofile'));
     }
 }
