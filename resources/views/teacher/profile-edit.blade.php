@@ -1,420 +1,318 @@
-@extends('layouts.master')
-@section('title', 'Admin Profile')
+@extends('layouts.teacher')
+@section('title', 'Teacher Dashboard')
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card card-user">
-                <div class="image">
-                    <img src="{{url('adminassets/img/bg/damir-bosnjak.jpg')}}" alt="...">
-                </div>
-                <div class="card-body">
-                    <div class="author">
-                        @if($teacherprofile->user_image)
-                            <img class="avatar border-gray" src="{{asset('upload/user/'.$teacherprofile->user_image)}}" alt="Image">
-                        @else
-                            <img class="avatar border-gray" src="{{url('adminassets/img/accountant.jpg')}}" alt="Default User">
-                        @endif
-                        <h3 class="profile-username text-center">{{$teacherprofile->name}}</h3>
-
-                      {{--  <p class="text-muted text-center"><input type="text" class="form-control" placeholder=""
-                                                                 value="{{$adminprofile->user_type}}" name="user_type"
-                                                                 title="User Type"></p>
-
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b class="fa fa-mobile-phone pull-left ml-0"> Mobile</b> <a class="pull-right">{{$adminprofile->phone}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b class="fa fa-envelope-o pull-left  ml-0"> Email</b> <a class="pull-right">{{$adminprofile->email}}</a>
-                            </li>--}}
-                        </ul>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="{{url('adminassets/img/bg/damir-bosnjak.jpg')}}" alt="...">
                     </div>
-                </div>
-            </div>
-            {{--<div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Personal Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <td>{{$adminprofile->name}}</td>
-                            </tr>
-                            <tr>
-                                <th>Username</th>
-                                <td>{{$adminprofile->username}}</td>
-                            </tr>
-                            <tr>
-                                <th>Marital Status</th>
-                                <td>Married</td>
-                            </tr>
-                            <tr>
-                                <th>Blood Group</th>
-                                <td>A+</td>
-                            </tr>
-                            <tr>
-                                <th>National Identifier</th>
-                                <td>17301-2345673-2</td>
-                            </tr>
-                            <tr>
-                                <th>Date of Birth</th>
-                                <td>02/12/1998</td>
-                            </tr>
-                            <tr>
-                                <th>Religion</th>
-                                <td>Islam</td>
-                            </tr>
-                            <tr>
-                                <th>Nationality</th>
-                                <td>Pakistani</td>
-                            </tr>
-                            <tr>
-                                <th>Domicile</th>
-                                <td>Karak</td>
-                            </tr>
-                            <tr>
-                                <th>Cast</th>
-                                <td>Khattak</td>
-                            </tr>
-                            <tr>
-                                <th>City</th>
-                                <td>Karak</td>
-                            </tr>
-                            <tr>
-                                <th>Emergency Contact Person</th>
-                                <td>Shafiq Khan</td>
-                            </tr>
-                            <tr>
-                                <th>Emergency Contact No</th>
-                                <td>+92 111 2222 123</td>
-                            </tr>
-                            <tr>
-                                <th>Emergency Contact Relation</th>
-                                <td>Brother</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>--}}
-        </div>
+                    <div class="card-body">
+                        <div class="author">
 
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Personal Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        @if(session()->has('message'))
-                            <div class="alert alert-success">
-                                {{ session()->get('message') }}
-                            </div>
-                        @endif
-                        <form action="{{url('profile-update')}}" method="Post" enctype="multipart/form-data">
-                            @csrf
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <th><input type="text" class="form-control @error('name') is-invalid @enderror" placeholder=""
-                                       value="{{$teacherprofile->name}}" name="name"
-                                       title="Name">
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </th>
+                            @if($teacherprofile->user_image)
+                                <img class="avatar border-gray" src="{{asset('upload/employee/'.$teacherprofile->user_image)}}" alt="Image">
+                            @else
+                                <img class="avatar border-gray" src="{{url('adminassets/img/accountant.jpg')}}" alt="Default User">
+                            @endif
+                            <h3 class="profile-username text-center ">{{ $teacherprofile->emp_given_name }}</h3>
 
-                            </tr>
-                            <tr>
-                                <th>Username</th>
-                                <th><input type="text" class="form-control" placeholder=""
-                                       value="{{$teacherprofile->username}}" name="username"
-                                       title="User Name" readonly>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Image</th>
-                                <th><input type="file" class="form-control" placeholder=""
+                            <p class="text-muted text-center font-weight-bold">{{ $teacherprofile->user_type }}</p>
+                            <form action="{{url('teacher/profile-update')}}" method="Post" enctype="multipart/form-data">
+                                @csrf
+                                <div><input type="file" class="form-control" placeholder=""
                                            value="" name="user_image"
                                            title="User Image">
-                                </th>
-                            </tr>
-                            {{--<tr>
-                                <th>User Type</th>
-                                <th>
-                                    <select class="selectpicker" name="user_type" data-size="5"
-                                        data-style="btn btn-secondary" title="Select User Type">
-                                    <option value="" disabled selected>Select User Type</option>
-                                    @foreach($users_types as $user_type)
-                                        <option value="{{$user_type->user_type}}"
-                                                @if($adminprofile->user_type==$user_type->user_type_Name)selected @endif>{{$user_type->user_type_Name}}</option>
-                                    @endforeach
-                                </select>
-                                </th>
-                            </tr>--}}
-                            <tr>
-                                <th>Phone</th>
-                                <th><input type="text" class="form-control @error('phone') is-invalid @enderror" placeholder=""
-                                           value="{{$teacherprofile->phone}}" name="phone"
-                                           title="Phone">
-                                    @error('phone')
-                                    <span class="invalid-feedback" role="alert">
+                                </div>
+                                <br>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label font-weight-bold">Mobile</label>
+                                <input type="text" class="form-control col-sm-6 @error('phone') is-invalid @enderror" placeholder=""
+                                       value="{{$teacherprofile->emp_mob_Ph}}" name="phone"
+                                       title="phone">
+                                @error('phone')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <th><input type="text" class="form-control @error('email') is-invalid @enderror" placeholder=""
-                                           value="{{$teacherprofile->email}}" name="email"
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label font-weight-bold">Email</label>
+                                    <input type="text" class="form-control col-sm-6 @error('email') is-invalid @enderror" placeholder=""
+                                           value="{{$teacherprofile->emp_Email}}" name="email"
                                            title="email">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Password</th>
-                                <th><input type="password" class="form-control @error('password') is-invalid @enderror" placeholder=""
-                                            name="password"
-                                           title="Password">
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Confirm Password</th>
-                                <th><input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder=""
-                                            name="password_confirmation"
-                                           title="Confirm Password">
-                                    @error('password_confirmation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </th>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <th><input type='submit'
-                                       class='btn btn-finish  btn-secondary btn-wd pull-right'
-                                       name='finish' value='Submit'/>
-                                </th>
-                            </tr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            {{--        <th>Marital Status</th>
-                                    <td>Married</td>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"> Personal Information</h5>
+                    </div>
+                    <div class="card-body table-full-width table-hover">
+                        <div class="table-condensed">
+
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div>{{$error}}</div>
+                                @endforeach
+                            @endif
+                            @if(session('message'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
+                            <table class="table table-hover" width="100%">
+                                <tbody>
+                                <tr>
+                                    <th>Father Name</th>
+                                    <td><input type="text" class="form-control @error('fath_name') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->emp_fat_Name}}" name="fath_name"
+                                               title="fath_name">
+                                        @error('fath_name')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
+                                </tr>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td><input type="text" class="form-control @error('gender') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->gender}}" name="gender"
+                                               title="gender">
+                                        @error('gender')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
+                                </tr>
+                                <tr>
+                                    <th>Marital Status</th>
+                                    <td><input type="text" class="form-control @error('marital_status') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->emp_marital_Status}}" name="marital_status"
+                                               title="marital_status">
+                                        @error('marital_status')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Blood Group</th>
-                                    <td>A+</td>
+                                    <td><input type="text" class="form-control @error('blood_group') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->blood_group}}" name="blood_group"
+                                               title="blood_group">
+                                        @error('blood_group')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>National Identifier</th>
-                                    <td>17301-2345673-2</td>
+                                    <td><input type="text" class="form-control @error('nationality') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->nationality}}" name="nationality"
+                                               title="nationality">
+                                        @error('nationality')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Date of Birth</th>
-                                    <td>02/12/1998</td>
+                                    <td><input type="text" class="form-control @error('dob') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->emp_Dob}}" name="dob"
+                                               title="dob">
+                                        @error('dob')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Religion</th>
-                                    <td>Islam</td>
+                                    <td><input type="text" class="form-control @error('religion') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->religion}}" name="religion"
+                                               title="religion">
+                                        @error('religion')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Nationality</th>
-                                    <td>Pakistani</td>
+                                    <td>{{ $teacherprofile->nationality}}</td>
                                 </tr>
                                 <tr>
                                     <th>Domicile</th>
-                                    <td>Karak</td>
+                                    <td><input type="text" class="form-control @error('domicile') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->dom_District}}" name="domicile"
+                                               title="domicile">
+                                        @error('domicile')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Cast</th>
-                                    <td>Khattak</td>
+                                    <td><input type="text" class="form-control @error('cast') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->cast}}" name="cast"
+                                               title="cast">
+                                        @error('cast')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>City</th>
-                                    <td>Karak</td>
+                                    <td><input type="text" class="form-control @error('city') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->emp_City}}" name="city"
+                                               title="city">
+                                        @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Emergency Contact Person</th>
-                                    <td>Shafiq Khan</td>
+                                    <td><input type="text" class="form-control @error('emer_cont_name') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->emer_cont_Name}}" name="emer_cont_name"
+                                               title="emer_cont_per">
+                                        @error('emer_cont_per')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Emergency Contact No</th>
-                                    <td>+92 111 2222 123</td>
+                                    <td><input type="text" class="form-control @error('emer_contact') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->emer_cont_No}}" name="emer_contact"
+                                               title="emer_contact">
+                                        @error('emer_contact')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
                                 </tr>
                                 <tr>
                                     <th>Emergency Contact Relation</th>
-                                    <td>Brother</td>
-                                </tr>--}}
-                            </tbody>
-                        </table>
-                        </form>
+                                    <td><input type="text" class="form-control @error('em_contact_rel') is-invalid @enderror" placeholder=""
+                                               value="{{$teacherprofile->fk_emer_relat_Id}}" name="em_contact_rel"
+                                               title="em_contact_rel">
+                                        @error('em_contact_rel')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <input type='submit'
+                                   class='btn btn-finish  btn-secondary btn-wd pull-right'
+                                   name='finish' value='Submit'/>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-           {{-- <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Billing Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-                            <tr>
-                                <th>Billing Type</th>
-                                <td>Daily</td>
-                            </tr>
-                            <tr>
-                                <th>Billing Rate</th>
-                                <td>&#8360; 700</td>
-                            </tr>
-                            <tr>
-                                <th>Billing Schedule</th>
-                                <td>Monthly</td>
-                            </tr>
-                            <tr>
-                                <th>Basic Pay</th>
-                                <td>&#8360; 18,200</td>
-                            </tr>
-                            <tr>
-                                <th>Net Pay</th>
-                                <td>&#8360; 28,200</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"> Pension Information</h5>
-                </div>
-                <div class="card-body table-full-width table-hover">
-                    <div class="table-condensed">
-                        <table class="table table-hover" width="100%">
-                            <tbody>
-
-                            <tr>
-                                <th>GFP Balance</th>
-                                <td>&#8360; 24,200</td>
-                            </tr>
-                            <tr>
-                                <th>EPS Balance</th>
-                                <td>&#8360; 9,100</td>
-                            </tr>
-                            <tr>
-                                <th>Graduity Balance</th>
-                                <td>&#8360; 9,100</td>
-                            </tr>
-                            <tr>
-                                <th>Total Balance</th>
-                                <td>&#8360; 42,500</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>--}}
+            <!--<div class="col-md-8">-->
+            <!--<div class="card">-->
+            <!--<div class="card-header">-->
+            <!--<h5 class="title">Edit Profile</h5>-->
+            <!--</div>-->
+            <!--<div class="card-body">-->
+            <!--<form>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-5 pr-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Company (disabled)</label>-->
+            <!--<input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 px-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Username</label>-->
+            <!--<input type="text" class="form-control" placeholder="Username" value="michael23">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 pl-1">-->
+            <!--<div class="form-group">-->
+            <!--<label for="exampleInputEmail1">Email address</label>-->
+            <!--<input type="email" class="form-control" placeholder="Email">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-6 pr-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>First Name</label>-->
+            <!--<input type="text" class="form-control" placeholder="Company" value="Chet">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-6 pl-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Last Name</label>-->
+            <!--<input type="text" class="form-control" placeholder="Last Name" value="Faker">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Address</label>-->
+            <!--<input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-4 pr-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>City</label>-->
+            <!--<input type="text" class="form-control" placeholder="City" value="Melbourne">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 px-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Country</label>-->
+            <!--<input type="text" class="form-control" placeholder="Country" value="Australia">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 pl-1">-->
+            <!--<div class="form-group">-->
+            <!--<label>Postal Code</label>-->
+            <!--<input type="number" class="form-control" placeholder="ZIP Code">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>About Me</label>-->
+            <!--<textarea rows="4" cols="80" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</form>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
-        <!--<div class="col-md-8">-->
-        <!--<div class="card">-->
-        <!--<div class="card-header">-->
-        <!--<h5 class="title">Edit Profile</h5>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-        <!--<form>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-5 pr-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Company (disabled)</label>-->
-        <!--<input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-3 px-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Username</label>-->
-        <!--<input type="text" class="form-control" placeholder="Username" value="michael23">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-4 pl-1">-->
-        <!--<div class="form-group">-->
-        <!--<label for="exampleInputEmail1">Email address</label>-->
-        <!--<input type="email" class="form-control" placeholder="Email">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-6 pr-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>First Name</label>-->
-        <!--<input type="text" class="form-control" placeholder="Company" value="Chet">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-6 pl-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Last Name</label>-->
-        <!--<input type="text" class="form-control" placeholder="Last Name" value="Faker">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-12">-->
-        <!--<div class="form-group">-->
-        <!--<label>Address</label>-->
-        <!--<input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-4 pr-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>City</label>-->
-        <!--<input type="text" class="form-control" placeholder="City" value="Melbourne">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-4 px-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Country</label>-->
-        <!--<input type="text" class="form-control" placeholder="Country" value="Australia">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-4 pl-1">-->
-        <!--<div class="form-group">-->
-        <!--<label>Postal Code</label>-->
-        <!--<input type="number" class="form-control" placeholder="ZIP Code">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-12">-->
-        <!--<div class="form-group">-->
-        <!--<label>About Me</label>-->
-        <!--<textarea rows="4" cols="80" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</form>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
     </div>
-</div>
 @endsection
 
 @section('front_script')
