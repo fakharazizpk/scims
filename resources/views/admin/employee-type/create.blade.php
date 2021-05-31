@@ -17,24 +17,18 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            @if(count($errors) > 0 )
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <ul class="p-0 m-0" style="list-style: none;">
-                                        @foreach($errors->all() as $error)
-                                            <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+
                             <form role="form" action="{{url('admin/employee-type/add')}}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="designation">Designation</label>
-                                        <select name="designation" id="designation" class="form-control select2" style="width: 100%;">
+                                        <select name="designation" id="designation" class="form-control @error('designation') is-invalid select2 @enderror" style="width: 100%;">
+                                            @error('designation')
+                                            <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
                                             <option selected="selected" value="">Select Designation</option>
                                             @foreach($designations as $designation)
                                             <option value="{{$designation->desig_Id}}">{{$designation->designation}}</option>
@@ -43,7 +37,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="employee-type">Employee Type</label>
-                                        <select name="employee_type" id="employee-type" class="form-control select2" style="width: 100%;">
+                                        <select name="employee_type" id="employee-type" class="form-control @error('employee_type') is-invalid select2 @enderror" style="width: 100%;">
+                                            @error('employee_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                             <option selected="selected" value="">Select Employee Type</option>
                                                 <option value="Teaching">Teaching</option>
                                                 <option value="None Teaching">None Teaching</option>
@@ -53,8 +52,8 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="{{url('admin/employee-type')}}" class="btn btn-warning">Back</a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <a href="{{url('admin/employee-type')}}" class="btn btn-warning">Cancel</a>
                                 </div>
                             </form>
                         </div>

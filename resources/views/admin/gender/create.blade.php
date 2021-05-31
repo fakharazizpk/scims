@@ -17,24 +17,18 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            @if(count($errors) > 0 )
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <ul class="p-0 m-0" style="list-style: none;">
-                                        @foreach($errors->all() as $error)
-                                            <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+
                             <form role="form" action="{{url('admin/gender/add')}}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Gender</label>
-                                        <select name="gender" class="form-control select2" style="width: 100%;">
+                                        <select name="gender" class="form-control @error('gender') is-invalid select2 @enderror" style="width: 100%;">
+                                            @error('gender')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                             <option selected="selected" value="">Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -45,8 +39,8 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="{{url('admin/gender')}}" class="btn btn-warning">Back</a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <a href="{{url('admin/gender')}}" class="btn btn-warning">Cancel</a>
                                 </div>
                             </form>
                         </div>

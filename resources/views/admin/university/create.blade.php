@@ -17,31 +17,36 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            @if(count($errors) > 0 )
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <ul class="p-0 m-0" style="list-style: none;">
-                                        @foreach($errors->all() as $error)
-                                            <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+{{--                            @if(count($errors) > 0 )--}}
+{{--                                <div class="alert alert-danger alert-dismissible fade show" role="alert">--}}
+{{--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                                        <span aria-hidden="true">&times;</span>--}}
+{{--                                    </button>--}}
+{{--                                    <ul class="p-0 m-0" style="list-style: none;">--}}
+{{--                                        @foreach($errors->all() as $error)--}}
+{{--                                            <li>{{$error}}</li>--}}
+{{--                                        @endforeach--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
                             <form role="form" action="{{url('admin/university/add')}}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="university">University</label>
-                                        <input type="text" class="form-control" id="university" value="{{ old('university')}}" name="university" placeholder="Enter University"/>
+                                        <input type="text" class="form-control @error('university') is-invalid @enderror" id="university" value="{{ old('university')}}" name="university" placeholder="Enter University"/>
+                                        @error('university')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="{{url('admin/university')}}" class="btn btn-warning">Back</a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <a href="{{url('admin/university')}}" class="btn btn-warning">Cancel</a>
                                 </div>
                             </form>
                         </div>

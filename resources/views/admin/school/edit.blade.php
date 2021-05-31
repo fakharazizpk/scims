@@ -17,18 +17,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            @if(count($errors) > 0 )
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <ul class="p-0 m-0" style="list-style: none;">
-                                        @foreach($errors->all() as $error)
-                                            <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+
                             <form role="form" action="{{url('admin/school/update')}}" method="post">
                                 <input type="hidden" name="id" value="{{ $school->pk_school_Id}}">
                                 @csrf
@@ -37,13 +26,23 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="school-name">School Name</label>
-                                                <input type="text" class="form-control" id="school-name" value="{{ $school->school_Name}}" name="school_Name" placeholder="Enter School Name"/>
+                                                <input type="text" class="form-control @error('school_Name') is-invalid @enderror" id="school-name" value="{{ $school->school_Name}}" name="school_Name" placeholder="Enter School Name"/>
+                                                @error('school_Name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="principal-name">Principal Name</label>
-                                                <input type="text" class="form-control" id="principal-name" value="{{ $school->principal_Name}}" name="principal_Name" placeholder="Enter Principal Name"/>
+                                                <input type="text" class="form-control @error('principal_Name') is-invalid @enderror" id="principal-name" id="principal-name" value="{{ $school->principal_Name}}" name="principal_Name" placeholder="Enter Principal Name"/>
+                                                @error('principal_Name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -52,12 +51,23 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="affiliation">Affiliation No</label>
-                                                <input type="text" class="form-control" id="affiliation" value="{{ $school->affiliation_No}}" name="affiliation_No" placeholder="Enter Affiliation No"/>
+                                                <input type="text" class="form-control @error('affiliation_No') is-invalid @enderror" id="affiliation" value="{{ $school->affiliation_No}}" name="affiliation_No" placeholder="Enter Affiliation No"/>
+                                                @error('affiliation_No')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="board">Board</label>
-                                            <select name="board" id="board" class="form-control select2" style="width: 100%;">
+                                            <select name="board" id="board" class="form-control @error('board') is-invalid select2 @enderror" style="width: 100%;">
+
+                                                @error('board')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                                 <option selected="selected"  value="">Select Board</option>
                                                 @foreach($boards as $board)
                                                 <option value="{{$board->pk_board_Id}}" @if($school->board_Id==$board->pk_board_Id) selected  @endif>{{$board->board_Name}}</option>
@@ -70,13 +80,23 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="registration">Registration No</label>
-                                                <input type="text" class="form-control" id="registration" value="{{ $school->registration}}" name="registration" placeholder="Enter Registration No"/>
+                                                <input type="text" class="form-control @error('registration') is-invalid @enderror" id="registration" value="{{ $school->registration}}" name="registration" placeholder="Enter Registration No"/>
+                                                @error('registration')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="registered-with">Registered With</label>
-                                                <input type="text" class="form-control" id="registered-with" value="{{ $school->registered_with}}" name="registered_with" placeholder="Enter Education Department"/>
+                                                <input type="text" class="form-control @error('registered_with') is-invalid @enderror" id="registered-with" value="{{ $school->registered_with}}" name="registered_with" placeholder="Enter Education Department"/>
+                                                @error('registered_with')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -85,13 +105,23 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="primary-contact">Primary Contact</label>
-                                                <input type="text" class="form-control" id="primary-contact" value="{{ $school->primary_Contact}}" name="primary_Contact" placeholder="Enter Primary Contact"/>
+                                                <input type="text" class="form-control @error('primary_Contact') is-invalid @enderror"" id="primary-contact" value="{{ $school->primary_Contact}}" name="primary_Contact" placeholder="Enter Primary Contact"/>
+                                                @error('primary_Contact')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="secondary-contact">Secondary Contact</label>
-                                                <input type="text" class="form-control" id="secondary-contact" value="{{ $school->secondary_Contact}}" name="secondary_Contact" placeholder="Enter Secondary Contact"/>
+                                                <input type="text" class="form-control @error('secondary_Contact') is-invalid @enderror" id="secondary-contact" value="{{ $school->secondary_Contact}}" name="secondary_Contact" placeholder="Enter Secondary Contact"/>
+                                                @error('secondary_Contact')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -101,7 +131,12 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="district">District</label>
-                                                <select name="district" id="district" class="form-control select2" style="width: 100%;">
+                                                <select name="district" id="district" class="form-control @error('district') is-invalid select2 @enderror" style="width: 100%;">
+                                                    @error('district')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <option selected="selected" value="">Select District</option>
                                                     @foreach($districts as $district)
                                                         <option value="{{$district->dom_Id}}" @if($school->dom_Id==$district->dom_Id) selected  @endif>{{$district->dom_District}}</option>
@@ -112,7 +147,12 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="city">City</label>
-                                                <select name="city" id="city" class="form-control select2" style="width: 100%;">
+                                                <select name="city" id="city" class="form-control @error('city') is-invalid select2 @enderror" style="width: 100%;">
+                                                    @error('city')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                     <option selected="selected" >Select City</option>
                                                     @foreach($cities as $city)
                                                         <option value="{{$city->pk_city_id}}" @if($school->city_Id==$city->pk_city_id) selected  @endif>{{$city->city_name}}</option>
@@ -127,7 +167,12 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="school-address">School Address</label>
-                                                <input type="text" class="form-control" id="school-address" value="{{ $school->school_Add}}" name="school_address" placeholder="Enter School Address"/>
+                                                <input type="text" class="form-control @error('school_address') is-invalid @enderror" id="school-address" value="{{ $school->school_Add}}" name="school_address" placeholder="Enter School Address"/>
+                                                @error('school_address')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -135,8 +180,8 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <a href="{{url('admin/school')}}" class="btn btn-warning">Back</a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <a href="{{url('admin/school')}}" class="btn btn-warning">Cancel</a>
                                 </div>
                             </form>
                         </div>
