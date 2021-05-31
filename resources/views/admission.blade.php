@@ -166,7 +166,7 @@
 
                                                 <div class="col-sm-4 select-wizard">
                                                     <label class="col-sm-12">Nationality</label>
-                                                    <select multiple class="selectpicker " data-size="3" name="nationality" id="nationality" data-style="btn btn-secondary" data-container="" data-live-search="true" title="Select Nationality" data-hide-disabled="true"  data-virtual-scroll="false">
+                                                    <select  class="selectpicker " data-size="3" name="nationality" id="nationality" data-style="btn btn-secondary" data-container="" data-live-search="true" title="Select Nationality" data-hide-disabled="true"  data-virtual-scroll="false">
                                                         <option value="" disabled>Choose Nationality</option>
                                                         @foreach($nationalities as $nationality)
                                                             <option value="{{$nationality->nation_Id}}">{{$nationality->nationality}}</option>

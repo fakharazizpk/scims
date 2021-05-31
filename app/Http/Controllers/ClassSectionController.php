@@ -84,6 +84,9 @@ class ClassSectionController extends Controller
         //->studentbyIds = explode(',',$class->subject);
 
         $class_sections->studentbyids = explode(',', $class_sections->students);
+        $class_sections->user =  $class_sections->user;
+
+
         return Response::json($class_sections);
     }
 

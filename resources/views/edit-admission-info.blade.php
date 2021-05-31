@@ -207,7 +207,7 @@
 
                                                 <div class="col-sm-4 select-wizard">
                                                     <label class="col-sm-12">Nationality</label>
-                                                    <select multiple class="selectpicker " data-size="3"
+                                                    <select  class="selectpicker " data-size="3"
                                                             name="nationality" id="nationality"
                                                             data-style="btn btn-secondary" data-container=""
                                                             data-live-search="true" title="Select Nationality"

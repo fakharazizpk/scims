@@ -119,8 +119,6 @@ $(document).ready(function(e){
 
 
                 });
-
-
             }
         });
     });
@@ -213,7 +211,7 @@ $(document).ready(function(e){
 
         $.get('edit-class-section/'+edit_class_section_id, function (data) {
 
-            console.log(data.studentbyids);
+            console.log(data);
             $('#edit-class-section-modal').modal('show');
             $('#class-section-id').val(data.c_section_Id);
             $('#edit-class-section-name').val(data.class_section_name);
@@ -222,8 +220,8 @@ $(document).ready(function(e){
 
             $("#edit_sel_class").val(data.cls_Id).trigger('change');
             $("#edit-teacher").val(data.emp_Id).trigger('change');
-            $("#edit-representative").val(data.crep_Id).trigger('change');
-            $("#edit_sel_student").val(data.student).trigger('change');
+
+            $('#edit-representative').append($("<option selected value='"+data.user.std_Id+"'>"+data.user.std_Fname+" "+data.user.std_Mname+"</option>"));
           /*  $.each(data.studentbyids, function(key, val) {
 
 

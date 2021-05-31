@@ -20,8 +20,7 @@ class UserController extends Controller
     }
 
     public function ProfileView()
-    {
-        //dd(Session::get('userData'));
+    {        //dd(Session::get('userData'));
         $adminprofile = User::where('id',Session::get('userData')['id'])->first();
         //dd($adminprofile);
         return view('profile', compact('adminprofile'));

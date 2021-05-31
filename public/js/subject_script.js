@@ -52,7 +52,7 @@ $(document).ready(function(){
                     //$('#success-alert').show();
                     //$('#success-alert').text('Successfully Added!').fadeIn('slow');
                     $('#success-message').delay(2000).fadeOut('slow');
-                    //location.reload();
+                    location.reload();
 
                 }
             }});

@@ -43,7 +43,7 @@ class AdminSchoolController extends Controller
             'registered_with'  => 'required',
             'district'  => 'required',
             'city'  => 'required',
-            'primary_Contact'  => 'required',
+            'primary_Contact'  => 'required|numeric|min:10|max:11',
             'school_address'  => 'required',
         ]);
 
@@ -92,7 +92,7 @@ class AdminSchoolController extends Controller
             'registered_with'  => 'required',
             'district'  => 'required',
             'city'  => 'required',
-            'primary_Contact'  => 'required',
+            'primary_Contact'  => 'required|numeric|min:10|max:11',
             'school_address'  => 'required',
         ]);
         $update = [

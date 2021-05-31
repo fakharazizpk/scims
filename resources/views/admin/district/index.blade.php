@@ -30,9 +30,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @php
-                                $i = 1;
-                                @endphp
+                                @php $i = 1; @endphp
                                 @foreach($districts as $district)
                                 <tr>
                                     <td>{{$i++}}</td>
