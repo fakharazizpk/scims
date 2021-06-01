@@ -46,10 +46,30 @@
 <script src="{{asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.js')}}"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
+<!-- sweet alert cdn -->
+<!--  Plugin for Sweet Alert -->
+<script src="{{asset('assets/js/plugins/sweetalert2.min.js')}}"></script>
+<!-- Forms Validations Plugin -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script>
+    $('a.twitter').confirm({
+        content: "...",
+    });
+    $('a.twitter').confirm({
+        buttons: {
+            hey: function(){
+                location.href = this.$target.attr('href');
+            }
+        }
+    });
+</script>
+<!-- sweet cdn alert ends -->
 @yield('custom_script')
 </body>
 </html>

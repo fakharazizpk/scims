@@ -37,7 +37,7 @@
                                     <td>{{$board->board_Name}}</td>
                                     <td>
                                         <a href="{{url('admin/board/edit/'.$board->pk_board_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/board/delete/'.$board->pk_board_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/board/delete/'.$board->pk_board_Id)}}" class="btn btn-danger twitter" data-title="Confirmation ?"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

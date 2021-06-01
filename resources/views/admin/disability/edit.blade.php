@@ -52,7 +52,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <a href="{{url('admin/disability')}}" class="btn btn-warning">Cancel</a>
+                                    <a href="{{url('admin/disability')}}"  class="btn btn-warning" onclick="demo.showSwal('warning-message-and-confirmation')">Cancel</a>
                                 </div>
                             </form>
                         </div>
@@ -82,5 +82,6 @@
             bsCustomFileInput.init();
         });
     </script>
+
 @endsection
 

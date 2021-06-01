@@ -47,7 +47,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <a href="{{url('admin/board')}}" class="btn btn-warning">Cancel</a>
+                                    <a href="{{url('admin/board')}}" class="btn btn-warning twitter" data-title="Confirmation ?">Cancel</a>
                                 </div>
                             </form>
                         </div>
