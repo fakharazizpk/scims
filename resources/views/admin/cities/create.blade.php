@@ -24,16 +24,16 @@
                                     <div class="form-group">
                                         <label>District</label>
                                         <select name="district" class="form-control @error('district') is-invalid select2 @enderror" style="width: 100%;">
-                                            @error('district')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
                                             <option selected="selected" value="">Select District</option>
                                             @foreach($districts as $district)
                                             <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
                                             @endforeach
                                         </select>
+                                        @error('district')
+                                        <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="city_name">City Name</label>

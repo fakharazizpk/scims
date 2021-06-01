@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'District')
+@section('title', 'State')
 
 @section('content')
     <div class="content-wrapper">
@@ -11,7 +11,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h3 class="card-title">District</h3>
+                            <h3 class="card-title">State</h3>
                         </div>
                         @if(session()->has('message'))
                             <div class="alert alert-success">
@@ -20,12 +20,11 @@
                         @endif
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{url('admin/district/add-view')}}" class="btn btn-primary pull-right mb-1">Add District</a>
+                            <a href="{{url('admin/state/add-view')}}" class="btn btn-primary pull-right mb-1">Add State</a>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>District</th>
                                     <th>State</th>
                                     <th>Nationality</th>
                                     <th>Action</th>
@@ -33,15 +32,14 @@
                                 </thead>
                                 <tbody>
                                 @php $i = 1; @endphp
-                                @foreach($districts as $district)
+                                @foreach($states as $state)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$district->dom_District}}</td>
-                                    <td>{{$district->state_name}}</td>
-                                    <td>{{$district->nationality}}</td>
+                                    <td>{{$state->state_name}}</td>
+                                    <td>{{$state->nationality}}</td>
                                     <td>
-                                        <a href="{{url('admin/district/edit/'.$district->dom_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/district/delete/'.$district->dom_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/state/edit/'.$state->state_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{url('admin/state/delete/'.$state->state_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -49,7 +47,6 @@
                                 <tfoot>
                                 <tr>
                                     <th>Id</th>
-                                    <th>District</th>
                                     <th>State</th>
                                     <th>Nationality</th>
                                     <th>Action</th>

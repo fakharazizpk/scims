@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 /*Admin Controller*/
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomeController;
-use App\Http\Controllers\AdminNationalityController;
 use App\Http\Controllers\AdminReligionController;
 use App\Http\Controllers\AdminGenderController;
 use App\Http\Controllers\AdminSectionController;
@@ -14,6 +13,8 @@ use App\Http\Controllers\AdminDesignationController;
 use App\Http\Controllers\AdminCastController;
 use App\Http\Controllers\AdminStudentCategoryController;
 use App\Http\Controllers\AdminMaritalStatusController;
+use App\Http\Controllers\AdminNationalityController;
+use App\Http\Controllers\AdminStateController;
 use App\Http\Controllers\AdminDistrictController;
 use App\Http\Controllers\AdminCityController;
 use App\Http\Controllers\AdminDisabilityController;
@@ -88,6 +89,29 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     Route::get('nationality/edit/{id}', [AdminNationalityController::class, 'edit']);
     Route::post('nationality/update', [AdminNationalityController::class, 'update']);
     Route::get('nationality/delete/{id}', [AdminNationalityController::class, 'delete']);
+    /*state*/
+    Route::get('getstates/{id}', [AdminStateController::class, 'getStates']); //for ajax dropdown
+    Route::get('state', [AdminStateController::class, 'index']);
+    Route::get('state/add-view', [AdminStateController::class, 'create']);
+    Route::post('state/add', [AdminStateController::class, 'store']);
+    Route::get('state/edit/{id}', [AdminStateController::class, 'edit']);
+    Route::post('state/update', [AdminStateController::class, 'update']);
+    Route::get('state/delete/{id}', [AdminStateController::class, 'delete']);
+    /*district*/
+    Route::get('district', [AdminDistrictController::class, 'index']);
+    Route::get('district/add-view', [AdminDistrictController::class, 'create']);
+    Route::post('district/add', [AdminDistrictController::class, 'store']);
+    Route::get('district/edit/{id}', [AdminDistrictController::class, 'edit']);
+    Route::post('district/update', [AdminDistrictController::class, 'update']);
+    Route::get('district/delete/{id}', [AdminDistrictController::class, 'delete']);
+    /*cities*/
+    Route::get('cities', [AdminCityController::class, 'index']);
+    Route::get('cities/add-view', [AdminCityController::class, 'create']);
+    Route::post('cities/add', [AdminCityController::class, 'store']);
+    Route::get('cities/edit/{id}', [AdminCityController::class, 'edit']);
+    Route::post('cities/update', [AdminCityController::class, 'update']);
+    Route::get('cities/delete/{id}', [AdminCityController::class, 'delete']);
+
     /*Religion*/
     Route::get('religion', [AdminReligionController::class, 'index']);
     Route::get('religion/add-view', [AdminReligionController::class, 'create']);
@@ -145,13 +169,7 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     Route::get('marital-status/edit/{id}', [AdminMaritalStatusController::class, 'edit']);
     Route::post('marital-status/update', [AdminMaritalStatusController::class, 'update']);
     Route::get('marital-status/delete/{id}', [AdminMaritalStatusController::class, 'delete']);
-    /*district*/
-    Route::get('district', [AdminDistrictController::class, 'index']);
-    Route::get('district/add-view', [AdminDistrictController::class, 'create']);
-    Route::post('district/add', [AdminDistrictController::class, 'store']);
-    Route::get('district/edit/{id}', [AdminDistrictController::class, 'edit']);
-    Route::post('district/update', [AdminDistrictController::class, 'update']);
-    Route::get('district/delete/{id}', [AdminDistrictController::class, 'delete']);
+
     /*disability*/
     Route::get('disability', [AdminDisabilityController::class, 'index']);
     Route::get('disability/add-view', [AdminDisabilityController::class, 'create']);
@@ -159,13 +177,7 @@ Route::prefix('admin')->middleware(['validAdmin'])->group(function () {
     Route::get('disability/edit/{id}', [AdminDisabilityController::class, 'edit']);
     Route::post('disability/update', [AdminDisabilityController::class, 'update']);
     Route::get('disability/delete/{id}', [AdminDisabilityController::class, 'delete']);
-    /*cities*/
-    Route::get('cities', [AdminCityController::class, 'index']);
-    Route::get('cities/add-view', [AdminCityController::class, 'create']);
-    Route::post('cities/add', [AdminCityController::class, 'store']);
-    Route::get('cities/edit/{id}', [AdminCityController::class, 'edit']);
-    Route::post('cities/update', [AdminCityController::class, 'update']);
-    Route::get('cities/delete/{id}', [AdminCityController::class, 'delete']);
+
     /*Class Section*/
     Route::get('class-section', [AdminClassSectionController::class, 'index']);
     Route::get('class-section/add-view', [AdminClassSectionController::class, 'create']);

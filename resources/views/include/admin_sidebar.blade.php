@@ -222,6 +222,24 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{url('admin/state')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>State</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('admin/district')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>District</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('admin/cities')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Cities</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{url('admin/religion')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Religion</p>
@@ -250,18 +268,6 @@
                             <a href="{{url('admin/gender')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Gender</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{url('admin/district')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>District</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{url('admin/cities')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Cities</p>
                             </a>
                         </li>
                         <li class="nav-item">

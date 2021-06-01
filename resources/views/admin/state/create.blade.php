@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit City')
+@section('title', 'Create State')
 
 @section('content')
     <div class="content-wrapper">
@@ -13,55 +13,43 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">City</h3>
+                                <h3 class="card-title">State</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
 
-                            <form role="form" action="{{url('admin/cities/update')}}" method="post">
+                            <form role="form" action="{{url('admin/state/add')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ $city->pk_city_id}}">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="district">District</label>
-                                        <select name="district" class="form-control @error('district') is-invalid select2 @enderror" style="width: 100%;">
-                                            @error('district')
+                                        <label for="state">State</label>
+                                        <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" value="{{ old('state')}}" name="state" placeholder="Enter State"/>
+                                        @error('state')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nationality">Nationality</label>
+                                        <select name="nationality" class="form-control @error('nationality') is-invalid @enderror" style="width: 100%;">
+                                            @error('nationality')
+                                            <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                             @enderror
-                                            <option selected="selected" value="">Select District</option>
-                                            @foreach($districts as $district)
-                                            <option value="{{$district->dom_Id}}" @if($city->dom_id==$district->dom_Id) selected @endif>{{$district->dom_District}}</option>
-                                            @endforeach
+                                            <option selected="selected" value="">Select Nationality</option>
+                                           @foreach($nationalities as $nationality)
+                                            <option value="{{$nationality->nation_Id}}">{{$nationality->nationality}}</option>
+                                           @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="city-name">City Name</label>
-                                        <input type="text" class="form-control @error('city_name') is-invalid @enderror" id="city-name" value="{{ $city->city_name}}" name="city_name" placeholder="Enter City Name"/>
-                                        @error('city_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="zip-code">Zip Code</label>
-                                        <input type="text" class="form-control @error('zip_code') is-invalid @enderror" id="zip-code" value="{{ $city->zip_code}}" name="zip_code" placeholder="Enter Zip Code"/>
-                                        @error('zip_code')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <a href="{{url('admin/cities')}}" class="btn btn-warning">Cancel</a>
+                                    <a href="{{url('admin/state')}}" class="btn btn-warning">Cancel</a>
                                 </div>
                             </form>
                         </div>

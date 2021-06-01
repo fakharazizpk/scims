@@ -1,3 +1,4 @@
+
 <footer class="main-footer">
     <strong>Copyright &copy; 2020-{{date('Y')}} <a href="#">Point Web Tech</a>.</strong>
     All rights reserved.
@@ -14,6 +15,7 @@
 </div>
 <!-- ./wrapper -->
 
+<script> var admin = "{{ url('admin') }}"; </script>
 <!-- jQuery -->
 <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
