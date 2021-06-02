@@ -37,7 +37,7 @@
                                     <td>{{$religion->religion}}</td>
                                     <td>
                                         <a href="{{url('admin/religion/edit/'.$religion->relig_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/religion/delete/'.$religion->relig_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/religion/delete/'.$religion->relig_Id)}}" class="btn btn-danger delete" data-title=" "><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

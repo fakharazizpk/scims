@@ -53,7 +53,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <a href="{{url('admin/employee-type')}}" class="btn btn-warning">Cancel</a>
+                                    <a href="{{url('admin/employee-type')}}" class="btn btn-warning cancel" data-title=" ">Cancel</a>
                                 </div>
                             </form>
                         </div>

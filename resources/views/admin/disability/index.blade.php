@@ -39,7 +39,7 @@
                                     <td>{{$disability->disability}}</td>
                                     <td>
                                         <a href="{{url('admin/disability/edit/'.$disability->disable_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/disability/delete/'.$disability->disable_Id)}}" class="btn btn-danger twitter" data-title="Goto twitter?"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/disability/delete/'.$disability->disable_Id)}}" class="btn btn-danger delete" data-title=" "><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

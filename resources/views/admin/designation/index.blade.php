@@ -39,7 +39,7 @@
                                     <td>{{$designation->desig_Status}}</td>
                                     <td>
                                         <a href="{{url('admin/designation/edit/'.$designation->desig_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/designation/delete/'.$designation->desig_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/designation/delete/'.$designation->desig_Id)}}" class="btn btn-danger delete" data-title=" "><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

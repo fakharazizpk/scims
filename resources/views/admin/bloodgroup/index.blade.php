@@ -37,7 +37,7 @@
                                     <td>{{$blood_group->blood_group}}</td>
                                     <td>
                                         <a href="{{url('admin/blood-group/edit/'.$blood_group->bg_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/blood-group/delete/'.$blood_group->bg_Id)}}"  class="btn btn-danger twitter" data-title="Confirmation ?" ><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/blood-group/delete/'.$blood_group->bg_Id)}}"  class="btn btn-danger delete" data-title=" "><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

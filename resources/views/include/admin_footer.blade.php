@@ -57,18 +57,40 @@
 <!-- Forms Validations Plugin -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script>
-    $('a.twitter').confirm({
-        content: "...",
+    $('a.delete').confirm({
+        content: '<h3 class="text-center"><i class="fas fa-exclamation-triangle"></i></h3>'+
+                '<h4 class="text-center">This record will be deleted permanently!</h4>' +
+                '<p class="text-center">Are you sure to proceed?</p>',
+
     });
-    $('a.twitter').confirm({
+    $('a.delete').confirm({
         buttons: {
             hey: function(){
+                $.alert('Confirmed!');
                 location.href = this.$target.attr('href');
             }
         }
     });
 </script>
+<script>
+    $('a.cancel').confirm({
+        content: '<h3 class="text-center"><i class="fas fa-exclamation-triangle"></i></h3>'+
+            '<h4 class="text-center">This process will be cancelled!</h4>' +
+            '<p class="text-center">Are you sure to proceed?</p>',
+
+    });
+    $('a.cancel').confirm({
+        buttons: {
+            hey: function(){
+                $.alert('Confirmed!');
+                location.href = this.$target.attr('href');
+            }
+        }
+    });
+</script>
+
 <!-- sweet cdn alert ends -->
 @yield('custom_script')
 </body>

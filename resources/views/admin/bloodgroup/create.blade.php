@@ -35,7 +35,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <a href="{{url('admin/blood-group')}}" class="btn btn-warning twitter" data-title="Confirmation ?">Cancel</a>
+                                    <a href="{{url('admin/blood-group')}}" class="btn btn-warning cancel" data-title=" ">Cancel</a>
                                 </div>
                             </form>
                         </div>

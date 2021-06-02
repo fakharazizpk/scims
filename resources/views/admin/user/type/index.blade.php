@@ -37,7 +37,7 @@
                                     <td>{{$user_type->user_type_Name}}</td>
                                     <td>
                                         <a href="{{url('admin/user-type/edit/'.$user_type->user_type_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="{{url('admin/user-type/delete/'.$user_type->user_type_Id)}}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="fa fa-trash"></i></a>
+                                        <a href="{{url('admin/user-type/delete/'.$user_type->user_type_Id)}}" class="btn btn-danger delete" data-title=" "><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
