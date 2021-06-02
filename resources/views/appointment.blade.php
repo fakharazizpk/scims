@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="col-sm-3 select-wizard">
                                             <label class="col-sm-12">Nationality</label>
-                                            <select  class="selectpicker " data-size="3" name="nationality" id="nationality" data-style="btn btn-secondary" data-container="" data-live-search="true" title="Select Nationality" data-hide-disabled="true"  data-virtual-scroll="false">
+                                            <select  class="selectpicker" data-size="3" name="nationality" id="emp-nationality" data-style="btn btn-secondary" data-container="" data-live-search="true" title="Select Nationality" data-hide-disabled="true"  data-virtual-scroll="false">
                                                 <option value="" disabled>Choose Nationality</option>
                                                 @foreach($nationalities as $nationality)
                                                     <option value="{{$nationality->nation_Id}}">{{$nationality->nationality}}</option>
@@ -148,9 +148,9 @@
                                             <label class="col-sm-12" >Employee District</label>
                                             <select class="selectpicker"  id="employee_district" name="employee_district" data-container="" data-style="btn btn-secondary" data-size="3" data-style=" " title="Select district" data-live-search="true"  data-hide-disabled="true">
                                                 <option value="" disabled >Select District</option>
-                                                @foreach($districts as $district)
+                                                {{--@foreach($districts as $district)
                                                     <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
-                                                @endforeach
+                                                @endforeach--}}
                                             </select>
                                         </div>
                                         <div class=" col-sm-3 select-wizard">
@@ -586,25 +586,32 @@
                                 </div>
                                 <div class="tab-pane" id="cntinfo">
                                     <div class="row bor-sep">
-                                        <h6 class="col-sm-12">Address</h6>
+                                        <h6 class="col-sm-12">Mailing Address</h6>
                                         <div class="form-group col-sm-12">
-                                            <label>Mailing Address</label>
+                                            <label>Street Address</label>
                                             <textarea  class="form-control" name="mailing_address" rows="1" cols="33" ></textarea>
                                         </div>
-                                        <div class="form-group col-sm-12">
-                                            <label>Permanent Address</label>
-                                            <textarea  class="form-control" name="permanent_address" rows="1" cols="33"></textarea>
+
+                                        <div class="form-group col-sm-3">
+                                            <label>State</label>
+                                            <select class="selectpicker" name="state"    id="emp-state" data-container="" data-size="3" data-style="btn btn-secondary" title="Select domicile" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select State</option>
+                                                {{--@foreach($districts as $district)--}}
+                                                    {{--<option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>--}}
+                                                    <option value="1">State Name</option>
+                                                {{--@endforeach--}}
+                                            </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
-                                            <label>Domicile</label>
-                                            <select class="selectpicker" name="district"    id="district" data-container="" data-size="3" data-style="btn btn-secondary" title="Select domicile" data-live-search="true"  data-hide-disabled="true">
-                                                <option value="" disabled selected>Select domicile</option>
+                                        <div class="form-group col-sm-3">
+                                            <label>District</label>
+                                            <select class="selectpicker" name="district"    id="district" data-container="" data-size="3" data-style="btn btn-secondary" title="Select District" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select District</option>
                                                 @foreach($districts as $district)
                                                     <option value="{{$district->dom_Id}}">{{$district->dom_District}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="select-wizard col-sm-4">
+                                        <div class="select-wizard col-sm-3">
                                             <label class="col-sm-12">City</label>
                                             <select class="selectpicker " id="employee_city" name="employee_city" data-container="" data-size="3" data-style="btn btn-secondary" title="Select city" data-live-search="true"  data-hide-disabled="true">
                                                 <option value="" disabled selected>Select city</option>
@@ -613,9 +620,16 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-sm-3">
                                             <label>Zipcode</label>
                                             <input type="text" class="form-control" placeholder="" name="zip_code" >
+                                        </div>
+                                    </div>
+                                    <div class="row bor-sep">
+                                        <h6 class="col-sm-12">Permanent Address</h6>
+                                        <div class="form-group col-sm-12">
+                                            <label>Permanent Address</label>
+                                            <textarea  class="form-control" name="permanent_address" rows="1" cols="33"></textarea>
                                         </div>
                                     </div>
                                     <div class="row bor-sep">
@@ -717,10 +731,10 @@
     </div>
 @endsection
 @section('front_css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--}}
 @endsection
 @section('front_script')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
     <script src="{{asset('adminassets/validator/dist/jquery.validate.js')}}"></script>
     <script src="{{asset('js/employee_script.js')}}"></script>
     <script>

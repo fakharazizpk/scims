@@ -330,6 +330,7 @@ Route::post('withdrawl-student', [StudentController::class, 'WithdrawlStudentPos
 
 /*Employee*/
 //Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for ajax*/
+Route::get('getdistrict/{id}', [EmployeeController::class, 'getDistrict']); /*for ajax nationality and district in employee*/
 Route::get('staff', [EmployeeController::class, 'index']);
 Route::post('employee-filter', [EmployeeController::class, 'EmployeeFilter']);
 Route::get('appointment', [EmployeeController::class, 'create']);

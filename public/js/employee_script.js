@@ -3,6 +3,51 @@
 
 $(document).ready(function () {
 
+
+    $('select[name="nationality"]').on('change',function(){
+        var districtID = $(this).val();
+            $.ajaxSetup({
+                headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
+            });
+
+            $.ajax({
+                url : base_url +'/getdistrict/' +districtID,
+                type : "GET",
+                dataType : "json",
+
+                success:function(data)
+                {
+                    console.log(data);
+
+                    //$('select[name="employee_district"]').empty().trigger('change');
+                    if(data != "") {
+
+                    $('select[name="employee_district"]').html('');
+
+
+                    //$('select[name="employee_district"]').append('<option selected="selected" value="">Select District</option>');
+                    $.each(data, function(key,value){
+
+                        //console.log(key); return;
+
+                        $('select[name="employee_district"]').append('<option value="'+key+'">'+value+'</option>');
+                        //$('select[name="employee_district"]').val(4);
+                        $('select[name="employee_district"]').selectpicker("refresh");
+
+
+                   //$('select[name="employee_district"]').append('<option value="'+ key +'">'+ value +'</option>').trigger('change');
+                    });
+                }else if(data == ''){
+                    $('select[name="employee_district"]').html('');
+                        //$('select[name="employee_district"]').empty().trigger('change');
+                    //$('select[name="employee_district"]').selectpicker("refresh");
+                    }
+
+                }
+            });
+       });
+
+
     $(".add-academic-btn").click(function (e) {
         e.preventDefault();
          var academicHtml = '<div class="row appended_acad_qual_div" id="appended_acad_qual_div" style="margin:1px">' +

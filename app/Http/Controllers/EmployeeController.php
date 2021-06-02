@@ -42,7 +42,15 @@ use Redirect, Response;
 class EmployeeController extends Controller
 {
 
-   
+
+    public function getDistrict($id)
+    {
+        //dd($id);
+        $states = DB::table("domicile")->where("nation_Id",$id)->pluck("dom_District","dom_Id");
+        //dd($states);
+        return json_encode($states);
+    }
+
     public function getEmployee($id)
     {
 

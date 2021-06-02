@@ -15,7 +15,7 @@ class AdminStateController extends Controller
     public function getStates($id)
     {
         //dd($id);
-        $states = DB::table("state")->where("nation_id",$id)->pluck("state_name","state_Id");
+        $states = DB::table("state")->where("nation_Id",$id)->pluck("state_name","state_Id");
         //dd($states);
         return json_encode($states);
     }
