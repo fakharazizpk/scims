@@ -342,6 +342,7 @@ class EmployeeController extends Controller
         $employee_info_table->nation_Id = $request->nationality;
         $employee_info_table->country_Id = $request->country;
         $employee_info_table->state_Id = $request->state;
+        $employee_info_table->city_Id = $request->employee_city;
         $employee_info_table->dom_Id = $request->employee_district;
         $employee_info_table->cast_Id = $request->staff_cast;
         $employee_info_table->emp_Status = ($request->employee_status) ? 'Active' : 'Inactive';
@@ -524,7 +525,7 @@ class EmployeeController extends Controller
                 'country_Id' => $request->country,
                 'state_Id' => $request->state,
                 'dom_Id' => $request->employee_district,
-                'pk_city_id' => $request->city,
+                'pk_city_id' => $request->employee_city,
                 'cast_Id' => $request->staff_cast,
                 'emp_Status' => ($request->employee_status) ? 'Active' : 'Inactive',
                 /*last id's of another table start*/

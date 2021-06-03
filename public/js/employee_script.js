@@ -299,7 +299,7 @@ $(document).ready(function () {
         });
         var admission_data = new FormData($('#add-employee-form')[0]);
         $.ajax({
-            url: base_url + 'appointment-info',
+            url: base_url + '/appointment-info',
             enctype: 'multipart/form-data',
             method: 'post',
             contentType: false,
