@@ -3,50 +3,164 @@
 
 $(document).ready(function () {
 
+    $('select[name="country"]').on('change',function(){
+        $('select[name="state"]').empty();
+        $('select[name="state"]').selectpicker("refresh");
+        $('select[name="district"]').empty();
+        $('select[name="district"]').selectpicker("refresh");
+        $('select[name="employee_city"]').empty();
+        $('select[name="employee_city"]').selectpicker("refresh");
+    });
+    $('select[name="state"]').on('change',function(){
+        $('select[name="district"]').empty();
+        $('select[name="district"]').selectpicker("refresh");
+        $('select[name="employee_city"]').empty();
+        $('select[name="employee_city"]').selectpicker("refresh");
+    });
 
+
+    /*for district ajax*/
     $('select[name="nationality"]').on('change',function(){
+        var nationalityID = $(this).val();
+            $.ajaxSetup({
+                headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
+            });
+
+            $.ajax({
+                url : base_url +'/getdistrict/' +nationalityID,
+                type : "GET",
+                dataType : "json",
+
+                success:function(data)
+                {
+                    $('select[name="employee_district"]').html('');
+                    if(data != "") {
+                   $.each(data, function(key,value){
+
+                        $('select[name="employee_district"]').append('<option value="'+key+'">'+value+'</option>');
+                        $('select[name="employee_district"]').selectpicker("refresh");
+                        });
+                }else{
+                        $('select[name="employee_district"]').append('<option value=""></option>');
+                        $('select[name="employee_district"]').selectpicker("refresh");
+                    }
+                }
+            });
+       });
+    /*for district ajax*/
+
+    /*for state ajax*/
+    $('select[name="country"]').on('change',function(){
+        var nationID = $(this).val();
+            $.ajaxSetup({
+                headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
+            });
+
+            $.ajax({
+                url : base_url +'/getstate/' +nationID,
+                type : "GET",
+                dataType : "json",
+
+                success:function(data)
+                {
+                    $('select[name="state"]').html('');
+                    if(data != "") {
+                   $.each(data, function(key,value){
+
+                        $('select[name="state"]').append('<option value="'+key+'">'+value+'</option>');
+                        $('select[name="state"]').selectpicker("refresh");
+                        });
+                }else{
+                        $('select[name="state"]').append('<option value=""></option>');
+                        $('select[name="state"]').selectpicker("refresh");
+                    }
+                }
+            });
+       });
+    /*for state ajax*/
+
+    /*for district ajax on state*/
+    $('select[name="state"]').on('change',function(){
+        var stateID = $(this).val();
+            $.ajaxSetup({
+                headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
+            });
+
+            $.ajax({
+                url : base_url +'/get-district-by-state/' +stateID,
+                type : "GET",
+                dataType : "json",
+
+                success:function(data)
+                {
+                    $('select[name="district"]').html('');
+                    if(data != "") {
+                   $.each(data, function(key,value){
+
+                        $('select[name="district"]').append('<option value="'+key+'">'+value+'</option>');
+                        $('select[name="district"]').selectpicker("refresh");
+                        });
+                }else{
+                        $('select[name="district"]').append('<option value=""></option>');
+                        $('select[name="district"]').selectpicker("refresh");
+                    }
+                }
+            });
+       });
+    /*for distrrict ajax on state*/
+
+    /*for city ajax on district*/
+    $('select[name="district"]').on('change',function(){
         var districtID = $(this).val();
             $.ajaxSetup({
                 headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
             });
 
             $.ajax({
-                url : base_url +'/getdistrict/' +districtID,
+                url : base_url +'/get-city-by-district/' +districtID,
                 type : "GET",
                 dataType : "json",
 
                 success:function(data)
                 {
-                    console.log(data);
-
-                    //$('select[name="employee_district"]').empty().trigger('change');
+                    $('select[name="employee_city"]').html('');
                     if(data != "") {
+                   $.each(data, function(key,value){
 
-                    $('select[name="employee_district"]').html('');
-
-
-                    //$('select[name="employee_district"]').append('<option selected="selected" value="">Select District</option>');
-                    $.each(data, function(key,value){
-
-                        //console.log(key); return;
-
-                        $('select[name="employee_district"]').append('<option value="'+key+'">'+value+'</option>');
-                        //$('select[name="employee_district"]').val(4);
-                        $('select[name="employee_district"]').selectpicker("refresh");
-
-
-                   //$('select[name="employee_district"]').append('<option value="'+ key +'">'+ value +'</option>').trigger('change');
-                    });
-                }else if(data == ''){
-                    $('select[name="employee_district"]').html('');
-                        //$('select[name="employee_district"]').empty().trigger('change');
-                    //$('select[name="employee_district"]').selectpicker("refresh");
+                        $('select[name="employee_city"]').append('<option value="'+key+'">'+value+'</option>');
+                        $('select[name="employee_city"]').selectpicker("refresh");
+                        });
+                }else{
+                        $('select[name="employee_city"]').append('<option value=""></option>');
+                        $('select[name="employee_city"]').selectpicker("refresh");
                     }
-
                 }
             });
        });
+    /*for zipcode ajax on city*/
 
+    $('select[name="employee_city"]').on('change',function(){
+        var cityID = $(this).val();
+        $.ajaxSetup({
+            headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
+        });
+        $.ajax({
+            url : base_url +'/getzipcode/' +cityID,
+            type : "GET",
+            dataType : "json",
+            success:function(data)
+            {
+                console.log(data.zip_code);
+                $('[name="zip_code"]').val('');
+                if(data != "") {
+                        $('[name="zip_code"]').val(data);
+                }else{
+                    $('select[name="zip_code"]').val('');
+                }
+            }
+        });
+    });
+    /*for zipcode ajax on city*/
 
     $(".add-academic-btn").click(function (e) {
         e.preventDefault();
@@ -235,7 +349,7 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: base_url + 'staff',
+            url: base_url + '/staff',
             // url    : "http://localhost/nextdaylabels_live/admin/public/template",
 
             type   : 'get',
@@ -656,7 +770,7 @@ $('.edit-employee-submit-btn').click(function (e) {
     });
     var edit_admission_data = new FormData($('#edit-employee-form')[0]);
     $.ajax({
-        url: base_url + 'update-appointment-info',
+        url: base_url + '/update-appointment-info',
         enctype: 'multipart/form-data',
         method: 'post',
         contentType: false,

@@ -44,14 +44,17 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nationality</th>
+                                    <th>Country</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @php $i=1; @endphp
                                 @foreach($nationalities as $nation)
                                 <tr>
-                                    <td>{{$nation->nation_Id}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$nation->nationality}}</td>
+                                    <td>{{$nation->country}}</td>
                                     <td>
                                         <a href="{{url('admin/nationality/edit/'.$nation->nation_Id)}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                         <a href="{{url('admin/nationality/delete/'.$nation->nation_Id)}}" class="btn btn-danger delete" data-title=" "><i class="fa fa-trash"></i></a>

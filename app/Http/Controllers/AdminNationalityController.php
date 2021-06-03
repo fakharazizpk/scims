@@ -23,14 +23,16 @@ class AdminNationalityController extends Controller
     }
     public function store(Request $request)
     {
-        //dd($request->nationality);
+        //dd($request->all());
         $request->validate([
             'nationality'  => 'required|unique:nationality',
+            'country'  => 'required|required|unique:nationality,country',
         ]);
 
         $nation = new Nationality;
-
         $nation->nationality = $request->nationality;
+        $nation->country = $request->country;
+        //dd($nation);
         $nation->save();
 
         if($nation){
@@ -52,12 +54,14 @@ class AdminNationalityController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'nationality'  => 'required|unique:nationality',
+            'nationality'  => 'required',
+            'country'  => 'required',
         ]);
 
         $update = [
 
             'nationality' => $request->nationality,
+            'country' => $request->country,
 
 
         ];

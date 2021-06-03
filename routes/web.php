@@ -329,7 +329,10 @@ Route::get('withdrawl-student/{id}', [StudentController::class, 'WithdrawlStuden
 Route::post('withdrawl-student', [StudentController::class, 'WithdrawlStudentPost']);
 
 /*Employee*/
-//Route::get('get-student/{id}', [EmployeeController::class, 'getstudent']); /*for ajax*/
+Route::get('getstate/{id}', [EmployeeController::class, 'getState']); /*get state by nationality ajax*/
+Route::get('get-district-by-state/{id}', [EmployeeController::class, 'getDistrictByState']); /*get district by state ajax*/
+Route::get('get-city-by-district/{id}', [EmployeeController::class, 'getCityByDistrict']); /*get city by district ajax*/
+Route::get('getzipcode/{id}', [EmployeeController::class, 'getZipCode']); /*get city by district ajax*/
 Route::get('getdistrict/{id}', [EmployeeController::class, 'getDistrict']); /*for ajax nationality and district in employee*/
 Route::get('staff', [EmployeeController::class, 'index']);
 Route::post('employee-filter', [EmployeeController::class, 'EmployeeFilter']);

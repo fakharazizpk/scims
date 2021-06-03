@@ -674,18 +674,33 @@
                                 </div>
                                 <div class="tab-pane" id="cntinfo">
                                     <div class="row bor-sep">
-                                        <h6 class="col-sm-12">Address</h6>
+                                        <h6 class="col-sm-12">Mailing Address</h6>
                                         <div class="form-group col-sm-12">
-                                            <label>Mailing Address</label>
+                                            <label>Street Address</label>
                                             <textarea class="form-control" name="mailing_address" rows="1"
                                                       cols="33">{{$employee->emp_mail_Add}}</textarea>
                                         </div>
-                                        <div class="form-group col-sm-12">
-                                            <label>Permanent Address</label>
-                                            <textarea class="form-control" name="permanent_address" rows="1"
-                                                      cols="33">{{$employee->emp_pmt_Add}}</textarea>
+                                        <div class="form-group col-sm-3">
+                                            <label>Country</label>
+                                            <select class="selectpicker" name="country"    id="emp-country" data-container="" data-size="3" data-style="btn btn-secondary" title="Select Country" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="" disabled selected>Select Country</option>
+                                                @foreach($nationalities as $nationality)
+                                                    <option value="{{$nationality->nation_Id}}" @if($nationality->nation_Id==$employee->country_Id) selected @endif>{{$nationality->country}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
+
+                                        <div class="form-group col-sm-3">
+                                            <label>State</label>
+                                            <select class="selectpicker" name="state"    id="emp-state" data-container="" data-size="3" data-style="btn btn-secondary" title="Select State" data-live-search="true"  data-hide-disabled="true">
+                                                <option value="">Select State</option>
+                                                {{--@foreach($districts as $district)--}}
+                                                <option value="{{$employee->state_Id}}" selected>{{$employee->state_name}}</option>
+                                                {{--<option value="1">State Name</option>--}}
+                                                {{--@endforeach--}}
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-3">
                                             <label>Domicile</label>
                                             <select class="selectpicker" name="district" id="district" data-container=""
                                                     data-size="3" data-style="btn btn-secondary" title="Select domicile"
@@ -697,8 +712,8 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="select-wizard col-sm-4">
-                                            <label class="col-sm-12">City</label>
+                                        <div class="select-wizard col-sm-3">
+                                            <label class="col-sm-12">City/Tehsil</label>
                                             <select class="selectpicker " id="employee_city" name="employee_city"
                                                     data-container="" data-size="3" data-style="btn btn-secondary"
                                                     title="Select city" data-live-search="true"
@@ -710,10 +725,18 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-sm-3">
                                             <label>Zipcode</label>
                                             <input type="text" class="form-control" value="{{$employee->zip_Code}}"
                                                    placeholder="" name="zip_code">
+                                        </div>
+                                    </div>
+                                    <div class="row bor-sep">
+                                        <div class="form-group col-sm-12">
+                                            <h6 class="col-sm-12">Permanent Address</h6>
+                                            <label>Permanent Address</label>
+                                            <textarea class="form-control" name="permanent_address" rows="1"
+                                                      cols="33">{{$employee->emp_pmt_Add}}</textarea>
                                         </div>
                                     </div>
                                     <div class="row bor-sep">

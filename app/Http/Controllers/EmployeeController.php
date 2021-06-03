@@ -20,6 +20,7 @@ use App\Models\Occupation;
 use App\Models\Relationship;
 /*use App\Models\School;*/
 
+use App\Models\State;
 use App\Models\StudentCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,12 +44,40 @@ class EmployeeController extends Controller
 {
 
 
+    public function getState($id)
+    {
+        //dd($id);
+        $states = DB::table("state")->where("nation_Id",$id)->pluck("state_name","state_Id");
+        //dd($states);
+        return json_encode($states);
+    }
     public function getDistrict($id)
     {
         //dd($id);
-        $states = DB::table("domicile")->where("nation_Id",$id)->pluck("dom_District","dom_Id");
+        $district = DB::table("domicile")->where("nation_Id",$id)->pluck("dom_District","dom_Id");
         //dd($states);
-        return json_encode($states);
+        return json_encode($district);
+    }
+    public function getDistrictByState($id)
+    {
+        //dd($id);
+        $district = DB::table("domicile")->where("state_Id",$id)->pluck("dom_District","dom_Id");
+        //dd($states);
+        return json_encode($district);
+    }
+    public function getCityByDistrict($id)
+    {
+        //dd($id);
+        $district = DB::table("cities")->where("dom_Id",$id)->pluck("city_name","pk_city_id","zip_code");
+        //dd($states);
+        return json_encode($district);
+    }
+    public function getZipCode($id)
+    {
+        //dd($id);
+        $district = DB::table("cities")->where("pk_city_id",$id)->pluck("zip_code");
+        //dd($states);
+        return json_encode($district);
     }
 
     public function getEmployee($id)
@@ -167,13 +196,14 @@ class EmployeeController extends Controller
         $employee_types = EmployeeType::all();
         $designations = Designation::all();
         $ralationship = Relationship::all();
+        $states = State::all();
         $districts = District::all();
         $cities = City::all();
         $religions = Religion::all();
         $nationalities = Nationality::all();
         $casts = Cast::all();
 
-        return view('appointment', compact('marital_status', 'genders', 'bloodgroups', 'employee_types', 'designations', 'ralationship', 'districts', 'cities', 'religions', 'nationalities', 'casts'));
+        return view('appointment', compact('marital_status', 'genders', 'bloodgroups', 'employee_types', 'designations', 'ralationship', 'districts', 'cities', 'religions', 'nationalities', 'casts','states'));
     }
 
     public function appointmentInfo(Request $request)
@@ -310,6 +340,8 @@ class EmployeeController extends Controller
         $employee_info_table->emp_Dob = $request->date_of_birth;
         $employee_info_table->relig_Id = $request->religion;
         $employee_info_table->nation_Id = $request->nationality;
+        $employee_info_table->country_Id = $request->country;
+        $employee_info_table->state_Id = $request->state;
         $employee_info_table->dom_Id = $request->employee_district;
         $employee_info_table->cast_Id = $request->staff_cast;
         $employee_info_table->emp_Status = ($request->employee_status) ? 'Active' : 'Inactive';
@@ -327,10 +359,10 @@ class EmployeeController extends Controller
 
         $user = new User();
         $user->name = $request->given_name;
-        $user->user_type = $request->user_type;
-        $user->username = $request->user_id;
-        $user->status = ($request->status) ? 'Active' : 'Inactive';
-        $user->password = Hash::make($request->password);
+        $user->user_type = $request->designation;
+        $user->username = $request->staff_cnic;
+        $user->status = ($request->employee_status) ? 'Active' : 'Inactive';
+        $user->password = Hash::make($request->staff_cnic);
         $user->save();
 
         //$employee_last_id = $employee_info_table->emp_Id;
@@ -349,24 +381,27 @@ class EmployeeController extends Controller
         $ralationship = Relationship::all();
         $districts = District::all();
         $cities = City::all();
+        $states = State::all();
         $religions = Religion::all();
         $nationalities = Nationality::all();
         $casts = Cast::all();
         $employee = DB::table('employee_info')
-            ->join('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
-            ->join('employee_type', 'employee_info.emp_typ_Id', '=', 'employee_type.emp_typ_Id')
-            ->join('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
-            ->join('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
-            ->join('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
-            ->join('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
-            ->join('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
-            ->join('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
-            ->join('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
-            ->join('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
+            ->leftjoin('employee_contact', 'employee_info.emp_cnt_Id', '=', 'employee_contact.emp_cnt_Id')
+            ->leftjoin('employee_type', 'employee_info.emp_typ_Id', '=', 'employee_type.emp_typ_Id')
+            ->leftjoin('gender', 'employee_info.gnd_Id', '=', 'gender.gnd_Id')
+            ->leftjoin('nationality', 'employee_info.nation_Id', '=', 'nationality.nation_Id')
+            ->leftjoin('state', 'employee_info.state_Id', '=', 'state.state_Id')
+            ->leftjoin('domicile', 'employee_info.dom_Id', '=', 'domicile.dom_Id')
+            ->leftjoin('cities', 'employee_info.city_Id', '=', 'cities.pk_city_id')
+            ->leftjoin('cast', 'employee_info.cast_Id', '=', 'cast.cast_Id')
+            ->leftjoin('blood_group', 'employee_info.bg_Id', '=', 'blood_group.bg_Id')
+            ->leftjoin('religion', 'employee_info.relig_Id', '=', 'religion.relig_Id')
+            ->leftjoin('emergency_contact', 'employee_info.emer_cnt_Id', '=', 'emergency_contact.emer_cnt_Id')
+            ->leftjoin('employment_info', 'employee_info.empt_Id', '=', 'employment_info.empt_Id')
             ->where('employee_info.emp_Id', $id)->first();
-        //dd($employee);
+        //dd($employee->state_name);
         //$studentParent = explode(",", $student->parent_ids);
-        return view('edit-appointment-info', compact('employee', 'employee_types', 'genders', 'marital_status', 'bloodgroups', 'religions', 'nationalities', 'districts', 'cities', 'casts', 'ralationship', 'designations'));
+        return view('edit-appointment-info', compact('employee', 'employee_types', 'genders', 'marital_status', 'bloodgroups', 'religions', 'nationalities', 'districts', 'cities', 'casts', 'ralationship', 'designations','states'));
     }
 
     public function UpdateAppointmentInfo(Request $request)
@@ -486,7 +521,10 @@ class EmployeeController extends Controller
                 'emp_Dob' => $request->date_of_birth,
                 'relig_Id' => $request->religion,
                 'nation_Id' => $request->nationality,
+                'country_Id' => $request->country,
+                'state_Id' => $request->state,
                 'dom_Id' => $request->employee_district,
+                'pk_city_id' => $request->city,
                 'cast_Id' => $request->staff_cast,
                 'emp_Status' => ($request->employee_status) ? 'Active' : 'Inactive',
                 /*last id's of another table start*/
@@ -511,6 +549,8 @@ class EmployeeController extends Controller
                 'emp_Dob' => $request->date_of_birth,
                 'relig_Id' => $request->religion,
                 'nation_Id' => $request->nationality,
+                'country_Id' => $request->country,
+                'state_Id' => $request->state,
                 'dom_Id' => $request->employee_district,
                 'cast_Id' => $request->staff_cast,
                 'emp_Status' => ($request->employee_status) ? 'Active' : 'Inactive',

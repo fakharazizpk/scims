@@ -31,6 +31,15 @@
                                             </span>
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label for="nationality">Country</label>
+                                        <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" value="{{ $national->country}}" name="country" placeholder="Enter Country"/>
+                                        @error('country')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
 
