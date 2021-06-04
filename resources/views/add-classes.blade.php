@@ -23,7 +23,7 @@
                         <div class="row bor-sep">
                             {{--View Modal--}}
                             <div class="modal fade" id="viewclass" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl modal-sm">
+                                <div class="modal-dialog modal-lg modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header justify-content-center">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="modal-body row">
                                             <div class="col-sm-6">
-                                                <div class="row bor-sep">
+                                                <div class="row">
                                                     <h6 class="col-sm-12">Class Details</h6>
                                                     <div class="form-group col-sm-6 ">
                                                         <label class="font-weight-bolder">Class Name</label>
@@ -56,28 +56,32 @@
                                                         <p id="show-tuition-fee">2000</p><hr>
                                                     </div>
                                                 </div>
-                                                <div class="">
-                                                    <div class="bor-sep">
-                                                        <div class="card-header">
-                                                            <h6 class="card-title">subjects</h6>
-                                                            <p class="category">List of subjects taught</p>
-                                                        </div>
-                                                        <div class="card-content  table-full-width">
-                                                            <table class="table subjects_table">
-                                                                <thead>
-                                                                <tr><th>#</th>
-                                                                    <th>Subject</th>
-                                                                </tr></thead>
-                                                                <tbody>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <h6 class="col-sm-12">Subjects</h6>
+                                                    {{--<div class="card-header">
 
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                                    </div>--}}
+                                                    <div class="card-content  table">
+                                                        <table class="table subjects_table">
+                                                            <thead>
+                                                            <tr>
+                                                                <label></label>
+                                                                <label></label>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                </div>
                                             </div>
+                                            </div>
+
+
                                             <!--<div class="divider"></div>-->
-                                            <div class="col-sm-6" style="overflow-y: scroll;height: 900px!important;">
+                                           {{-- <div class="col-sm-6" style="overflow-y: scroll;height: 900px!important;">
                                                 <div class="row bor-sep">
                                                     <h6 class="col-sm-12">Section Details</h6>
                                                     <div class="form-group col-sm-6 ">
@@ -135,7 +139,7 @@
                                                         <p>Ali</p><hr>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--}}
                                         </div>
 
                                         <div class="modal-footer">

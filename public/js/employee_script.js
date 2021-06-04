@@ -797,7 +797,7 @@ $('.edit-employee-submit-btn').click(function (e) {
                 $('#success-message').show();
                 $('#success-message').append('<p>' + result.message + '</p>');
                 //$('#success-alert').show();
-                //$('#success-alert').text('Successfully Added!').fadeIn('slow');
+                $('#success-message').text('Successfully Added!').fadeIn('slow');
                 $('#success-message').delay(2000).fadeOut('slow');
                 //location.reload();
                 window.location.href = base_url+'staff';

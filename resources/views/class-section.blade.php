@@ -25,6 +25,147 @@
                                 </button>
                             </div>
                         </div>
+                        {{--Start view Class section Modal--}}
+                        {{--View Modal--}}
+                        <div class="modal fade" id="view-class-section-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                        <h5 class="title title-up">Class Section Details</h5>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <div class="col-sm-12">
+                                            <div class="row ">
+                                                <h6 class="col-sm-12">Section Details</h6>
+                                                <div class="form-group col-sm-6">
+                                                    <label class="font-weight-bolder">Class Name</label>
+                                                    <p id="show-class-name">Seven</p><hr>
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label class="font-weight-bolder">Section Name</label>
+                                                    <p id="show-class-section-name">Alpha</p><hr>
+                                                </div>
+                                                <div class="form-group col-sm-6 ">
+                                                    <label class="font-weight-bolder">Class Teacher</label>
+                                                    <p id="show-class-teacher">Ahmed Ali</p><hr>
+                                                </div>
+                                                <div class="form-group col-sm-6 ">
+                                                    <label class="font-weight-bolder">Strength</label>
+                                                    <p id="show-class-strength">32</p><hr>
+                                                </div>
+                                                <div class="form-group col-sm-6 ">
+                                                    <label class="font-weight-bolder">Class Representative</label>
+                                                    <p id="show-class-rep">Ali</p><hr>
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        {{-- <div class="">
+                                             <button type="submit" class="btn btn-success btn-link" data-dismiss="modal">Save</button>
+                                         </div>
+                                         <div class="divider"></div>--}}
+                                        <div class="">
+                                            <button type="button" class="btn btn-danger btn-link btn-round" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="class-section-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                        <h5 class="title title-up">Add Class Section</h5>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <form id="add-class-section-form">
+                                            @csrf
+                                            <div class="col-sm-12">
+                                                <div class="add-div-error" style="display:none">
+                                                    <div class="alert alert-danger alert-dismissible fade show"
+                                                         role="alert" id="add-alert-danger">
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <ul class="p-0 m-0" style="list-style: none;">
+                                                            <li></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class=" col-sm-6 select-wizard">
+                                                        <label>For Class</label>
+                                                        <select class="selectpicker" id="sel_class" name="class_name" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                            <option value="" disabled selected>Select Class</option>
+                                                            @foreach($nameofclasses as $nameofclass)
+                                                                <option value="{{$nameofclass->cls_Id}}">{{$nameofclass->class}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <div class="add-div-error class_name"></div>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Section Name</label>
+                                                        <input type="text" class="form-control" placeholder="" name="class_section_name"  number="true" number="true">
+                                                        <div class="add-div-error class_section_name"></div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Add Students</label>
+                                                        <select class="selectpicker" id="sel_student" name="students[]" data-style="btn btn-secondary " multiple title="Choose Students" data-size="5">
+                                                            <option disabled> Choose Students</option>
+                                                        </select>
+                                                        <div class="add-div-error students"></div>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>No of Students Added</label>
+                                                        <input type="text" class="form-control" placeholder="" id="add-no-of-student" name="no_of_student"  number="true" number="true">
+                                                        <div class="add-div-error no_of_student"></div>
+                                                    </div>
+                                                    <div class=" col-sm-6 select-wizard">
+                                                        <label>Assign Class Rep</label>
+                                                        <select class="selectpicker" id="representative" name="representative" data-size="5"  data-style="btn btn-secondary" title="Select Billing Scgedule" >
+                                                            <option value="" disabled selected>Select Student</option>
+                                                        </select>
+                                                        <div class="add-div-error representative"></div>
+                                                    </div>
+                                                    <div class=" col-sm-6 select-wizard">
+                                                        <label>Teacher</label>
+                                                        <select class="selectpicker" id="" name="teacher" data-size="5" data-style="btn btn-secondary" title="Select Class" >
+                                                            <option value="" disabled selected>Select Teacher</option>
+                                                            @foreach($teachers as $teacher)
+                                                                <option value="{{$teacher->emp_Id }}">{{$teacher->emp_given_name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <div class="add-div-error teacher"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="">
+                                            <button type="button" class="btn btn-success btn-link" id="add-class-section-btn">Save</button>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="">
+                                            <button type="button" data-dismiss="modal" class="btn btn-danger btn-link">Cancel</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{--End View Modal--}}
+                        {{--End view Class section Modal--}}
+
                         {{--add class section Modal--}}
                         <div class="modal fade" id="class-section-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-sm">

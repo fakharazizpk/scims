@@ -68,8 +68,15 @@ class ClassSectionController extends Controller
     {
 
         $where = array('c_section_Id' => $id);
-        $subject = ClassSection::where($where)->first();
-        return Response::json($subject);
+
+        $class_section = DB::table('class_section')
+            ->select('class_section.class_section_name','class_section.no_of_student','class.class', 'employee_info.emp_given_name','student_info.std_Fname','student_info.std_Mname','student_info.std_Lname')
+            ->leftjoin('class', 'class_section.cls_Id', '=', 'class.cls_Id')
+            ->leftjoin('employee_info', 'class_section.emp_Id', '=', 'employee_info.emp_Id')
+            ->leftjoin('student_info', 'class_section.crep_Id', '=', 'student_info.std_Id')
+            ->where($where)->first();
+        //dd($class_section);
+        return Response::json($class_section);
 
     }
 

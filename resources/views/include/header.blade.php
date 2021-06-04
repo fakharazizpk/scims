@@ -11,57 +11,67 @@ Coded by www.pointwebtech.com
 -->
 <!DOCTYPE html>
 <html lang="en">
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('adminassets/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('adminassets/img/favicon.png')}}">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title> SCIMS | @yield('title')</title>
-    <meta name="_token" content="{{csrf_token()}}" />
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta name="_token" content="{{csrf_token()}}"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
     <!-- Extra details for Live View on GitHub Pages -->
     <!-- Canonical SEO -->
-    <link rel="canonical" href="https://www.creative-tim.com/product/paper-dashboard-2-pro" />
+    <link rel="canonical" href="https://www.creative-tim.com/product/paper-dashboard-2-pro"/>
     <!--  Social tags      -->
-    <meta name="keywords" content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 4 dashboard, bootstrap 4, css3 dashboard, bootstrap 4 admin, paper dashboard bootstrap 4 dashboard, frontend, responsive bootstrap 4 dashboard, paper design, paper dashboard bootstrap 4 dashboard">
-    <meta name="description" content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
+    <meta name="keywords"
+          content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 4 dashboard, bootstrap 4, css3 dashboard, bootstrap 4 admin, paper dashboard bootstrap 4 dashboard, frontend, responsive bootstrap 4 dashboard, paper design, paper dashboard bootstrap 4 dashboard">
+    <meta name="description"
+          content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="Paper Dashboard PRO by Creative Tim">
-    <meta itemprop="description" content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
+    <meta itemprop="description"
+          content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
     <meta itemprop="image" content="../../../s3.amazonaws.com/creativetim_bucket/products/84/opt_pd2p_thumbnail.jpg">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@creativetim">
     <meta name="twitter:title" content="Paper Dashboard PRO by Creative Tim">
-    <meta name="twitter:description" content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
+    <meta name="twitter:description"
+          content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you.">
     <meta name="twitter:creator" content="@creativetim">
-    <meta name="twitter:image" content="../../../s3.amazonaws.com/creativetim_bucket/products/84/opt_pd2p_thumbnail.jpg">
+    <meta name="twitter:image"
+          content="../../../s3.amazonaws.com/creativetim_bucket/products/84/opt_pd2p_thumbnail.jpg">
     <!-- Open Graph data -->
     <meta property="fb:app_id" content="655968634437471">
-    <meta property="og:title" content="Paper Dashboard PRO by Creative Tim" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://creativetimofficial.github.io/paper-dashboard-2-pro/examples/dashboard.html" />
-    <meta property="og:image" content="../../../s3.amazonaws.com/creativetim_bucket/products/84/opt_pd2p_thumbnail.jpg" />
-    <meta property="og:description" content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you." />
-    <meta property="og:site_name" content="Creative Tim" />
+    <meta property="og:title" content="Paper Dashboard PRO by Creative Tim"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url"
+          content="https://creativetimofficial.github.io/paper-dashboard-2-pro/examples/dashboard.html"/>
+    <meta property="og:image"
+          content="../../../s3.amazonaws.com/creativetim_bucket/products/84/opt_pd2p_thumbnail.jpg"/>
+    <meta property="og:description"
+          content="Paper Dashboard PRO is a beautiful Bootstrap 4 admin dashboard with a large number of components, designed to look beautiful, clean and organized. If you are looking for a tool to manage dates about your business, this dashboard is the thing for you."/>
+    <meta property="og:site_name" content="Creative Tim"/>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <!-- CSS Files -->
-    <link href="{{asset('adminassets/css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('adminassets/css/font-awesome.css')}}" rel="stylesheet" />
-    <link href="{{asset('adminassets/css/font-awesome.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('adminassets/css/paper-dashboard.min1036.css?v=2.1.1')}}" rel="stylesheet" />
+    <link href="{{asset('adminassets/css/bootstrap.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('adminassets/css/font-awesome.css')}}" rel="stylesheet"/>
+    <link href="{{asset('adminassets/css/font-awesome.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('adminassets/css/paper-dashboard.min1036.css?v=2.1.1')}}" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{asset('adminassets/demo/demo.css" rel="stylesheet')}}" />
-    <link href="{{asset('css/custom.css')}}" rel="stylesheet')}}" />
+    <link href="{{asset('adminassets/demo/demo.css" rel="stylesheet')}}"/>
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet')}}"/>
 
- @yield('front_css')
-    <!-- Extra details for Live View on GitHub Pages -->
+@yield('front_css')
+<!-- Extra details for Live View on GitHub Pages -->
     <!-- Google Tag Manager -->
     <script>
-        (function(w, d, s, l, i) {
+        (function (w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
                 'gtm.start': new Date().getTime(),
@@ -82,7 +92,10 @@ Coded by www.pointwebtech.com
 <body class="">
 <!-- Extra details for Live View on GitHub Pages -->
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+</noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div class="wrapper ">
     <div class="sidebar" data-color="default" data-active-color="danger">
@@ -106,7 +119,7 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="{{asset('adminassets/img/faces/ayo-ogunseinde-2.jpg')}}" />
+                    <img src="{{asset('adminassets/img/faces/ayo-ogunseinde-2.jpg')}}"/>
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -131,9 +144,10 @@ Coded by www.pointwebtech.com
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                     <span class="sidebar-mini-icon">S</span>
-                                    <span class="sidebar-normal">Settings</span>
+                                    <span class="sidebar-normal">Logout</span>
                                 </a>
                             </li>
                         </ul>
@@ -180,30 +194,24 @@ Coded by www.pointwebtech.com
                                     <span class="sidebar-normal"> Subjects </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Examination </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Syllabus </span>
-                                </a>
-                            </li>
+                            {{--<li>
+                                    <a href="#">
+                                        <span class="sidebar-mini-icon">ADM</span>
+                                        <span class="sidebar-normal"> Syllabus </span>
+                                    </a>
+                                </li>--}}
                             <li>
                                 <a href="{{url('users')}}">
                                     <span class="sidebar-mini-icon">ADM</span>
                                     <span class="sidebar-normal"> Users </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{url('type')}}">
-                                    <span class="sidebar-mini-icon">ADM</span>
-                                    <span class="sidebar-normal"> Users Type </span>
-                                </a>
-                            </li>
+                            {{--<li>
+                                 <a href="{{url('type')}}">
+                                     <span class="sidebar-mini-icon">ADM</span>
+                                     <span class="sidebar-normal"> Users Type </span>
+                                 </a>
+                             </li>--}}
 
                         </ul>
                     </div>
@@ -272,7 +280,7 @@ Coded by www.pointwebtech.com
                     <a data-toggle="collapse" href="#tablesExamples">
                         <i class="fa fa-clipboard"></i>
                         <p>
-                            Examination  <b class="caret"></b>
+                            Examination <b class="caret"></b>
                         </p>
                     </a>
                     <div class="collapse " id="tablesExamples">
@@ -447,22 +455,23 @@ Coded by www.pointwebtech.com
                     </div>
                     <a class="navbar-brand" href="javascript:;">School Information Management System</a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                  {{--  <form>
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </form>--}}
+                    {{--  <form>
+                          <div class="input-group no-border">
+                              <input type="text" value="" class="form-control" placeholder="Search...">
+                              <div class="input-group-append">
+                                  <div class="input-group-text">
+                                      <i class="fa fa-search"></i>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>--}}
                     <ul class="navbar-nav">
                         {{--<li class="nav-item">
                             <a class="nav-link btn-magnify" href="javascript:;">

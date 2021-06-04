@@ -137,7 +137,7 @@ $('body').on('click', '.edit-school-btn', function () {
 });
 
 $('body').on('click', '#view-school-btn', function () {
-    alert('fdgfsg');
+    //alert('fdgfsg');
     var show_school_id = $(this).data('id');
     $.get('show-school/'+show_school_id, function (data) {
         console.log(data);

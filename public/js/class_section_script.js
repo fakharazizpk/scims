@@ -255,21 +255,16 @@ $(document).ready(function(e){
         })
     });
     $('.show-view-class-section-btn').on('click', function () {
-        alert('hello');
+        //alert('hello');
         var class_section_id = $(this).data('id');
-        $.get('show-class/'+class_section_id, function (data) {
-           //console.log(data);
+        $.get('show-class-section/'+class_section_id, function (data) {
+           console.log(data);
             $('#view-class-section-modal').modal('show');
-           /* $('#show-class-name').text(data.class);
-            $('#show-tuition-fee').text(data.tuition_fee);
-            $('#show-no-of-periods').text(data.no_of_period);
-            $('#show-school-section').text(data.sc_sec_name);*/
-           /* $(".subjects_table tbody").empty();
-            $.each(data.subjects, function(key, val) {
-                var markup = "<tr><td>" + (key + 1) + "</td><td>" + val.subject + "</td></tr>";
-                $(".subjects_table tbody").append(markup);
-                // $('select[name="subject"]').append('<option value="'+ key +'">'+ value +'</option>');
-            });*/
+            $('#show-class-name').text(data.class);
+            $('#show-class-section-name').text(data.class_section_name);
+            $('#show-class-strength').text(data.no_of_student);
+            $('#show-class-teacher').text(data.emp_given_name);
+            $('#show-class-rep').text(data.std_Fname + " " +data.std_Mname);
 
         })
     });
