@@ -12,7 +12,7 @@ $(document).ready(function(){
             }
         });
         jQuery.ajax({
-            url: base_url + "add-user",
+            url: base_url + "/add-user",
             method: 'post',
             data:  $(this).serialize(),
             success: function(result){

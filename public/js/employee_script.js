@@ -27,7 +27,7 @@ $(document).ready(function () {
             });
 
             $.ajax({
-                url : base_url +'/getdistrict/' +nationalityID,
+                url : base_url +'getdistrict/' +nationalityID,
                 type : "GET",
                 dataType : "json",
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
             });
 
             $.ajax({
-                url : base_url +'/getstate/' +nationID,
+                url : base_url +'getstate/' +nationID,
                 type : "GET",
                 dataType : "json",
 
@@ -87,7 +87,7 @@ $(document).ready(function () {
             });
 
             $.ajax({
-                url : base_url +'/get-district-by-state/' +stateID,
+                url : base_url +'get-district-by-state/' +stateID,
                 type : "GET",
                 dataType : "json",
 
@@ -117,7 +117,7 @@ $(document).ready(function () {
             });
 
             $.ajax({
-                url : base_url +'/get-city-by-district/' +districtID,
+                url : base_url +'get-city-by-district/' +districtID,
                 type : "GET",
                 dataType : "json",
 
@@ -145,7 +145,7 @@ $(document).ready(function () {
             headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")}
         });
         $.ajax({
-            url : base_url +'/getzipcode/' +cityID,
+            url : base_url +'getzipcode/' +cityID,
             type : "GET",
             dataType : "json",
             success:function(data)
@@ -299,7 +299,7 @@ $(document).ready(function () {
         });
         var admission_data = new FormData($('#add-employee-form')[0]);
         $.ajax({
-            url: base_url + '/appointment-info',
+            url: base_url + 'appointment-info',
             enctype: 'multipart/form-data',
             method: 'post',
             contentType: false,
@@ -349,7 +349,7 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: base_url + '/staff',
+            url: base_url + 'staff',
             // url    : "http://localhost/nextdaylabels_live/admin/public/template",
 
             type   : 'get',
@@ -770,7 +770,7 @@ $('.edit-employee-submit-btn').click(function (e) {
     });
     var edit_admission_data = new FormData($('#edit-employee-form')[0]);
     $.ajax({
-        url: base_url + '/update-appointment-info',
+        url: base_url + 'update-appointment-info',
         enctype: 'multipart/form-data',
         method: 'post',
         contentType: false,
@@ -799,7 +799,8 @@ $('.edit-employee-submit-btn').click(function (e) {
                 //$('#success-alert').show();
                 //$('#success-alert').text('Successfully Added!').fadeIn('slow');
                 $('#success-message').delay(2000).fadeOut('slow');
-                location.reload();
+                //location.reload();
+                window.location.href = base_url+'staff';
             }
         }
     });

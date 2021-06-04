@@ -9,6 +9,9 @@
                         {{ session()->get('message') }}
                     </div>
                 @endif
+                    <div class="alert success-message">
+
+                    </div>
                     <form id="RegisterValidation" action="{{url('employee-filter')}}" method="post">
                         @csrf
                     <div class="card ">

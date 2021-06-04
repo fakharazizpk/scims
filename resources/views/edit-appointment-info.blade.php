@@ -316,7 +316,7 @@
                                                     data-live-search="true">
                                                 <option value="" disabled selected>Select Designation</option>
                                                 @foreach($designations as $designation)
-                                                    <option value="{{$designation->desig_Id}}" @if($employee->desig_Id ==$designation->desig_Id) selected @endif>{{$designation->designation}}</option>
+                                                    <option value="{{$designation->designation}}" >{{$designation->designation}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

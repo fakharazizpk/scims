@@ -408,9 +408,6 @@ class EmployeeController extends Controller
     public function UpdateAppointmentInfo(Request $request)
     {
         //dd($request->all());
-
-
-
         $employment_info_table = [
             'appt_Date' => $request->hire_date,
             'adjust_Date' => $request->adjustment_date,
