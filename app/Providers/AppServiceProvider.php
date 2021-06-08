@@ -26,11 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //$adminprofile = User::where('id',Session::get('userData')['id'])->first();
-        //view()->share('adminprofile', User::all());
-        view()->composer('*', function ($view)
+        view()->composer('include.header', function ($view)
         {
-            $view->with('adminprofile', User::where('id',Session::get('userData')['id'])->first());
+            $view->with('profieData', User::where('id',Session::get('userData')['id'])->first());
             $view->with('school', School::all());
         });
     }

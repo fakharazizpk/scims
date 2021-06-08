@@ -41,11 +41,9 @@
                                                         <label>User Type</label>
                                                         <select class="selectpicker" data-size="7" name="user_type" data-style="btn btn-secondary" title="Select Blood Group" id="edit-user-type">
                                                             <option value="" disabled selected>Select Type</option>
-                                                            <option value="Admin">Admin</option>
-                                                            <option value="Accountant">Accountant</option>
-                                                            <option value="Parent">Parent</option>
-                                                            <option value="Teacher">Teacher</option>
-
+                                                            @foreach($user_types as $user_type)
+                                                            <option value="{{$user_type->user_type_Name}}">{{$user_type->user_type_Name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-sm-12">
@@ -259,10 +257,9 @@
                                                         <label>User Type</label>
                                                         <select class="selectpicker" data-size="7" name="user_type" data-style="btn btn-secondary" title="Select Blood Group" id="edit-user-type">
                                                             <option value="" disabled selected>Select Type</option>
-                                                            <option value="Admin">Admin</option>
-                                                            <option value="Accountant">Accountant</option>
-                                                            <option value="Parent">Parent</option>
-                                                            <option value="Teacher">Teacher</option>
+                                                            @foreach($user_types as $user_type)
+                                                                <option value="{{$user_type->user_type_Name}}">{{$user_type->user_type_Name}}</option>
+                                                            @endforeach
 
                                                         </select>
                                                     </div>
@@ -519,7 +516,7 @@
                                             </div>
                                             <div class="divider"></div>
                                             <div class="">
-                                                <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>

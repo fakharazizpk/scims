@@ -16,7 +16,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('add-users', compact('users'));
+        $user_types = UserType::all();
+        return view('add-users', compact('users','user_types'));
     }
 
     public function ProfileView()
@@ -113,6 +114,8 @@ class UserController extends Controller
                     }
                     else if($userFound->user_type=='Teacher'){
                         return redirect('teacher/dashboard');
+                    }else if($userFound->user_type=='Examiner'){
+                        return redirect('examiner/dashboard');
                     }
                     else if($userFound->user_type=='Accountant'){
                         return "Accountant Dashboard";// exit;

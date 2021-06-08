@@ -10,7 +10,7 @@ Coded by www.pointwebtech.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 
-@php //echo "<pre>"; print_r($profieData); exit;@endphp
+@php //echo "<pre>"; print_r($profileData); exit;@endphp
 <!DOCTYPE html>
 <html lang="en">
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
@@ -98,8 +98,8 @@ Coded by www.pointwebtech.com
                 </div>
                 <!-- <p>CT</p> -->
             </a>
-            <a href="{{url('teacher/dashboard')}}" class="simple-text logo-normal">
-                Teacher Portal
+            <a href="{{url('examiner/dashboard')}}" class="simple-text logo-normal">
+                Examiner Portal
                 <!-- <div class="logo-image-big">
                   <img src="../assets/img/logo-big.png">
                 </div> -->
@@ -108,17 +108,17 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    @if($profieData->user_image)
-                        <img src="{{asset('upload/user/'.$profieData->user_image)}}"/>
-                    @else
+                  {{--  @if($profileData)
+                        <img src="{{asset('upload/user/'.$profileData->user_image)}}"/>
+                    @else--}}
                         <img src="{{url('adminassets/img/employee%20avatar.png')}}" />
-                    @endif
+                   {{-- @endif--}}
 
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                Teacher Name
+                    Examiner
                 <b class="caret"></b>
               </span>
                     </a>
@@ -138,9 +138,10 @@ Coded by www.pointwebtech.com
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                     <span class="sidebar-mini-icon">S</span>
-                                    <span class="sidebar-normal">Settings</span>
+                                    <span class="sidebar-normal">Logout</span>
                                 </a>
                             </li>
                         </ul>
@@ -150,57 +151,11 @@ Coded by www.pointwebtech.com
 
             <ul class="nav">
                 <li class="active">
-                    <a href="{{url('teacher/dashboard')}}">
+                    <a href="{{url('examiner/dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="" href="#">
-                        <i class="fa fa-university"></i>
-                        <p>
-                            Blog </b>
-                        </p>
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="" href="#">
-                        <i class="fa fa-envelope-o"></i>
-                        <p>
-                            Messages </b>
-                        </p>
-                    </a>
-
-                </li>
-                </li>
-                <li>
-                    <a data-toggle="" href="../pages/student-register.html">
-                        <i class="fa fa-book"></i>
-                        <p>
-                            Register </b>
-                        </p>
-                    </a>
-
-                </li>
-                <li>
-                    <a data-toggle="" href="{{url('teacher/dairy')}}">
-                        <i class="fa fa-pencil-square"></i>
-                        <p>
-                            Diary </b>
-                        </p>
-                    </a>
-
-                </li>
-                <li>
-                    <a data-toggle="" href="#">
-                        <i class="fa fa-file-text"></i>
-                        <p>
-                            Assessments </b>
-                        </p>
-                    </a>
-
-                </li>
-
             </ul>
         </div>
     </div>

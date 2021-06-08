@@ -37,6 +37,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ExaminerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -348,6 +349,13 @@ Route::get('teacher/profile', [TeacherController::class, 'TeacherProfile']); //t
 Route::get('teacher/editProfile', [TeacherController::class, 'editProfile']); //admin profile edit
 Route::post('teacher/profile-update', [TeacherController::class, 'ProfileUpdate']); //teacher profile Update
 Route::get('teacher/dairy', [TeacherController::class, 'Dairy']);
+
+/*Examiner*/
+Route::get('examiner/dashboard', [ExaminerController::class, 'index']);
+Route::get('examiner/profile', [ExaminerController::class, 'ExaminerProfile']); //examiner profile
+Route::get('examiner/editProfile', [ExaminerController::class, 'editProfile']); //examiner profile edit
+Route::post('examiner/profile-update', [ExaminerController::class, 'ProfileUpdate']); //examiner profile Update
+
 
 /*class class*/
 /*Route::get('class', [AddClassesController::class, 'index']);

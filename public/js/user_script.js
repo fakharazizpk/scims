@@ -12,7 +12,7 @@ $(document).ready(function(){
             }
         });
         jQuery.ajax({
-            url: base_url + "/add-user",
+            url: base_url + "add-user",
             method: 'post',
             data:  $(this).serialize(),
             success: function(result){
@@ -145,7 +145,7 @@ $('body').on('click', '#edit-user', function () {
         $('#edit-user-id').val(data.id);
         $('[id=edit-user-type] option').filter(function() {
             return ($(this).text() == data.user_type); //To select Green
-        }).prop('selected', true);
+        }).attr('selected', 'selected');
         //$('#edit-user-type option:selected').text(user_type);
         $('#edit-name').val(data.name);
         $('#edit-username').val(data.username);

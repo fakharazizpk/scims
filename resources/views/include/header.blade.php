@@ -9,7 +9,7 @@ Coded by www.pointwebtech.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-@php //echo "<pre>"; print_r($adminprofile); exit;@endphp
+@php //echo "<pre>"; print_r($profieData); exit;@endphp
 <!DOCTYPE html>
 <html lang="en">
 <!-- Added by HTTrack -->
@@ -122,8 +122,8 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    @if($adminprofile->user_image)
-                        <img src="{{asset('upload/user/'.$adminprofile->user_image)}}"/>
+                    @if($profieData->user_image)
+                        <img src="{{asset('upload/user/'.$profieData->user_image)}}"/>
                     @else
                         <img src="{{asset('adminassets/img/faces/ayo-ogunseinde-2.jpg')}}"/>
                     @endif
@@ -131,7 +131,7 @@ Coded by www.pointwebtech.com
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                {{$adminprofile->name}}
+                {{$profieData->name}}
                 <b class="caret"></b>
               </span>
                     </a>
