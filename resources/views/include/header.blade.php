@@ -9,6 +9,7 @@ Coded by www.pointwebtech.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+@php //echo "<pre>"; print_r($adminprofile); exit;@endphp
 <!DOCTYPE html>
 <html lang="en">
 <!-- Added by HTTrack -->
@@ -103,14 +104,16 @@ Coded by www.pointwebtech.com
           Tip 1: You can change the color of the sidebar using: data-color=" default | primary | info | success | warning | danger |"
       -->
         <div class="logo">
-            <a href="{{url('/')}}" class="simple-text logo-mini">
+            <a href="#" class="simple-text logo-mini">
                 <div class="logo-image-small">
                     <img src="{{asset('adminassets/img/logo.gif')}}">
                 </div>
                 <!-- <p>CT</p> -->
             </a>
-            <a href="{{url('/')}}" class="simple-text logo-normal">
-                Creative Tim
+            <a href="#" class="simple-text logo-normal">
+                @foreach($school as $sch)
+                    {{$sch->school_abbreviation}}
+                @endforeach
                 <!-- <div class="logo-image-big">
                   <img src="../assets/img/logo-big.png">
                 </div> -->
@@ -119,12 +122,16 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="{{asset('adminassets/img/faces/ayo-ogunseinde-2.jpg')}}"/>
+                    @if($adminprofile->user_image)
+                        <img src="{{asset('upload/user/'.$adminprofile->user_image)}}"/>
+                    @else
+                        <img src="{{asset('adminassets/img/faces/ayo-ogunseinde-2.jpg')}}"/>
+                    @endif
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                Chet Faker
+                {{$adminprofile->name}}
                 <b class="caret"></b>
               </span>
                     </a>

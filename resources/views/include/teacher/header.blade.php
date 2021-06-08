@@ -9,6 +9,8 @@ Coded by www.pointwebtech.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+
+@php //echo "<pre>"; print_r($adminprofile); exit;@endphp
 <!DOCTYPE html>
 <html lang="en">
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
@@ -106,7 +108,12 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="{{url('adminassets/img/employee%20avatar.png')}}" />
+                    @if($adminprofile->user_image)
+                        <img src="{{asset('upload/user/'.$adminprofile->user_image)}}"/>
+                    @else
+                        <img src="{{url('adminassets/img/employee%20avatar.png')}}" />
+                    @endif
+
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
