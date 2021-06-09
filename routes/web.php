@@ -352,6 +352,13 @@ Route::get('teacher/dairy', [TeacherController::class, 'Dairy']);
 
 /*Examiner*/
 Route::get('examiner/dashboard', [ExaminerController::class, 'index']);
+Route::post('examiner/add-schedule-exam', [ExaminerController::class, 'CreateExam']);
+Route::get('examiner/edit-schedule-exam/{id}', [ExaminerController::class, 'EditExam']);
+/*Route::get('examiner/show-schedule-exam/{id}', [ExaminerController::class, 'ShowExam']);
+
+Route::post('examiner/update-schedule-exam', [ExaminerController::class, 'UpdateExam']);
+Route::get('examiner/delete-schedule-exam/{id}', [ExaminerController::class, 'DeleteExam']);*/
+
 Route::get('examiner/profile', [ExaminerController::class, 'ExaminerProfile']); //examiner profile
 Route::get('examiner/editProfile', [ExaminerController::class, 'editProfile']); //examiner profile edit
 Route::post('examiner/profile-update', [ExaminerController::class, 'ProfileUpdate']); //examiner profile Update

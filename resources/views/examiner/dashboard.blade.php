@@ -1,6 +1,14 @@
 @extends('layouts.examiner')
 @section('title', 'Examiner Dashboard')
 @section('content')
+    <style>
+        .add-div-error{
+            color: red;
+        }
+        .edit-div-error{
+            color: red;
+        }
+    </style>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
@@ -30,7 +38,6 @@
                             <div class="tab-pane active" id="allexams" role="tabpanel" aria-expanded="true">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <form id="RegisterValidation" action="#" method="">
                                             <div class=" ">
                                                 <div class="card-header ">
                                                     <h4 class="card-title">Examinations</h4>
@@ -39,13 +46,14 @@
                                                     <div class="row bor-sep">
 
                                                         <div class="col-sm-12 pull-right">
-                                                            <button class="btn btn-secondary pull-right btn-round" data-toggle="modal" data-target="#scheduleexam">
+                                                            <button class="btn btn-secondary pull-right btn-round" id="schedule-exam-btn">
                                                                 Schedule Exam
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="scheduleexam" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="schedule-exam" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-xl modal-sm">
+
                                                             <div class="modal-content">
                                                                 <div class="modal-header justify-content-center">
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -53,29 +61,32 @@
                                                                     </button>
                                                                     <h5 class="title title-up">Schedule New Exam</h5>
                                                                 </div>
+                                                                <form id="Shedule-Exam-Form" method="post">
+                                                                    @csrf
                                                                 <div class="modal-body row">
                                                                     <div class="col-sm-3">
                                                                         <div class="row">
 
                                                                             <div class=" col-sm-12 select-wizard">
                                                                                 <label>Exam type</label>
-                                                                                <select class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class" >
+                                                                                <select name="exam_Type" class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class">
                                                                                     <option value="" disabled selected>Choose type</option>
                                                                                     <option value="1">Weekly</option>
                                                                                     <option value="2">Monthly</option>
                                                                                     <option value="3">Term</option>
-                                                                                    <option value="1">Other</option>
+                                                                                    <option value="4">Other</option>
                                                                                 </select>
+                                                                                <div class="add-div-error exam_Type"></div>
                                                                             </div>
                                                                             <div class="col-sm-12 select-wizard">
                                                                                 <label class="col-sm-12">Section</label>
-                                                                                <select multiple class="selectpicker " data-size="5" id="number-multiple" data-style="btn btn-secondary" data-container="" data-live-search="false" title="Choose sections" data-hide-disabled="true" data-actions-box="true" data-virtual-scroll="false">
+                                                                                <select name="school_Section[]" multiple class="selectpicker " data-size="5" id="number-multiple" data-style="btn btn-secondary" data-container="" data-live-search="false" title="Choose sections" data-hide-disabled="true" data-actions-box="true" data-virtual-scroll="false">
                                                                                     <option value="" disabled>Choose section</option>
-                                                                                    <option value="1">Pre Section</option>
-                                                                                    <option value="2">Junior Section</option>
-                                                                                    <option value="2">Middle Section</option>
-                                                                                    <option value="2">Senior Section</option>
+                                                                                    @foreach($school_sections as $school_section)
+                                                                                    <option value="{{$school_section->sc_sec_Id}}">{{$school_section->sc_sec_name}}</option>
+                                                                                    @endforeach
                                                                                 </select>
+                                                                                <div class="add-div-error school_Section"></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -84,19 +95,23 @@
                                                                         <div class="row">
                                                                             <div class="form-group col-sm-4">
                                                                                 <label>Exam name</label>
-                                                                                <input type="text" class="form-control" placeholder="" name="examname"  number="true" number="true">
+                                                                                <input type="text" class="form-control" placeholder="" name="exam_Name">
+                                                                                <div class="add-div-error exam_Name"></div>
                                                                             </div>
                                                                             <div class="form-group col-sm-4">
                                                                                 <label>Start date</label>
-                                                                                <input type="date" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                                                <input type="text" class="form-control datepicker" placeholder="" name="exam_Start">
+                                                                                <div class="add-div-error exam_Start"></div>
                                                                             </div>
                                                                             <div class="form-group col-sm-4">
                                                                                 <label>End date</label>
-                                                                                <input type="date" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                                                <input type="text" class="form-control datepicker" placeholder="" name="exam_End">
+                                                                                <div class="add-div-error exam_End"></div>
                                                                             </div>
                                                                             <div class="form-group col-sm-12">
                                                                                 <label>Comments</label>
-                                                                                <textarea type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true"></textarea>
+                                                                                <textarea type="text" class="form-control" placeholder="" name="exam_Comment"></textarea>
+                                                                                <div class="add-div-error exam_Comment"></div>
                                                                             </div>
                                                                         </div>
 
@@ -106,11 +121,89 @@
                                                                 <!--</div>-->
                                                                 <div class="modal-footer">
                                                                     <div class="">
-                                                                        <button type="submit" class="btn btn-success btn-round btn-link" data-dismiss="modal">Save</button>
+                                                                        <button type="submit" class="btn btn-success btn-round btn-link" id="add-schedule-exam-btn">Save</button>
+
                                                                     </div>
                                                                     <div class="divider"></div>
                                                                     <div class="">
-                                                                        <button type="button" class="btn btn-danger btn-round btn-link">Cancel</button>
+                                                                        <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Cancel</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="edit-schedule-exam-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl modal-sm">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header justify-content-center">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <i class="fa fa-remove"></i>
+                                                                    </button>
+                                                                    <h5 class="title title-up">Edit Schedule Exam</h5>
+                                                                </div>
+                                                                <form>
+                                                                    <input type="hidden" name="exam_id" value="" id="edit-exam-id">
+                                                                </form>
+                                                                <div class="modal-body row">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="row">
+
+                                                                            <div class=" col-sm-12 select-wizard">
+                                                                                <label>Exam type</label>
+                                                                                <select name="exam_Type" id="edit-exam-type" class="selectpicker" data-size="7" data-style="btn btn-secondary" title="Select Class">
+                                                                                    <option value="" disabled selected>Choose type</option>
+                                                                                    <option value="1">Weekly</option>
+                                                                                    <option value="2">Monthly</option>
+                                                                                    <option value="3">Term</option>
+                                                                                    <option value="4">Other</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-12 select-wizard">
+                                                                                <label class="col-sm-12">Section</label>
+                                                                                <select name="school_Section[]" id="edit-school-section" multiple class="selectpicker " data-size="5"  data-style="btn btn-secondary" data-container="" data-live-search="false" title="Choose sections" data-hide-disabled="true" data-actions-box="true" data-virtual-scroll="false">
+                                                                                    <option value="" disabled>Choose section</option>
+                                                                                    @foreach($school_sections as $school_section)
+                                                                                        <option value="{{$school_section->sc_sec_Id}}">{{$school_section->sc_sec_name}}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="divider"></div>
+                                                                    <div class="col-sm-9">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-sm-4">
+                                                                                <label>Exam name</label>
+                                                                                <input type="text" class="form-control" placeholder="" name="exam_Name" id="edit-exam-name">
+                                                                            </div>
+                                                                            <div class="form-group col-sm-4">
+                                                                                <label>Start date</label>
+                                                                                <input type="text" class="form-control datepicker" placeholder="" name="exam_Start" id="edit-exam-start">
+                                                                            </div>
+                                                                            <div class="form-group col-sm-4">
+                                                                                <label>End date</label>
+                                                                                <input type="text" class="form-control datepicker" placeholder="" name="exam_End" id="edit-exam_end">
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12">
+                                                                                <label>Comments</label>
+                                                                                <textarea type="text" class="form-control" placeholder="" name="exam_Comment" id="edit-exam-Comment"></textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--</div>-->
+                                                                <div class="modal-footer">
+                                                                    <div class="">
+                                                                        <button type="submit" class="btn btn-success btn-round btn-link">Save</button>
+                                                                    </div>
+                                                                    <div class="divider"></div>
+                                                                    <div class="">
+                                                                        <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Cancel</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -123,7 +216,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <i class="fa fa-remove"></i>
                                                                     </button>
-                                                                    <h5 class="title title-up">Schedule New Exam</h5>
+                                                                    <h5 class="title title-up">View Exam</h5>
                                                                 </div>
                                                                 <div class="modal-body row">
                                                                     <div class="col-sm-3">
@@ -141,7 +234,7 @@
                                                                             </div>
                                                                             <div class="col-sm-12 select-wizard">
                                                                                 <label class="col-sm-12">Section</label>
-                                                                                <select multiple class="selectpicker " data-size="5" id="number-multiple" data-style="btn btn-secondary" data-container="" data-live-search="false" title="Choose sections" data-hide-disabled="true" data-actions-box="true" data-virtual-scroll="false">
+                                                                                <select multiple class="selectpicker " data-size="5"  data-style="btn btn-secondary" data-container="" data-live-search="false" title="Choose sections" data-hide-disabled="true" data-actions-box="true" data-virtual-scroll="false">
                                                                                     <option value="" disabled>Choose section</option>
                                                                                     <option value="1">Pre Section</option>
                                                                                     <option value="2">Junior Section</option>
@@ -160,15 +253,15 @@
                                                                             </div>
                                                                             <div class="form-group col-sm-4">
                                                                                 <label>Start date</label>
-                                                                                <input type="date" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                                                <input type="text" class="form-control datepicker" placeholder="" name="houseallow">
                                                                             </div>
                                                                             <div class="form-group col-sm-4">
                                                                                 <label>End date</label>
-                                                                                <input type="date" class="form-control" placeholder="" name="houseallow"  number="true" number="true">
+                                                                                <input type="text" class="form-control datepicker" placeholder="" name="houseallow">
                                                                             </div>
                                                                             <div class="form-group col-sm-12">
                                                                                 <label>Comments</label>
-                                                                                <textarea type="text" class="form-control" placeholder="" name="houseallow"  number="true" number="true"></textarea>
+                                                                                <textarea type="text" class="form-control" placeholder="" name="houseallow"></textarea>
                                                                             </div>
                                                                         </div>
 
@@ -178,11 +271,11 @@
                                                                 <!--</div>-->
                                                                 <div class="modal-footer">
                                                                     <div class="">
-                                                                        <button type="submit" class="btn btn-success btn-round btn-link" data-dismiss="modal">Save</button>
+                                                                        <button type="submit" class="btn btn-success btn-round btn-link">Save</button>
                                                                     </div>
                                                                     <div class="divider"></div>
                                                                     <div class="">
-                                                                        <button type="button" class="btn btn-danger btn-round btn-link">Cancel</button>
+                                                                        <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -226,26 +319,27 @@
                                                                     </tr>
                                                                     </tfoot>
                                                                     <tbody>
+                                                                    @foreach($exams as $exam)
                                                                     <tr>
                                                                         <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
+                                                                        <td>{{$exam->exam_Name}}</td>
+                                                                        <td>{{$exam->exm_typ_Id}}</td>
+                                                                        <td>{{$exam->school_section}}</td>
+                                                                        <td>{{$exam->exam_Start}}</td>
+                                                                        <td>{{$exam->exam_End}}</td>
+                                                                        <td>{{$exam->exam_Status}}</td>
                                                                         <td class="">
                                                                             <div class="form-inline pull-right">
                                                                                 <div class="">
-                                                                                    <button class=" btn-link btn-cus-weight btn-block " type="button" id="" data-target="#viewexams" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+                                                                                    <button class=" btn-link btn-cus-weight btn-block" type="button" id="" data-id="{{ $exam->exam_Id  }}" data-target="#viewexams"  data-toggle="modal" aria-haspopup="true" aria-expanded="false">
                                                                                         View
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="nav-item btn-rotate dropdown ">
-                                                                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    <a class="nav-link dropdown-toggle " href="" id="navbarDropdownMenuLink" data-id="{{ $exam->exam_Id  }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     </a>
                                                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                                                                        <a class="dropdown-item" href="#" data-target="#scheduleexam" data-toggle="modal" aria-haspopup="true" aria-expanded="false">Edit</a>
+                                                                                        <a class="dropdown-item edit-schedule-exam-btn" href="#"  data-toggle="modal" data-id="{{ $exam->exam_Id  }}" aria-haspopup="true" aria-expanded="false">Edit</a>
                                                                                         <a class="dropdown-item" href="#">Delete</a>
                                                                                     </div>
                                                                                 </div>
@@ -253,6 +347,7 @@
 
                                                                         </td>
                                                                     </tr>
+                                                                     @endforeach
                                                                     </tbody>
                                                                 </table>
                                                             </div><!-- end content-->
@@ -261,7 +356,6 @@
                                                 </div> <!-- end row -->
 
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
 
@@ -390,11 +484,11 @@
                                                             <!--</div>-->
                                                             <div class="modal-footer">
                                                                 <div class="">
-                                                                    <button type="submit" class="btn btn-success btn-round btn-link" data-dismiss="modal">Save</button>
+                                                                    <button type="submit" class="btn btn-success btn-round btn-link">Save</button>
                                                                 </div>
                                                                 <div class="divider"></div>
                                                                 <div class="">
-                                                                    <button type="button" class="btn btn-danger btn-round btn-link">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Cancel</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -738,11 +832,11 @@
                                                             <!--</div>-->
                                                             <div class="modal-footer">
                                                                 <div class="">
-                                                                    <button type="submit" class="btn btn-success btn-round btn-link" data-dismiss="modal">Save</button>
+                                                                    <button type="submit" class="btn btn-success btn-round btn-link">Save</button>
                                                                 </div>
                                                                 <div class="divider"></div>
                                                                 <div class="">
-                                                                    <button type="button" class="btn btn-danger btn-round btn-link">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Cancel</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -862,11 +956,11 @@
                                                             <!--</div>-->
                                                             <div class="modal-footer">
                                                                 <div class="">
-                                                                    <button type="submit" class="btn btn-success btn-round  btn-link" data-dismiss="modal">Save</button>
+                                                                    <button type="submit" class="btn btn-success btn-round  btn-link">Save</button>
                                                                 </div>
                                                                 <div class="divider"></div>
                                                                 <div class="">
-                                                                    <button type="button" class="btn btn-danger btn-round btn-link">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Cancel</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1102,11 +1196,11 @@
                                                             <!--</div>-->
                                                             <div class="modal-footer">
                                                                 <div class="">
-                                                                    <button type="submit" class="btn btn-success btn-round btn-link" data-dismiss="modal">Save</button>
+                                                                    <button type="submit" class="btn btn-success btn-round btn-link">Save</button>
                                                                 </div>
                                                                 <div class="divider"></div>
                                                                 <div class="">
-                                                                    <button type="button" class="btn btn-danger btn-round btn-link">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger btn-round btn-link" data-dismiss="modal">Cancel</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1412,6 +1506,7 @@
 @endsection
 
 @section('front_script')
+    <script src="{{asset('js/examiner.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#materialtable').DataTable({
