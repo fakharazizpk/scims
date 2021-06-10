@@ -108,11 +108,11 @@ Coded by www.pointwebtech.com
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    @if($profieData->user_image)
-                        <img src="{{asset('upload/user/'.$profieData->user_image)}}"/>
-                    @else
+{{--                    @if($profieData->user_image)--}}
+{{--                        <img src="{{asset('upload/user/'.$profieData->user_image)}}"/>--}}
+{{--                    @else--}}
                         <img src="{{url('adminassets/img/employee%20avatar.png')}}" />
-                    @endif
+{{--                    @endif--}}
 
                 </div>
                 <div class="info">
