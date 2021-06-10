@@ -10,9 +10,8 @@
                     </div>
                     <div class="card-body">
                         <div class="author">
-
                             @if($teacherprofile->user_image)
-                                <img class="avatar border-gray" src="{{asset('upload/employee/'.$teacherprofile->user_image)}}" alt="Image">
+                                <img class="avatar border-gray" src="{{asset('upload/user/'.$teacherprofile->user_image)}}" alt="Image">
                             @else
                                 <img class="avatar border-gray" src="{{url('adminassets/img/accountant.jpg')}}" alt="Default User">
                             @endif
@@ -61,11 +60,11 @@
                     <div class="card-body table-full-width table-hover">
                         <div class="table-condensed">
 
-                            @if ($errors->any())
-                                @foreach ($errors->all() as $error)
-                                    <div>{{$error}}</div>
-                                @endforeach
-                            @endif
+{{--                            @if ($errors->any())--}}
+{{--                                @foreach ($errors->all() as $error)--}}
+{{--                                    <div>{{$error}}</div>--}}
+{{--                                @endforeach--}}
+{{--                            @endif--}}
                             @if(session('message'))
                                 <div class="alert alert-success">
                                     {{ session()->get('message') }}
@@ -75,7 +74,8 @@
                                 <tbody>
                                 <tr>
                                     <th>Father Name</th>
-                                    <td><input type="text" class="form-control @error('fath_name') is-invalid @enderror" placeholder=""
+                                    <td><input type="text" class="form-control" name="emp_cont_id" hidden>
+                                        <input type="text" class="form-control @error('fath_name') is-invalid @enderror" placeholder=""
                                                value="{{$teacherprofile->emp_fat_Name}}" name="fath_name"
                                                title="fath_name">
                                         @error('fath_name')
@@ -86,9 +86,16 @@
                                 </tr>
                                 <tr>
                                     <th>Gender</th>
-                                    <td><input type="text" class="form-control @error('gender') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->gender}}" name="gender"
-                                               title="gender">
+                                    <td>
+                                        <select class="form-select form-control form-select-lg mb-3" name="gender" @error('gender') is-invalid @enderror aria-label=".form-select-lg example">
+                                            <option selected>Select Gender</option>
+                                            @foreach($gender as $gender)
+                                                <option value="{{$gender->gnd_Id}}" @if($gender->gnd_Id == $teacherprofile->gnd_Id) selected @endif> {{ $gender->gender }} </option>
+                                            @endforeach
+                                        </select>
+{{--                                        <input type="text" class="form-control @error('gender') is-invalid @enderror" placeholder=""--}}
+{{--                                               value="{{$teacherprofile->gender}}" name="gender"--}}
+{{--                                               title="gender">--}}
                                         @error('gender')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -97,9 +104,16 @@
                                 </tr>
                                 <tr>
                                     <th>Marital Status</th>
-                                    <td><input type="text" class="form-control @error('marital_status') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->emp_marital_Status}}" name="marital_status"
-                                               title="marital_status">
+                                    <td>
+                                        <select class="form-select form-control form-select-lg mb-3" name="marital_status" aria-label=".form-select-lg example">
+{{--                                            <option >Select Marital Status</option>--}}
+                                            @foreach($maritalstatus as $marit_stat)
+                                            <option value="{{$marit_stat->marital_status}}" @if($marit_stat->marital_status == $teacherprofile->emp_marital_Status) selected @endif >{{$marit_stat->marital_status}}</option>
+                                            @endforeach
+                                        </select>
+{{--                                        <input type="text" class="form-control @error('marital_status') is-invalid @enderror" placeholder=""--}}
+{{--                                               value="{{$teacherprofile->emp_marital_Status}}" name="marital_status"--}}
+{{--                                               title="marital_status">--}}
                                         @error('marital_status')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -108,29 +122,38 @@
                                 </tr>
                                 <tr>
                                     <th>Blood Group</th>
-                                    <td><input type="text" class="form-control @error('blood_group') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->blood_group}}" name="blood_group"
-                                               title="blood_group">
+                                    <td>
+                                        <select class="form-select form-control form-select-lg mb-3" name="blood_group" @error('blood_group') is-invalid @enderror aria-label=".form-select-lg example">
+                                            <option >Select Blood Group</option>
+                                            @foreach($bloodgroup as $blod_group)
+                                            <option value="{{$blod_group->bg_Id}}" @if($blod_group->bg_Id == $teacherprofile->bg_Id) selected @endif>{{$blod_group->blood_group}}</option>
+                                            @endforeach
+                                        </select>
+{{--                                        <input type="text" class="form-control @error('blood_group') is-invalid @enderror" placeholder=""--}}
+{{--                                               value="{{$teacherprofile->blood_group}}" name="blood_group"--}}
+{{--                                               title="blood_group">--}}
                                         @error('blood_group')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror</td>
+                                        @enderror
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>National Identifier</th>
                                     <td><input type="text" class="form-control @error('nationality') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->nationality}}" name="nationality"
+                                               value="{{$teacherprofile->emp_Cnic}}" name="nationality"
                                                title="nationality">
                                         @error('nationality')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror</td>
+                                        @enderror
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Date of Birth</th>
-                                    <td><input type="text" class="form-control @error('dob') is-invalid @enderror" placeholder=""
+                                    <td><input type="text" class="form-control datepicker" @error('dob') is-invalid @enderror placeholder=""
                                                value="{{$teacherprofile->emp_Dob}}" name="dob"
                                                title="dob">
                                         @error('dob')
@@ -141,9 +164,13 @@
                                 </tr>
                                 <tr>
                                     <th>Religion</th>
-                                    <td><input type="text" class="form-control @error('religion') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->religion}}" name="religion"
-                                               title="religion">
+                                    <td>
+                                        <select class="form-select form-control form-select-lg mb-3" name="religion" @error('religion') is-invalid @enderror aria-label=".form-select-lg example">
+                                            <option selected>Select Religion</option>
+                                            @foreach ($religion as $religion)
+                                                <option value="{{$religion->relig_Id}}" @if($religion->relig_Id == $teacherprofile->relig_Id) selected @endif> {{ $religion->religion }} </option>
+                                            @endforeach
+                                        </select>
                                         @error('religion')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -152,55 +179,68 @@
                                 </tr>
                                 <tr>
                                     <th>Nationality</th>
-                                    <td>{{ $teacherprofile->nationality}}</td>
+                                    <td>
+                                        <select class="form-select form-control form-select-lg mb-3" name="nationality" @error('nationality') is-invalid @enderror aria-label=".form-select-lg example">
+                                            <option >Select Nationality</option>
+                                            @foreach ($nationalities as $nationality)
+                                                <option value="{{$nationality->nation_Id}}" @if($nationality->nation_Id == $teacherprofile->nation_Id) selected @endif> {{ $nationality->nationality }} </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th>Domicile</th>
-                                    <td><input type="text" class="form-control @error('domicile') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->dom_District}}" name="domicile"
-                                               title="domicile">
-                                        @error('domicile')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror</td>
-                                </tr>
+{{--                                <tr>--}}
+{{--                                    <th>Domicile</th>--}}
+{{--                                    <td><input type="text" class="form-control @error('domicile') is-invalid @enderror" placeholder=""--}}
+{{--                                               value="{{$teacherprofile->dom_District}}" name="domicile"--}}
+{{--                                               title="domicile">--}}
+{{--                                        @error('domicile')--}}
+{{--                                        <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                        @enderror</td>--}}
+{{--                                </tr>--}}
                                 <tr>
                                     <th>Cast</th>
-                                    <td><input type="text" class="form-control @error('cast') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->cast}}" name="cast"
-                                               title="cast">
+                                    <td>
+                                        <select class="form-select form-control form-select-lg mb-3" name="cast" @error('cast') is-invalid @enderror aria-label=".form-select-lg example">
+                                            <option >Select Nationality</option>
+                                            @foreach ($cast as $cast)
+                                                <option value="{{$cast->cast_Id}}" @if($cast->cast_Id == $teacherprofile->cast_Id) selected @endif> {{ $cast->cast }} </option>
+                                            @endforeach
+                                        </select>
                                         @error('cast')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                         @enderror</td>
                                 </tr>
-                                <tr>
-                                    <th>City</th>
-                                    <td><input type="text" class="form-control @error('city') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->emp_City}}" name="city"
-                                               title="city">
-                                        @error('city')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror</td>
-                                </tr>
+{{--                                <tr>--}}
+{{--                                    <th>City</th>--}}
+{{--                                    <td><input type="text" class="form-control @error('city') is-invalid @enderror" placeholder=""--}}
+{{--                                               value="{{$teacherprofile->emp_City}}" name="city"--}}
+{{--                                               title="city">--}}
+{{--                                        @error('city')--}}
+{{--                                        <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                        @enderror</td>--}}
+{{--                                </tr>--}}
                                 <tr>
                                     <th>Emergency Contact Person</th>
-                                    <td><input type="text" class="form-control @error('emer_cont_name') is-invalid @enderror" placeholder=""
+                                        <td>
+                                        <input type="text" class="form-control" @error('emer_cont_name') is-invalid @enderror placeholder=""
                                                value="{{$teacherprofile->emer_cont_Name}}" name="emer_cont_name"
                                                title="emer_cont_per">
                                         @error('emer_cont_per')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror</td>
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </td>
                                 </tr>
                                 <tr>
                                     <th>Emergency Contact No</th>
-                                    <td><input type="text" class="form-control @error('emer_contact') is-invalid @enderror" placeholder=""
+                                    <td><input type="text" class="form-control @error('emer_contact') is-invalid @enderror placeholder=""
                                                value="{{$teacherprofile->emer_cont_No}}" name="emer_contact"
                                                title="emer_contact">
                                         @error('emer_contact')
@@ -211,9 +251,13 @@
                                 </tr>
                                 <tr>
                                     <th>Emergency Contact Relation</th>
-                                    <td><input type="text" class="form-control @error('em_contact_rel') is-invalid @enderror" placeholder=""
-                                               value="{{$teacherprofile->fk_emer_relat_Id}}" name="em_contact_rel"
-                                               title="em_contact_rel">
+                                    <td><input type="hidden" name="e_id"  value="{{$teacherprofile->emer_cnt_Id}}">
+                                        <select class="form-select form-control form-select-lg mb-3" name="emer_contact_rel" @error('em_contact_rel') is-invalid @enderror aria-label=".form-select-lg example">
+                                            <option >Select Emergency Contact Relation</option>
+                                            @foreach ($relationship as $rel)
+                                                <option value="{{$rel->pk_relat_Id}}" @if($rel->pk_relat_Id == $teacherprofile->fk_emer_relat_Id) selected @endif> {{ $rel->relation_Name }} </option>
+                                            @endforeach
+                                        </select>
                                         @error('em_contact_rel')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
