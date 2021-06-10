@@ -10,11 +10,11 @@
                 </div>
                 <div class="card-body">
                     <div class="author">
-                        @if($teacher->user_image)
-                            <img class="avatar border-gray" src="{{asset('upload/employee/'.$teacher->user_image)}}" alt="Image">
-                        @else
+{{--                        @if($teacher->user_image)--}}
+{{--                            <img class="avatar border-gray" src="{{asset('upload/employee/'.$teacher->user_image)}}" alt="Image">--}}
+{{--                        @else--}}
                             <img class="avatar border-gray" src="{{url('adminassets/img/accountant.jpg')}}" alt="Default User">
-                        @endif
+{{--                        @endif--}}
                         <h3 class="profile-username text-center">{{ $teacher->emp_given_name }}</h3>
 
                         <p class="text-muted text-center">teacher</p>
